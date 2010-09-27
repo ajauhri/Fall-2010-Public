@@ -7,4 +7,18 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  layout 'application'
+
+  helper_method :current_user
+
+  private
+
+  def current_user_session
+    return @curent_user_session if defined?(@curent_user_session)
+    @current_user_session = UserSession.find
+  end
+
+  def current_user
+    @current_user = current_user_session && current_user_session.record
+  end
 end
