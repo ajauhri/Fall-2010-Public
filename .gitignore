@@ -5,6 +5,8 @@ Gemfile.lock
 
 config/database.yml
 
+.sqlite3
+
 log/*
 nbproject/*
 .idea/*

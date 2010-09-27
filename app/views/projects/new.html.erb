@@ -12,12 +12,8 @@
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.label :total_estimated_effort %><br />
-    <%= f.text_field :total_estimated_effort %>
-  </p>
-  <p>
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= f.collection_select(:lifecycle_id, Lifecycle.find(:all), :id, :name, :prompt => "Select a lifecycle") %>
+
   </p>
   <p>
     <%= f.submit 'Create' %>
