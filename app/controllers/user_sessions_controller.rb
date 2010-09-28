@@ -1,7 +1,11 @@
 class UserSessionsController < ApplicationController
-before_filter :check_user, :only => [:new]
+
+  before_filter :require_user, :except => ['new', 'create']
 
   def new
+    if current_user
+      redirect_to  :controller => 'projects', :action => 'index'
+    end
     @user_session = UserSession.new
   end
 
@@ -9,7 +13,7 @@ before_filter :check_user, :only => [:new]
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = "Successfully logged in."
-      redirect_to :controller => 'pet', :action => 'index'
+      redirect_to :controller => 'projects', :action => 'index'
     else
       render :action => 'new'
     end
@@ -19,7 +23,7 @@ before_filter :check_user, :only => [:new]
     @user_session = UserSession.find
     @user_session.destroy
     flash[:notice] = "Successfully logged out."
-    redirect_to :controller => 'pet', :action => 'index'
+    redirect_to :action => 'new'
   end
 
 end
