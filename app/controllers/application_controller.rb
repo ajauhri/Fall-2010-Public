@@ -7,6 +7,15 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  before_filter :set_cache_buster
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
+
+
   layout 'application'
 
   helper_method :current_user
@@ -21,4 +30,19 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user = current_user_session && current_user_session.record
   end
+
+  def require_user
+    unless current_user
+      #store_location
+      flash[:notice] = "You must be logged in to access this page"
+      redirect_to login_url
+    end
+  end
+
+  def check_user
+  if current_user #&& ("editor".eql? current_user.role)
+      redirect_to :controller => 'pet', :action => 'index'
+   end
+end
+
 end

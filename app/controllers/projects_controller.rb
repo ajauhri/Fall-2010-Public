@@ -1,6 +1,9 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
+
+ before_filter :require_user, :only => [:new, :edit, :update, :index]
+
   def index
     @projects = Project.all
 

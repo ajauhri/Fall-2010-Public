@@ -19,6 +19,7 @@ group :development do
 #  gem linecache, '0.43'
   gem 'rcov'
   gem 'rdoc'
+  gem 'rspec'
   gem 'rspec-rails'
 end
 
@@ -31,4 +32,5 @@ group :test do
   gem 'rcov'
   gem 'rdoc'
   gem 'rspec'
+  gem 'rspec-rails'
 end

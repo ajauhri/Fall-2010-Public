@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+before_filter :check_user, :only => [:new]
 
   def new
     @user_session = UserSession.new
