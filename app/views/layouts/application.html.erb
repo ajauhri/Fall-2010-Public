@@ -3,9 +3,13 @@
 <html>
   <head>
     <title>PET 1.3</title>
+  <%= stylesheet_link_tag "pet", :media => "all" %>
   </head>
   <body>
-    <div id="user_nav">
+    <table class="nav-tabs">
+  <tr id="login">
+    <td>
+     <div id="user_nav">
       <% if current_user %>
       <%= link_to "Settings", edit_user_path(:current) %>
        | <%= link_to "Logout", logout_path %>
@@ -15,8 +19,36 @@
        | <%= link_to "Login", login_path %>
        <% end %>
     </div>
-
-    <%= yield :layout %><!-- <label id="code.depot.e.include"/> -->
-
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h1>LOGO</h1>
+  <ul>
+    <% if current_user %>
+    <li><a>Create New Project</a></li>
+    <li id="selected"><a>Log Effort</a></li>
+    <% end %>
+  </ul>
+    </td></tr>
+</table>
+    <table class ="content-table">
+  <tr>
+    <% if current_user %>
+    <td class="side-bar">
+      Side bar stuff
+    </td>
+    <% end %>
+    <td>
+       <%= yield :layout %>
+    </td>
+  </tr>
+  <tr id="footer">
+    <td colspan="2">
+      Copyright
+    </td>
+  </tr>
+</table>
+   <!-- <label id="code.depot.e.include"/> -->
   </body>
 </html>

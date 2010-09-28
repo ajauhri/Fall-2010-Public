@@ -34,4 +34,5 @@ group :test do
   gem 'rdoc'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'factory_girl'
 end
