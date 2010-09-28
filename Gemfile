@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails',	'2.3.8'
 gem 'bundler'
 gem 'delayed_job', '2.1.0.pre'
+gem 'thoughtbot-factory_girl'
 
 group :plugins do
   gem 'calendar_date_select'
