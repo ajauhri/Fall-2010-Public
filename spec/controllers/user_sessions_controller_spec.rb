@@ -7,4 +7,8 @@ describe UserSessionsController do
     controller.should be_an_instance_of(UserSessionsController)
   end
 
+  it "should redirect to the login page" do
+
+  end
+
 end
