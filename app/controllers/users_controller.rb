@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     
       if @user.save
         flash[:notice] = "Registration Successful!"
-        redirect_to root_url
+        redirect_to :controller => 'projects', :action => 'index'
       else
         render :action => "new"
       end

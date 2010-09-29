@@ -8,6 +8,13 @@ Factory.define :valid_user , :class => User do |u|
   u.email "mathieu.rousseau.31@gmail.com"
 end
 
+Factory.define :valid_user1 , :class => User do |u|
+  u.username "mathieu77"
+  u.password "mathieu"
+  u.password_confirmation "mathieu"
+  u.email "mathieu.rousseau.99@gmail.com"
+end
+
 Factory.define :invalid_user , :class => User do |u|
 end
 
