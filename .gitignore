@@ -5,7 +5,7 @@ Gemfile.lock
 
 config/database.yml
 
-db/development.sqlite3
+.sqlite3
 db/test.sqlite3
 db/production.sqlite3
 
