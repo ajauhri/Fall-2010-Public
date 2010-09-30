@@ -2,10 +2,10 @@
 # and open the template in the editor.
 
 Factory.define :valid_user , :class => User do |u|
-  u.username "mathieu"
-  u.password "mathieu"
-  u.password_confirmation "mathieu"
-  u.email "mathieu.rousseau.31@gmail.com"
+  u.sequence(:username) {|n| "user#{n}"}
+  u.password "test"
+  u.password_confirmation {|u| u.password} #This is called a block, and gives flexibility
+  u.sequence(:email) { |n| "cmu#{n}@gmail.com" }
   #u.single_access_token "k3cFzLIQnZ4MHRmJvJzg"
 end
 
