@@ -10,7 +10,7 @@ describe Project do
     project.new_record?
   end
 
-  it "should be invalid withoud a name" do
+  it "should be invalid without a name" do
     @project.should_not be_valid
     @lifecycle = Factory.create(:lifecycle)
     @project.name = "Project XYZ"

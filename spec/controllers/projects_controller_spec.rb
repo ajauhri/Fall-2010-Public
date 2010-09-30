@@ -14,19 +14,10 @@ describe ProjectsController, "creating a new project" do
   end
 
   it "should redirect to index with a notice on successful save" do
-    :current_user.should_not be_nil
-
-    #current_user.should == "cmu1"
-    #post 'create' , :user_session => {:username => @valid_user.username,
-    #                                  :password => @valid_user.password}
-    get :index
-    response.should render_template(:index)#redirect_to :controller => 'projects', :action => 'index'
-
-    #Project.any_instance.stubs(:valid?).returns(true)
-       
-#    post 'create'
-#    flash[:notice].should_not be_nil
-#    response.should redirect_to(projects_path)
+    Project.any_instance.stubs(:valid?).returns(true)
+    post :create
+    flash[:notice].should_not be_nil
+    response.should redirect_to(project_url(assigns[:project]))
   end
 
   it "should redirect to index" do
