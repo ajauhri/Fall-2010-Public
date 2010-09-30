@@ -2,6 +2,7 @@
 # and open the template in the editor.
 
 Factory.define :valid_user , :class => User do |u|
+<<<<<<< .merge_file_BkSLtv
   u.sequence(:username) {|n| "user#{n}"}
   u.password "test"
   u.password_confirmation {|u| u.password} #This is called a block, and gives flexibility
