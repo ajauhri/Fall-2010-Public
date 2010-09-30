@@ -1,7 +1,8 @@
 class Project < ActiveRecord::Base
 
   belongs_to :lifecyle
-  validates_presence_of :name
+  validates_presence_of :name, :lifecycle_id
+  
   STATUS_TYPES = [
     ["Active"], #"active"],
     ["Archived"], #"archived"],
