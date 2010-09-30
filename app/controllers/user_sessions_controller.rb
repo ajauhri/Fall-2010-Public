@@ -4,7 +4,7 @@ class UserSessionsController < ApplicationController
 
   def new
     if current_user
-      redirect_to  :controller => 'projects', :action => 'index'
+      redirect_to  root_url
     end
     @user_session = UserSession.new
   end
