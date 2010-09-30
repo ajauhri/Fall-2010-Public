@@ -26,20 +26,6 @@ Factory.define :invalid_email , :class => User do |u|
   u.email "mathieu.rousseau.31gmail.com"
 end
 
-Factory.define :preexisting_username  , :class => User do |u|
-  u.username "mathieu1"
-  u.password "mathieu"
-  u.password_confirmation "mathieu"
-  u.email "mathieu.rousseau@gmail.com"
-end
-
-Factory.define :preexisting_email  , :class => User do |u|
-  u.username "mathieu3"
-  u.password "mathieu"
-  u.password_confirmation "mathieu"
-  u.email "mathieu.rousseau.31@gmail.com"
-end
-
 Factory.define :nonmatching_password  , :class => User do |u|
   u.username "mathieu4"
   u.password "mathieu"

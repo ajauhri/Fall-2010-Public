@@ -19,12 +19,12 @@ describe User do
     Factory.build(:invalid_email).should be_invalid
   end
 
-  it "should invalid :preexisting_username factory" do
-    Factory.build(:preexisting_username).should be_invalid
+  it "should be invalid with preexisting username" do
+    Factory.build(:valid_user, :username => @valid_user.username).should be_invalid
   end
 
-  it "should invalid :preexisting_email factory" do
-    Factory.build(:preexisting_email).should be_invalid
+  it "should be invalid with preexisting_email" do
+    Factory.build(:valid_user, :email => @valid_user.email).should be_invalid
   end
 
   it "should invalid :nonmatching_password factory" do
