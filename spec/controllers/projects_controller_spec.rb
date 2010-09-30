@@ -1,41 +1,63 @@
 require 'spec_helper'
 
 describe ProjectsController, "creating a new project" do
+  setup :activate_authlogic
   integrate_views
 
+  before(:all) do
+    Factory.create(:project)
+  end
+
+  before(:each) do
+    #logout_user
+    login_user
+  end
+
   it "should redirect to index with a notice on successful save" do
-    Project.any_instance.stubs(:valid?).returns(true)
-    post 'create'
-    flash[:notice].should_not be_nil
-    #response.should redirect_to(projects_path)
+    :current_user.should_not be_nil
+
+    #current_user.should == "cmu1"
+    #post 'create' , :user_session => {:username => @valid_user.username,
+    #                                  :password => @valid_user.password}
+    get :index
+    response.should render_template(:index)#redirect_to :controller => 'projects', :action => 'index'
+
+    #Project.any_instance.stubs(:valid?).returns(true)
+       
+#    post 'create'
+#    flash[:notice].should_not be_nil
+#    response.should redirect_to(projects_path)
   end
 
   it "should redirect to index" do
+    #login_user
     Project.any_instance.stubs(:valid?).returns(true)
     get 'index'
+    response.should render_template(:index)
   end
 
   it "edit action should render edit template" do
     get :edit, :id => Project.first
-    #response.should render_template(:edit)
+    response.should render_template(:edit)
   end
 
   it "update action should render edit template when model is invalid" do
     Project.any_instance.stubs(:valid?).returns(false)
     put :update, :id => Project.first
-    #response.should render_template(:edit)
+    response.should render_template(:edit)
   end
 
   it "update action should redirect when model is valid" do
     Project.any_instance.stubs(:valid?).returns(true)
     put :update, :id => Project.first
-    #response.should redirect_to(:index)
+    flash[:notice].should_not be_nil
+    response.should redirect_to(:id => Project.first)
   end
 
   it "destroy action should destroy model and redirect to index action" do
     project = Project.first
     delete :destroy, :id => project
-    #response.should redirect_to(projects_url)
-    #Project.exists?(project.id).should be_false
+    response.should redirect_to(projects_url)
+    Project.exists?(project.id).should be_false
   end
 end
