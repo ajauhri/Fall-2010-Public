@@ -56,6 +56,7 @@
           </div>
         <% end %>
         <div id="mainContent">
+            <%= "<div id='error'>" + flash[:notice] + '</div>' if flash[:notice]%>
           <%= yield :layout %>
         </div>
 

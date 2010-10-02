@@ -7,16 +7,30 @@ describe UserSessionsController do
 
   it "should redirect to the root page" do
     post 'create' , :user_session => {:username => @valid_user.username,
-                                      :password => @valid_user.password}
+      :password => @valid_user.password}
 
-   response.should redirect_to :controller => 'projects', :action => 'index'
+    response.should redirect_to :controller => 'projects', :action => 'index'
   end
 
-    it "should redirect to the login screen when logout" do
-    post 'destroy' , :user_session => {:username => @valid_user.username,
-                                      :password => @valid_user.password}
+  it 'should redirect to new if unsuccessful login'
+    post
 
-   response.should redirect_to login_path
+  it "should redirect to the login screen when logout" do
+    post 'destroy' , :user_session => {:username => @valid_user.username,
+      :password => @valid_user.password}
+
+    response.should redirect_to login_path
+  end
+
+  it 'should render the new/login template' do
+    login_user
+    get 'new'
+    reponse.should render_template 'new'
+  end
+
+  it 'should redirect to root url because user is logged in' do
+    get 'new'
+    response.should redirect_to root_url
   end
 
 end
