@@ -8,6 +8,17 @@ body {
     clear: both;
     height: 1px; margin: 0;
 }
+
+#error{
+    border: 1px solid red;
+    margin: 0 auto;
+    background: pink;
+    padding: 1em;
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+}
+
 #main {
     position: relative;
     width: 1024px;
