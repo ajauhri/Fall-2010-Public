@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     end
   end
 
+  """
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
@@ -53,4 +54,5 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  """
 end

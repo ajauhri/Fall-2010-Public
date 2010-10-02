@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UsersController do
-
+  setup :activate_authlogic
   #Delete this example and add some real ones
   it "should use UsersController" do
     controller.should be_an_instance_of(UsersController)
@@ -22,18 +22,40 @@ describe UsersController do
     response.should redirect_to login_path
   end
 
+  it "should render edit template when user wants to edit and he is logged in" do
+    login_user
+    put 'edit'
+    response.should render_template 'edit'
+  end
+
   it "should render the new template" do
     get 'new'
     response.should render_template 'new'
   end
 
   #Test was unsuccessful, don't know how to create a valid user here
-  """
+  
   it 'should successfuly create a user' do
-    post 'create', :user => Factory.build(:valid_user1).attributes
-    #response.should redirect_to :controller => 'projects', :action => 'index'
-    response.should render_template 'new'
+    User.any_instance.stubs(:valid?).returns(true)
+    post :create
+    response.should redirect_to :controller => 'projects', :action => 'index'
 
   end
-"""
+
+  it 'should successfuly update a user' do
+
+    login_user
+    User.any_instance.stubs(:valid?).returns(true)
+    post :update
+    response.should redirect_to root_url
+  end
+
+  it 'should unsuccessfuly update a user' do
+
+    login_user
+    User.any_instance.stubs(:valid?).returns(false)
+    post :update
+    response.should render_template 'edit'
+  end
+
 end
