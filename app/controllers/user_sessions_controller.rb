@@ -15,6 +15,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Successfully logged in."
       redirect_to :controller => 'projects', :action => 'index'
     else
+      flash[:notice] = "The username or password you entered is incorrect!"
       render :action => 'new'
     end
   end
