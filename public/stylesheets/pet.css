@@ -13,7 +13,7 @@ body {
     width: 1024px;
     margin: 0 auto;
     padding: 3px 0 0 0;
-    
+
 }
 #topbg {
     position: absolute; top: 0; left: 0; z-index: -1;
@@ -178,4 +178,55 @@ body {
     padding: 3px 5px;
 }
 
+/* Login Page */
+#Login
+{
+    background-image: url(/images/LoginBackground.png);
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-top: 50px;
+    margin-right: auto;
+    padding-left: 30px;
+    padding-right: 34px;
+    padding-top: 10px;
+    width: 280px;
+    height: 240px;
+    
+}
+
+#Login input[type="text"], #Login input[type="password"]
+{
+        border-color: #A8A8A8;
+    border-style: solid;
+    border-width: 2px;
+        color: #015666;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+#Login input[type="text"]:focus, #Login input[type="password"]:focus
+{
+background-color: #FFF4DA;
+}
+
+.LoginLabel
+{
+    padding-top: 10px;
+    color: #015666;    
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.LoginTextfield
+{
+padding-top: 5px;
+
+
+}
+
+.LoginButton
+{
+    padding-top: 10px;
+}
 
