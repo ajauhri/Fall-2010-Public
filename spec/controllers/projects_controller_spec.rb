@@ -9,7 +9,7 @@ describe ProjectsController do
   end
 
   before(:each) do
-    #logout_user
+    logout_user
     login_user
   end
   

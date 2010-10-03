@@ -9,13 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100930231425) do
+ActiveRecord::Schema.define(:version => 20101002231336) do
+
+  create_table "lifecycle_phases", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "sequence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lifecycle_id"
+  end
 
   create_table "lifecycles", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "project_phases", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "sequence"
+    t.decimal  "total_estimated_effort"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "project_id"
+    t.integer  "lifecycle_phase_id"
   end
 
   create_table "projects", :force => true do |t|
