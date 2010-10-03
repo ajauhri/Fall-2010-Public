@@ -41,9 +41,7 @@
         <% if current_user %>
         <div id="NavBar">
           <ul id="menu">
-              <li><a class="sel"><span></span>Project Management</a></li>
-              <li><%= link_to "<span></span>Create New Project", :controller => 'projects', :action => 'new' %></li>
-              <li><a href="#"><span></span>Log Effort</a></li>
+            <%=  display_links('<li>','</li>') %>
           </ul>
         </div>
         <% end %>
@@ -56,7 +54,10 @@
           </div>
         <% end %>
         <div id="mainContent">
-            <%= "<div id='error'>" + flash[:notice] + '</div>' if flash[:notice]%>
+            <%= "<div id='error'>" + flash[:error] + '</div>' if flash[:error]%>
+            <%= "<div id='notice'>" + flash[:notice] + '</div>' if flash[:notice]%>
+            <% flash[:error] = nil %>
+          <% flash[:notice] = nil %>
           <%= yield :layout %>
         </div>
 
@@ -64,7 +65,10 @@
         <div class="cleaner"></div>
 
         <div id="footer">
-          Copyright
+          <%  if current_user %>
+          <%=  display_links %><br/>
+          <% end %>
+          <b>Copyright &copy; 2010 - Rails Coaster</b>
         </div>
 
 

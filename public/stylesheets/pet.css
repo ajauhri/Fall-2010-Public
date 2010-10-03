@@ -11,8 +11,17 @@ body {
 
 #error{
     border: 1px solid red;
+    background: #FFE6E6;
+    
+}
+
+#notice{
+    border: 1px solid #feb875;
+    background: #fce6d2;
+}
+
+#notice, #error{
     margin: 0 auto;
-    background: pink;
     padding: 1em;
     width: 50%;
     text-align: center;
@@ -109,8 +118,13 @@ body {
     width: 70px;
 }
 
+#LoginMenu a:hover{
+     color: #5FBDCE;
+}
+
 
 /* @end */
+
 
 #content {
     padding: 1px;
@@ -174,7 +188,7 @@ body {
 {
 
     padding: 1em;
-    height: 400px;
+    min-height: 400px;
 }
 
 #footer {
@@ -183,10 +197,21 @@ body {
     text-align: center;
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
-    background: url('/images/gradient.jpg');
+    background: #015666;
+    color: white;
 }
 #footer a {
+    color: #5FBDCE;
+    text-decoration: none;
     padding: 3px 5px;
+}
+
+#footer a.sel{
+    color: white;
+}
+
+#footer a:hover{
+    color: white;
 }
 
 /* Login Page */
@@ -195,12 +220,12 @@ body {
     background-image: url(/images/LoginBackground.png);
     background-repeat: no-repeat;
     margin-left: auto;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-right: auto;
     padding-left: 30px;
     padding-right: 34px;
     padding-top: 10px;
-    width: 280px;
+    width: 215px;
     height: 240px;
     
 }
