@@ -14,6 +14,7 @@ Factory.define :valid_user1 , :class => User do |u|
   u.password "mathieu"
   u.password_confirmation "mathieu"
   u.email "mathieu.rousseau.99@gmail.com"
+  u.role "Admin"
 end
 
 Factory.define :invalid_user , :class => User do |u|
