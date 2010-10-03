@@ -1,33 +1,63 @@
+
+
+
 <% form_for(@user) do |f| %>
+
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-    <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
 
+<div class="RoundContent">
+   <div class="RoundTop">
+	 <%= image_tag "/images/UpperLeftCorner.png", :class=> "corner", :style => "display: none" %>
+   </div>
+
+   <table class="InputTable">
+     <tr>
+    <td>
+    <%= f.label "User Name:" %>
+    </td><td>
+    <%= f.text_field :username %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label "Email Address:" %>
+        </td><td>
+    <%= f.text_field :email %>
+      </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label "Password:" %>
+        </td><td>
+    <%= f.password_field :password %>
+     </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label 'Confirm Password:' %>
+    </td><td>
+    <%= f.password_field :password_confirmation %>
+      </td>
+  </tr>
   <% if current_user.role == User::ADMIN %>
-  <p>
-    <%= f.label 'Role' %><br/>
+  <tr>
+    <td>
+    <%= f.label 'Role:' %>
+    </td><td>
     <%= f.select :role, User::ROLES %>
-  </p>
+    </td></tr>
   <% end %>
 
-  <p>
+  <tr><td>
+    </td><td>
     <%= f.submit 'Submit' %>
-  </p>
-<% end %>
+    </td></tr>
+</table>
 
-<%= link_to 'Back', :back %>
+   <div class="RoundBottom">
+	 <%= image_tag "/images/BottomleftCorner.png", :class=> "corner", :style => "display: none" %>
+   </div>
+</div>
+
+<% end %>

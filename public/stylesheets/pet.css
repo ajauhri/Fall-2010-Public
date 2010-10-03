@@ -186,7 +186,7 @@ body {
 
 #mainContent
 {
-
+    text-align: center;
     padding: 1em;
     min-height: 400px;
 }
@@ -266,3 +266,35 @@ padding-top: 5px;
     padding-top: 10px;
 }
 
+/* Round Table for Input values */
+
+.RoundContent {
+	width: 70%;
+	background-color: #015666;
+	color: #fff;
+        margin: 0 auto;
+}
+
+.RoundTop {
+	background: url("/images/UpperRightCorner.png") no-repeat top right;
+}
+
+.RoundBottom {
+	background: url("/images/BottomRightCorner.png") no-repeat top right;
+}
+
+.RoundContent img.corner {
+   width: 14px;
+   height: 14px;
+   border: none;
+   display: block !important;
+}
+
+.InputTable {
+    width: 80%;
+    border: none;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+}
