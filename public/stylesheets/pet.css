@@ -227,6 +227,7 @@ body {
     padding-top: 10px;
     width: 215px;
     height: 240px;
+    text-align: left;
     
 }
 
@@ -270,8 +271,8 @@ padding-top: 5px;
 
 .RoundContent {
 	width: 70%;
-	background-color: #015666;
-	color: #fff;
+	background-color: #9FD7E2;
+	color: #000;
         margin: 0 auto;
 }
 
@@ -284,8 +285,8 @@ padding-top: 5px;
 }
 
 .RoundContent img.corner {
-   width: 14px;
-   height: 14px;
+   width: 23px;
+   height: 23px;
    border: none;
    display: block !important;
 }
@@ -295,6 +296,6 @@ padding-top: 5px;
     border: none;
     margin: 0 auto;
     font-size: 12px;
-    font-weight: bold;
+   font-weight: bold;
     text-align: left;
 }

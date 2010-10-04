@@ -11,11 +11,10 @@
   </div>
   <div class="LoginTextfield">
     <%= form.password_field :password %>
+    <%= form.check_box :remember_me%>
+     <%= form.label "remember password" %>
   </div>
   <div class="LoginButton">
-    <%= form.check_box :remember_me%> <%= form.label "remember password" %>
-    <br/>
-
   <%= form.submit "Login" %><a href="#">Forgot your password?</a>
   </div>
 </div>
