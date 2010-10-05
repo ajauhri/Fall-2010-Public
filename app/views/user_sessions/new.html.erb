@@ -3,11 +3,12 @@
   <div class="LoginLabel">
     <%= form.label :username, "Username" %>
   </div>
-  <div class="LoginTextfield">
+  <div id="username">
     <%= form.text_field :username %>
   </div>
   <div class="LoginLabel">
     <%= form.label :password, "Password" %>
+    
   </div>
   <div class="LoginTextfield">
     <%= form.password_field :password %>
@@ -15,8 +16,12 @@
      <%= form.label "remember password" %>
   </div>
   <div class="LoginButton">
-  <%= form.submit "Login" %><a href="#">Forgot your password?</a>
+  <%= form.submit "Login", :class => 'button' %>
   </div>
+  <div>
+  <a href="#">Forgot your password?</a>
+  </div>
+  
 </div>
 <% end %>
 
