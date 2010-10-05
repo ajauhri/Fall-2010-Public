@@ -7,7 +7,7 @@ module ApplicationHelper
     spacer = "|" if tag == ''
     html += tag + get_link("<span></span>Project Management", 'projects', 'index') + end_tag + spacer
     html += tag + get_link("<span></span>Create New Project", 'projects', 'new') + end_tag + spacer
-    html += tag + link_to("<span></span>Log Effort", '#') + end_tag
+    html += tag + get_link("<span></span>Log Effort", 'efforts', 'index') + end_tag
     return html
   end
 

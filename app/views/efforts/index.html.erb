@@ -1,0 +1,11 @@
+<h1>Listing efforts</h1>
+
+
+<% form_tag :url => {:action => 'create'} do %>
+
+  <%= select 'post', 'Project', ["Project A","Project B"], {:prompt => "Select Project"} %>
+  <%= select 'Phase', 'Phase', ["Phase 1","Phase 2"], {:prompt => "Select Phase"}  %>
+  <%= collection_select :deliverable, :id, @deliverables, :id, :name, :prompt => 'Select Deliverable' %>
+  <%= text_field_tag 'Effort', nil, :style => "width: 20px;"%>
+  <%= submit_tag 'Add Effort' %>
+<% end %>
