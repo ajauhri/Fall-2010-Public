@@ -1,16 +1,5 @@
-
-
-
 <% form_for(@user) do |f| %>
-
   <%= f.error_messages %>
-
-
-<div class="RoundContent">
-   <div class="RoundTop">
-	 <%= image_tag "/images/UpperLeftCorner.png", :class=> "corner", :style => "display: none" %>
-   </div>
-
    <table class="InputTable">
      <tr>
     <td>
@@ -54,10 +43,4 @@
     <%= f.submit 'Submit' %>
     </td></tr>
 </table>
-
-   <div class="RoundBottom">
-	 <%= image_tag "/images/BottomleftCorner.png", :class=> "corner", :style => "display: none" %>
-   </div>
-</div>
-
 <% end %>

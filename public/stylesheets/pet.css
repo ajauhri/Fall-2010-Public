@@ -12,7 +12,7 @@ body {
 #error{
     border: 1px solid red;
     background: #FFE6E6;
-    
+
 }
 
 #notice{
@@ -119,7 +119,7 @@ body {
 }
 
 #LoginMenu a:hover{
-     color: #5FBDCE;
+    color: #5FBDCE;
 }
 
 
@@ -228,22 +228,22 @@ body {
     width: 215px;
     height: 240px;
     text-align: left;
-    
+
 }
 
 #Login input[type="text"], #Login input[type="password"]
 {
-        border-color: #A8A8A8;
+    border-color: #A8A8A8;
     border-style: solid;
     border-width: 2px;
-        color: #015666;
+    color: #015666;
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-size: 12px;
 }
 
 #Login input[type="text"]:focus, #Login input[type="password"]:focus
 {
-background-color: #FFF4DA;
+    background-color: #FFF4DA;
 }
 
 .LoginLabel
@@ -257,7 +257,7 @@ background-color: #FFF4DA;
 
 .LoginTextfield
 {
-padding-top: 5px;
+    padding-top: 5px;
 
 
 }
@@ -267,35 +267,24 @@ padding-top: 5px;
     padding-top: 10px;
 }
 
-/* Round Table for Input values */
-
-.RoundContent {
-	width: 70%;
-	background-color: #9FD7E2;
-	color: #000;
-        margin: 0 auto;
-}
-
-.RoundTop {
-	background: url("/images/UpperRightCorner.png") no-repeat top right;
-}
-
-.RoundBottom {
-	background: url("/images/BottomRightCorner.png") no-repeat top right;
-}
-
-.RoundContent img.corner {
-   width: 23px;
-   height: 23px;
-   border: none;
-   display: block !important;
-}
+/* Table for Input values */
 
 .InputTable {
-    width: 80%;
+    background: -webkit-gradient(linear, left top, left bottom, from(#9FD7E2), to(#678C93));
+    background: -moz-linear-gradient(top,  #9FD7E2,  #678C93);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9FD7E2', endColorstr='#678C93');
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4);
+    box-shadow: 0 1px 2px rgba(0,0,0,.4);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+    color: #000;
+    margin: 0 auto;
     border: none;
     margin: 0 auto;
     font-size: 12px;
-   font-weight: bold;
+    font-weight: bold;
     text-align: left;
+    padding: 1em;
 }

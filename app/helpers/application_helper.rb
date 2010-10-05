@@ -18,4 +18,5 @@ module ApplicationHelper
       return link_to string, :controller => controller, :action => action
     end
   end
+
 end
