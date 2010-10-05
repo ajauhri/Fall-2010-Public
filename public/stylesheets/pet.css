@@ -357,12 +357,15 @@ width: 8em;
     padding-bottom: 10px;
 
     width: 215px;
+
     text-align: left;
+
 }
 
 #Login a
 {
     color: blue;
+
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-weight: normal;
     font-style: italic;
@@ -407,6 +410,8 @@ width: 8em;
     text-align: center;
 }
 
+
+
 /* Round Table for Input values */
 
 .RoundContent {
@@ -431,19 +436,8 @@ width: 8em;
     display: block !important;
 }
 
-
 .InputTable {
-    background: -webkit-gradient(linear, left top, left bottom, from(#9FD7E2), to(#678C93));
-    background: -moz-linear-gradient(top,  #9FD7E2,  #678C93);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9FD7E2', endColorstr='#678C93');
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4);
-    box-shadow: 0 1px 2px rgba(0,0,0,.4);
-    -webkit-border-radius: 1em;
-    -moz-border-radius: 1em;
-    border-radius: 1em;
-    color: #000;
-    margin: 0 auto;
+    width: 80%;
     border: none;
     margin: 0 auto;
     font-size: 12px;
