@@ -24,6 +24,7 @@ background:
     center bottom,
     rgb(255,255,255) 0%,
     rgb(255,156,64) 1000%
+
 );
 
 
@@ -185,6 +186,7 @@ width: 8em;
     padding: 7px 6px 0px;
 
 
+
     /*height: 2em;
     list-style: none;
     margin: 0;
@@ -341,6 +343,9 @@ width: 8em;
     border-color: #015666;
     border-width: 2px;
     border-style: solid;
+
+
+
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -352,6 +357,7 @@ width: 8em;
     padding-bottom: 10px;
 
     width: 215px;
+
     text-align: left;
 
 }
@@ -359,6 +365,7 @@ width: 8em;
 #Login a
 {
     color: blue;
+
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-weight: normal;
     font-style: italic;
