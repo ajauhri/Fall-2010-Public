@@ -24,7 +24,7 @@ background:
     center bottom,
     rgb(255,255,255) 0%,
     rgb(255,156,64) 1000%
-    
+
 );
 
 
@@ -184,7 +184,7 @@ width: 8em;
     line-height: 100%;
     margin: 0px;
     padding: 7px 6px 0px;
- 
+
 
 
     /*height: 2em;
@@ -345,7 +345,7 @@ width: 8em;
     border-style: solid;
 
 
-    
+
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -386,7 +386,7 @@ width: 8em;
 .LoginLabel
 {
     padding-top: 10px;
-    color: #015666;    
+    color: #015666;
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-size: 12px;
     font-weight: bold;
@@ -407,7 +407,30 @@ width: 8em;
     text-align: center;
 }
 
-/* Table with input values */
+/* Round Table for Input values */
+
+.RoundContent {
+    width: 70%;
+    background-color: #9FD7E2;
+    color: #000;
+    margin: 0 auto;
+}
+
+.RoundTop {
+    background: url("/images/UpperRightCorner.png") no-repeat top right;
+}
+
+.RoundBottom {
+    background: url("/images/BottomRightCorner.png") no-repeat top right;
+}
+
+.RoundContent img.corner {
+    width: 23px;
+    height: 23px;
+    border: none;
+    display: block !important;
+}
+
 
 .InputTable {
     background: -webkit-gradient(linear, left top, left bottom, from(#9FD7E2), to(#678C93));
@@ -426,7 +449,6 @@ width: 8em;
     font-size: 12px;
     font-weight: bold;
     text-align: left;
-    padding: 1em;
 }
 
 .InputTable td
