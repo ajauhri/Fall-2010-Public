@@ -357,27 +357,15 @@ width: 8em;
     padding-bottom: 10px;
 
     width: 215px;
-    
     text-align: left;
-
-<<<<<<< .merge_file_a05940
-<<<<<<< .merge_file_a08740
-=======
-=======
->>>>>>> .merge_file_a09012
 }
 
 #Login a
 {
     color: blue;
-    
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-weight: normal;
     font-style: italic;
-<<<<<<< .merge_file_a05940
->>>>>>> .merge_file_a07796
-=======
->>>>>>> .merge_file_a09012
 }
 
 #Login input[type="text"], #Login input[type="password"]
@@ -419,17 +407,7 @@ width: 8em;
     text-align: center;
 }
 
-<<<<<<< .merge_file_a05940
-<<<<<<< .merge_file_a08740
-/* Table for Input values */
-=======
-
-
-/* Table for Input values */
-=======
-
-
-/* Table for Input values */
+/* Table with input values */
 
 .InputTable {
     background: -webkit-gradient(linear, left top, left bottom, from(#9FD7E2), to(#678C93));
