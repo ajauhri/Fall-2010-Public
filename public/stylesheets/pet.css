@@ -9,10 +9,90 @@ body {
     height: 1px; margin: 0;
 }
 
+.button {
+
+    -webkit-box-shadow: rgba(4, 133, 157, 0.75) 0px 0px 8px;
+    -moz-box-shadow:0px 8px 24px rgba(4, 133, 157, 0.75);
+    box-shadow: 0px 8px 24px rgba(4, 133, 157, 0.75);
+
+    background-color: rgba(255, 157, 64, 0.75);
+
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#FFB773));
+
+background:
+-moz-linear-gradient(
+    center bottom,
+    rgb(255,255,255) 0%,
+    rgb(255,156,64) 1000%
+    
+);
+
+
+    border: 2px solid #999;
+
+    border-radius: 5px;
+color: #015666;
+cursor: pointer;
+display: inline-block;
+font-size: 1.5em;
+font-weight: bold;
+padding: 0.25em 0.5em 0.3em;
+position: relative;
+text-align: center;
+text-shadow: rgba(0, 0, 0, 0.496094) 1px 1px 3px;
+width: 8em;
+
+    /*
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Verdana,Arial,Helvetica,sans-serif;
+    padding: .5em 2em .55em;
+
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+
+    color: #fef4e9;
+    border: solid 1px #da7c0c;
+    background: #f78d1d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+    background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20'); */
+}
+
+
+
+
+.button:hover {
+    text-decoration: none;
+    background: #f47c20;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+    background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+.button:active {
+    position: relative;
+    top: 1px;
+    color: #fcd3a5;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+    background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+
+
 #error{
     border: 1px solid red;
     background: #FFE6E6;
-    
+
 }
 
 #notice{
@@ -52,7 +132,7 @@ body {
 
 /* @group Header */
 #Title{
-    text-align: center;
+    /*clear:both;*/
     height: 40px;
     font-style: normal;
     font-family: Verdana,Arial,Helvetica,sans-serif;
@@ -71,6 +151,8 @@ body {
 
 #header h1
 {
+    margin-left: auto; margin-right: auto;
+    text-align: center;
     font-size: 36px;
 }
 
@@ -87,39 +169,71 @@ body {
 
 #LoginMenu
 {
-    padding: 5px;
+    padding-right: 5px;
     float: right;
-    /*position: absolute;*/
-    list-style-type: none;
-    height: 26px;
+    /*height: 10px;
+    position: absolute;*/
 }
 
 #LoginMenu ul {
-    height: 2em;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 1px 3px;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#FFB773));
+    border: 1px solid #6D6D6D;
+    border-bottom-left-radius: 1em 1em;
+    border-bottom-right-radius: 1em 1em;
+    line-height: 100%;
+    margin: 0px;
+    padding: 7px 6px 0px;
+ 
+
+
+    /*height: 2em;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0;*/
+}
+
+#LoginMenu ul:after {
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0px;
+    line-height: 0;
+    visibility: hidden;
 }
 
 #LoginMenu li{
-
     float: left;
-    text-align: center;
+    list-style: none;
+    margin: 0px 5px;
+    padding: 0px 0px 8px;
+    position: relative;
+
+           /*border-right-color: black;
+        border-right-style: solid;
+    border-right-width: 1px;*/
+
+
+
+
+    /*float: left;
+    text-align: center;*/
+
 }
 
 #LoginMenu ul li a {
-    background: url('/images/NavLogin.png') 100% 0;
-    padding: 2px;
-    display: block;
-    height: 2em;
-    line-height: 2em;
-    margin-left: 2px;
+    color: #E7E5E5;
+    /*display: block;*/
+    font-weight: bold;
+    margin: 0px;
+    padding: 8px 10px;
     text-decoration: none;
-    width: 70px;
+    text-shadow: rgba(0, 0, 0, 0.29687);
+
 }
 
 #LoginMenu a:hover{
-     color: #5FBDCE;
+    color: #5FBDCE;
 }
 
 
@@ -167,6 +281,7 @@ body {
     text-align: center;
     background: #015666;
     color: white;
+    border-radius: 5px;
 }
 #menu a span {
     display: block;
@@ -199,6 +314,7 @@ body {
     border-bottom: 1px solid gray;
     background: #015666;
     color: white;
+    border-radius: 15px;
 }
 #footer a {
     color: #5FBDCE;
@@ -217,33 +333,57 @@ body {
 /* Login Page */
 #Login
 {
-    background-image: url(/images/LoginBackground.png);
+    /*background-image: url(/images/LoginBackground.png);
     background-repeat: no-repeat;
-    margin-left: auto;
-    margin-top: 20px;
-    margin-right: auto;
-    padding-left: 30px;
-    padding-right: 34px;
-    padding-top: 10px;
-    width: 215px;
-    height: 240px;
-    text-align: left;
+    background-image: -moz-linear-gradient(100% 100% 90deg, #2F2727, #1a82f7);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1a82f7), to(#2F2727));*/
+
+    background-color: #b0dee6;
+    border-radius: 5px;
+    border-color: #015666;
+    border-width: 2px;
+    border-style: solid;
+
+
     
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+
+
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    width: 215px;
+    
+    text-align: left;
+
+}
+
+#Login a
+{
+    color: blue;
+    
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-weight: normal;
+    font-style: italic;
 }
 
 #Login input[type="text"], #Login input[type="password"]
 {
-        border-color: #A8A8A8;
+    border-color: #A8A8A8;
     border-style: solid;
     border-width: 2px;
-        color: #015666;
+    color: #015666;
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-size: 12px;
 }
 
 #Login input[type="text"]:focus, #Login input[type="password"]:focus
 {
-background-color: #FFF4DA;
+    background-color: #FFF4DA;
 }
 
 .LoginLabel
@@ -257,7 +397,7 @@ background-color: #FFF4DA;
 
 .LoginTextfield
 {
-padding-top: 5px;
+    padding-top: 5px;
 
 
 }
@@ -265,30 +405,35 @@ padding-top: 5px;
 .LoginButton
 {
     padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
+
+
 
 /* Round Table for Input values */
 
 .RoundContent {
-	width: 70%;
-	background-color: #9FD7E2;
-	color: #000;
-        margin: 0 auto;
+    width: 70%;
+    background-color: #9FD7E2;
+    color: #000;
+    margin: 0 auto;
 }
 
 .RoundTop {
-	background: url("/images/UpperRightCorner.png") no-repeat top right;
+    background: url("/images/UpperRightCorner.png") no-repeat top right;
 }
 
 .RoundBottom {
-	background: url("/images/BottomRightCorner.png") no-repeat top right;
+    background: url("/images/BottomRightCorner.png") no-repeat top right;
 }
 
 .RoundContent img.corner {
-   width: 23px;
-   height: 23px;
-   border: none;
-   display: block !important;
+    width: 23px;
+    height: 23px;
+    border: none;
+    display: block !important;
 }
 
 .InputTable {
@@ -296,6 +441,11 @@ padding-top: 5px;
     border: none;
     margin: 0 auto;
     font-size: 12px;
-   font-weight: bold;
+    font-weight: bold;
     text-align: left;
+}
+
+.InputTable td
+{
+    vertical-align: top;
 }

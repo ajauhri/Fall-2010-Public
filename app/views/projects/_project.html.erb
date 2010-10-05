@@ -1,0 +1,63 @@
+<% form_for(@project) do |f| %>
+  <%= f.error_messages %>
+
+<div class="RoundContent">
+   <div class="RoundTop">
+	 <%= image_tag "/images/UpperLeftCorner.png", :class=> "corner", :style => "display: none" %>
+   </div>
+
+   <table class="InputTable">
+     <tr>
+    <td>
+    <%= f.label "Project Name:" %>
+    </td><td>
+    <%= f.text_field :name %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label "Description:" %>
+        </td><td>
+    <%= f.text_area :description %>
+      </td>
+  </tr>
+       <tr>
+    <td>
+    <%= f.label "Status:" %>
+    </td><td>
+  <%= f.select(:status, Project::STATUS_TYPES) %>
+    </td>
+  </tr>
+
+         <tr>
+    <td>
+    <%= f.label "Lifecycle:" %>
+    </td><td>
+ <%= f.collection_select(:lifecycle_id, Lifecycle.find(:all), :id, :name, :prompt => "Select a lifecycle") %>
+    </td>
+  </tr>
+
+
+
+
+  <tr><td>
+    </td><td>
+        <% if  action_name == 'new' %>
+    <%= f.submit 'Create' %>
+    <% elsif action_name == 'edit' %>
+    <%= f.submit 'Update' %>
+    <% else %>
+    <%= f.submit 'Submit' %>
+    <% end %>
+      <%= link_to 'Back', projects_path %>
+    </td></tr>
+</table>
+
+   <div class="RoundBottom">
+	 <%= image_tag "/images/BottomleftCorner.png", :class=> "corner", :style => "display: none" %>
+   </div>
+</div>
+
+<% end %>
+
+
