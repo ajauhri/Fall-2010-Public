@@ -360,8 +360,11 @@ width: 8em;
     
     text-align: left;
 
+<<<<<<< .merge_file_a05940
 <<<<<<< .merge_file_a08740
 =======
+=======
+>>>>>>> .merge_file_a09012
 }
 
 #Login a
@@ -371,7 +374,10 @@ width: 8em;
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-weight: normal;
     font-style: italic;
+<<<<<<< .merge_file_a05940
 >>>>>>> .merge_file_a07796
+=======
+>>>>>>> .merge_file_a09012
 }
 
 #Login input[type="text"], #Login input[type="password"]
@@ -413,7 +419,12 @@ width: 8em;
     text-align: center;
 }
 
+<<<<<<< .merge_file_a05940
 <<<<<<< .merge_file_a08740
+/* Table for Input values */
+=======
+
+
 /* Table for Input values */
 =======
 
