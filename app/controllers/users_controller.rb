@@ -44,6 +44,9 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
+    ##
+    ## Delete effort logs first if we ever support deleting users
+    ##
     @user = User.find(params[:id])
     @user.destroy
 

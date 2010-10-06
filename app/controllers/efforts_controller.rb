@@ -2,10 +2,19 @@ class EffortsController < ApplicationController
   # GET /efforts
   # GET /efforts.xml
   def index
-    @deliverables = Deliverable.find(:all) # FOR NOW, NEED TO CHANGE TO MAKE THIS APPEAR WITH AJAX
+    @projects     = Project.find(:all)
+    #@phases       = Phase.find(:all)
+    @deliverables = Deliverable.find(:all)
+    
     @efforts = Effort.find(:all, :conditions => ['user_id = ?', current_user.id])
-    @efforts.sort! { |a,b| a.updated_at <=> b.updated_at }
+    @efforts.sort! { |a,b| b.updated_at <=> a.updated_at }
     @effort = Effort.new
+
+    if params[:selected_deliverable]
+      @selected_deliverable = params[:selected_deliverable].to_i
+    elsif @efforts.length > 0
+      @selected_deliverable = @efforts[0].deliverable_id
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,6 +22,7 @@ class EffortsController < ApplicationController
     end
   end
 
+=begin
   # GET /efforts/1
   # GET /efforts/1.xml
   def show
@@ -35,33 +45,35 @@ class EffortsController < ApplicationController
     end
   end
 
+
   # GET /efforts/1/edit
   def edit
     @effort = Effort.find(params[:id])
   end
+=end
 
   # POST /efforts
   # POST /efforts.xml
   def create
     u_id  = current_user.id
     d_id  = params[:effort][:deliverable_id]
-    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)#:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
+
+    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)
+    #:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
     if @effort.nil?
       @effort                 = Effort.new(params[:effort])
       @effort.user_id         = u_id
-      #@effort.deliverable_id  = d_id
     else
       @effort.value += params[:effort][:value].to_f
     end
 
-    if @effort.save
-      redirect_to :action => 'index'
-    else
+    if not @effort.save
       flash[:error] = error_html(@effort.errors)
-      redirect_to :action => 'index'
     end
+    redirect_to :action => 'index'
   end
 
+=begin
   # PUT /efforts/1
   # PUT /efforts/1.xml
   def update
@@ -77,7 +89,8 @@ class EffortsController < ApplicationController
       end
     end
   end
-
+=end
+  
   # DELETE /efforts/1
   # DELETE /efforts/1.xml
   def destroy

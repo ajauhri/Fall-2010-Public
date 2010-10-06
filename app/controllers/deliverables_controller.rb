@@ -72,6 +72,9 @@ class DeliverablesController < ApplicationController
   # DELETE /deliverables/1
   # DELETE /deliverables/1.xml
   def destroy
+    ###
+    ### Delete all effort logs associated with deliverable before a deliverable delete
+    ###
     @deliverable = Deliverable.find(params[:id])
     @deliverable.destroy
 

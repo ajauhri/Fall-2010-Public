@@ -1,9 +1,10 @@
 class Effort < ActiveRecord::Base
- belongs_to :user
- belongs_to :deliverable
- validates_presence_of :value
- validates_numericality_of :value
- validate :validify_effort
+  belongs_to :user
+  belongs_to :deliverable
+  validates_presence_of :value
+  validates_numericality_of :value
+  validate :validify_effort
+  validates_uniqueness_of :user_id, :scope => :deliverable_id
 
   def get_total_deliverable_effort(d_id)
     sum = 0
@@ -15,6 +16,11 @@ class Effort < ActiveRecord::Base
   private
 
   def validify_effort
-    errors.add('', "Must select a deliverable to log effort") if deliverable_id.blank?
+    if deliverable_id.blank?
+      errors.add('', "Must select a deliverable to log effort")
+    end
+    if value < 0
+      self.value = 0
+    end
   end
 end

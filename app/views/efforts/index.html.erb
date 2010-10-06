@@ -1,29 +1,37 @@
 <h2>Recently Logged Effort</h2>
-<table class="DisplayTable" style="width: 60%">
-  <th id="HeaderLeft">Deliverable Name</th>
+<table class="DisplayTable">
+  <th id="HeaderLeft">Project</th>
+  <th>Phase</th>
+  <th>Deliverable</th>
   <th>Effort (Hours)</th>
+  <th>Last Updated</th>
   <th></th>
   <th id="HeaderRight"></th>
   <% for effort in @efforts %>
     <tr>
-      <td><%=  effort.id %></td>
-      <td><%=  effort.value %></td>
-      <td>Log</td>
+      <td>TBD</td>
+      <td>TBD</td>
+      <td><%=  Deliverable.find_by_id(effort.deliverable_id).name %></td>
+      <td><%=  effort.value.round(1) %></td>
+      <td><%=  effort.updated_at.to_s(:long) %></td>
+      <td><%= link_to 'Log', :action => 'index', :selected_deliverable => effort.deliverable_id %></td>
       <td><%= link_to 'X', effort, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
   <% if @efforts.length == 0 %>
     <tr>
-      <td colspan="4">You have not logged effort to any deliverables</td>
+      <td colspan="7">You have not logged effort to any deliverables</td>
     </tr>
   <% end %>
-    <tr id="BottomRow"><td colspan="4"></td></tr>
+  <tr id="BottomRow"><td colspan="7"></td></tr>
 </table>
+
+
 <% form_for @effort, :html => {:class => "InputArea", :style => "width:50%;"} do |form| %>
   <% form.error_messages %>
-  <%= select 'post', 'Project', ["Project A","Project B"], {:prompt => "Select Project"} %>
+  <%= collection_select 'Project', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
   <%= select 'Phase', 'Phase', ["Phase 1","Phase 2"], {:prompt => "Select Phase"}  %>
-  <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable' %>
+  <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
   <%= form.text_field :value, :style => "width: 30px;"%>
   <%= form.submit 'Add Effort' %>
 <% end %>

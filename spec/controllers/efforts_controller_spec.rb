@@ -2,117 +2,58 @@ require 'spec_helper'
 
 describe EffortsController do
 
+  before(:each) do
+    login_user
+  end
+
+  after(:each) do
+    logout_user
+  end
+
+
   def mock_effort(stubs={})
     @mock_effort ||= mock_model(Effort, stubs)
   end
+ 
 
   describe "GET index" do
-    it "assigns all efforts as @efforts" do
-      Effort.stub(:find).with(:all).and_return([mock_effort])
+    it "should render the index template" do
       get :index
-      assigns[:efforts].should == [mock_effort]
+      response.should render_template 'index'
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested effort as @effort" do
-      Effort.stub(:find).with("37").and_return(mock_effort)
-      get :show, :id => "37"
-      assigns[:effort].should equal(mock_effort)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new effort as @effort" do
-      Effort.stub(:new).and_return(mock_effort)
-      get :new
-      assigns[:effort].should equal(mock_effort)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested effort as @effort" do
-      Effort.stub(:find).with("37").and_return(mock_effort)
-      get :edit, :id => "37"
-      assigns[:effort].should equal(mock_effort)
-    end
-  end
 
   describe "POST create" do
 
     describe "with valid params" do
-      it "assigns a newly created effort as @effort" do
-        Effort.stub(:new).with({'these' => 'params'}).and_return(mock_effort(:save => true))
-        post :create, :effort => {:these => 'params'}
-        assigns[:effort].should equal(mock_effort)
+      it "should successfully create an effort" do
+        effort = Factory.build(:valid_effort)
+        post :create, :effort => effort.attributes
+        response.should redirect_to :action => 'index'
       end
 
-      it "redirects to the created effort" do
-        Effort.stub(:new).and_return(mock_effort(:save => true))
-        post :create, :effort => {}
-        response.should redirect_to(effort_url(mock_effort))
-      end
-    end
+      it "should successfully update effort" do
+   
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved effort as @effort" do
-        Effort.stub(:new).with({'these' => 'params'}).and_return(mock_effort(:save => false))
-        post :create, :effort => {:these => 'params'}
-        assigns[:effort].should equal(mock_effort)
-      end
-
-      it "re-renders the 'new' template" do
-        Effort.stub(:new).and_return(mock_effort(:save => false))
-        post :create, :effort => {}
-        response.should render_template('new')
-      end
-    end
-
-  end
-
-  describe "PUT update" do
-
-    describe "with valid params" do
-      it "updates the requested effort" do
-        Effort.should_receive(:find).with("37").and_return(mock_effort)
-        mock_effort.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :effort => {:these => 'params'}
-      end
-
-      it "assigns the requested effort as @effort" do
-        Effort.stub(:find).and_return(mock_effort(:update_attributes => true))
-        put :update, :id => "1"
-        assigns[:effort].should equal(mock_effort)
-      end
-
-      it "redirects to the effort" do
-        Effort.stub(:find).and_return(mock_effort(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(effort_url(mock_effort))
+        #Effort.any_instance.stubs(:valid?).returns(true)
+        effort = Factory.build(:valid_effort)
+        post :create, :effort => effort.attributes#, :value => 5
+        #effort.value.should_equal 10
+        response.should redirect_to :action => 'index'
       end
     end
 
     describe "with invalid params" do
-      it "updates the requested effort" do
-        Effort.should_receive(:find).with("37").and_return(mock_effort)
-        mock_effort.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :effort => {:these => 'params'}
-      end
-
-      it "assigns the effort as @effort" do
-        Effort.stub(:find).and_return(mock_effort(:update_attributes => false))
-        put :update, :id => "1"
-        assigns[:effort].should equal(mock_effort)
-      end
-
-      it "re-renders the 'edit' template" do
-        Effort.stub(:find).and_return(mock_effort(:update_attributes => false))
-        put :update, :id => "1"
-        response.should render_template('edit')
+      it "should unsuccessfully create an effort" do
+        
+        post :create
+        flash[:error].should_not be_nil
+        response.should redirect_to :action => 'index'
       end
     end
-
   end
+
 
   describe "DELETE destroy" do
     it "destroys the requested effort" do
@@ -122,7 +63,7 @@ describe EffortsController do
     end
 
     it "redirects to the efforts list" do
-      Effort.stub(:find).and_return(mock_effort(:destroy => true))
+      Effort.stubs(:find).and_return(mock_effort(:destroy => true))
       delete :destroy, :id => "1"
       response.should redirect_to(efforts_url)
     end
