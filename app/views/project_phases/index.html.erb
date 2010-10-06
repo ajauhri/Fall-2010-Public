@@ -1,0 +1,26 @@
+<h1>Listing project_phases</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Sequence</th>
+    <th>Total estimated effort</th>
+  </tr>
+
+<% @project_phases.each do |project_phases| %>
+  <tr>
+    <td><%=h project_phases.name %></td>
+    <td><%=h project_phases.description %></td>
+    <td><%=h project_phases.sequence %></td>
+    <td><%=h project_phases.total_estimated_effort %></td>
+    <td><%= link_to 'Show', project_phases %></td>
+    <td><%= link_to 'Edit', edit_project_phases_path(project_phases) %></td>
+    <td><%= link_to 'Destroy', project_phases, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New project_phases', new_project_phases_path %>

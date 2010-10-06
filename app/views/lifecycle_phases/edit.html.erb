@@ -1,0 +1,24 @@
+<h1>Editing lifecycle_phase</h1>
+
+<% form_for(@lifecycle_phase) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :sequence %><br />
+    <%= f.text_field :sequence %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @lifecycle_phase %> |
+<%= link_to 'Back', lifecycle_phases_path %>
