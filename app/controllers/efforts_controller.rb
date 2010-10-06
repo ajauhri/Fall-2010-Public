@@ -2,8 +2,10 @@ class EffortsController < ApplicationController
   # GET /efforts
   # GET /efforts.xml
   def index
-    @deliverables = Deliverable.find(:all)
+    @deliverables = Deliverable.find(:all) # FOR NOW, NEED TO CHANGE TO MAKE THIS APPEAR WITH AJAX
     @efforts = Effort.find(:all, :conditions => ['user_id = ?', current_user.id])
+    @efforts.sort! { |a,b| a.updated_at <=> b.updated_at }
+    @effort = Effort.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,17 +43,22 @@ class EffortsController < ApplicationController
   # POST /efforts
   # POST /efforts.xml
   def create
-    puts params
-    @effort = Effort.new(params[:effort])
+    u_id  = current_user.id
+    d_id  = params[:effort][:deliverable_id]
+    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)#:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
+    if @effort.nil?
+      @effort                 = Effort.new(params[:effort])
+      @effort.user_id         = u_id
+      #@effort.deliverable_id  = d_id
+    else
+      @effort.value += params[:effort][:value].to_f
+    end
 
-    respond_to do |format|
-      if @effort.save
-        format.html { redirect_to(@effort, :notice => 'Effort was successfully created.') }
-        format.xml  { render :xml => @effort, :status => :created, :location => @effort }
-      else
-        format.html { render :action => "index" }
-        format.xml  { render :xml => @effort.errors, :status => :unprocessable_entity }
-      end
+    if @effort.save
+      redirect_to :action => 'index'
+    else
+      flash[:error] = error_html(@effort.errors)
+      redirect_to :action => 'index'
     end
   end
 

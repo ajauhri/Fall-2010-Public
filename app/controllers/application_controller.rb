@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   layout 'application'
 
-  helper_method :current_user
+  helper_method :current_user, :error_html
 
   private
 
@@ -40,6 +40,14 @@ class ApplicationController < ActionController::Base
     unless current_user
         redirect_to login_url
     end
+  end
+
+  def error_html(errors)
+    html = "<b><u>Error!</u></b><br/>"
+    for error in errors
+      html += "#{error[0].capitalize.humanize} #{error[1]}<br/>"
+    end
+    return html
   end
 
 

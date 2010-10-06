@@ -19,32 +19,27 @@ body {
 
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#FFB773));
 
-background:
--moz-linear-gradient(
-    center bottom,
-    rgb(255,255,255) 0%,
-    rgb(255,156,64) 1000%
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> b971c587e9f353b8d95439df3267f7737fc5efc0
-);
+    background:
+        -moz-linear-gradient(
+        center bottom,
+        rgb(255,255,255) 0%,
+        rgb(255,156,64) 1000%
+        );
 
 
     border: 2px solid #999;
 
     border-radius: 5px;
-color: #015666;
-cursor: pointer;
-display: inline-block;
-font-size: 1.5em;
-font-weight: bold;
-padding: 0.25em 0.5em 0.3em;
-position: relative;
-text-align: center;
-text-shadow: rgba(0, 0, 0, 0.496094) 1px 1px 3px;
-width: 8em;
+    color: #015666;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0.25em 0.5em 0.3em;
+    position: relative;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.496094) 1px 1px 3px;
+    width: 8em;
 
     /*
     display: inline-block;
@@ -188,11 +183,7 @@ width: 8em;
     line-height: 100%;
     margin: 0px;
     padding: 7px 6px 0px;
-<<<<<<< HEAD
-
-=======
- 
->>>>>>> b971c587e9f353b8d95439df3267f7737fc5efc0
+  
 
 
     /*height: 2em;
@@ -217,9 +208,9 @@ width: 8em;
     padding: 0px 0px 8px;
     position: relative;
 
-           /*border-right-color: black;
-        border-right-style: solid;
-    border-right-width: 1px;*/
+    /*border-right-color: black;
+ border-right-style: solid;
+border-right-width: 1px;*/
 
 
 
@@ -353,11 +344,7 @@ width: 8em;
     border-style: solid;
 
 
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> b971c587e9f353b8d95439df3267f7737fc5efc0
+   
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -369,23 +356,13 @@ width: 8em;
     padding-bottom: 10px;
 
     width: 215px;
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> b971c587e9f353b8d95439df3267f7737fc5efc0
-    text-align: left;
+   
 
 }
 
 #Login a
 {
     color: blue;
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> b971c587e9f353b8d95439df3267f7737fc5efc0
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-weight: normal;
     font-style: italic;
@@ -432,40 +409,74 @@ width: 8em;
 
 
 
-/* Round Table for Input values */
+/* Area for Input values */
 
-.RoundContent {
-    width: 70%;
-    background-color: #9FD7E2;
-    color: #000;
-    margin: 0 auto;
-}
-
-.RoundTop {
-    background: url("/images/UpperRightCorner.png") no-repeat top right;
-}
-
-.RoundBottom {
-    background: url("/images/BottomRightCorner.png") no-repeat top right;
-}
-
-.RoundContent img.corner {
-    width: 23px;
-    height: 23px;
+.InputArea {
+    padding: 2em;
     border: none;
-    display: block !important;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-weight: bold;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    background: #f78d1d;
+    background: -webkit-gradient(linear, left top, left bottom, from(#5FBDCE), to(#428490));
+    background: -moz-linear-gradient(top,  #5FBDCE,  #428490);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#5FBDCE', endColorstr='#428490');
 }
 
 .InputTable {
-    width: 80%;
-    border: none;
-    margin: 0 auto;
-    font-size: 12px;
-    font-weight: bold;
+    width: 100%;
     text-align: left;
+    padding: 0;
+    color: #FFFFFF;
 }
 
-.InputTable td
-{
-    vertical-align: top;
+
+.EffortTable {
+    margin: 1em auto;
+    text-align: left;
+  -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    border-spacing: 0;
+    color: #FFFFFF;
+    background: #EEEEEE;
+}
+
+.EffortTable td {
+    color: #000000;
+    padding: .5em;
+}
+
+.EffortTable th{
+    -webkit-border-radius: inherit;
+    -moz-border-radius: inherit;
+    border-radius: inherit;
+    background: #015666;
+    padding: .5em;
+}
+
+.EffortTable td a{
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.EffortTable tr:hover {
+    background: #AFDEE6;
+}
+
+#EffortBottomRow td{
+    height: 6px;
+    background: #EEEEEE;
 }

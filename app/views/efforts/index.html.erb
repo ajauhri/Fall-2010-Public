@@ -1,11 +1,24 @@
-<h1>Listing efforts</h1>
 
-
-<% form_tag :url => {:action => 'create'} do %>
-
+<table class="EffortTable">
+  <th>Deliverable Name</th><th>Effort (Hours)</th>
+  <% for effort in @efforts %>
+    <tr>
+      <td><%= effort.id %></td>
+      <td><%= effort.value %></td>
+    </tr>
+  <% end %>
+  <% if @efforts.length == 0 %>
+    <tr>
+      <td colspan="2">You have not logged effort to any deliverables</td>
+    </tr>
+  <% end %>
+    <tr id="EffortBottomRow"><td></td><td></td></tr>
+</table>
+<% form_for @effort, :html => {:class => "InputArea", :style => "width:50%;"} do |form| %>
+  <% form.error_messages %>
   <%= select 'post', 'Project', ["Project A","Project B"], {:prompt => "Select Project"} %>
   <%= select 'Phase', 'Phase', ["Phase 1","Phase 2"], {:prompt => "Select Phase"}  %>
-  <%= collection_select :deliverable, :id, @deliverables, :id, :name, :prompt => 'Select Deliverable' %>
-  <%= text_field_tag 'Effort', nil, :style => "width: 20px;"%>
-  <%= submit_tag 'Add Effort' %>
+  <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable' %>
+  <%= form.text_field :value, :style => "width: 30px;"%>
+  <%= form.submit 'Add Effort' %>
 <% end %>
