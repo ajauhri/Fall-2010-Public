@@ -1,11 +1,14 @@
 <h1>Listing projects</h1>
 
-<table>
+<table class="DisplayTable">
   <tr>
-    <th>Name</th>
+    <th id="HeaderLeft">Name</th>
     <th>Description</th>
-    <th>Total estimated effort</th>
+    <th>Total Est. Effort</th>
     <th>Status</th>
+    <th></th>
+    <th></th>
+    <th id="HeaderRight"</th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -19,6 +22,8 @@
     <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+    <tr id="BottomRow"><td colspan="7"></td></tr>
 </table>
+</div>
 
 <br />

@@ -439,7 +439,7 @@ border-right-width: 1px;*/
 }
 
 
-.EffortTable {
+.DisplayTable {
     margin: 1em auto;
     text-align: left;
   -webkit-border-radius: 1em;
@@ -453,30 +453,32 @@ border-right-width: 1px;*/
     background: #EEEEEE;
 }
 
-.EffortTable td {
+.DisplayTable td {
     color: #000000;
-    padding: .5em;
 }
 
-.EffortTable th{
-    -webkit-border-radius: inherit;
-    -moz-border-radius: inherit;
-    border-radius: inherit;
+.DisplayTable th{
     background: #015666;
-    padding: .5em;
 }
 
-.EffortTable td a{
-    display: block;
-    text-decoration: none;
-    color: #000;
+.DisplayTable th, td{
+    padding: 1em;
 }
 
-.EffortTable tr:hover {
-    background: #AFDEE6;
-}
-
-#EffortBottomRow td{
+.DisplayTable #BottomRow td{
     height: 6px;
     background: #EEEEEE;
+    padding: 0;
+}
+
+.DisplayTable #HeaderRight{
+    -webkit-border-top-right-radius: 1em;
+    -moz-border-top-right-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.DisplayTable #HeaderLeft{
+    -webkit-border-top-left-radius: 1em;
+    -moz-border-top-left-radius: 1em;
+    border-top-left-radius: 1em;
 }
