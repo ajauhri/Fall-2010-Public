@@ -1,33 +1,48 @@
+<div class="InputArea">
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :username %><br />
+   <table class="InputTable">
+     <tr>
+    <td>
+    <%= f.label "User Name:" %>
+    </td><td>
     <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label "Email Address:" %>
+        </td><td>
     <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
+      </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label "Password:" %>
+        </td><td>
     <%= f.password_field :password %>
-  </p>
-    <p>
-    <%= f.label :password_confirmation %><br />
+     </td>
+  </tr>
+  <tr>
+    <td>
+    <%= f.label 'Confirm Password:' %>
+    </td><td>
     <%= f.password_field :password_confirmation %>
-  </p>
-
+      </td>
+  </tr>
   <% if current_user.role == User::ADMIN %>
-  <p>
-    <%= f.label 'Role' %><br/>
+  <tr>
+    <td>
+    <%= f.label 'Role:' %>
+    </td><td>
     <%= f.select :role, User::ROLES %>
-  </p>
+    </td></tr>
   <% end %>
 
-  <p>
+  <tr><td>
+    </td><td>
     <%= f.submit 'Submit' %>
-  </p>
+    </td></tr>
+</table>
 <% end %>
-
-<%= link_to 'Back', :back %>
+</div>

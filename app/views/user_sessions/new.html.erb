@@ -1,62 +1,28 @@
   <% form_for @user_session do |form| %>
-  <%= form.error_messages %>
 <div id="Login">
   <div class="LoginLabel">
     <%= form.label :username, "Username" %>
   </div>
-  <div class="LoginTextfield">
+  <div id="username">
     <%= form.text_field :username %>
   </div>
   <div class="LoginLabel">
     <%= form.label :password, "Password" %>
+    
   </div>
   <div class="LoginTextfield">
     <%= form.password_field :password %>
+    <%= form.check_box :remember_me%>
+     <%= form.label "remember password" %>
   </div>
   <div class="LoginButton">
-  <a href="#">Forgot your password?</a>
-  <%= form.submit "Login" %>
+  <%= form.submit "Login", :class => 'button' %>
   </div>
+  <div>
+  <a href="#">Forgot your password?</a>
+  </div>
+  
 </div>
 <% end %>
-
-  <!--form action="/sessions/create" class="onboard_form" method="post">
-    <div class="field text_field">
-      <label for="email">Email address</label>
-    </div>
-    <div class="another_row">
-      <input class="autotab behavior" id="email" name="email" tabindex="1" type="text">
-    </div>
-    <div class="field text_field">
-      <label for="password">Password</label>
-      <span>
-        &nbsp;&nbsp;
-      </span>
-      <a href="/users/forgot_password?from_openid=false">Forgot password?</a>
-    </div>
-    <div class="one_more_row">
-      <input id="password" name="password" tabindex="2" type="password" value="">
-    </div>
-    <div class="remember_me_field">
-      <div class="field check_box_field">
-        <input id="remember_me" name="remember_me" type="checkbox" value="1">
-        <label for="remember_me" style="display:inline">Remember me</label>
-      </div>
-    </div>
-    <div class="actions">
-      <div class="right gistsubmit" onclick="document.getElementById(&quot;loading_spinner&quot;).style.display = &quot;inline&quot;;"><input name="commit" type="submit" value="Sign In"><span></span></div>
-      <img alt="Sm_loader" class="right" id="loading_spinner" src="/images/loaders/sm_loader.gif?1285981737" style="margin-top:13px;display:none;">
-      <div class="clear"></div>
-    </div>
-    <input id="time_zone_offset" name="time_zone_offset" type="hidden" value="-7">
-    <input id="from_openid" name="from_openid" type="hidden">
-    <input id="version" name="version" type="hidden">
-    <a href="/sessions/new?openid=true">Sign in with Google Apps</a>
-    <br>
-    <a href="/users/new">Create account</a>
-    <br>
-    <a href="/corp/home">Return to main Gist website</a>
-    <div class="clear"></div>
-  </form-->
 
 

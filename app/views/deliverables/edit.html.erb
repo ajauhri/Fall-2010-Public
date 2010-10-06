@@ -1,0 +1,24 @@
+<h1>Editing deliverables</h1>
+
+<% form_for(@deliverable) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :est_effort %><br />
+    <%= f.text_field :est_effort %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @deliverable %> |
+<%= link_to 'Back', deliverables_path %>

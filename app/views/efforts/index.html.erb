@@ -1,0 +1,29 @@
+<h2>Recently Logged Effort</h2>
+<table class="DisplayTable" style="width: 60%">
+  <th id="HeaderLeft">Deliverable Name</th>
+  <th>Effort (Hours)</th>
+  <th></th>
+  <th id="HeaderRight"></th>
+  <% for effort in @efforts %>
+    <tr>
+      <td><%=  effort.id %></td>
+      <td><%=  effort.value %></td>
+      <td>Log</td>
+      <td><%= link_to 'X', effort, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  <% if @efforts.length == 0 %>
+    <tr>
+      <td colspan="4">You have not logged effort to any deliverables</td>
+    </tr>
+  <% end %>
+    <tr id="BottomRow"><td colspan="4"></td></tr>
+</table>
+<% form_for @effort, :html => {:class => "InputArea", :style => "width:50%;"} do |form| %>
+  <% form.error_messages %>
+  <%= select 'post', 'Project', ["Project A","Project B"], {:prompt => "Select Project"} %>
+  <%= select 'Phase', 'Phase', ["Phase 1","Phase 2"], {:prompt => "Select Phase"}  %>
+  <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable' %>
+  <%= form.text_field :value, :style => "width: 30px;"%>
+  <%= form.submit 'Add Effort' %>
+<% end %>

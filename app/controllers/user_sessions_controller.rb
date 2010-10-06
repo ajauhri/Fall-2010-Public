@@ -12,9 +12,9 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Successfully logged in."
       redirect_to :controller => 'projects', :action => 'index'
     else
+      flash[:error] = "The username or password you entered is incorrect!"
       render :action => 'new'
     end
   end
@@ -22,7 +22,11 @@ class UserSessionsController < ApplicationController
   def destroy
     @user_session = UserSession.find
     @user_session.destroy
+    if params[:id] == 'intruder'
+      flash[:error] = "You're not allowed in here!"
+    else
     flash[:notice] = "Successfully logged out."
+    end
     redirect_to :action => 'new'
   end
 

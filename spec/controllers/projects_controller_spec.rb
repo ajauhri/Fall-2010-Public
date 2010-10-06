@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ProjectsController, "creating a new project" do
+describe ProjectsController do
   setup :activate_authlogic
   integrate_views
 
@@ -9,9 +9,16 @@ describe ProjectsController, "creating a new project" do
   end
 
   before(:each) do
-    #logout_user
+    logout_user
     login_user
   end
+  
+  it "should create a new project" do
+    get :new
+    response.should render_template(:new)
+    :project.should_not be_nil
+  end
+
 
   it "should redirect to index with a notice on successful save" do
     Project.any_instance.stubs(:valid?).returns(true)
@@ -21,10 +28,14 @@ describe ProjectsController, "creating a new project" do
   end
 
   it "should redirect to index" do
-    #login_user
     Project.any_instance.stubs(:valid?).returns(true)
     get 'index'
     response.should render_template(:index)
+  end
+
+  it "should show a project" do
+    get :show, :id => Project.first
+    response.should render_template(:show)
   end
 
   it "edit action should render edit template" do

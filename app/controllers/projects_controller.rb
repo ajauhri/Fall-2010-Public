@@ -26,7 +26,6 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @project }
@@ -44,7 +43,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(params[:project])
 
     respond_to do |format|
-      if not @project.save
+      if @project.save
         format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
