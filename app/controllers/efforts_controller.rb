@@ -57,7 +57,9 @@ class EffortsController < ApplicationController
   def create
     u_id  = current_user.id
     d_id  = params[:effort][:deliverable_id]
-    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)#:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
+
+    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)
+    #:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
     if @effort.nil?
       @effort                 = Effort.new(params[:effort])
       @effort.user_id         = u_id
@@ -71,7 +73,7 @@ class EffortsController < ApplicationController
     redirect_to :action => 'index'
   end
 
- =begin
+=begin
   # PUT /efforts/1
   # PUT /efforts/1.xml
   def update

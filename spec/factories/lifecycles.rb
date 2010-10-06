@@ -2,7 +2,7 @@ Factory.define :lifecycle do |l|
   l.name "XP Agile"
   l.description "Popular agile methodology"
 end
-
+=begin
 Factory.define :lifecycle_XP_phase, :class => LifecyclePhase do |lxp|
   lxp.sequence(:name) {|n| "Iteration #{n}"}
   lxp.association :lifecycle, :factory => :lifecycle
@@ -18,3 +18,4 @@ end
 Factory.define :lifecycle_waterfall, :parent => :lifecycle do |l|
   l.name "Waterfall"
 end
+=end

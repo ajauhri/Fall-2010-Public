@@ -4,6 +4,7 @@ class Effort < ActiveRecord::Base
   validates_presence_of :value
   validates_numericality_of :value
   validate :validify_effort
+  validates_uniqueness_of :user_id, :scope => :deliverable_id
 
   def get_total_deliverable_effort(d_id)
     sum = 0
