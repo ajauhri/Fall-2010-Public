@@ -22,14 +22,17 @@ body {
     background:
         -moz-linear-gradient(
         center bottom,
-        rgb(255,255,255) 0%,
-        rgb(255,156,64) 1000%
+        white,
+        #FFB773
         );
 
 
     border: 2px solid #999;
 
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
     border-radius: 5px;
+    
     color: #015666;
     cursor: pointer;
     display: inline-block;
@@ -175,11 +178,22 @@ body {
 }
 
 #LoginMenu ul {
+    -moz-box-shadow: rgba(0, 0, 0, 0.398438) 0px 1px 3px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.398438) 0px 1px 3px;
+
+
+    background: orange;
+    background: -moz-linear-gradient(top,white,#FFB773);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#FFB773));
     border: 1px solid #6D6D6D;
+
+
+    -moz-border-radius-bottomleft: 1em 1em;
+    -moz-border-radius-bottomright: 1em 1em;
     border-bottom-left-radius: 1em 1em;
     border-bottom-right-radius: 1em 1em;
+
+
     line-height: 100%;
     margin: 0px;
     padding: 7px 6px 0px;
@@ -280,6 +294,7 @@ border-right-width: 1px;*/
     text-align: center;
     background: #015666;
     color: white;
+    -moz-border-radius: 5px;
     border-radius: 5px;
 }
 #menu a span {
@@ -313,6 +328,7 @@ border-right-width: 1px;*/
     border-bottom: 1px solid gray;
     background: #015666;
     color: white;
+    -moz-border-radius: 15px;
     border-radius: 15px;
 }
 #footer a {
@@ -338,6 +354,7 @@ border-right-width: 1px;*/
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1a82f7), to(#2F2727));*/
 
     background-color: #b0dee6;
+    -moz-border-radius: 5px;
     border-radius: 5px;
     border-color: #015666;
     border-width: 2px;
@@ -442,7 +459,6 @@ border-right-width: 1px;*/
 .DisplayTable {
     margin: 1em auto;
     text-align: left;
-  -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
@@ -472,14 +488,12 @@ border-right-width: 1px;*/
 }
 
 .DisplayTable #HeaderRight{
-    -webkit-border-top-right-radius: 1em;
-    -moz-border-top-right-radius: 1em;
+    -moz-border-radius-topright: 1em;
     border-top-right-radius: 1em;
 }
 
 .DisplayTable #HeaderLeft{
-    -webkit-border-top-left-radius: 1em;
-    -moz-border-top-left-radius: 1em;
+    -moz-border-radius-topleft: 1em;
     border-top-left-radius: 1em;
 }
 
