@@ -1,4 +1,4 @@
-<h1>Listing projects</h1>
+<h1>Projects</h1>
 
 <table class="DisplayTable">
   <tr>
@@ -13,17 +13,16 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%=h project.name %></td>
+    <td><%= link_to h(project.name), project %></td>
     <td><%=h project.description %></td>
     <td><%=h project.total_estimated_effort %></td>
     <td><%=h project.status %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td></td>
+    <td></td>
+    <td><%= link_to 'x', project, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
     <tr id="BottomRow"><td colspan="7"></td></tr>
 </table>
-</div>
 
 <br />

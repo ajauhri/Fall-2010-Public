@@ -14,12 +14,7 @@ def create_phases
    @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(self.lifecycle_id)
    @lifecycle_phases.each do |lp|
      
-       ProjectPhases.create(
-         :name => lp.name,
-         :description => lp.description,
-         :lifecycle_phase => lp,
-         :sequence => lp.sequence,
-         :project => self)
+    ProjectPhases.create_from_lifecycle_phase(lp.id, self)
    end
  end
 
