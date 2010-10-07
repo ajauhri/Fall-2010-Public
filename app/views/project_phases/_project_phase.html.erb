@@ -1,5 +1,5 @@
 <p><b>Phase</b>
-<%= link_to h(project_phase.name), project_phase %>
+<%= link_to h(project_phase.name), edit_project_phase_path(@project_phase) %>
 <%= link_to 'x', project_phase, :confirm => 'Are you sure?', :method => :delete %>
 <%= link_to 'Add deliverables', new_deliverable_path %>
 </p>
