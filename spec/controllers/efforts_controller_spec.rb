@@ -26,9 +26,9 @@ describe EffortsController do
 
         it "should assign selected_deliverable to first effort" do
           effort = Factory.create(:valid_effort)
+        @logged_in_user.id = effort.user_id
       get :index
       assigns(:selected_deliverable).should_not be_nil
-
   end
 end
 

@@ -6,12 +6,14 @@ class Effort < ActiveRecord::Base
   validate :validify_effort
   validates_uniqueness_of :user_id, :scope => :deliverable_id
 
+=begin
   def get_total_deliverable_effort(d_id)
     sum = 0
     for effort in Effort.find_by_deliverable_id(d_id)
       sum += effort.value
     end
   end
+=end
 
   private
 
