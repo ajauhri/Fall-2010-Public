@@ -1,23 +1,23 @@
 <p>
   <b>Name:</b>
-  <%=h @project_phases.name %>
+  <%=h @project_phase.name %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%=h @project_phases.description %>
+  <%=h @project_phase.description %>
 </p>
 
 <p>
   <b>Sequence:</b>
-  <%=h @project_phases.sequence %>
+  <%=h @project_phase.sequence %>
 </p>
 
 <p>
   <b>Total estimated effort:</b>
-  <%=h @project_phases.total_estimated_effort %>
+  <%=h @project_phase.total_estimated_effort %>
 </p>
 
 
-<%= link_to 'Edit', edit_project_phases_path(@project_phases) %> |
-<%= link_to 'Back', project_phases_path %>
+<%= link_to 'Edit', edit_project_phase_path(@project_phase) %> |
+<%= link_to 'Back', project_phase_path %>

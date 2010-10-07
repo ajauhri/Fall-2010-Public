@@ -4,7 +4,7 @@ describe "/project_phases/edit.html.erb" do
   include ProjectPhasesHelper
 
   before(:each) do
-    assigns[:project_phases] = @project_phases = stub_model(ProjectPhases,
+    assigns[:project_phase] = @project_phase = stub_model(ProjectPhases,
       :new_record? => false,
       :name => "value for name",
       :description => "value for description",
@@ -16,7 +16,7 @@ describe "/project_phases/edit.html.erb" do
   it "renders the edit project_phases form" do
     render
 
-    response.should have_tag("form[action=#{project_phases_path(@project_phases)}][method=post]") do
+    response.should have_tag("form[action=#{project_phase_path(@project_phase)}][method=post]") do
       with_tag('input#project_phases_name[name=?]', "project_phases[name]")
       with_tag('textarea#project_phases_description[name=?]', "project_phases[description]")
       with_tag('input#project_phases_sequence[name=?]', "project_phases[sequence]")

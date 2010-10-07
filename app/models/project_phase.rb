@@ -1,4 +1,4 @@
-class ProjectPhases < ActiveRecord::Base
+class ProjectPhase < ActiveRecord::Base
   belongs_to :project
   belongs_to :lifecycle_phase
 

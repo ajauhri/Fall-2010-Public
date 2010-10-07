@@ -15,7 +15,7 @@
     <td><%=h project_phases.sequence %></td>
     <td><%=h project_phases.total_estimated_effort %></td>
     <td><%= link_to 'Show', project_phases %></td>
-    <td><%= link_to 'Edit', edit_project_phases_path(project_phases) %></td>
+    <td><%= link_to 'Edit', edit_project_phase_path(project_phases) %></td>
     <td><%= link_to 'Destroy', project_phases, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -23,4 +23,4 @@
 
 <br />
 
-<%= link_to 'New project_phases', new_project_phases_path %>
+<%= link_to 'New project_phases', new_project_phase_path %>

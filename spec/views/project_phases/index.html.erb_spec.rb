@@ -5,13 +5,13 @@ describe "/project_phases/index.html.erb" do
 
   before(:each) do
     assigns[:project_phases] = [
-      stub_model(ProjectPhases,
+      stub_model(ProjectPhase,
         :name => "value for name",
         :description => "value for description",
         :sequence => 1,
         :total_estimated_effort => 9.99
       ),
-      stub_model(ProjectPhases,
+      stub_model(ProjectPhase,
         :name => "value for name",
         :description => "value for description",
         :sequence => 1,

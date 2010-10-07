@@ -1,6 +1,6 @@
 class AddTestDataForProjectPhases < ActiveRecord::Migration
   def self.up
-    ProjectPhases.delete_all
+    ProjectPhase.delete_all
 
     project_xyz = Project.find_by_name("Project XYZ")
     project_xyz.create_phases
@@ -12,6 +12,6 @@ class AddTestDataForProjectPhases < ActiveRecord::Migration
   end
 
   def self.down
-    ProjectPhases.delete_all
+    ProjectPhase.delete_all
   end
 end
