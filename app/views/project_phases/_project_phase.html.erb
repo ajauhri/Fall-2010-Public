@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <li id="id_<%=project_phases.id%>">
 <span class="handle">[drag]</span>
 <b>Phase</b>
@@ -5,3 +6,10 @@
 <%= link_to 'x', project_phase, :confirm => 'Are you sure?', :method => :delete %>
 <%= link_to 'Add deliverables', new_deliverable_path %>
 </li>
+=======
+<p><b>Phase</b>
+<%= link_to h(project_phase.name), edit_project_phase_path(@project_phase) %>
+<%= link_to 'x', project_phase, :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to 'Add deliverables', new_deliverable_path %>
+</p>
+>>>>>>> 1774519582be2820e766f972eca3f814fe6e0bc3
