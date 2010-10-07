@@ -12,7 +12,7 @@ class AddTestDataProjects < ActiveRecord::Migration
     or from gathering data empirically. The written report that comes from the
     project is usually in the form of a dissertation, which will contain sections
     on the project's inception, methods of inquiry, analysis, findings and conclusions.",
-      :lifecycle_id => Lifecycle.first.id
+      :lifecycle_id => Lifecycle.find_by_name("XP").id
     )
 
     Project.create(
@@ -21,11 +21,11 @@ class AddTestDataProjects < ActiveRecord::Migration
      are subject to very high stresses and have to be made of very high quality
      steel. It took many decades to improve the quality of the materials,
      including the change from iron to steel.",
-      :lifecycle_id => Lifecycle.first.id
+      :lifecycle_id => Lifecycle.find_by_name("Simplified Waterfall").id
     )
   end
 
   def self.down
-
+    Project.delete_all
   end
 end
