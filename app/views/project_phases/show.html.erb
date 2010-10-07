@@ -1,4 +1,24 @@
 <p>
+  <a href="#" onclick="prompt.setDefaultValue('Pink');prompt.setVisible(true);">
+    Prompt
+  </a>
+  </p>
+  <script type="text/javascript">
+    var promptHandler = function(response) {
+      if (response == null) {
+        alert('Afraid to answer?');
+      } else {
+        alert('I like ' + response + ' too!');
+      }
+    }
+
+    var prompt = new goog.ui.Prompt(
+        'Information Required',
+        'What is your favorite color?',
+        promptHandler);
+  </script>
+  
+<p>
   <b>Name:</b>
   <%=h @project_phases.name %>
 </p>
