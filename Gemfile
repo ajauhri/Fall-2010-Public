@@ -23,6 +23,7 @@ group :development do
   gem 'rdoc'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'acts_as_list'
 end
 
 group :test do
