@@ -1,0 +1,4 @@
+page.insert_html(:top, :phaseslist , :partial => "project_phase", :object => @project_phase)
+#page[:tracker_form].reset
+#page.replace_html :notice, flash[:notice]
+#flash.discard

@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe "/deliverables/show.html.erb" do
   include DeliverablesHelper
+
+=begin
   before(:each) do
     assigns[:deliverables] = @deliverables = stub_model(Deliverable,
       :name => "value for name",
@@ -16,4 +18,5 @@ describe "/deliverables/show.html.erb" do
     response.should have_text(/value\ for\ description/)
     response.should have_text(/1\.5/)
   end
+=end
 end

@@ -18,9 +18,6 @@ class ApplicationController < ActionController::Base
 
   end
 
- 
-
-
   layout 'application'
 
   helper_method :current_user, :error_html

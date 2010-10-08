@@ -20,6 +20,7 @@ describe "/project_phases/index.html.erb" do
     ]
   end
 
+=begin
   it "renders a list of project_phases" do
     render
     response.should have_tag("tr>td", "value for name".to_s, 2)
@@ -27,4 +28,5 @@ describe "/project_phases/index.html.erb" do
     response.should have_tag("tr>td", 1.to_s, 2)
     response.should have_tag("tr>td", 9.99.to_s, 2)
   end
+=end
 end

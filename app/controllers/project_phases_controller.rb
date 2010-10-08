@@ -40,11 +40,17 @@ class ProjectPhasesController < ApplicationController
   # POST /project_phases
   # POST /project_phases.xml
   def create
-    @project_phase = ProjectPhase.new(params[:project_phases])
-
+    @project_phase = ProjectPhase.new(params[:project_phase])
+    
+    # Probably there is a better way to do this, using associations, nested forms.
+    @project_phase.project_id=session[:current_project]
+    
     respond_to do |format|
       if @project_phase.save
-        format.html { redirect_to(@project_phase, :notice => 'Project phase was successfully created.') }
+        @project_phases = ProjectPhase.find_all_by_project_id(@project_phase.project_id, :order => :sequence)
+        format.html { render :partial => @project_phases }
+        #format.html { redirect_to(@project_phase.project, :notice => 'Project phase was successfully created.') }
+        format.js
         format.xml  { render :xml => @project_phase, :status => :created, :location => @project_phase }
       else
         format.html { render :action => "new" }
@@ -76,7 +82,7 @@ class ProjectPhasesController < ApplicationController
     @project_phase.destroy
 
     respond_to do |format|
-      format.html { redirect_to(projects_url) }
+      format.html { redirect_to(@project_phase.project) }
       format.xml  { head :ok }
     end
   end

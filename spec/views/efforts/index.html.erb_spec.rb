@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "/efforts/index.html.erb" do
   include EffortsHelper
 
+=begin
   before(:each) do
     assigns[:efforts] = [
       stub_model(Effort,
@@ -21,4 +22,5 @@ describe "/efforts/index.html.erb" do
     response.should have_tag("tr>td", 1.5.to_s, 2)
     response.should have_tag("tr>td", "value for username".to_s, 2)
   end
+=end
 end

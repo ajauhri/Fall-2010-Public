@@ -15,7 +15,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id])
-
+    #@project.project_phases.build
+    session[:current_project] = @project.id
+    puts "This is the call " + @project.id.to_s
+    #puts "Called from show (controller) " + @project.project_phases.size.to_s
     @project_phases = ProjectPhase.find_all_by_project_id(params[:id], :order=>"sequence")
     respond_to do |format|
       format.html # show.html.erb
@@ -84,9 +87,7 @@ class ProjectsController < ApplicationController
   end
 
   def sort
-    puts "haha"
     params[:phaseslist].each_with_index do |id, index|
-      #puts "index" + index +"id "+ id.to_s
       ProjectPhase.update_all(['sequence=?',index+1],['id=?',id])
     end
     render :nothing => true

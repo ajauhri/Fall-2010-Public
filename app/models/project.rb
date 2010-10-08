@@ -3,7 +3,9 @@ class Project < ActiveRecord::Base
   belongs_to :lifecyle
   has_many :project_phases, :order => "sequence"
   validates_presence_of :name, :lifecycle_id
-  
+
+  accepts_nested_attributes_for :project_phases
+
   STATUS_TYPES = [
     ["Active"], #"active"],
     ["Archived"], #"archived"],

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "/efforts/new.html.erb" do
   include EffortsHelper
 
+=begin
   before(:each) do
     assigns[:effort] = stub_model(Effort,
       :new_record? => true,
@@ -19,4 +20,5 @@ describe "/efforts/new.html.erb" do
       with_tag("input#effort_username[name=?]", "effort[username]")
     end
   end
+=end
 end

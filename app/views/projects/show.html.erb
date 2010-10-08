@@ -1,49 +1,57 @@
+<table class="DisplayTable" >
+  <tr><td>
+      <b>Name:</b>
+      <%=h @project.name %>
+    </td>
+  </tr>
 
-<p>
-  <b>Name:</b>
-  <%=h @project.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @project.description %>
-</p>
-
-<p>
-  <b>Total estimated effort:</b>
-  <%=h @project.total_estimated_effort %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%=h @project.status %>
-</p>
-<p>
+  <tr><td>
+      <b>Description:</b>
+      <%=h @project.description %>
+    </td>
+  </tr>
+  <tr><td>
+      <b>Total estimated effort:</b>
+      <%=h @project.total_estimated_effort %>
+    </td>
+  </tr>
+  <tr><td>
+      <b>Status:</b>
+      <%=h @project.status %>
+    </td>
+  </tr>
+</table>
+  <%= link_to 'New project_phases', new_project_phase_path %>
   <a href="#" onclick="prompt.setDefaultValue('Pink');prompt.setVisible(true);">
     Create New Phase
   </a>
-  </p>
   <script type="text/javascript">
     var promptHandler = function(response) {
-     
        // alert('I like ' + response + ' too!');
-      
     }
-
-
     var prompt = new goog.ui.Prompt(
         'Enter New Phase Details',['Phase Name'],
-        promptHandler);
-       
-
+        promptHandler);  
   </script>
 
-  <ul id="phaseslist">
-<%= render :partial => @project_phases %>
+<div>
 
+  <% form_remote_for(:project_phase, @project_phase, :url => {:controller => :project_phases, :action => :create},
+    :html => { :id => "phases_form"}) do |f| %>
+  <%# form_remote_for :project_phase, :url => :url => {:controller => :project_phases, :action => :create} do |f| %>
+
+   Name: <%= f.text_field :name %><br />
+   Description: <%= f.text_field :description %><br />
+
+  <%= f.submit "Create" %>
+  <% end %>
+</div>
+
+  <ul id="phaseslist">
+    <%= render :partial => @project_phases %>
   </ul>
 
-  <%= sortable_element("phaseslist", :url => sort_projects_path, :handle => "handle") %>
+<%= sortable_element("phaseslist", :url => sort_projects_path, :handle => "handle") %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
