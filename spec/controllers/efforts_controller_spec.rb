@@ -9,11 +9,6 @@ describe EffortsController do
   after(:each) do
     logout_user
   end
-
-
-  def mock_effort(stubs={})
-    @mock_effort ||= mock_model(Effort, stubs)
-  end
  
 
   describe "GET index" do
@@ -21,7 +16,21 @@ describe EffortsController do
       get :index
       response.should render_template 'index'
     end
+
+    it "should assign selected_deliverable to the passed parameter" do
+      get :index, :selected_deliverable => "1"
+
+      assigns(:selected_deliverable).should == 1
+      
   end
+
+        it "should assign selected_deliverable to first effort" do
+          effort = Factory.create(:valid_effort)
+        @logged_in_user.id = effort.user_id
+      get :index
+      assigns(:selected_deliverable).should_not be_nil
+  end
+end
 
 
   describe "POST create" do
@@ -34,20 +43,17 @@ describe EffortsController do
       end
 
       it "should successfully update effort" do
-   
-
-        #Effort.any_instance.stubs(:valid?).returns(true)
-        effort = Factory.build(:valid_effort)
-        post :create, :effort => effort.attributes#, :value => 5
-        #effort.value.should_equal 10
+        effort = Factory.create(:valid_effort)
+        @logged_in_user.id = effort.user_id
+        post :create, :effort => {:deliverable_id => effort.deliverable_id, :value => 5.0}
+        effort.value.should == 5.0
         response.should redirect_to :action => 'index'
       end
     end
 
     describe "with invalid params" do
       it "should unsuccessfully create an effort" do
-        
-        post :create
+        post :create, :effort => {:deliverable_id => nil, :value => 5.0}
         flash[:error].should_not be_nil
         response.should redirect_to :action => 'index'
       end
@@ -56,16 +62,15 @@ describe EffortsController do
 
 
   describe "DELETE destroy" do
-    it "destroys the requested effort" do
-      Effort.should_receive(:find).with("37").and_return(mock_effort)
-      mock_effort.should_receive(:destroy)
-      delete :destroy, :id => "37"
-    end
 
-    it "redirects to the efforts list" do
-      Effort.stubs(:find).and_return(mock_effort(:destroy => true))
-      delete :destroy, :id => "1"
+
+
+
+    it "destroy action should destroy effort and redirect to effort index" do
+      effort = Factory.create(:valid_effort)
+      delete :destroy, :id => effort
       response.should redirect_to(efforts_url)
+      Effort.exists?(effort.id).should be_false
     end
   end
 
