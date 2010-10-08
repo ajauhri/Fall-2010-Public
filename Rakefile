@@ -4,8 +4,6 @@
 require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 
 require 'rake'
-
-require 'db:test:prepare'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
