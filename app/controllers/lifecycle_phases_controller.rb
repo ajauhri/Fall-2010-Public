@@ -1,6 +1,5 @@
 class LifecyclePhasesController < ApplicationController
-  # GET /lifecycle_phases
-  # GET /lifecycle_phases.xml
+   # Lists all LifecyclePhases from the DB
   def index
 
     @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(params[:id])
@@ -11,8 +10,7 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-  # GET /lifecycle_phases/1
-  # GET /lifecycle_phases/1.xml
+    # Lists details of a particular LifecyclePhase. Params required: LifecyclePhases.id
   def show
     @lifecycle_phase = LifecyclePhase.find(params[:id])
 
@@ -22,8 +20,7 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-  # GET /lifecycle_phases/new
-  # GET /lifecycle_phases/new.xml
+  # Renders a new template with all fields required to create a LifecyclePhase
   def new
     @lifecycle_phase = LifecyclePhase.new
 
@@ -33,13 +30,14 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-  # GET /lifecycle_phases/1/edit
+ # Retrieves a LifecyclePhase record. Params required: LifecyclePhase.id
   def edit
     @lifecycle_phase = LifecyclePhase.find(params[:id])
   end
 
-  # POST /lifecycle_phases
-  # POST /lifecycle_phases.xml
+
+  # Creates a LifecyclePhase record. All params related to a LifecyclePhase need to be passed
+
   def create
     @lifecycle_phase = LifecyclePhase.new(params[:lifecycle_phase])
 
@@ -54,8 +52,8 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-  # PUT /lifecycle_phases/1
-  # PUT /lifecycle_phases/1.xml
+   # Update a LifecyclePhase record. Params required: LifecyclePhase.id
+
   def update
     @lifecycle_phase = LifecyclePhase.find(params[:id])
 
@@ -70,8 +68,8 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-  # DELETE /lifecycle_phases/1
-  # DELETE /lifecycle_phases/1.xml
+    # Deletes a LifecyclePhase record. Params required: LifecyclePhase.id
+
   def destroy
     @lifecycle_phase = LifecyclePhase.find(params[:id])
     @lifecycle_phase.destroy

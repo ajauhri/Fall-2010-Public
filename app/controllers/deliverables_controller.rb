@@ -1,6 +1,5 @@
 class DeliverablesController < ApplicationController
-  # GET /deliverables
-  # GET /deliverables.xml
+  # Lists all deliverables from the DB
   def index
     @deliverables = Deliverable.all
 
@@ -10,8 +9,8 @@ class DeliverablesController < ApplicationController
     end
   end
 
-  # GET /deliverables/1
-  # GET /deliverables/1.xml
+  #  Lists details of a particular deliverable. Params required: Deliverable.id
+
   def show
     @deliverable = Deliverable.find(params[:id])
 
@@ -21,8 +20,8 @@ class DeliverablesController < ApplicationController
     end
   end
 
-  # GET /deliverables/new
-  # GET /deliverables/new.xml
+  # Renders a new template with all fields required to create a deliverable
+
   def new
     @deliverable = Deliverable.new
 
@@ -32,13 +31,14 @@ class DeliverablesController < ApplicationController
     end
   end
 
-  # GET /deliverables/1/edit
+# Retrieves a Deliverable record. Params required: Deliverable.id
+
   def edit
     @deliverable = Deliverable.find(params[:id])
   end
 
-  # POST /deliverables
-  # POST /deliverables.xml
+  # Creates a Deliverable record. All params related to a deliverable need to be passed
+
   def create
     @deliverable = Deliverable.new(params[:deliverable])
 
@@ -53,8 +53,9 @@ class DeliverablesController < ApplicationController
     end
   end
 
-  # PUT /deliverables/1
-  # PUT /deliverables/1.xml
+
+# Update a Deliverable record. Params required: Deliverable.id
+
   def update
     @deliverable = Deliverable.find(params[:id])
 
@@ -69,8 +70,9 @@ class DeliverablesController < ApplicationController
     end
   end
 
-  # DELETE /deliverables/1
-  # DELETE /deliverables/1.xml
+
+  # Deletes a Deliverable record. Params required: Deliverable.id
+
   def destroy
     ###
     ### Delete all effort logs associated with deliverable before a deliverable delete

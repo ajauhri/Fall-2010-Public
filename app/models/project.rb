@@ -1,3 +1,4 @@
+# Model class for projects table. Associations => belongs_to :lifecycle, has_many :project_phases
 class Project < ActiveRecord::Base
   after_create :create_phases
   belongs_to :lifecyle
@@ -11,6 +12,9 @@ class Project < ActiveRecord::Base
     ["Archived"], #"archived"],
     ["Deleted"]#, "deleted"]
   ]
+
+# For automatically inserting (at the time of creation of a new project) all pre-defined phases from LifecyclePhase
+
 
 def create_phases
    @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(self.lifecycle_id)

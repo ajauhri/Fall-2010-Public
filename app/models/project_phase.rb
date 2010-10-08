@@ -1,13 +1,18 @@
+# Model class for project_phases table, Associations => belongs_to :project, :lifecycle_phase, has_many :deliverables
 class ProjectPhase < ActiveRecord::Base
+ 
   belongs_to :project
   belongs_to :lifecycle_phase
   has_many :deliverables
   acts_as_list :column=> :sequence#, :scope => "project_id = #{:project_id}"
 
+  #For defining the scope for acts_as_list method
+
   def scope_condition
     "#{connection.quote_column_name("project_id")} = #{quote_value(project_id)}" #+ :project
   end
 
+  # For automatically inserting (at the time of creation of a new project) all pre-defined phases from LifecyclePhase
   def self.create_from_lifecycle_phase(lifecycle_phase_id, project)
     @lifecycle_phase = LifecyclePhase.find(lifecycle_phase_id)
 

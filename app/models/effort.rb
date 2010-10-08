@@ -1,3 +1,4 @@
+# Model class for efforts table. Associations: belongs_to :user, :deliverable
 class Effort < ActiveRecord::Base
   belongs_to :user
   belongs_to :deliverable
@@ -16,7 +17,7 @@ class Effort < ActiveRecord::Base
 =end
 
   private
-
+# Checks for the validity of a deliverable to log effort
   def validify_effort
     if deliverable_id.blank?
       errors.add('', "Must select a deliverable to log effort")

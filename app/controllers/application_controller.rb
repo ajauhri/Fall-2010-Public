@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   before_filter :set_cache_buster, :require_user
 
+# Doesn't allow browsers to cache web pages
 
   def set_cache_buster
    
@@ -24,20 +25,27 @@ class ApplicationController < ActionController::Base
 
   private
 
+# Used to authenticate a user session
+
   def current_user_session
     return @curent_user_session if defined?(@curent_user_session)
     @current_user_session = UserSession.find
   end
 
+ # Returns the current_user session
+
   def current_user
     @current_user = current_user_session && current_user_session.record
   end
 
+  # Checks for user sessions against methods which require user authentication
   def require_user
     unless current_user
         redirect_to login_url
     end
   end
+
+  # Records execution errors
 
   def error_html(errors)
     html = "<b><u>Error!</u></b><br/>"
