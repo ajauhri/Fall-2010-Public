@@ -17,8 +17,7 @@ class EffortsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @efforts }
+      format.html
     end
   end
 
@@ -99,7 +98,6 @@ class EffortsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(efforts_url) }
-      format.xml  { head :ok }
     end
   end
 end

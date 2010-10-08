@@ -25,4 +25,11 @@ describe Effort do
     Factory.build(:invalid_deliverable).should be_invalid
   end
 
+  it "should set a negative effort value to zero" do
+   effort = Factory.create(:negative_effort_value)
+    effort.value.should == 0
+
+
+  end
+
 end
