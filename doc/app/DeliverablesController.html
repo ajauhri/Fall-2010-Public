@@ -22,16 +22,6 @@
 <body class="class">
 
 	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-			</div>
-		</div>
-
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -69,19 +59,19 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-i-create">#create</a></li>
+					<li><a href="#M000009">#create</a></li>
 					
-					<li><a href="#method-i-destroy">#destroy</a></li>
+					<li><a href="#M000013">#destroy</a></li>
 					
-					<li><a href="#method-i-edit">#edit</a></li>
+					<li><a href="#M000006">#edit</a></li>
 					
-					<li><a href="#method-i-index">#index</a></li>
+					<li><a href="#M000000">#index</a></li>
 					
-					<li><a href="#method-i-new">#new</a></li>
+					<li><a href="#M000004">#new</a></li>
 					
-					<li><a href="#method-i-show">#show</a></li>
+					<li><a href="#M000002">#show</a></li>
 					
-					<li><a href="#method-i-update">#update</a></li>
+					<li><a href="#M000011">#update</a></li>
 					
 				</ul>
 			</div>
@@ -143,10 +133,6 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
-				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
-				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -199,7 +185,7 @@
 
 		
 			<div id="create-method" class="method-detail ">
-				<a name="method-i-create"></a>
+				<a name="M000009"></a>
 
 				<div class="method-heading">
 				
@@ -223,15 +209,15 @@ related to a deliverable need to be passed
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/deliverables_controller.rb, line 42</span>
 42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-43:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:deliverable</span>])
+43:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:deliverable</span>])
 44: 
 45:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 46:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">save</span>
-47:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@deliverable</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Deliverables was successfully created.'</span>) }
-48:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverables</span> }
+47:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@deliverable</span>, <span class="ruby-identifier">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Deliverables was successfully created.'</span>) }
+48:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:created</span>, <span class="ruby-identifier">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverables</span> }
 49:       <span class="ruby-keyword kw">else</span>
-50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-51:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+50:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+51:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unprocessable_entity</span> }
 52:       <span class="ruby-keyword kw">end</span>
 53:     <span class="ruby-keyword kw">end</span>
 54:   <span class="ruby-keyword kw">end</span></pre>
@@ -240,13 +226,11 @@ related to a deliverable need to be passed
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="destroy-method" class="method-detail ">
-				<a name="method-i-destroy"></a>
+				<a name="M000013"></a>
 
 				<div class="method-heading">
 				
@@ -273,12 +257,12 @@ required: Deliverable.id
 77:     <span class="ruby-comment cmt">###</span>
 78:     <span class="ruby-comment cmt">### Delete all effort logs associated with deliverable before a deliverable delete</span>
 79:     <span class="ruby-comment cmt">###</span>
-80:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+80:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
 81:     <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">destroy</span>
 82: 
 83:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 84:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">deliverables_url</span>) }
-85:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+85:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-identifier">:ok</span> }
 86:     <span class="ruby-keyword kw">end</span>
 87:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -286,13 +270,11 @@ required: Deliverable.id
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="edit-method" class="method-detail ">
-				<a name="method-i-edit"></a>
+				<a name="M000006"></a>
 
 				<div class="method-heading">
 				
@@ -316,20 +298,18 @@ required: Deliverable.id
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/deliverables_controller.rb, line 36</span>
 36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-37:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+37:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
 38:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="index-method" class="method-detail ">
-				<a name="method-i-index"></a>
+				<a name="M000000"></a>
 
 				<div class="method-heading">
 				
@@ -356,7 +336,7 @@ Lists all deliverables from the DB
  5: 
  6:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
  7:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
- 8:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverables</span> }
+ 8:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverables</span> }
  9:     <span class="ruby-keyword kw">end</span>
 10:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -364,13 +344,11 @@ Lists all deliverables from the DB
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="new-method" class="method-detail ">
-				<a name="method-i-new"></a>
+				<a name="M000004"></a>
 
 				<div class="method-heading">
 				
@@ -397,7 +375,7 @@ Renders a new template with all fields required to create a deliverable
 27: 
 28:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 29:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-30:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span> }
+30:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span> }
 31:     <span class="ruby-keyword kw">end</span>
 32:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -405,13 +383,11 @@ Renders a new template with all fields required to create a deliverable
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="show-method" class="method-detail ">
-				<a name="method-i-show"></a>
+				<a name="M000002"></a>
 
 				<div class="method-heading">
 				
@@ -434,11 +410,11 @@ Lists details of a particular deliverable. Params required: Deliverable.id
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/deliverables_controller.rb, line 14</span>
 14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
-15:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+15:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
 16: 
 17:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
 18:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
-19:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span> }
+19:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span> }
 20:     <span class="ruby-keyword kw">end</span>
 21:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -446,13 +422,11 @@ Lists details of a particular deliverable. Params required: Deliverable.id
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="update-method" class="method-detail ">
-				<a name="method-i-update"></a>
+				<a name="M000011"></a>
 
 				<div class="method-heading">
 				
@@ -476,23 +450,21 @@ required: Deliverable.id
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/deliverables_controller.rb, line 59</span>
 59:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-60:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+60:     <span class="ruby-ivar">@deliverable</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
 61: 
 62:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-63:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:deliverable</span>])
-64:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@deliverable</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Deliverable was successfully updated.'</span>) }
-65:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+63:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:deliverable</span>])
+64:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@deliverable</span>, <span class="ruby-identifier">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Deliverable was successfully updated.'</span>) }
+65:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-identifier">:ok</span> }
 66:       <span class="ruby-keyword kw">else</span>
-67:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-68:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
+67:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+68:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unprocessable_entity</span> }
 69:       <span class="ruby-keyword kw">end</span>
 70:     <span class="ruby-keyword kw">end</span>
 71:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>

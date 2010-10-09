@@ -1,6 +1,7 @@
+# Handles effort logging
 class EffortsController < ApplicationController
-  # GET /efforts
-  # GET /efforts.xml
+  
+  # Display most recently logged effort and autopopulate select field with most recent
   def index
     @projects     = Project.find(:all)
     #@phases       = Phase.find(:all)
@@ -51,8 +52,7 @@ class EffortsController < ApplicationController
   end
 =end
 
-  # POST /efforts
-  # POST /efforts.xml
+  # Updates an effort log if it exists, otherwise create new effort log
   def create
     u_id  = current_user.id
     d_id  = params[:effort][:deliverable_id]
@@ -90,8 +90,7 @@ class EffortsController < ApplicationController
   end
 =end
   
-  # DELETE /efforts/1
-  # DELETE /efforts/1.xml
+  # Removes an effort log
   def destroy
     @effort = Effort.find(params[:id])
     @effort.destroy

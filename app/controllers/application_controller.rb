@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Records execution errors
+  # Records execution errors, formats them for display
 
   def error_html(errors)
     html = "<b><u>Error!</u></b><br/>"

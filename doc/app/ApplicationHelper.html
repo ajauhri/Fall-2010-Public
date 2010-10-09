@@ -22,16 +22,6 @@
 <body class="module">
 
 	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-			</div>
-		</div>
-
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -62,9 +52,9 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-i-display_links">#display_links</a></li>
+					<li><a href="#M000044">#display_links</a></li>
 					
-					<li><a href="#method-i-get_link">#get_link</a></li>
+					<li><a href="#M000046">#get_link</a></li>
 					
 				</ul>
 			</div>
@@ -126,10 +116,6 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
-				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
-				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -186,7 +172,7 @@ application.
 
 		
 			<div id="display-links-method" class="method-detail ">
-				<a name="method-i-display_links"></a>
+				<a name="M000044"></a>
 
 				<div class="method-heading">
 				
@@ -198,35 +184,35 @@ application.
 
 				<div class="method-description">
 					
-					
+					<p>
+Helper to display links in tabs format or text format
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="display-links-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 4</span>
- 4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display_links</span>(<span class="ruby-identifier">tag</span> = <span class="ruby-value str">''</span>, <span class="ruby-identifier">end_tag</span> = <span class="ruby-value str">''</span>)
- 5:     <span class="ruby-identifier">html</span> = <span class="ruby-value str">&quot;&quot;</span>
- 6:     <span class="ruby-identifier">spacer</span> = <span class="ruby-value str">''</span>
- 7:     <span class="ruby-identifier">spacer</span> = <span class="ruby-value str">&quot;|&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
- 8:     <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-value str">&quot;&lt;span&gt;&lt;/span&gt;Project Management&quot;</span>, <span class="ruby-value str">'projects'</span>, <span class="ruby-value str">'index'</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">end_tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">spacer</span>
- 9:     <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-value str">&quot;&lt;span&gt;&lt;/span&gt;Create New Project&quot;</span>, <span class="ruby-value str">'projects'</span>, <span class="ruby-value str">'new'</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">end_tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">spacer</span>
-10:     <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-value str">&quot;&lt;span&gt;&lt;/span&gt;Log Effort&quot;</span>, <span class="ruby-value str">'efforts'</span>, <span class="ruby-value str">'index'</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">end_tag</span>
-11:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">html</span>
-12:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 5</span>
+ 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display_links</span>(<span class="ruby-identifier">tag</span> = <span class="ruby-value str">''</span>, <span class="ruby-identifier">end_tag</span> = <span class="ruby-value str">''</span>)
+ 6:     <span class="ruby-identifier">html</span> = <span class="ruby-value str">&quot;&quot;</span>
+ 7:     <span class="ruby-identifier">spacer</span> = <span class="ruby-value str">''</span>
+ 8:     <span class="ruby-identifier">spacer</span> = <span class="ruby-value str">&quot;|&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+ 9:     <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-value str">&quot;&lt;span&gt;&lt;/span&gt;Project Management&quot;</span>, <span class="ruby-value str">'projects'</span>, <span class="ruby-value str">'index'</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">end_tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">spacer</span>
+10:     <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-value str">&quot;&lt;span&gt;&lt;/span&gt;Create New Project&quot;</span>, <span class="ruby-value str">'projects'</span>, <span class="ruby-value str">'new'</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">end_tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">spacer</span>
+11:     <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-value str">&quot;&lt;span&gt;&lt;/span&gt;Log Effort&quot;</span>, <span class="ruby-value str">'efforts'</span>, <span class="ruby-value str">'index'</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">end_tag</span>
+12:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">html</span>
+13:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>
 
 		
 			<div id="get-link-method" class="method-detail ">
-				<a name="method-i-get_link"></a>
+				<a name="M000046"></a>
 
 				<div class="method-heading">
 				
@@ -238,26 +224,26 @@ application.
 
 				<div class="method-description">
 					
-					
+					<p>
+Helper to create a link_to call
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="get-link-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 14</span>
-14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span>)
-15:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">controller</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">action</span>
-16:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;&lt;a class = 'sel'&gt;#{string}&lt;/a&gt;&quot;</span>
-17:     <span class="ruby-keyword kw">else</span>
-18:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">string</span>, <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>
-19:     <span class="ruby-keyword kw">end</span>
-20:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 16</span>
+16:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_link</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">action</span>)
+17:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">controller</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">action</span>
+18:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;&lt;a class = 'sel'&gt;#{string}&lt;/a&gt;&quot;</span>
+19:     <span class="ruby-keyword kw">else</span>
+20:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">string</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>
+21:     <span class="ruby-keyword kw">end</span>
+22:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>

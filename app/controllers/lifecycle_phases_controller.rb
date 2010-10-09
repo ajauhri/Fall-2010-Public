@@ -1,3 +1,4 @@
+# Handles lifecycle functionality
 class LifecyclePhasesController < ApplicationController
    # Lists all LifecyclePhases from the DB
   def index

@@ -1,4 +1,4 @@
-
+# Handles project functionality
 class ProjectsController < ApplicationController
   # Lists all Projects from the DB
 

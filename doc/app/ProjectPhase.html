@@ -22,16 +22,6 @@
 <body class="class">
 
 	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-			</div>
-		</div>
-
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -69,9 +59,9 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-c-create_from_lifecycle_phase">::create_from_lifecycle_phase</a></li>
+					<li><a href="#M000050">::create_from_lifecycle_phase</a></li>
 					
-					<li><a href="#method-i-scope_condition">#scope_condition</a></li>
+					<li><a href="#M000048">#scope_condition</a></li>
 					
 				</ul>
 			</div>
@@ -133,10 +123,6 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
-				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
-				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -193,7 +179,7 @@ Model class for project_phases table, Associations => belongs_to :project,
 
 		
 			<div id="create-from-lifecycle-phase-method" class="method-detail ">
-				<a name="method-c-create_from_lifecycle_phase"></a>
+				<a name="M000050"></a>
 
 				<div class="method-heading">
 				
@@ -221,18 +207,16 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 18: 
 19:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lifecycle_phase</span>
 20:         <span class="ruby-identifier">create</span>(
-21:          <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">name</span>,
-22:          <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">description</span>,
-23:          <span class="ruby-value">:lifecycle_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>,
-24:          <span class="ruby-value">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">sequence</span>,
-25:          <span class="ruby-value">:project</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>)
+21:          <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">name</span>,
+22:          <span class="ruby-identifier">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">description</span>,
+23:          <span class="ruby-identifier">:lifecycle_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>,
+24:          <span class="ruby-identifier">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">sequence</span>,
+25:          <span class="ruby-identifier">:project</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>)
 26:     <span class="ruby-keyword kw">end</span>
 27:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>
@@ -245,7 +229,7 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 
 		
 			<div id="scope-condition-method" class="method-detail ">
-				<a name="method-i-scope_condition"></a>
+				<a name="M000048"></a>
 
 				<div class="method-heading">
 				
@@ -273,8 +257,6 @@ For defining the scope for acts_as_list method
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>

@@ -1,3 +1,4 @@
+# Handles phase functionality
 class ProjectPhasesController < ApplicationController
  # Lists all ProjectPhases from the DB
   def index

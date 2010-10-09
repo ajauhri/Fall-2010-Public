@@ -22,16 +22,6 @@
 <body class="class">
 
 	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-			</div>
-		</div>
-
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -69,15 +59,15 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-i-create">#create</a></li>
+					<li><a href="#M000036">#create</a></li>
 					
-					<li><a href="#method-i-edit">#edit</a></li>
+					<li><a href="#M000037">#edit</a></li>
 					
-					<li><a href="#method-i-new">#new</a></li>
+					<li><a href="#M000035">#new</a></li>
 					
-					<li><a href="#method-i-require_admin">#require_admin</a></li>
+					<li><a href="#M000040">#require_admin</a></li>
 					
-					<li><a href="#method-i-update">#update</a></li>
+					<li><a href="#M000038">#update</a></li>
 					
 				</ul>
 			</div>
@@ -139,10 +129,6 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
-				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
-				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -179,7 +165,10 @@
 		<h1 class="class">UsersController</h1>
 
 		<div id="description">
-			
+			<p>
+Handles user functionality
+</p>
+
 		</div>
 
 		<!-- Constants -->
@@ -195,7 +184,7 @@
 
 		
 			<div id="create-method" class="method-detail ">
-				<a name="method-i-create"></a>
+				<a name="M000036"></a>
 
 				<div class="method-heading">
 				
@@ -219,26 +208,24 @@ a <a href="Project.html">Project</a> need to be passed
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 13</span>
 13:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-14:       <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>])
-15:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
-16:           <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-value str">&quot;Registration Successful!&quot;</span>
-17:           <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'projects'</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>
-18:         <span class="ruby-keyword kw">else</span>
-19:           <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span>
-20:         <span class="ruby-keyword kw">end</span>
+14:     <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:user</span>])
+15:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+16:       <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-value str">&quot;Registration Successful!&quot;</span>
+17:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'projects'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>
+18:     <span class="ruby-keyword kw">else</span>
+19:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span>
+20:     <span class="ruby-keyword kw">end</span>
 21:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="edit-method" class="method-detail ">
-				<a name="method-i-edit"></a>
+				<a name="M000037"></a>
 
 				<div class="method-heading">
 				
@@ -269,13 +256,11 @@ Project.id
 				</div>
 
 				
-
-				
 			</div>
 
 		
 			<div id="new-method" class="method-detail ">
-				<a name="method-i-new"></a>
+				<a name="M000035"></a>
 
 				<div class="method-heading">
 				
@@ -296,22 +281,20 @@ Lists all Projects from the DB
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-   <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 7</span>
-7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
-8:     <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
-9:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 8</span>
+ 8:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+ 9:     <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+10:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>
 
 		
 			<div id="require-admin-method" class="method-detail ">
-				<a name="method-i-require_admin"></a>
+				<a name="M000040"></a>
 
 				<div class="method-heading">
 				
@@ -323,29 +306,29 @@ Lists all Projects from the DB
 
 				<div class="method-description">
 					
-					
+					<p>
+Redirects if the current_user is not Admin
+</p>
 					
 
 					
 					<div class="method-source-code"
 						id="require-admin-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 58</span>
-58:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_admin</span>
-59:     <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'user_sessions'</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'destroy'</span>, <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'intruder'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">role</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">ADMIN</span>
-60:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 57</span>
+57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_admin</span>
+58:     <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'user_sessions'</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'destroy'</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'intruder'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">role</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">ADMIN</span>
+59:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>
 
 		
 			<div id="update-method" class="method-detail ">
-				<a name="method-i-update"></a>
+				<a name="M000038"></a>
 
 				<div class="method-heading">
 				
@@ -367,21 +350,19 @@ Project.id
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 31</span>
-31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-32:     <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
-33:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>])
-34:       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-value str">&quot;Profile successfully updated.&quot;</span>
-35:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
-36:     <span class="ruby-keyword kw">else</span>
-37:       <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'edit'</span>
-38:     <span class="ruby-keyword kw">end</span>
-39:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/users_controller.rb, line 30</span>
+30:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+31:     <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
+32:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:user</span>])
+33:       <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-value str">&quot;Profile successfully updated.&quot;</span>
+34:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
+35:     <span class="ruby-keyword kw">else</span>
+36:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'edit'</span>
+37:     <span class="ruby-keyword kw">end</span>
+38:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
-
-				
 
 				
 			</div>
