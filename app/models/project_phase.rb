@@ -1,6 +1,7 @@
 # Model class for project_phases table, Associations => belongs_to :project, :lifecycle_phase, has_many :deliverables
 class ProjectPhase < ActiveRecord::Base
- 
+  after_create :create_deliverables
+
   belongs_to :project
   belongs_to :lifecycle_phase
   has_many :deliverables
@@ -23,6 +24,13 @@ class ProjectPhase < ActiveRecord::Base
          :lifecycle_phase => @lifecycle_phase,
          :sequence => @lifecycle_phase.sequence,
          :project => project)
+    end
+  end
+
+  def create_deliverables
+    @typical_deliverables = TypicalDeliverable.find_all_by_lifecycle_phase_id(self.lifecycle_phase_id)
+    @typical_deliverables.each do |td|
+      Deliverables.create_from_typical_deliverable(td.id, self)
     end
   end
 end
