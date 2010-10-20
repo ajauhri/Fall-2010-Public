@@ -67,9 +67,9 @@ class EffortsController < ApplicationController
       @effort.value += effort_value
     end
 
-    deliverable_effort = Deliverable.find(d_id).actual_effort
-    deliverable_effort += effort_value
-    Deliverable.update(:actual_effort => deliverable_effort)
+    #deliverable_effort = Deliverable.find(d_id).actual_effort
+    #deliverable_effort += effort_value
+    #Deliverable.update(:actual_effort => deliverable_effort)
 
     if not @effort.save
       flash[:error] = error_html(@effort.errors)
