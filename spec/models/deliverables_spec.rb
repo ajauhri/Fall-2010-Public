@@ -5,7 +5,7 @@ describe Deliverable do
     @valid_attributes = {
       :name => "value for name",
       :description => "value for description",
-      :est_effort => 1.5
+      :estimated_effort => 1.5
     }
   end
 

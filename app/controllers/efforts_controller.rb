@@ -4,7 +4,7 @@ class EffortsController < ApplicationController
   # Display most recently logged effort and autopopulate select field with most recent
   def index
     @projects     = Project.find(:all)
-    #@phases       = Phase.find(:all)
+    @phases       = ProjectPhase.find(:all)
     @deliverables = Deliverable.find(:all)
     
     @efforts = Effort.find(:all, :conditions => ['user_id = ?', current_user.id])
@@ -56,6 +56,7 @@ class EffortsController < ApplicationController
   def create
     u_id  = current_user.id
     d_id  = params[:effort][:deliverable_id]
+    effort_value = params[:effort][:value].to_f
 
     @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)
     #:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
@@ -63,8 +64,12 @@ class EffortsController < ApplicationController
       @effort                 = Effort.new(params[:effort])
       @effort.user_id         = u_id
     else
-      @effort.value += params[:effort][:value].to_f
+      @effort.value += effort_value
     end
+
+    deliverable_effort = Deliverable.find(d_id).actual_effort
+    deliverable_effort += effort_value
+    Deliverable.update(:actual_effort => deliverable_effort)
 
     if not @effort.save
       flash[:error] = error_html(@effort.errors)

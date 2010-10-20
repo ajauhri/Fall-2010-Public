@@ -30,7 +30,7 @@
 <% form_for @effort, :html => {:class => "InputArea", :style => "width:50%;"} do |form| %>
   <% form.error_messages %>
   <%= collection_select 'Project', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
-  <%= select 'Phase', 'Phase', ["Phase 1","Phase 2"], {:prompt => "Select Phase"}  %>
+  <%= collection_select 'Project', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>
   <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
   <%= form.text_field :value, :style => "width: 30px;"%>
   <%= form.submit 'Add Effort' %>

@@ -4,14 +4,14 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Est effort</th>
+    <th>Estimated effort</th>
   </tr>
 
 <% @deliverables.each do |deliverable| %>
   <tr>
     <td><%=h deliverable.name %></td>
     <td><%=h deliverable.description %></td>
-    <td><%=h deliverable.est_effort %></td>
+    <td><%=h deliverable.estimated_effort %></td>
     <td><%= link_to 'Show', deliverable %></td>
     <td><%= link_to 'Edit', edit_deliverable_path(deliverable) %></td>
     <td><%= link_to 'Destroy', deliverable, :confirm => 'Are you sure?', :method => :delete %></td>
