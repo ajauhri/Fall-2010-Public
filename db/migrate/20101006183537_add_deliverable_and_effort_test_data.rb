@@ -2,7 +2,7 @@ class AddDeliverableAndEffortTestData < ActiveRecord::Migration
   def self.up
     Effort.delete_all
     Deliverable.delete_all
-    d1 = Deliverable.create(:name => "Deliverable 1", :est_effort => 17)
+    d1 = Deliverable.create(:name => "Deliverable 1", :estimated_effort => 17)
     asem_id     = User.find_by_username('asem').id
     rob_id      = User.find_by_username('rob').id
     abhinav_id  = User.find_by_username('abhinav').id

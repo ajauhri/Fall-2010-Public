@@ -1,6 +1,6 @@
-class CreateDeliverables < ActiveRecord::Migration
+class CreateTypicalDeliverables < ActiveRecord::Migration
   def self.up
-    create_table :deliverables do |t|
+    create_table :typical_deliverables do |t|
       t.string :name
       t.text :description
       t.string :deliverable_type
@@ -9,16 +9,12 @@ class CreateDeliverables < ActiveRecord::Migration
       t.decimal :estimated_size
       t.decimal :estimated_effort
       t.decimal :estimated_production_rate
-      t.decimal :actual_size
-      t.decimal :actual_effort
-      t.decimal :actual_production_rate
-      t.integer :project_phase_id
-
+      t.integer :lifecycle_phase_id
       t.timestamps
     end
   end
 
   def self.down
-    drop_table :deliverables
+    drop_table :typical_deliverables
   end
 end
