@@ -1,6 +1,6 @@
+# Handles phase functionality
 class ProjectPhasesController < ApplicationController
-  # GET /project_phases
-  # GET /project_phases.xml
+ # Lists all ProjectPhases from the DB
   def index
     @project_phases = ProjectPhase.all
 
@@ -10,8 +10,9 @@ class ProjectPhasesController < ApplicationController
     end
   end
 
-  # GET /project_phases/1
-  # GET /project_phases/1.xml
+
+  # Lists details of a particular ProjectPhase. Params required: ProjectPhase.id
+
   def show
     @project_phase = ProjectPhase.find(params[:id])
 
@@ -21,8 +22,9 @@ class ProjectPhasesController < ApplicationController
     end
   end
 
-  # GET /project_phases/new
-  # GET /project_phases/new.xml
+
+  # Renders a new template with all fields required to create a ProjectPhase
+
   def new
     @project_phase = ProjectPhase.new
 
@@ -32,13 +34,16 @@ class ProjectPhasesController < ApplicationController
     end
   end
 
-  # GET /project_phases/1/edit
+   # Retrieves a ProjectPhase record. Params required: ProjectPhase.id
+
   def edit
     @project_phase = ProjectPhase.find(params[:id])
   end
 
-  # POST /project_phases
-  # POST /project_phases.xml
+
+  # Creates a ProjectPhase record. All params related to a ProjectPhase need to be passed
+
+
   def create
     @project_phase = ProjectPhase.new(params[:project_phase])
     
@@ -59,8 +64,10 @@ class ProjectPhasesController < ApplicationController
     end
   end
 
-  # PUT /project_phases/1
-  # PUT /project_phases/1.xml
+
+  # Update a ProjectPhase record. Params required: ProjectPhase.id
+
+
   def update
     @project_phase = ProjectPhase.find(params[:id])
 
@@ -75,8 +82,9 @@ class ProjectPhasesController < ApplicationController
     end
   end
 
-  # DELETE /project_phases/1
-  # DELETE /project_phases/1.xml
+
+  # Deletes a ProjectPhase record. Params required: ProjectPhase.id
+
   def destroy
     @project_phase = ProjectPhase.find(params[:id])
     @project_phase.destroy

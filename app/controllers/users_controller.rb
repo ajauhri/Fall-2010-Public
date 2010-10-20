@@ -1,35 +1,32 @@
+# Handles user functionality
 class UsersController < ApplicationController
 
   before_filter :require_user, :except => ['new', 'create']
   before_filter :require_admin, :except => ['edit', 'update']
 
-  # GET /users/new
-  # GET /users/new.xml
+  # Lists all Projects from the DB
   def new
     @user = User.new
   end
 
-   # POST /users
-  # POST /users.xml
+  # Creates a Project record. All params related to a Project need to be passed
   def create
-      @user = User.new(params[:user])
-        if @user.save
-          flash[:notice] = "Registration Successful!"
-          redirect_to :controller => 'projects', :action => 'index'
-        else
-          render :action => "new"
-        end
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Registration Successful!"
+      redirect_to :controller => 'projects', :action => 'index'
+    else
+      render :action => "new"
+    end
   end
 
-  # GET /users/1/edit
+  # Retrieves a Project record. Params required: Project.id
   def edit
     @user = current_user
   end
 
- 
 
-  # PUT /users/1
-  # PUT /users/1.xml
+  # Update a Project record. Params required: Project.id
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
@@ -56,7 +53,7 @@ class UsersController < ApplicationController
     end
   end
 =end
-
+  # Redirects if the current_user is not Admin
   def require_admin
     redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder' if not current_user.role == User::ADMIN
   end

@@ -1,6 +1,6 @@
+# Handles project functionality
 class ProjectsController < ApplicationController
-  # GET /projects
-  # GET /projects.xml
+  # Lists all Projects from the DB
 
   def index
     @projects = Project.all
@@ -11,8 +11,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.xml
+  # Lists details of a particular Project. Params required: Project.id
+
   def show
     @project = Project.find(params[:id])
     #@project.project_phases.build
@@ -26,8 +26,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.xml
+  # Renders a new template with all fields required to create a Project
+
   def new
     @project = Project.new
     respond_to do |format|
@@ -36,13 +36,14 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1/edit
+ # Retrieves a Project record. Params required: Project.id
+
   def edit
     @project = Project.find(params[:id])
   end
 
-  # POST /projects
-  # POST /projects.xml
+  # Creates a Project record. All params related to a Project need to be passed
+  
   def create
     @project = Project.new(params[:project])
    
@@ -58,8 +59,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.xml
+  # Update a Project record. Params required: Project.id
+
   def update
     @project = Project.find(params[:id])
 
@@ -74,8 +75,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.xml
+  # Deletes a Project record. Params required: Project.id
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
@@ -85,6 +85,8 @@ class ProjectsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  # Updates sequence values of ProjectPhases. Params required: ProjectPhase.id, ProjectPhase.sequence
 
   def sort
     params[:phaseslist].each_with_index do |id, index|

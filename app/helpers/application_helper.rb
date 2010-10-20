@@ -1,6 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  # Helper to display links in tabs format or text format
   def display_links(tag = '', end_tag = '')
     html = ""
     spacer = ''
@@ -11,6 +12,7 @@ module ApplicationHelper
     return html
   end
 
+  # Helper to create a link_to call
   def get_link(string, controller, action)
     if controller_name == controller and action_name == action
       return "<a class = 'sel'>#{string}</a>"

@@ -1,3 +1,4 @@
+# Model class for users table. Associations => has_many :efforts
 class User < ActiveRecord::Base
   has_many :efforts
   acts_as_authentic
