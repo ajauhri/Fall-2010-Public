@@ -3,6 +3,17 @@ require 'spec_helper'
 describe UsersController do
   setup :activate_authlogic
   #Delete this example and add some real ones
+  before :each do
+    logout_user
+    login_user
+  end
+
+  it "should check have one user" do
+    
+    User.should have(1).show
+  end
+
+
   it "should use UsersController" do
     controller.should be_an_instance_of(UsersController)
   end

@@ -56,6 +56,7 @@ Spec::Runner.configure do |config|
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 
   def login_user(options = {})
+    
     @logged_in_user = Factory.create(:valid_user, options)
     @controller.stubs(:current_user).returns(@logged_in_user)
     @logged_in_user
@@ -68,10 +69,10 @@ Spec::Runner.configure do |config|
 #    @logged_in_user
 #  end
 
-  def logout_user
-    @logged_in_user = nil
-    @controller.stubs(:current_user).returns(@logged_in_user)
-    @logged_in_user
-  end
+    def logout_user
+      @logged_in_user = nil
+      @controller.stubs(:current_user).returns(@logged_in_user)
+      @logged_in_user
+    end
 
 end
