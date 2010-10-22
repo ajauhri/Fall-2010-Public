@@ -1,8 +1,8 @@
 <p>
-  <a href="#" onclick="prompt.setDefaultValue('Pink');prompt.setVisible(true);">
-    Prompt
-  </a>
-  </p>
+  <!--  <a href="#" onclick="prompt.setDefaultValue('Pink');prompt.setVisible(true);">
+      Prompt
+    </a>
+    </p> -->
   <script type="text/javascript">
     var promptHandler = function(response) {
       if (response == null) {
@@ -13,32 +13,37 @@
     }
 
     var prompt = new goog.ui.Prompt(
-        'Information Required',
-        'What is your favorite color?',
-        promptHandler);
+    'Information Required',
+    'What is your favorite color?',
+    promptHandler);
   </script>
-  
-<p>
-  <b>Name:</b>
-  <%=h @project_phase.name %>
-</p>
 
-<p>
-  <b>Description:</b>
-  <%=h @project_phase.description %>
-</p>
+<table class="quickTable" id="quickPhase">
 
-<p>
-  <b>Sequence:</b>
-  <%=h @project_phase.sequence %>
-</p>
+  <tr>
+    <td><b>Name:</b></td>
+    <td><%=h @project_phase.name %></td>
+  </tr>
 
-<p>
-  <b>Total estimated effort:</b>
-  <%=h @project_phase.total_estimated_effort %>
-</p>
+  <tr>
+    <td> <b>Description:</b></td>
+    <td> <%=h @project_phase.description %></td>
+  </tr>
 
+  <tr>
+    <td> <b>Sequence:</b></td>
+    <td><%=h @project_phase.sequence %></td>
+  </tr>
 
-<%= link_to 'Edit', edit_project_phase_path(@project_phase) %> |
+  <tr>
+    <td> <b>Total estimated effort:</b></td>
+    <td> <%=h @project_phase.total_estimated_effort %></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <%= link_to 'Edit', edit_project_phase_path(@project_phase) %> |
+      <%= link_to 'Back', project_path %>
+    </td>
+  </tr>
+</table> 
 
-<%= link_to 'Back', project_path %>

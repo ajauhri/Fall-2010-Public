@@ -502,3 +502,28 @@ li .handle {
     cursor: move;
     color: #777;
 }
+
+.quickTable {
+    width: 300px;
+    text-align: left;
+}
+
+.quickTable td{
+    padding: 0;
+}
+#quickProject{
+    width: 300px;
+    margin: 0 auto;
+}
+#quickPhase{
+    width: 500px;
+}
+
+
+#phaseslist{
+    list-style-type: none;
+}
+
+#effort_deliverable_id{
+    width: 150px;
+}

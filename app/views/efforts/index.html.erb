@@ -9,12 +9,15 @@
   <th id="HeaderRight"></th>
   <% for effort in @efforts %>
     <tr>
-      <td>TBD</td>
-      <td>TBD</td>
-      <td><%=  Deliverable.find_by_id(effort.deliverable_id).name %></td>
+      <% deliverable = Deliverable.find_by_id(effort.deliverable_id) %>
+      <% phase = ProjectPhase.find_by_id(deliverable.project_phase_id) %>
+      <% project = Project.find_by_id(phase.project_id) %>
+      <td><%= project.name %></td>
+      <td><%= phase.name %> </td>
+      <td><%=  deliverable.name %></td>
       <td><%=  effort.value.round(1) %></td>
       <td><%=  effort.updated_at.to_s(:long) %></td>
-      <td><%= link_to 'Log', :action => 'index', :selected_deliverable => effort.deliverable_id %></td>
+      <td><%= link_to 'Log', :action => 'index', :selected_deliverable => deliverable.id %></td>
       <td><%= link_to 'X', effort, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
@@ -27,7 +30,7 @@
 </table>
 
 
-<% form_for @effort, :html => {:class => "InputArea", :style => "width:50%;"} do |form| %>
+<% form_for @effort, :html => {:class => "InputArea", :style => "width:70%;"} do |form| %>
   <% form.error_messages %>
   <%= collection_select 'Project', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
   <%= collection_select 'Project', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>

@@ -6,6 +6,7 @@ class ProjectPhase < ActiveRecord::Base
   belongs_to :lifecycle_phase
   has_many :deliverables
   acts_as_list :column=> :sequence#, :scope => "project_id = #{:project_id}"
+  #in_place_edit_for :name
 
   #For defining the scope for acts_as_list method
 

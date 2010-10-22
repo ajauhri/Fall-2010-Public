@@ -1,16 +1,15 @@
 require 'spec_helper'
 
 describe UsersController do
-  setup :activate_authlogic
-  #Delete this example and add some real ones
+  #setup :activate_authlogic
+
   before :each do
-    logout_user
-    login_user
+    logout
+    login
   end
 
   it "should check have one user" do
-    
-    User.should have(1).show
+     User.should have(1).show
   end
 
 
@@ -36,7 +35,7 @@ describe UsersController do
   end
 
   it "should render edit template when user wants to edit and he is logged in" do
-    login_user
+    
     put 'edit'
     response.should render_template 'edit'
   end
@@ -58,7 +57,6 @@ describe UsersController do
 =end
   it 'should successfuly update a user' do
 
-    login_user
     User.any_instance.stubs(:valid?).returns(true)
     post :update
     response.should redirect_to root_url
@@ -66,7 +64,7 @@ describe UsersController do
 
   it 'should unsuccessfuly update a user' do
 
-    login_user
+   
     User.any_instance.stubs(:valid?).returns(false)
     post :update
     response.should render_template 'edit'
