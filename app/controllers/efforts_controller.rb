@@ -11,10 +11,10 @@ class EffortsController < ApplicationController
     @efforts.sort! { |a,b| b.updated_at <=> a.updated_at }
     @effort = Effort.new
 
-    if params[:selected_deliverable]
+   if params[:selected_deliverable]
       @selected_deliverable = params[:selected_deliverable].to_i
-    elsif @efforts.length > 0
-      @selected_deliverable = @efforts[0].deliverable_id
+   # elsif @efforts.length > 0
+   #   @selected_deliverable = @efforts[0].deliverable_id
     end
 
     respond_to do |format|

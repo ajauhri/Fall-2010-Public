@@ -4,7 +4,7 @@ gem 'rails',	'2.3.8'
 gem 'bundler'
 gem 'delayed_job', '2.1.0.pre'
 #gem 'thoughtbot-factory_girl'
-gem 'mocha'
+
 
 group :plugins do
   gem 'calendar_date_select'
@@ -24,6 +24,7 @@ group :development do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'acts_as_list'
+ 
 end
 
 group :test do
@@ -38,4 +39,7 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'
-end
+  gem 'mocha'
+ end
+
+

@@ -6,6 +6,7 @@ class ProjectPhase < ActiveRecord::Base
   belongs_to :lifecycle_phase
   has_many :deliverables
   acts_as_list :column=> :sequence#, :scope => "project_id = #{:project_id}"
+  #in_place_edit_for :name
 
   #For defining the scope for acts_as_list method
 
@@ -30,7 +31,7 @@ class ProjectPhase < ActiveRecord::Base
   def create_deliverables
     @typical_deliverables = TypicalDeliverable.find_all_by_lifecycle_phase_id(self.lifecycle_phase_id)
     @typical_deliverables.each do |td|
-      Deliverable.create_from_typical_deliverable(td.id, self)
+      Deliverable.create_from_typical_deliverable(td.id, self.id)
     end
   end
 end
