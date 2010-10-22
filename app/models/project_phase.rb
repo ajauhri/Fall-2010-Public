@@ -30,7 +30,7 @@ class ProjectPhase < ActiveRecord::Base
   def create_deliverables
     @typical_deliverables = TypicalDeliverable.find_all_by_lifecycle_phase_id(self.lifecycle_phase_id)
     @typical_deliverables.each do |td|
-      Deliverable.create_from_typical_deliverable(td.id, self)
+      Deliverable.create_from_typical_deliverable(td.id, self.id)
     end
   end
 end
