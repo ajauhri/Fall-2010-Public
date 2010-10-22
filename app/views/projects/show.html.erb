@@ -21,19 +21,8 @@
     </td>
   </tr>
 </table>
-  <%= link_to 'New project_phases', new_project_phase_path %>
-  <a href="#" onclick="prompt.setDefaultValue('Pink');prompt.setVisible(true);">
-    Create New Phase
-  </a>
-  <script type="text/javascript">
-    var promptHandler = function(response) {
-       // alert('I like ' + response + ' too!');
-    }
-    var prompt = new goog.ui.Prompt(
-        'Enter New Phase Details',['Phase Name'],
-        promptHandler);  
-  </script>
 
+ 
 <div>
 
   <% form_remote_for(:project_phase, @project_phase, :url => {:controller => :project_phases, :action => :create},

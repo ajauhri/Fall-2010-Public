@@ -6,6 +6,8 @@ require 'spec/autorun'
 require 'spec/rails'
 require File.expand_path(File.join(File.dirname(__FILE__),'..','spec','factories','users'))
 require "authlogic/test_case"
+require "mocha"
+require "factory_girl"
 
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
@@ -54,13 +56,22 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
-
-  def login_user(options = {})
-    
-    @logged_in_user = Factory.create(:valid_user, options)
-    @controller.stubs(:current_user).returns(@logged_in_user)
-    @logged_in_user
+  def current_user(stubs = {})
+    @current_user ||= mock_model(User, stubs)
   end
+
+  def user_session(stubs = {}, user_stubs = {})
+   @current_user ||= mock_model(UserSession, {:user => current_user(user_stubs)}.merge(stubs))
+  end
+
+  def login(session_stubs = {}, user_stubs = {})
+   UserSession.stubs(:find).and_return(user_session(session_stubs, user_stubs))
+  end
+
+  def logout
+   @user_session = nil
+  end
+ 
 
 #  def login_admin(options = {})
 #    options[:admin] = true
@@ -69,10 +80,5 @@ Spec::Runner.configure do |config|
 #    @logged_in_user
 #  end
 
-    def logout_user
-      @logged_in_user = nil
-      @controller.stubs(:current_user).returns(@logged_in_user)
-      @logged_in_user
-    end
-
+  
 end
