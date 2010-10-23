@@ -8,11 +8,6 @@ describe UsersController do
     login
   end
 
-  it "should check have one user" do
-     User.should have(1).show
-  end
-
-
   it "should use UsersController" do
     controller.should be_an_instance_of(UsersController)
   end
