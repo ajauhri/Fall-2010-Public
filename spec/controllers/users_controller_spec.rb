@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+#testing a line
 describe UsersController do
   #setup :activate_authlogic
 
