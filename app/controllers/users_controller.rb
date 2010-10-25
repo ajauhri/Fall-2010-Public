@@ -55,6 +55,13 @@ class UsersController < ApplicationController
 =end
   # Redirects if the current_user is not Admin
   def require_admin
-    redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder' if not current_user.role == User::ADMIN
+     if !is_admin
+       redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder'
+     end
   end
+  
+  def is_admin
+    return current_user.role == User::ADMIN
+  end
+  
 end

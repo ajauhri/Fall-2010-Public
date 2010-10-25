@@ -1,68 +1,116 @@
-require 'spec_helper'
+require File.join(File.dirname(__FILE__), '../spec_helper')
 
 describe UsersController do
-  #setup :activate_authlogic
 
-  before :each do
-    logout
-    login
+  def mock_user(stubs={})
+    @mock_user ||= mock_model(User, stubs)
+  end
+  
+  describe "GET new" do
+    it "assigns a new user as @user" do
+      controller.stub!(:is_admin).and_return(true)
+      User.stub(:new).and_return(mock_user)
+      get :new
+      assigns[:user].should equal(mock_user)
+      end
   end
 
-  it "should use UsersController" do
-    controller.should be_an_instance_of(UsersController)
+
+  describe "GET edit" do
+    it "assigns the requested user as @user" do
+      controller.stub!(:current_user).and_return(mock_user)
+      get :edit, :id => "36"
+      assigns[:user].should equal(mock_user)
+    end
+  end
+  
+
+  describe "POST create" do
+
+    describe "with valid params" do
+      it "assigns a newly created user as @user" do
+        controller.stub!(:is_admin).and_return(true)
+        
+        User.stub(:new).with({'user' => 'params'}).and_return(mock_user(:save => true))
+        post :create, :user => {:user => 'params'}
+        assigns[:user].should equal(mock_user)
+      end
+
+      it "redirects to the created user" do
+        controller.stub!(:is_admin).and_return(true)
+        
+        User.stub(:new).and_return(mock_user(:save => true))
+        post :create, :user => {}
+        response.should redirect_to(projects_url)
+      end
+    end
   end
 
-=begin
-  it "should redirect to new" do
-    get 'new'
-    #response.should render_template 'new'
-  end
-=end
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved user as @user" do
+        controller.stub!(:is_admin).and_return(true)
+        User.stub(:new).with({'these' => 'params'}).and_return(mock_user(:save => false))
+        post :create, :user => {:these => 'params'}
+       response.should render_template('new')
+      end
 
-  it "should redirect to login when user not logged in and wants to update" do
-    put 'update'
-    response.should redirect_to login_path
-  end
+      it "re-renders the 'new' template" do
+        controller.stub!(:is_admin).and_return(true)
+        User.stub(:new).and_return(mock_user(:save => false))
+        post :create, :user => {}
+        response.should render_template('new')
+      end
+    end
 
-  it "should redirect to login when user not logged in and wants to edit" do
-    put 'edit'
-    response.should redirect_to login_path
-  end
+  
 
-  it "should render edit template when user wants to edit and he is logged in" do
-    
-    put 'edit'
-    response.should render_template 'edit'
-  end
+  describe "PUT update" do
 
-=begin
-  it "should render the new template" do
-    get 'new'
-    response.should render_template 'new'
-  end
-=end
+    describe "with valid params" do
+      it "updates the requested user" do
+        controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        #User.should_receive(:find).with("37").and_return(mock_user)
+        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :user => {:these => 'params'}
+      end
 
-  #Test was unsuccessful, don't know how to create a valid user here
-=begin
-  it 'should successfuly create a user' do
-    User.any_instance.stubs(:valid?).returns(true)
-    post :create
-    response.should redirect_to :controller => 'projects', :action => 'index'
-  end
-=end
-  it 'should successfuly update a user' do
+      it "assigns the requested user as @user" do
+        controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        put :update, :id => "1"
+        flash[:notice].should have_text("Profile successfully updated.")
+        response.should redirect_to(root_url)
+        #assigns[:flash].should equal("Successfully updated profile.")
+      end
 
-    User.any_instance.stubs(:valid?).returns(true)
-    post :update
-    response.should redirect_to root_url
-  end
-
-  it 'should unsuccessfuly update a user' do
-
-   
-    User.any_instance.stubs(:valid?).returns(false)
-    post :update
-    response.should render_template 'edit'
+      it "redirects to the user" do
+        controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        put :update, :id => "1"
+        response.should redirect_to(root_url)
+      end
+    end
   end
 
+    describe "with invalid params" do
+      before :each do
+        controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+      end
+      
+      it "updates the requested user" do
+        #User.should_receive(:find).with("37").and_return(mock_user)
+        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :user => {:these => 'params'}
+      end
+
+      it "assigns the user as @user" do
+       # User.stub(:find).and_return(mock_user(:update_attributes => false))
+        put :update, :id => "1"
+        assigns[:user].should equal(mock_user)
+      end
+
+      it "re-renders the 'edit' template" do
+       # User.stub(:find).and_return(mock_user(:update_attributes => false))
+        put :update, :id => "1"
+        response.should redirect_to(root_url)
+      end
+    end
 end
