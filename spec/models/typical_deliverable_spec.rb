@@ -3,6 +3,7 @@ require 'spec_helper'
 describe TypicalDeliverable do
   
     before(:all) do
+      DeliverableType.delete_all
       @deliverable_type = DeliverableType.create!(:name => 'Requirements Document',
       :unit_of_measure => 'pages')
     end
@@ -12,7 +13,7 @@ describe TypicalDeliverable do
     @valid_attributes = {
       :name => "Requirements Doc",
       :deliverable_type_id => @deliverable_type.id,
-      :complexity => TypicalDeliverable::COMPLEXITY[1],
+      :complexity => Complexity::VALUES[1],
       :estimated_size => 10,
       :estimated_effort => 20
     }

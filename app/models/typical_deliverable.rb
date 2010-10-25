@@ -11,9 +11,7 @@ class TypicalDeliverable < ActiveRecord::Base
 
   validate :estimated_size_should_be_positive, :estimated_effort_should_be_positive
 
-    COMPLEXITY = ["LOW","MEDIUM","HIGH"]
-
-  validates_inclusion_of :complexity, :in => COMPLEXITY
+  validates_inclusion_of :complexity, :in => Complexity::VALUES
 
   def get_production_rate
     #if !estimated_size.nil? && !estimated_effort.nil? && estimated_size > 0 && estimated_effort > 0

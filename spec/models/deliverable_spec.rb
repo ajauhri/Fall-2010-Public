@@ -6,7 +6,7 @@ describe Deliverable do
       :name => "UI Doc",
       :deliverable_type => "none",
       :unit_of_measure => "pages",
-      :complexity => Deliverable::COMPLEXITY[1],
+      :complexity => Complexity::VALUES[1],
       :estimated_size => 10,
       :estimated_effort => 20
     }
@@ -42,10 +42,15 @@ describe Deliverable do
 end
 
 describe Deliverable , "from a typical deliverable and a phase" do
-  it "should create a deliverablie for a project phase from a typical deliverable" do
-    deliverable_type = DeliverableType.create!(:name => 'Requirements Document1',
+  before :all do
+    DeliverableType.delete_all
+    @deliverable_type = DeliverableType.create!(:name => 'Requirements Document1',
       :unit_of_measure => 'pages')
-    typical_deliverable = TypicalDeliverable.create!(:name => 'Concept Document1', :deliverable_type_id => deliverable_type.id,
+  end
+
+  it "should create a deliverablie for a project phase from a typical deliverable" do
+     
+    typical_deliverable = TypicalDeliverable.create!(:name => 'Concept Document1', :deliverable_type_id => @deliverable_type.id,
       :estimated_size => 10, :estimated_effort => 20,
       :complexity => 'LOW')
     project_phase_id = 1
@@ -53,4 +58,6 @@ describe Deliverable , "from a typical deliverable and a phase" do
     deliverable = Deliverable.create_from_typical_deliverable(typical_deliverable.id, project_phase_id)
     deliverable.should be_valid
   end
+
+
 end
