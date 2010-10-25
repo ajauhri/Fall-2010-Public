@@ -11,6 +11,13 @@
 
 ActiveRecord::Schema.define(:version => 20101020183300) do
 
+  create_table "deliverable_types", :force => true do |t|
+    t.string   "name"
+    t.string   "unit_of_measure"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "deliverables", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -76,8 +83,7 @@ ActiveRecord::Schema.define(:version => 20101020183300) do
   create_table "typical_deliverables", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "deliverable_type"
-    t.string   "unit_of_measure"
+    t.integer  "deliverable_type_id"
     t.string   "complexity"
     t.decimal  "estimated_size"
     t.decimal  "estimated_effort"

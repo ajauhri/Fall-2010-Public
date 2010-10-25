@@ -1,0 +1,22 @@
+<h1>Listing deliverable_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Unit of measure</th>
+  </tr>
+
+<% @deliverable_types.each do |deliverable_type| %>
+  <tr>
+    <td><%=h deliverable_type.name %></td>
+    <td><%=h deliverable_type.unit_of_measure %></td>
+    <td><%= link_to 'Show', deliverable_type %></td>
+    <td><%= link_to 'Edit', edit_deliverable_type_path(deliverable_type) %></td>
+    <td><%= link_to 'Destroy', deliverable_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New deliverable_type', new_deliverable_type_path %>

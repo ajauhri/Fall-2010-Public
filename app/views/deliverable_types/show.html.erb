@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @deliverable_type.name %>
+</p>
+
+<p>
+  <b>Unit of measure:</b>
+  <%=h @deliverable_type.unit_of_measure %>
+</p>
+
+
+<%= link_to 'Edit', edit_deliverable_type_path(@deliverable_type) %> |
+<%= link_to 'Back', deliverable_types_path %>

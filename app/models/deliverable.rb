@@ -25,13 +25,15 @@ class Deliverable < ActiveRecord::Base
 
   def self.create_from_typical_deliverable(typical_deliverable_id, project_phase_id)
     @typical_deliverable = TypicalDeliverable.find(typical_deliverable_id)
+    deliverable_type = DeliverableType.find(@typical_deliverable.deliverable_type_id)
+
     puts "create_from_typical_deliverable ----" + @typical_deliverable.name
     if @typical_deliverable
         Deliverable.create(
          :name => @typical_deliverable.name,
          :description => @typical_deliverable.description,
-         :deliverable_type => @typical_deliverable.deliverable_type,
-         :unit_of_measure => @typical_deliverable.unit_of_measure,
+         :deliverable_type => deliverable_type.name,
+         :unit_of_measure => deliverable_type.unit_of_measure,
          :complexity => @typical_deliverable.complexity,
          :estimated_size => @typical_deliverable.estimated_size,
          :estimated_effort => @typical_deliverable.estimated_effort,

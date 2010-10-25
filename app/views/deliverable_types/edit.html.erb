@@ -1,0 +1,20 @@
+<h1>Editing deliverable_type</h1>
+
+<% form_for(@deliverable_type) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :unit_of_measure %><br />
+    <%= f.text_field :unit_of_measure %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @deliverable_type %> |
+<%= link_to 'Back', deliverable_types_path %>

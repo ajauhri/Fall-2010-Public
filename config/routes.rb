@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :deliverable_types
+
   map.resources :efforts
 
   map.resources :deliverables

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  unit_of_measure: MyString
+
+two:
+  name: MyString
+  unit_of_measure: MyString
