@@ -1,5 +1,7 @@
 class DeliverablesController < ApplicationController
   # Lists all deliverables from the DB
+
+=begin
   def index
     @deliverables = Deliverable.all
 
@@ -8,7 +10,7 @@ class DeliverablesController < ApplicationController
       format.xml  { render :xml => @deliverables }
     end
   end
-
+=end
   #  Lists details of a particular deliverable. Params required: Deliverable.id
 
   def show

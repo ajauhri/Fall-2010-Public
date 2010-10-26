@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe DeliverablesController do
 
-=begin
   def mock_deliverables(stubs={})
     @mock_deliverables ||= mock_model(Deliverable, stubs)
   end
@@ -15,6 +14,7 @@ describe DeliverablesController do
     end
   end
 
+=begin
   describe "GET show" do
     it "assigns the requested deliverables as @deliverables" do
       Deliverable.stub(:find).with("37").and_return(mock_deliverables)
