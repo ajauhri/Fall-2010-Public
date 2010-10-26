@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe DeliverablesController do
 
-=begin
   def mock_deliverables(stubs={})
     @mock_deliverables ||= mock_model(Deliverable, stubs)
   end
@@ -128,5 +127,4 @@ describe DeliverablesController do
       response.should redirect_to(deliverables_url)
     end
   end
-=end
 end
