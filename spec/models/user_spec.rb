@@ -2,9 +2,10 @@ require 'spec_helper'
 #require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
-  before do
+  before(:each) do
     @valid_user = Factory.create(:valid_user)
-end
+
+  end
 
   it "should succeed creating a new :valid_user from the Factory" do
     @valid_user.should be_valid
