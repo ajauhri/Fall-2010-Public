@@ -128,4 +128,6 @@ describe DeliverablesController do
       response.should redirect_to(deliverables_url)
     end
   end
+ end
+=end
 end
