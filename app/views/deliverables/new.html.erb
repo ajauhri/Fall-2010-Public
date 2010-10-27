@@ -1,3 +1,5 @@
+<% javascript 'dynamic_estimates' %>
+
 <h1>New deliverables</h1>
 
 <% form_for(@deliverable) do |f| %>
@@ -18,6 +20,8 @@
   <p>
     <%= f.submit 'Create' %>
   </p>
+
+
 <% end %>
 
 <%= link_to 'Back', deliverables_path %>
