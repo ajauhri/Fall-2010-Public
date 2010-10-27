@@ -4,7 +4,7 @@ class ProjectPhase < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :lifecycle_phase
-  has_many :deliverables
+  has_many :deliverables, :dependent => :destroy
   acts_as_list :column=> :sequence#, :scope => "project_id = #{:project_id}"
   #in_place_edit_for :name
 

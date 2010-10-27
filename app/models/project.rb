@@ -2,7 +2,7 @@
 class Project < ActiveRecord::Base
   after_create :create_phases
   belongs_to :lifecyle
-  has_many :project_phases, :order => "sequence"
+  has_many :project_phases, :order => "sequence", :dependent => :destroy
   validates_presence_of :name, :lifecycle_id
 
   accepts_nested_attributes_for :project_phases
