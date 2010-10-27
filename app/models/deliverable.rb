@@ -41,7 +41,7 @@ class Deliverable < ActiveRecord::Base
   end
 
   def self.get_estimates(deliverable_type, complexity)
-    find_by = ["deliverable_type = ? and complexity = ?", deliverable_type, complexity]
+    find_by = ["deliverable_type like ? and complexity like ?", deliverable_type, complexity]
     return get_statistics(find_by)
   end
 
@@ -49,17 +49,20 @@ protected
 
   def self.get_statistics(find_by)
     estimates = {}
-    estimates[:avg_effort] = Deliverable.find(:all, :conditions => find_by).average(:actual_effort)
-    estimates[:max_effort] = Deliverable.find(:all, :conditions => find_by).maximum(:actual_effort)
-    estimates[:min_effort] = Deliverable.find(:all, :conditions => find_by).minimum(:actual_effort)
-    estimates[:avg_size] = Deliverable.find(:all, :conditions => find_by).average(:actual_size)
-    estimates[:max_size] = Deliverable.find(:all, :conditions => find_by).maximum(:actual_size)
-    estimates[:min_size] = Deliverable.find(:all, :conditions => find_by).minimum(:actual_size)
-    estimates[:avg_rate] = Deliverable.find(:all, :conditions => find_by).average(:actual_production_rate)
-    estimates[:max_rate] = Deliverable.find(:all, :conditions => find_by).maximum(:actual_production_rate)
-    estimates[:min_rate] = Deliverable.find(:all, :conditions => find_by).minimum(:actual_production_rate)
-    return estimates
-  end
+  
+            estimates[:avg_effort] = Integer(Deliverable.average :actual_effort, :conditions => find_by)
+            estimates[:max_effort] = Integer(Deliverable.maximum :actual_effort, :conditions => find_by)
+            estimates[:min_effort] = Integer(Deliverable.minimum :actual_effort, :conditions => find_by)
+            estimates[:avg_size] = Integer(Deliverable.average :actual_size, :conditions => find_by)
+            estimates[:max_size] = Integer(Deliverable.maximum :actual_size, :conditions => find_by)
+            estimates[:min_size] = Integer(Deliverable.minimum :actual_size, :conditions => find_by)
+            estimates[:avg_rate] = Integer(Deliverable.average :actual_production_rate, :conditions => find_by)
+            estimates[:max_rate] = Integer(Deliverable.maximum :actual_production_rate, :conditions => find_by)
+            estimates[:min_rate] = Integer(Deliverable.minimum :actual_production_rate, :conditions => find_by)
+                 
+        return estimates
+         
+    end
 
   def estimated_size_should_be_positive
     if estimated_size.nil? || estimated_size <= 0

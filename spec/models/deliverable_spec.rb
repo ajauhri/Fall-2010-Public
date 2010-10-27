@@ -74,7 +74,7 @@ describe Deliverable, "estimating based upon matching type and complexity" do
   end
 
   it "should return accurate estimates for highly complex req. doc" do
-    estimates = Deliverable.get_estimates('Requirements Document', 'High')
+    estimates = Deliverable.get_estimates('Requirements Document', 'HIGH')
     estimates[:max_size].should equal(6)
     estimates[:min_size].should equal(2)
     estimates[:avg_size].should equal(4)
@@ -85,8 +85,4 @@ describe Deliverable, "estimating based upon matching type and complexity" do
     estimates[:min_rate].should equal(2)
     estimates[:avg_rate].should equal(4)
   end
-
-  
-
-  
 end
