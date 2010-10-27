@@ -34,7 +34,7 @@ describe Deliverable do
   end
 
   it "should fail if size not > 0 " do
-        deliverable = Deliverable.create!(@valid_attributes)
+    deliverable = Deliverable.create!(@valid_attributes)
     deliverable.estimated_size = -1
     deliverable.should be_invalid
   end
@@ -59,5 +59,34 @@ describe Deliverable , "from a typical deliverable and a phase" do
     deliverable.should be_valid
   end
 
+end
 
+
+describe Deliverable, "estimating based upon matching type and complexity" do
+
+  before(:all) do
+    Factory.create(:low_complex_minutes1)
+    Factory.create(:low_complex_minutes2)
+    Factory.create(:low_complex_minutes3)
+    Factory.create(:high_complex_requirements1)
+    Factory.create(:high_complex_requirements2)
+    Factory.create(:high_complex_requirements3)
+  end
+
+  it "should return accurate estimates for highly complex req. doc" do
+    estimates = Deliverable.get_estimates('Requirements Document', 'High')
+    estimates[:max_size].should equal(6)
+    estimates[:min_size].should equal(2)
+    estimates[:avg_size].should equal(4)
+    estimates[:max_effort].should equal(6)
+    estimates[:min_effort].should equal(2)
+    estimates[:avg_effort].should equal(4)
+    estimates[:max_rate].should equal(6)
+    estimates[:min_rate].should equal(2)
+    estimates[:avg_rate].should equal(4)
+  end
+
+  
+
+  
 end
