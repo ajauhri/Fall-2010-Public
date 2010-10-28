@@ -18,7 +18,7 @@
   </p>
   <p>
     <%= f.label :complexity %><br />
-    <%= f.select :complexity, Complexity::VALUES, :prompt => 'Complexity' %>
+    <%= f.select :complexity, Complexity.getValues, :prompt => 'Complexity' %>
   </p>
   <p>
     <%= f.label :description %><br />

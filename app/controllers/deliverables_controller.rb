@@ -94,7 +94,7 @@ class DeliverablesController < ApplicationController
     estimates = []
     deliverable_types = DeliverableType.find(:all)
     for deliverable_type in deliverable_types
-      for complexity in Complexity::VALUES
+      for complexity in Complexity.getValues
         estimates << {:type => deliverable_type.name, :complexity => complexity,
           :statistics => Deliverable.get_estimates(deliverable_type.name, complexity)}
       end
