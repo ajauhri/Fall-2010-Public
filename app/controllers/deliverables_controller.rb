@@ -26,7 +26,7 @@ class DeliverablesController < ApplicationController
 
   def new
     @deliverable = Deliverable.new
-
+    @estimates = dynamic_estimates
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @deliverable }
@@ -86,5 +86,19 @@ class DeliverablesController < ApplicationController
       format.html { redirect_to(deliverables_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+   def dynamic_estimates
+    estimates = []
+    deliverable_types = DeliverableType.find(:all)
+    for deliverable_type in deliverable_types
+      for complexity in Complexity::VALUES
+        estimates << {:type => deliverable_type.name, :complexity => complexity,
+          :statistics => Deliverable.get_estimates(deliverable_type.name, complexity)}
+      end
+    end
+    return estimates
   end
 end

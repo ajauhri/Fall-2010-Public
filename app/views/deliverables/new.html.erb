@@ -1,13 +1,24 @@
-<% javascript 'dynamic_estimates' %>
-
 <h1>New deliverables</h1>
 
 <% form_for(@deliverable) do |f| %>
   <%= f.error_messages %>
 
+  <select id="TEST">
+    <option value>1</option>
+    <option value="2">2</option>
+  </select>
+
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.collection_select :deliverable_type, DeliverableType.find(:all), :name, :name, :prompt => 'Deliverable Type'  %>
+  </p>
+  <p>
+    <%= f.label :complexity %><br />
+    <%= f.select :complexity, Complexity::VALUES, :prompt => 'Complexity' %>
   </p>
   <p>
     <%= f.label :description %><br />
@@ -21,7 +32,52 @@
     <%= f.submit 'Create' %>
   </p>
 
+  <table id="stats_table">
+    <th></th>
+    <th>Minimum</th>
+    <th>Maximum</th>
+    <th>Average</th>
+    <tr>
+      <td>Effort</td>
+      <td id="min_effort"></td>
+      <td id="max_effort"></td>
+      <td id="avg_effort"></td>
+    </tr>
+    <tr>
+      <td>Size</td>
+      <td id="min_size"></td>
+      <td id="max_size"></td>
+      <td id="avg_size"></td>
+    </tr>
+    <tr>
+      <td>Rate</td>
+      <td id="min_rate"></td>
+      <td id="max_rate"></td>
+      <td id="avg_rate"></td>
+    </tr>
+  </table>
 
 <% end %>
 
 <%= link_to 'Back', deliverables_path %>
+
+<script type="text/javascript">
+<% for estimate in @estimates %>
+   estimates.push(new Array('<%=h estimate[:type] %>', '<%=h estimate[:complexity] %>',
+  <%= estimate[:statistics][:min_effort] || 0 %>,
+  <%= estimate[:statistics][:max_effort] || 0 %>,
+  <%= estimate[:statistics][:avg_effort] || 0 %>,
+  <%= estimate[:statistics][:min_size] || 0 %>,
+  <%= estimate[:statistics][:max_size] || 0 %>,
+  <%= estimate[:statistics][:avg_size] || 0 %>,
+  <%= estimate[:statistics][:min_rate] || 0 %>,
+  <%= estimate[:statistics][:max_rate] || 0 %>,
+  <%= estimate[:statistics][:avg_rate] || 0 %>));
+<% end %>
+
+ document.observe('dom:loaded', function() {
+   jQuery('#stats_table').hide();
+   $('deliverable_deliverable_type').observe('change', pairSelected);
+   $('deliverable_complexity').observe('change', pairSelected);
+ });
+</script>

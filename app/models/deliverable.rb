@@ -59,7 +59,7 @@ protected
             estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by
             estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by
             estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by
-                 
+
         return estimates
          
     end
