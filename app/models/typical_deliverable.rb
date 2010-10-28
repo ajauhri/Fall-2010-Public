@@ -33,5 +33,5 @@ protected
     errors.add(:estimated_effort, 'should be positive')
     end
   end
-  
+
 end

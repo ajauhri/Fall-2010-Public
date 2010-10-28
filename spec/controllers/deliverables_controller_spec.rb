@@ -6,7 +6,7 @@ describe DeliverablesController do
     @mock_deliverable ||= mock_model(Deliverable, stubs)
   end
 
-    before(:each) do
+  before(:each) do
     login_user
   end
 
@@ -137,7 +137,7 @@ describe DeliverablesController do
       delete :destroy, :id => "37"
     end
 
-    it "redirects to the deliverables list" do
+    it "redirects to the current project show" do
       Deliverable.stub(:find).and_return(mock_deliverable(:destroy => true))
       @project_phase = mock_model(ProjectPhase)
       mock_deliverable.stub(:project_phase).and_return(@project_phase)

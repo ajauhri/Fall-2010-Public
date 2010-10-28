@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TypicalDeliverable do
-  
+
     before(:all) do
       DeliverableType.delete_all
       @deliverable_type = DeliverableType.create!(:name => 'Requirements Document',
@@ -27,7 +27,7 @@ it "should create a new instance given valid attributes" do
 
   it "should fail creating  a typical deliverable with an existing name (for the same phase)" do
     TypicalDeliverable.create(@valid_attributes)
-    TypicalDeliverable.create(@valid_attributes).should be_invalid    
+    TypicalDeliverable.create(@valid_attributes).should be_invalid
   end
 
   it "should fail with a complexity that does not exist in the complexity array" do

@@ -6,6 +6,14 @@ describe DeliverableTypesController do
     @mock_deliverable_type ||= mock_model(DeliverableType, stubs)
   end
 
+  before(:each) do
+    login_user
+  end
+
+  after(:each) do
+    logout_user
+  end
+
   describe "GET index" do
     it "assigns all deliverable_types as @deliverable_types" do
       DeliverableType.stub(:find).with(:all).and_return([mock_deliverable_type])
