@@ -50,15 +50,15 @@ protected
   def self.get_statistics(find_by)
     estimates = {}
   
-            estimates[:avg_effort] = Integer(Deliverable.average :actual_effort, :conditions => find_by)
-            estimates[:max_effort] = Integer(Deliverable.maximum :actual_effort, :conditions => find_by)
-            estimates[:min_effort] = Integer(Deliverable.minimum :actual_effort, :conditions => find_by)
-            estimates[:avg_size] = Integer(Deliverable.average :actual_size, :conditions => find_by)
-            estimates[:max_size] = Integer(Deliverable.maximum :actual_size, :conditions => find_by)
-            estimates[:min_size] = Integer(Deliverable.minimum :actual_size, :conditions => find_by)
-            estimates[:avg_rate] = Integer(Deliverable.average :actual_production_rate, :conditions => find_by)
-            estimates[:max_rate] = Integer(Deliverable.maximum :actual_production_rate, :conditions => find_by)
-            estimates[:min_rate] = Integer(Deliverable.minimum :actual_production_rate, :conditions => find_by)
+            estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by
+            estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by
+            estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by
+            estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by
+            estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by
+            estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by
+            estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by
+            estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by
+            estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by
                  
         return estimates
          
