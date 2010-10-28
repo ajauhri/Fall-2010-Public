@@ -11,14 +11,16 @@ class DeliverablesController < ApplicationController
     end
   end
 =end
+
   #  Lists details of a particular deliverable. Params required: Deliverable.id
 
   def show
+    
     @deliverable = Deliverable.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @deliverable }
+      #format.xml  { render :xml => @deliverable }
     end
   end
 
@@ -29,7 +31,7 @@ class DeliverablesController < ApplicationController
     @estimates = dynamic_estimates
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @deliverable }
+      #format.xml  { render :xml => @deliverable }
     end
   end
 
@@ -47,10 +49,10 @@ class DeliverablesController < ApplicationController
     respond_to do |format|
       if @deliverable.save
         format.html { redirect_to(@deliverable, :notice => 'Deliverables was successfully created.') }
-        format.xml  { render :xml => @deliverable, :status => :created, :location => @deliverables }
+        #format.xml  { render :xml => @deliverable, :status => :created, :location => @deliverables }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,10 +66,10 @@ class DeliverablesController < ApplicationController
     respond_to do |format|
       if @deliverable.update_attributes(params[:deliverable])
         format.html { redirect_to(@deliverable, :notice => 'Deliverable was successfully updated.') }
-        format.xml  { head :ok }
+        #format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -76,15 +78,13 @@ class DeliverablesController < ApplicationController
   # Deletes a Deliverable record. Params required: Deliverable.id
 
   def destroy
-    ###
-    ### Delete all effort logs associated with deliverable before a deliverable delete
-    ###
     @deliverable = Deliverable.find(params[:id])
+    project = @deliverable.project_phase.project
     @deliverable.destroy
 
     respond_to do |format|
-      format.html { redirect_to(deliverables_url) }
-      format.xml  { head :ok }
+      format.html { redirect_to project_url(project) }
+      #format.xml  { head :ok }
     end
   end
 

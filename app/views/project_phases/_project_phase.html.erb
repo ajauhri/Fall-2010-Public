@@ -5,6 +5,6 @@
 <%= link_to 'x', project_phase, :confirm => 'Are you sure?', :method => :delete %>
 <%= link_to 'Add deliverables', new_deliverable_path %>
 <% for deliverable in project_phase.deliverables.all %>
-<p><%= deliverable.name %></p>
+<p><%= deliverable.name %> <%= link_to 'Destroy', deliverable, :method => :delete %></p>
 <% end %>
 <% end %>
