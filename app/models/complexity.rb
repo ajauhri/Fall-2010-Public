@@ -1,3 +1,5 @@
 class Complexity
-  VALUES = ["LOW","MEDIUM","HIGH"]
+  def self.getValues() 
+  values = ["LOW","MEDIUM","HIGH"]
+end
 end

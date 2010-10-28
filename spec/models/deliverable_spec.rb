@@ -6,7 +6,7 @@ describe Deliverable do
       :name => "UI Doc",
       :deliverable_type => "none",
       :unit_of_measure => "pages",
-      :complexity => Complexity::VALUES[1],
+      :complexity => "LOW",#Complexity::VALUES,
       :estimated_size => 10,
       :estimated_effort => 20
     }
