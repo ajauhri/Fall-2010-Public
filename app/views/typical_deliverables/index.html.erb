@@ -1,0 +1,33 @@
+<h1>Listing Typical Deliverables</h1>
+
+<table class="DisplayTable">
+    <tr>
+    <th id="HeaderLeft">Name</th>
+    <th>Description</th>
+    <th>Complexity</th>
+    <th>Estimated Size</th>
+    <th>Estimated Effort</th>
+    <th>Estimated Production Rate</th>
+    <th>Deliverable Type</th>
+    <th>Lifecycle Phase</th>
+    <th id="HeaderRight"></th>
+  </tr>
+
+<% @typical_deliverables.each do |typical_deliverable| %>
+  <tr>
+    <td><%= link_to h(typical_deliverable.name), edit_typical_deliverable_path(typical_deliverable) %></td>
+    <td><%=  typical_deliverable.description %></td>
+    <td><%=  typical_deliverable.complexity %></td>
+    <td><%=  typical_deliverable.estimated_size %></td>
+    <td><%=  typical_deliverable.estimated_effort %></td>
+    <td><%=  typical_deliverable.get_production_rate %> </td>
+    <td><%= typical_deliverable.deliverable_type.name %></td>
+    <td><%= typical_deliverable.lifecycle_phase.name %></td>
+    <td><%= link_to 'x', typical_deliverable, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New typical_deliverable', new_typical_deliverable_path %>

@@ -1,0 +1,12 @@
+<h1>Editing typical_deliverable</h1>
+
+<% form_for(@typical_deliverable) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @typical_deliverable %> |
+<%= link_to 'Back', typical_deliverables_path %>

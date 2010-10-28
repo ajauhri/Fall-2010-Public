@@ -2,12 +2,18 @@ require 'spec_helper'
 
 describe EffortsController do
 
+=begin
   before(:each) do
     login_user
   end
 
   after(:each) do
     logout_user
+  end
+=end
+
+    def mock_user(stubs={})
+    @mock_user ||= mock_model(User, stubs)
   end
  
 
@@ -26,7 +32,8 @@ describe EffortsController do
 
         it "should assign selected_deliverable to first effort" do
           effort = Factory.create(:valid_effort)
-        @logged_in_user.id = effort.user_id
+          controller.stub!(:current_user).and_return(mock_user)
+        #current_user.id = effort.user_id
       get :index
       assigns(:selected_deliverable).should_not be_nil
   end
