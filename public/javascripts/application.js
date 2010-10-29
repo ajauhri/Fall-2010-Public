@@ -30,18 +30,8 @@ function pairSelected() {
  }
 }
 
-
-function effortSelect() {
-
-    project_id = $('_project_id').getValue();
-    phase_id = $('_phase_id').getValue();
-    pOptions = $('_phase_id').options
-    pOptions.length = 1;
-    phases.each(function(phase) {
-        if (phase[0] == project_id) {
-            pOptions[pOptions.length] = new Option(phase[1], phase[2])
-        }
-    });
+function phaseSelect(selectedPhase, selectedDeliverable) {
+    phase_id = $('_phase_id').getValue() || selectedPhase;
     dOptions = $('effort_deliverable_id').options
     dOptions.length = 1;
     deliverables.each(function(deliverable) {
@@ -49,4 +39,23 @@ function effortSelect() {
             dOptions[dOptions.length] = new Option(deliverable[1], deliverable[2])
         }
     });
+    if (selectedPhase) jQuery('#_phase_id').attr('value', selectedPhase);
+    if (selectedDeliverable) jQuery('#effort_deliverable_id').attr('value', selectedDeliverable);
+}
+
+function projectSelect(selectedProject, selectedPhase, selectedDeliverable) {
+    project_id = $('_project_id').getValue() || selectedProject;
+    pOptions = $('_phase_id').options
+    pOptions.length = 1;
+    phases.each(function(phase) {
+        if (phase[0] == project_id) {
+            pOptions[pOptions.length] = new Option(phase[1], phase[2])
+        }
+    });
+    if (selectedProject && selectedPhase && selectedDeliverable){
+       jQuery('#_project_id').attr('value', selectedProject);
+        phaseSelect(selectedPhase, selectedDeliverable);
+    } else {
+    $('effort_deliverable_id').options.length = 1;
+    }
 }

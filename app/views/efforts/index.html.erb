@@ -15,7 +15,8 @@
       <td><%=  deliverable.name %></td>
       <td><%=  effort.value.round(1) %></td>
       <td><%=  effort.updated_at.to_s(:long) %></td>
-      <td><%= link_to 'Log', :action => 'index', :selected_deliverable => deliverable.id %></td>
+      <td><%= link_to_function 'Log', "projectSelect(#{deliverable.project_phase.id},
+          #{deliverable.project_phase.project.id}, #{deliverable.id})" %></td>
       <td><%= link_to 'X', effort, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
@@ -47,8 +48,9 @@
 <%end%>
 
   document.observe('dom:loaded', function() {
-    effortSelect();
-    $('_project_id').observe('change', effortSelect);
-    $('_phase_id').observe('change', effortSelect);
+    projectSelect();
+    phaseSelect();
+    $('_project_id').observe('change', projectSelect);
+    $('_phase_id').observe('change', phaseSelect);
   });
 </script>

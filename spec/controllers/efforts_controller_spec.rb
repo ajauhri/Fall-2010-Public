@@ -1,47 +1,22 @@
 require 'spec_helper'
 
 describe EffortsController do
+  setup :activate_authlogic
+  integrate_views
 
-=begin
   before(:each) do
+    logout_user
     login_user
   end
-
-  after(:each) do
-    logout_user
-  end
-=end
-
-    def mock_user(stubs={})
-    @mock_user ||= mock_model(User, stubs)
-  end
- 
 
   describe "GET index" do
     it "should render the index template" do
       get :index
       response.should render_template 'index'
     end
-
-    it "should assign selected_deliverable to the passed parameter" do
-      get :index, :selected_deliverable => "1"
-
-      assigns(:selected_deliverable).should == 1
-      
   end
-
-        it "should assign selected_deliverable to first effort" do
-          effort = Factory.create(:valid_effort)
-          controller.stub!(:current_user).and_return(mock_user)
-        #current_user.id = effort.user_id
-      get :index
-      assigns(:selected_deliverable).should_not be_nil
-  end
-end
-
 
   describe "POST create" do
-
     describe "with valid params" do
       it "should successfully create an effort" do
         effort = Factory.build(:valid_effort)
@@ -67,12 +42,7 @@ end
     end
   end
 
-
   describe "DELETE destroy" do
-
-
-
-
     it "destroy action should destroy effort and redirect to effort index" do
       effort = Factory.create(:valid_effort)
       delete :destroy, :id => effort

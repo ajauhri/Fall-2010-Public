@@ -11,12 +11,6 @@ class EffortsController < ApplicationController
     @efforts.sort! { |a,b| b.updated_at <=> a.updated_at }
     @effort = Effort.new
 
-   if params[:selected_deliverable]
-      @selected_deliverable = params[:selected_deliverable].to_i
-   # elsif @efforts.length > 0
-   #   @selected_deliverable = @efforts[0].deliverable_id
-    end
-
     respond_to do |format|
       format.html
     end
@@ -54,23 +48,12 @@ class EffortsController < ApplicationController
 
   # Updates an effort log if it exists, otherwise create new effort log
   def create
-    u_id  = current_user.id
     d_id  = params[:effort][:deliverable_id]
-    effort_value = params[:effort][:value].to_f
+    value = params[:effort][:value].to_f
 
-    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, u_id)
-    #:all, :conditions => ['deliverable_id = ? and user_id = ?', d_id, u_id])
-    if @effort.nil?
-      @effort                 = Effort.new(params[:effort])
-      @effort.user_id         = u_id
-    else
-      @effort.value += effort_value
-    end
-
-    #deliverable_effort = Deliverable.find(d_id).actual_effort
-    #deliverable_effort += effort_value
-    #Deliverable.update(:actual_effort => deliverable_effort)
-
+    @effort = Effort.find_by_deliverable_id_and_user_id(d_id, current_user.id)
+    @effort = Effort.new(:user_id => current_user.id, :deliverable_id => d_id) if @effort.nil?
+    @effort.value == nil ? @effort.value = value : @effort.value += value
     if not @effort.save
       flash[:error] = error_html(@effort.errors)
     end
