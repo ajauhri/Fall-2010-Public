@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Complexity do
 
-  it "should not include blah" do
-    Complexity::VALUES.should_not include('blah')
+  it "should return an array of Complexity values" do
+  Complexity.getValues.should == ["LOW","MEDIUM","HIGH"]
   end
 end
