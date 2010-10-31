@@ -5,6 +5,10 @@ describe DeliverablesController do
   def mock_deliverable(stubs={})
     @mock_deliverable ||= mock_model(Deliverable, stubs)
   end
+  
+   def mock_deliverable_type(stubs={})
+    mock_model(DeliverableType, stubs)
+  end
 
   before(:each) do
     login_user
@@ -15,13 +19,13 @@ describe DeliverablesController do
   end
 
 =begin
-  describe "GET index" do
-    it "assigns all deliverables as @deliverables" do
-      Deliverable.stub(:find).with(:all).and_return([mock_deliverable])
-      get :index
-      assigns[:deliverables].should == [mock_deliverable]
-    end
-  end
+describe "GET index" do
+it "assigns all deliverables as @deliverables" do
+Deliverable.stub(:find).with(:all).and_return([mock_deliverable])
+get :index
+assigns[:deliverables].should == [mock_deliverable]
+end
+end
 =end
 
   describe "GET show" do
@@ -35,8 +39,17 @@ describe DeliverablesController do
   describe "GET new" do
     it "assigns a new deliverable as @deliverable" do
       Deliverable.stub(:new).and_return(mock_deliverable)
+      Complexity.stub!(:getValues).and_return( ["Low","Medium","High"])
+      deliverable_type1 = mock_deliverable_type(:name => "Deliverable1")
+      deliverable_type2 = mock_deliverable_type(:name => "Deliverable2")
+      DeliverableType.stub!(:find).with(:all).and_return([deliverable_type1, deliverable_type2])
+      Deliverable.should_receive(:get_estimates).with(any_args()).exactly(6).times
+      #estimates = controller.dynamic_estimates
+      
       get :new
       assigns[:deliverable].should equal(mock_deliverable)
+     #assigns[:estimates].should == [deliverable_type1,deliverable_type2]
+      
     end
   end
 
@@ -150,3 +163,4 @@ describe DeliverablesController do
     end
   end
 end
+
