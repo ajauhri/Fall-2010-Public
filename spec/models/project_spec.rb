@@ -1,8 +1,14 @@
 require 'spec_helper'
 
 describe Project do
+
   before(:each) do
     @project = Project.new
+    login_user
+  end
+
+  after :each do
+    logout_user
   end
 
   it "should succed creating a new :project from the Factory (with lifecycle association)" do

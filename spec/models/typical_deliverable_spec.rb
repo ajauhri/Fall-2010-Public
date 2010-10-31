@@ -9,11 +9,12 @@ describe TypicalDeliverable do
     end
 
     before(:each) do
+     
 
     @valid_attributes = {
       :name => "Requirements Doc",
       :deliverable_type_id => @deliverable_type.id,
-      :complexity => Complexity::VALUES[1],
+      :complexity => Complexity.getValues[1],
       :estimated_size => 10,
       :estimated_effort => 20
     }

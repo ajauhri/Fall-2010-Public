@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe "/projects/show.html.erb" do
   before(:all) do
-    User.delete_all
+    #User.delete_all
     login_user
     @lifecycle = Factory.create(:lifecycle)
     @project_phases = []

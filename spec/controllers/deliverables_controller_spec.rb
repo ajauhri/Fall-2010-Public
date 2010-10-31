@@ -10,6 +10,13 @@ describe DeliverablesController do
     mock_model(DeliverableType, stubs)
   end
 
+   def stub_project_phase_and_project
+     @project_phase = mock_model(ProjectPhase)
+      mock_deliverable.stub(:project_phase).and_return(@project_phase)
+      @project = mock_model(Project)
+      @project_phase.stub(:project).and_return(@project)
+   end
+
   before(:each) do
     login_user
   end
@@ -142,20 +149,22 @@ end
 
     it "destroys the requested deliverable" do
       Deliverable.should_receive(:find).with("37").and_return(mock_deliverable)
-      @project_phase = mock_model(ProjectPhase)
-      mock_deliverable.stub(:project_phase).and_return(@project_phase)
-      @project = mock_model(Project)
-      @project_phase.stub(:project).and_return(@project)
+      stub_project_phase_and_project
+#      @project_phase = mock_model(ProjectPhase)
+#      mock_deliverable.stub(:project_phase).and_return(@project_phase)
+#      @project = mock_model(Project)
+#      @project_phase.stub(:project).and_return(@project)
       mock_deliverable.should_receive(:destroy)
       delete :destroy, :id => "37"
     end
 
     it "redirects to the current project show" do
       Deliverable.stub(:find).and_return(mock_deliverable(:destroy => true))
-      @project_phase = mock_model(ProjectPhase)
-      mock_deliverable.stub(:project_phase).and_return(@project_phase)
-      @project = mock_model(Project)
-      @project_phase.stub(:project).and_return(@project)
+      stub_project_phase_and_project
+#      @project_phase = mock_model(ProjectPhase)
+#      mock_deliverable.stub(:project_phase).and_return(@project_phase)
+#      @project = mock_model(Project)
+#      @project_phase.stub(:project).and_return(@project)
       
       
       delete :destroy, :id => "1"
