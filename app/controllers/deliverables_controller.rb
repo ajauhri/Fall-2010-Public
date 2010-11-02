@@ -28,6 +28,8 @@ class DeliverablesController < ApplicationController
 
   def new
     @deliverable = Deliverable.new
+    @deliverable.project_phase_id = params[:project_phase_id]
+
     @estimates = dynamic_estimates
     respond_to do |format|
       format.html # new.html.erb
@@ -51,6 +53,7 @@ class DeliverablesController < ApplicationController
         format.html { redirect_to(@deliverable, :notice => 'Deliverables was successfully created.') }
         #format.xml  { render :xml => @deliverable, :status => :created, :location => @deliverables }
       else
+        @estimates =  dynamic_estimates
         format.html { render :action => "new" }
         #format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
       end

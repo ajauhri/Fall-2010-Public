@@ -45,6 +45,7 @@ end
 
   describe "GET new" do
     it "assigns a new deliverable as @deliverable" do
+      
       Deliverable.stub(:new).and_return(mock_deliverable)
       Complexity.stub!(:getValues).and_return( ["Low","Medium","High"])
       deliverable_type1 = mock_deliverable_type(:name => "Deliverable1")
@@ -53,7 +54,10 @@ end
       Deliverable.should_receive(:get_estimates).with(any_args()).exactly(6).times
       #estimates = controller.dynamic_estimates
       
-      get :new
+      @project_phase = mock_model(ProjectPhase)
+      mock_deliverable.should_receive(:project_phase_id=).with(@project_phase.id.to_s)
+      get :new, :project_phase_id => @project_phase.id
+      assigns[:deliverable].should be_an_instance_of(Deliverable)
       assigns[:deliverable].should equal(mock_deliverable)
      #assigns[:estimates].should == [deliverable_type1,deliverable_type2]
       
