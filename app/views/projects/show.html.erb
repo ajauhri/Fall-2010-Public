@@ -3,6 +3,10 @@
       <b>Name:</b>
       <%=h @project.name %>
     </td>
+    <td width="100px">
+      <%= link_to 'Edit', edit_project_path(@project) %> |
+      <%= link_to 'Back', projects_path %>
+    </td>
   </tr>
 
   <tr><td>
@@ -42,13 +46,22 @@
   <% end %>
 </div>
 
-  <ul id="phaseslist">
-    <%= render :partial => @project_phases %>
-  </ul>
-<span id="sortable_list_control"
-<%= sortable_element("phaseslist", :url => sort_projects_path, :handle => "handle") %>
-</span>
+
+<table class="DisplayTable" style="width: 100%">
+      <th id="HeaderLeft" style="width: 80%">Phase / Deliverables</th>
+    <th></th>
+    <th></th>
+    <th id="HeaderRight"</th>
+ <tbody id="phaseslist">
+   <%= render :partial => @project_phases %>
+ </tbody>
+</table>
 
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= sortable_element("phaseslist", 
+    :url => sort_projects_path,
+    :tag => "tr") %>
+
+
+
+

@@ -1,12 +1,17 @@
-<%content_tag_for :li, project_phase do %>
-  <span class="handle">[drag]</span>
+<%content_tag_for :tr, project_phase do %>
+  <td>
+  <span class="_handle">[drag]</span>
   <b>Phase</b>
   <%= link_to h(project_phase.name), edit_project_phase_path(project_phase) %>
-  <%= link_to 'x', project_phase, :confirm => 'Are you sure?', :method => :delete %>
 
-  <%= link_to 'Add deliverables', new_deliverable_path(:project_phase_id => project_phase.id) %>
 
   <% for deliverable in project_phase.deliverables.all %>
     <p><%= link_to h(deliverable.name), edit_deliverable_path(deliverable) %> <%= link_to 'Destroy', deliverable, :method => :delete %></p>
   <% end %>
+    </td><td>
+      <%= link_to 'Remove', project_phase, :confirm => 'Are you sure?', :method => :delete %>
+    </td><td>
+  <%= link_to 'Add deliverables', new_deliverable_path(:project_phase_id => project_phase.id) %>
+  </td>
 <% end %>
+
