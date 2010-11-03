@@ -68,7 +68,8 @@ class DeliverablesController < ApplicationController
 
     respond_to do |format|
       if @deliverable.update_attributes(params[:deliverable])
-        format.html { redirect_to(@deliverable, :notice => 'Deliverable was successfully updated.') }
+        format.html { redirect_to project_url(@deliverable.project_phase.project) }
+        #format.html { redirect_to(@deliverable, :notice => 'Deliverable was successfully updated.') }
         #format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

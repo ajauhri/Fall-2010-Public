@@ -122,7 +122,7 @@ end
       it "redirects to the deliverables" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => true))
         put :update, :id => "1"
-        response.should redirect_to(deliverable_url(mock_deliverable))
+        response.should redirect_to(deliverablse_url(mock_deliverable))
       end
     end
 
