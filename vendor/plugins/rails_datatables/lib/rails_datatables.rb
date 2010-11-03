@@ -36,7 +36,7 @@ module RailsDatatables
           "iDisplayLength": #{per_page},
           "bProcessing": true,
           "bServerSide": #{server_side},
-          "bLengthChange": false,
+          "bLengthChange": true,
           "bStateSave": #{persist_state},
           "bFilter": #{search},
           "bAutoWidth": #{auto_width},

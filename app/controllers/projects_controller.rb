@@ -22,7 +22,6 @@ class ProjectsController < ApplicationController
     @project_phases = ProjectPhase.find_all_by_project_id(params[:id], :order=>"sequence")
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @project }
     end
   end
 
@@ -51,10 +50,9 @@ class ProjectsController < ApplicationController
       
       if @project.save
         format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
+        flash[:error] = error_html(@project.errors)
         format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -67,10 +65,9 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
-        format.xml  { head :ok }
       else
+        flash[:error] = error_html(@project.errors)
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
