@@ -1,7 +1,7 @@
 <h1>Projects</h1>
 
 <% columns = [{:type => 'html', :class => "first"}, {:type => 'html'}, {:type => 'html'}, {:type => nil, :class => "last"}] %>
-<%= datatable(columns, {:sort_by => "[0, 'asc']", :per_page => 1}) %>
+<%= datatable(columns, {:sort_by => "[0, 'asc']", :persist_state => false}) %>
 
 <!-- table class="DisplayTable" -->
 <table class='datatable'>
@@ -21,7 +21,7 @@
     <td><%=h project.description %></td>
     <td><%=h project.total_estimated_effort %></td>
     <td><%=h project.status %></td>
-    <td><%= link_to 'x', project, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('/images/delete_icon.gif'), project, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </tbody>
