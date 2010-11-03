@@ -2,6 +2,7 @@
 class Deliverable < ActiveRecord::Base
   belongs_to :project_phase
   has_many :efforts, :dependent => :destroy
+  after_save :update_all_estimated_effort
 
   validates_presence_of :name, :deliverable_type, :unit_of_measure,
       :complexity, :estimated_size, :estimated_effort
@@ -46,6 +47,13 @@ class Deliverable < ActiveRecord::Base
   end
 
 protected
+
+
+  def update_all_estimated_effort
+   #self.project_phase.update(:total_estimated_effort => estimated_effort)
+    #     self.project.update(:value => value)
+  end
+
 
   def self.get_statistics(find_by)
     estimates = {}

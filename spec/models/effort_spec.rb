@@ -26,7 +26,8 @@ describe Effort do
   end
 
   it "should set a negative effort value to zero" do
-   effort = Factory.build(:negative_effort_value)
+   effort = Factory.create(:negative_effort_value,
+     :deliverable => Factory.build(:effort_deliverable))
    effort.value.should == 0
   end
 
