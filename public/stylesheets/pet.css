@@ -4,6 +4,11 @@ body {
     color: #333;
     font: 11px/1.5 verdana, sans-serif;
 }
+
+img {
+    border: none;
+}
+
 .cleaner {
     clear: both;
     height: 1px; margin: 0;

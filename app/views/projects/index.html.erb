@@ -1,19 +1,17 @@
 <h1>Projects</h1>
 
 <% columns = [{:type => 'html', :class => "first"}, {:type => 'html'}, {:type => 'html'}, {:type => nil, :class => "last"}] %>
-<%= datatable(columns, {:sort_by => "[0, 'desc']"}) %>
+<%= datatable(columns, {:sort_by => "[0, 'asc']", :persist_state => false}) %>
 
 <!-- table class="DisplayTable" -->
 <table class='datatable'>
   <thead>
   <tr>
-    <!--th id="HeaderLeft"--><th>Name</th>
+    <th id="HeaderLeft">Name</th>
     <th>Description</th>
     <th>Total Est. Effort</th>
     <th>Status</th>
-    <!--th></th>
-    <th></th>
-    <th id="HeaderRight"</th-->
+    <th id="HeaderRight"></th>
   </tr>
   </thead>
   <tbody>
@@ -23,14 +21,10 @@
     <td><%=h project.description %></td>
     <td><%=h project.total_estimated_effort %></td>
     <td><%=h project.status %></td>
-    <td></td>
-    <td></td>
-    <td><%= link_to 'x', project, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to image_tag('/images/delete_icon.gif'), project, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </tbody>
-    <!--tr id="BottomRow"><td colspan="7"></td></tr-->
-
 </table>
 
 <br />
