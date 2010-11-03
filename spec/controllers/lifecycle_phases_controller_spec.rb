@@ -28,7 +28,7 @@ describe LifecyclePhasesController do
 
   
 
-=begin
+
   def mock_lifecycle_phase(stubs={})
     @mock_lifecycle_phase ||= mock(LifecyclePhase, stubs)
   end
@@ -154,5 +154,5 @@ describe LifecyclePhasesController do
       response.should redirect_to(lifecycle_phases_url)
     end
   end
-=end
+
 end
