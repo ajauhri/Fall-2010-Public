@@ -112,6 +112,8 @@ table.datatable {
 	width: 100%;
 
     text-align: left;
+
+    -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
@@ -119,7 +121,6 @@ table.datatable {
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     border-spacing: 0;
     color: #FFFFFF;
-    background: #EEEEEE;
 }
 
 table.datatable thead th {
@@ -127,7 +128,6 @@ table.datatable thead th {
 	background: #015666;
 	font-weight: bold;
 	cursor: pointer;
-	* cursor: hand;
 }
 
 table.datatable thead #HeaderLeft {
@@ -146,9 +146,7 @@ table.datatable tfoot th {
 	font-weight: bold;
 }
 
-table.datatable tr.heading2 td {
-	border-bottom: 1px solid #aaa;
-}
+
 
 table.datatable td {
 	padding: 3px 10px;
@@ -193,44 +191,11 @@ table.datatable thead th.sorting_desc_disabled {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */
-table.display tr.odd.gradeA {
-	background-color: #ddffdd;
-}
-
-table.display tr.even.gradeA {
-	background-color: #eeffee;
-}
-
-table.display tr.odd.gradeC {
-	background-color: #ddddff;
-}
-
-table.display tr.even.gradeC {
-	background-color: #eeeeff;
-}
-
-table.display tr.odd.gradeX {
-	background-color: #ffdddd;
-}
-
-table.display tr.even.gradeX {
-	background-color: #ffeeee;
-}
-
-table.display tr.odd.gradeU {
-	background-color: #ddd;
-}
-
-table.display tr.even.gradeU {
-	background-color: #eee;
-}
-
-
-tr.odd {
+table.datatable tr.odd {
 	background-color: #E2E4FF;
 }
 
-tr.even {
+table.datatable tr.even {
 	background-color: white;
 }
 
