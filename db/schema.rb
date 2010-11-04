@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101102202442) do
+ActiveRecord::Schema.define(:version => 20101028044911) do
 
   create_table "deliverable_types", :force => true do |t|
     t.string   "name"
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(:version => 20101102202442) do
     t.string   "unit_of_measure"
     t.string   "complexity"
     t.decimal  "estimated_size"
-    t.decimal  "estimated_effort",          :default => 0.0
+    t.decimal  "estimated_effort"
     t.decimal  "estimated_production_rate"
     t.decimal  "actual_size"
-    t.decimal  "actual_effort",             :default => 0.0
+    t.decimal  "actual_effort"
     t.decimal  "actual_production_rate"
     t.integer  "project_phase_id"
     t.datetime "created_at"
@@ -36,12 +36,11 @@ ActiveRecord::Schema.define(:version => 20101102202442) do
   end
 
   create_table "efforts", :force => true do |t|
-    t.decimal  "value",          :default => 0.0
+    t.float    "value"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "deliverable_id"
     t.integer  "user_id"
-    t.datetime "effort_date"
   end
 
   create_table "lifecycle_phases", :force => true do |t|
@@ -64,23 +63,21 @@ ActiveRecord::Schema.define(:version => 20101102202442) do
     t.string   "name"
     t.text     "description"
     t.integer  "sequence"
-    t.decimal  "total_estimated_effort", :default => 0.0
+    t.decimal  "total_estimated_effort"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
     t.integer  "lifecycle_phase_id"
-    t.decimal  "actual_effort",          :default => 0.0
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "total_estimated_effort", :default => 0.0
+    t.decimal  "total_estimated_effort"
     t.string   "status",                 :default => "Active"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lifecycle_id"
-    t.decimal  "actual_effort",          :default => 0.0
   end
 
   create_table "typical_deliverables", :force => true do |t|
