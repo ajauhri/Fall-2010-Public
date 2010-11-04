@@ -10,6 +10,15 @@ describe DeliverablesController do
     mock_model(DeliverableType, stubs)
   end
 
+  def mock_project_phase(stubs={})
+    @mock_project_phase ||= mock_model(ProjectPhase, stubs)
+  end
+  
+  
+  def mock_project(stubs={})
+    @mock_project ||= mock_model(Project, stubs)
+  end
+  
    def stub_project_phase_and_project
      @project_phase = mock_model(ProjectPhase)
       mock_deliverable.stub(:project_phase).and_return(@project_phase)
@@ -115,16 +124,17 @@ end
 
       it "assigns the requested deliverables as @deliverable" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => true))
-        stub_project_phase_and_project
+        @mock_deliverable.should_receive(:project_phase).once.and_return(mock_project_phase(:project => "true"))
         put :update, :id => "1"
         assigns[:deliverable].should equal(mock_deliverable)
       end
 
       it "redirects to the deliverables" do
-        Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => true))
-        stub_project_phase_and_project
-        put :update, :id => "1"
-        response.should redirect_to(project_url(@project))
+        Deliverable.stub!(:find).with(any_args()).and_return(mock_deliverable(:project_phase => mock_project_phase(:project => mock_project)))
+        @mock_deliverable.should_receive(:update_attributes).once.with({'these' => 'params'}).and_return(true)
+        
+        put :update, :id => "1", :deliverable => {:these => 'params'}
+        response.should redirect_to(project_url(@mock_project))
       end
     end
 

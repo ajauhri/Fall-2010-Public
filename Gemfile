@@ -40,6 +40,11 @@ group :test do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'mocha'
+  gem 'autotest'
+  gem 'ZenTest'
+  gem 'autotest-rails', '4.1.0'
+  gem 'autotest-growl', '0.2.0'
+  gem 'autotest-fsevent', '0.1.1'
  end
 
 
