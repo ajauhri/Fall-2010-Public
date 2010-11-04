@@ -34,7 +34,9 @@
   <%= collection_select '', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
   <%= collection_select '', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>
   <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
-  <%= form.text_field :value, :style => "width: 30px;"%>
+
+  <%= form.text_field :value, :style => "width: 30px;"%>Hours
+  <%= form.text_field :effort_date, :class => 'datepicker' %>
   <%= form.submit 'Add Effort' %>
 <% end %>
 

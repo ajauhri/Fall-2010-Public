@@ -26,34 +26,38 @@ describe Effort do
   end
 
   it "should set a negative effort value to zero" do
-   effort = Factory.create(:negative_effort_value,
-     :deliverable => Factory.build(:effort_deliverable))
+   effort = Factory.create(:negative_effort_value)
    effort.value.should == 0
   end
 
-describe Effort do
+describe " for project, phase, deliverable shall be updated after effort creation" do
   
   before(:all) do
-    @effort_project = Factory.build(:effort_project)
-    @effort_project_phase = Factory.build(:effort_project_phase)
-    @effort_delvierable =  Factory.build(:effort_deliverable)
-    @testing_total_effort = Factory.build(:testing_total_effort)
+    
+    @testing_total_effort = Factory.create(:testing_total_effort)
+    @deliverable_effort_init = @testing_total_effort.deliverable.actual_effort
+  @project_phase_effort_init = @testing_total_effort.deliverable.project_phase.actual_effort
+  @project_effort_init = @testing_total_effort.deliverable.project_phase.project.actual_effort
+    @testing_total_effort2 = Factory.create(:testing_total_effort2, :deliverable => @testing_total_effort.deliverable)
+  
   end
   
-  it "should update project total effort" do
-  #@effort_project.value.should == @testing_total_effort.value
-end
-
-
-it "should update project phases total effort" do
-
-#@effort_project_phase.value.should == @testing_total_effort.value
-end
-
-
-it "should update deliverable effort" do
-
-#@effort_deliverable.value.should == @testing_total_effort.value
-end
-end
+   it "should update project total effort" do  
+     @project_effort_init == @testing_total_effort.value
+    @testing_total_effort.deliverable.project_phase.project.actual_effort.should == @deliverable_effort_init + @testing_total_effort2.value
+  end
+    
+        
+        it "should update project phases total effort" do
+           @project_phase_effort_init == @testing_total_effort.value
+           @testing_total_effort.deliverable.project_phase.actual_effort.should == @deliverable_effort_init + @testing_total_effort2.value
+        end
+        
+        
+        it "should update deliverable effort" do
+             @deliverable_effort_init.should == @testing_total_effort.value
+            @testing_total_effort.deliverable.actual_effort.should == @deliverable_effort_init + @testing_total_effort2.value
+           
+        end
+  end
 end

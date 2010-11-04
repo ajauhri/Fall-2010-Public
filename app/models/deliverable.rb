@@ -50,8 +50,10 @@ protected
 
 
   def update_all_estimated_effort
-   #self.project_phase.update(:total_estimated_effort => estimated_effort)
-    #     self.project.update(:value => value)
+   if self.project_phase and self.project_phase.project
+    self.project_phase.total_estimated_effort += estimated_effort
+    self.project_phase.project.total_estimated_effort += estimated_effort
+  end
   end
 
 
