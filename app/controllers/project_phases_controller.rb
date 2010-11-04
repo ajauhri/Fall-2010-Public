@@ -49,7 +49,6 @@ class ProjectPhasesController < ApplicationController
     
     # Probably there is a better way to do this, using associations, nested forms.
     @project_phase.project_id=session[:current_project]
-    
     respond_to do |format|
       if @project_phase.save
         @project_phases = ProjectPhase.find_all_by_project_id(@project_phase.project_id, :order => :sequence)

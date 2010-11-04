@@ -115,14 +115,16 @@ end
 
       it "assigns the requested deliverables as @deliverable" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => true))
+        stub_project_phase_and_project
         put :update, :id => "1"
         assigns[:deliverable].should equal(mock_deliverable)
       end
 
       it "redirects to the deliverables" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => true))
+        stub_project_phase_and_project
         put :update, :id => "1"
-        response.should redirect_to(deliverablse_url(mock_deliverable))
+        response.should redirect_to(project_url(@project))
       end
     end
 
