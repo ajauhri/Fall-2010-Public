@@ -72,7 +72,6 @@
 
 .dataTables_paginate {
 	width: 44px;
-	* width: 50px;
 	float: right;
 	text-align: right;
 }
@@ -156,6 +155,16 @@ table.datatable td {
 table.datatable td.center {
 	text-align: center;
 }
+
+table.datatable tr:last-child td:first-child {
+-moz-border-radius-bottomleft: 1em;
+-webkit-border-bottom-left-radius: 1em;
+border-bottom-left-radius: 1em;}
+
+table.datatable tr:last-child td:last-child {
+-moz-border-radius-bottomright: 1em;
+-webkit-border-bottom-right-radius: 1em;
+border-bottom-right-radius: 1em}
 
 
 
