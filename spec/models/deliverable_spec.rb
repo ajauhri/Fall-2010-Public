@@ -85,4 +85,31 @@ describe Deliverable, "estimating based upon matching type and complexity" do
     estimates[:min_rate].should equal(2)
     estimates[:avg_rate].should >=4
   end
+
+  describe "should update project, phase total_estimated_effort" do
+
+  
+    before(:all) do
+
+      @testing_deliverable = Factory.create(:effort_deliverable)
+      @phase_init = @testing_deliverable.project_phase.total_estimated_effort
+      @project_init = @testing_deliverable.project_phase.project.total_estimated_effort
+      @testing_deliverable2 = Factory.create(:effort_deliverable2, :project_phase => @testing_deliverable.project_phase)
+
+    end
+
+     it "should update project total estimated effort" do  
+      @project_init.should == @testing_deliverable.estimated_effort
+     @testing_deliverable.project_phase.project.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+    end
+
+
+          it "should update project phases total estimated effort" do
+           @phase_init.should == @testing_deliverable.estimated_effort
+           @testing_deliverable.project_phase.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+          end
+
+
+    end
+
 end

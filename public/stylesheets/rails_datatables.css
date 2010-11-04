@@ -72,7 +72,6 @@
 
 .dataTables_paginate {
 	width: 44px;
-	* width: 50px;
 	float: right;
 	text-align: right;
 }
@@ -112,6 +111,8 @@ table.datatable {
 	width: 100%;
 
     text-align: left;
+
+    -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
@@ -119,7 +120,6 @@ table.datatable {
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     border-spacing: 0;
     color: #FFFFFF;
-    background: #EEEEEE;
 }
 
 table.datatable thead th {
@@ -127,7 +127,6 @@ table.datatable thead th {
 	background: #015666;
 	font-weight: bold;
 	cursor: pointer;
-	* cursor: hand;
 }
 
 table.datatable thead #HeaderLeft {
@@ -146,9 +145,7 @@ table.datatable tfoot th {
 	font-weight: bold;
 }
 
-table.datatable tr.heading2 td {
-	border-bottom: 1px solid #aaa;
-}
+
 
 table.datatable td {
 	padding: 3px 10px;
@@ -158,6 +155,16 @@ table.datatable td {
 table.datatable td.center {
 	text-align: center;
 }
+
+table.datatable tr:last-child td:first-child {
+-moz-border-radius-bottomleft: 1em;
+-webkit-border-bottom-left-radius: 1em;
+border-bottom-left-radius: 1em;}
+
+table.datatable tr:last-child td:last-child {
+-moz-border-radius-bottomright: 1em;
+-webkit-border-bottom-right-radius: 1em;
+border-bottom-right-radius: 1em}
 
 
 
@@ -193,44 +200,11 @@ table.datatable thead th.sorting_desc_disabled {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */
-table.display tr.odd.gradeA {
-	background-color: #ddffdd;
-}
-
-table.display tr.even.gradeA {
-	background-color: #eeffee;
-}
-
-table.display tr.odd.gradeC {
-	background-color: #ddddff;
-}
-
-table.display tr.even.gradeC {
-	background-color: #eeeeff;
-}
-
-table.display tr.odd.gradeX {
-	background-color: #ffdddd;
-}
-
-table.display tr.even.gradeX {
-	background-color: #ffeeee;
-}
-
-table.display tr.odd.gradeU {
-	background-color: #ddd;
-}
-
-table.display tr.even.gradeU {
-	background-color: #eee;
-}
-
-
-tr.odd {
+table.datatable tr.odd {
 	background-color: #E2E4FF;
 }
 
-tr.even {
+table.datatable tr.even {
 	background-color: white;
 }
 
@@ -307,7 +281,6 @@ td.details {
 	padding: 2px 5px;
 	margin: 0 3px;
 	cursor: pointer;
-	*cursor: hand;
 }
 
 .paging_full_numbers span.paginate_button {
@@ -360,111 +333,7 @@ tr.even td.sorting_3 {
 }
 
 
-/* For the Conditional-CSS grading rows */
-/*
- 	Colour calculations (based off the main row colours)
-  Level 1:
-		dd > c4
-		ee > d5
-	Level 2:
-	  dd > d1
-	  ee > e2
- */
-tr.odd.gradeA td.sorting_1 {
-	background-color: #c4ffc4;
-}
 
-tr.odd.gradeA td.sorting_2 {
-	background-color: #d1ffd1;
-}
-
-tr.odd.gradeA td.sorting_3 {
-	background-color: #d1ffd1;
-}
-
-tr.even.gradeA td.sorting_1 {
-	background-color: #d5ffd5;
-}
-
-tr.even.gradeA td.sorting_2 {
-	background-color: #e2ffe2;
-}
-
-tr.even.gradeA td.sorting_3 {
-	background-color: #e2ffe2;
-}
-
-tr.odd.gradeC td.sorting_1 {
-	background-color: #c4c4ff;
-}
-
-tr.odd.gradeC td.sorting_2 {
-	background-color: #d1d1ff;
-}
-
-tr.odd.gradeC td.sorting_3 {
-	background-color: #d1d1ff;
-}
-
-tr.even.gradeC td.sorting_1 {
-	background-color: #d5d5ff;
-}
-
-tr.even.gradeC td.sorting_2 {
-	background-color: #e2e2ff;
-}
-
-tr.even.gradeC td.sorting_3 {
-	background-color: #e2e2ff;
-}
-
-tr.odd.gradeX td.sorting_1 {
-	background-color: #ffc4c4;
-}
-
-tr.odd.gradeX td.sorting_2 {
-	background-color: #ffd1d1;
-}
-
-tr.odd.gradeX td.sorting_3 {
-	background-color: #ffd1d1;
-}
-
-tr.even.gradeX td.sorting_1 {
-	background-color: #ffd5d5;
-}
-
-tr.even.gradeX td.sorting_2 {
-	background-color: #ffe2e2;
-}
-
-tr.even.gradeX td.sorting_3 {
-	background-color: #ffe2e2;
-}
-
-tr.odd.gradeU td.sorting_1 {
-	background-color: #c4c4c4;
-}
-
-tr.odd.gradeU td.sorting_2 {
-	background-color: #d1d1d1;
-}
-
-tr.odd.gradeU td.sorting_3 {
-	background-color: #d1d1d1;
-}
-
-tr.even.gradeU td.sorting_1 {
-	background-color: #d5d5d5;
-}
-
-tr.even.gradeU td.sorting_2 {
-	background-color: #e2e2e2;
-}
-
-tr.even.gradeU td.sorting_3 {
-	background-color: #e2e2e2;
-}
 
 
 /*

@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe LifecyclePhasesController do
+setup :activate_authlogic
+  
+  #integrate_views
 
-  setup :activate_authlogic
-  integrate_views
+  def mock_lifecycle_phase(stubs={})
+    @mock_lifecycle_phase ||= mock(LifecyclePhase, stubs)
+  end
+
 
   before(:all) do
     @lifecycle = Factory.create(:lifecycle)
@@ -26,12 +31,7 @@ describe LifecyclePhasesController do
      #LifecyclePhase.where(["lifecycle_id = ?", Lifecycle.first]).size.should == 9
   end
 
-  
 
-
-  def mock_lifecycle_phase(stubs={})
-    @mock_lifecycle_phase ||= mock(LifecyclePhase, stubs)
-  end
 
   describe "GET index" do
     it "assigns all lifecycle_phases as @lifecycle_phases" do
@@ -101,19 +101,19 @@ describe LifecyclePhasesController do
 
     describe "with valid params" do
       it "updates the requested lifecycle_phase" do
-        LifecyclePhase.should_receive(:find).with("37").returns(mock_lifecycle_phase)
+        LifecyclePhase.should_receive(:find).with("37").and_return(mock_lifecycle_phase)
         mock_lifecycle_phase.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :lifecycle_phase => {:these => 'params'}
       end
 
       it "assigns the requested lifecycle_phase as @lifecycle_phase" do
-        LifecyclePhase.stubs(:find).returns(mock_lifecycle_phase(:update_attributes => true))
+        LifecyclePhase.stub!(:find).and_return(mock_lifecycle_phase(:update_attributes => true))
         put :update, :id => "1"
         assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
       end
 
       it "redirects to the lifecycle_phase" do
-        LifecyclePhase.stubs(:find).returns(mock_lifecycle_phase(:update_attributes => true))
+        LifecyclePhase.should_receive(:find).once.with({'some' => 'params'}).and_return(mock_lifecycle_phase(:update_attributes => true))
         put :update, :id => "1"
         response.should redirect_to(lifecycle_phase_url(mock_lifecycle_phase))
       end
@@ -121,19 +121,19 @@ describe LifecyclePhasesController do
 
     describe "with invalid params" do
       it "updates the requested lifecycle_phase" do
-        LifecyclePhase.should_receive(:find).with("37").returns(mock_lifecycle_phase)
+        LifecyclePhase.should_receive(:find).with("37").and_return(mock_lifecycle_phase)
         mock_lifecycle_phase.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :lifecycle_phase => {:these => 'params'}
       end
 
       it "assigns the lifecycle_phase as @lifecycle_phase" do
-        LifecyclePhase.stubs(:find).returns(mock_lifecycle_phase(:update_attributes => false))
+        LifecyclePhase.stub!(:find).and_return(mock_lifecycle_phase(:update_attributes => false))
         put :update, :id => "1"
         assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
       end
 
       it "re-renders the 'edit' template" do
-        LifecyclePhase.stubs(:find).returns(mock_lifecycle_phase(:update_attributes => false))
+        LifecyclePhase.stub!(:find).and_return(mock_lifecycle_phase(:update_attributes => false))
         put :update, :id => "1"
         response.should render_template('edit')
       end
@@ -143,7 +143,7 @@ describe LifecyclePhasesController do
 
   describe "DELETE destroy" do
     it "destroys the requested lifecycle_phase" do
-      LifecyclePhase.should_receive(:find).with("37").returns(mock_lifecycle_phase)
+      LifecyclePhase.should_receive(:find).with("37").and_return(mock_lifecycle_phase)
       mock_lifecycle_phase.should_receive(:destroy)
       delete :destroy, :id => "37"
     end
