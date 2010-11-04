@@ -1,6 +1,8 @@
 # Handles phase functionality
 class ProjectPhasesController < ApplicationController
  # Lists all ProjectPhases from the DB
+
+=begin
   def index
     @project_phases = ProjectPhase.all
 
@@ -9,7 +11,7 @@ class ProjectPhasesController < ApplicationController
       format.xml  { render :xml => @project_phases }
     end
   end
-
+=end
 
   # Lists details of a particular ProjectPhase. Params required: ProjectPhase.id
 
@@ -18,7 +20,7 @@ class ProjectPhasesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @project_phase }
+      #format.xml  { render :xml => @project_phase }
     end
   end
 
@@ -30,7 +32,7 @@ class ProjectPhasesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @project_phase }
+      #format.xml  { render :xml => @project_phase }
     end
   end
 
@@ -47,18 +49,16 @@ class ProjectPhasesController < ApplicationController
   def create
     @project_phase = ProjectPhase.new(params[:project_phase])
     
-    # Probably there is a better way to do this, using associations, nested forms.
-    @project_phase.project_id=session[:current_project]
     respond_to do |format|
       if @project_phase.save
         @project_phases = ProjectPhase.find_all_by_project_id(@project_phase.project_id, :order => :sequence)
         format.html { render :partial => @project_phases }
         #format.html { redirect_to(@project_phase.project, :notice => 'Project phase was successfully created.') }
         format.js
-        format.xml  { render :xml => @project_phase, :status => :created, :location => @project_phase }
+        #format.xml  { render :xml => @project_phase, :status => :created, :location => @project_phase }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -71,12 +71,12 @@ class ProjectPhasesController < ApplicationController
     @project_phase = ProjectPhase.find(params[:id])
 
     respond_to do |format|
-      if @project_phase.update_attributes(params[:project_phases])
-        format.html { redirect_to(@project_phase, :notice => 'Project phase was successfully updated.') }
-        format.xml  { head :ok }
+      if @project_phase.update_attributes(params[:project_phase])
+        format.html { redirect_to(@project_phase.project, :notice => 'Project phase was successfully updated.') }
+        #format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -90,7 +90,7 @@ class ProjectPhasesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(@project_phase.project) }
-      format.xml  { head :ok }
+      #format.xml  { head :ok }
     end
   end
 
