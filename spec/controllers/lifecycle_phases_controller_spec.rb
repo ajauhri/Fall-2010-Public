@@ -6,16 +6,8 @@ setup :activate_authlogic
   #integrate_views
 
   def mock_lifecycle_phase(stubs={})
-    @mock_lifecycle_phase ||= mock(LifecyclePhase, stubs)
+    @mock_lifecycle_phase ||= mock_model(LifecyclePhase, stubs)
   end
-
-
-  before(:all) do
-    @lifecycle = Factory.create(:lifecycle)
-    4.times do 
-      Factory(:lifecycle_XP_phase, :lifecycle => @lifecycle )
-    end
-   end
   
   before :each do
     logout_user
@@ -35,15 +27,15 @@ setup :activate_authlogic
 
   describe "GET index" do
     it "assigns all lifecycle_phases as @lifecycle_phases" do
-      LifecyclePhase.stubs(:find).with(:all).returns([mock_lifecycle_phase])
+      LifecyclePhase.stub!(:find).with(any_args()).and_return(mock_lifecycle_phase)
       get :index
-      assigns[:lifecycle_phases].should == [mock_lifecycle_phase]
+      assigns[:lifecycle_phases].should == mock_lifecycle_phase
     end
   end
 
   describe "GET show" do
     it "assigns the requested lifecycle_phase as @lifecycle_phase" do
-      LifecyclePhase.stubs(:find).with("37").returns(mock_lifecycle_phase)
+      LifecyclePhase.stub!(:find).with("37").and_return(mock_lifecycle_phase)
       get :show, :id => "37"
       assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
     end
@@ -107,15 +99,19 @@ setup :activate_authlogic
       end
 
       it "assigns the requested lifecycle_phase as @lifecycle_phase" do
-        LifecyclePhase.stub!(:find).and_return(mock_lifecycle_phase(:update_attributes => true))
-        put :update, :id => "1"
+        LifecyclePhase.stub!(:find).with(any_args()).and_return(mock_lifecycle_phase)
+        @mock_lifecycle_phase.should_receive(:update_attributes).once.with({'these' => 'params'}).and_return(true)
+        put :update, :id => "1", :lifecycle_phase => {:these => 'params'}
         assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
+        flash[:notice] == "LfecyclePhase was successfully updated."
+        response.should redirect_to(lifecycle_phase_url(@mock_lifecycle_phase))
       end
 
       it "redirects to the lifecycle_phase" do
-        LifecyclePhase.should_receive(:find).once.with({'some' => 'params'}).and_return(mock_lifecycle_phase(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(lifecycle_phase_url(mock_lifecycle_phase))
+        LifecyclePhase.stub!(:find).with(any_args()).and_return(mock_lifecycle_phase)
+        @mock_lifecycle_phase.should_receive(:update_attributes).once.with({'these' => 'params'}).and_return(true)
+        put :update, :id => "1", :lifecycle_phase => {:these => 'params'}
+        response.should redirect_to(lifecycle_phase_url(@mock_lifecycle_phase))
       end
     end
 

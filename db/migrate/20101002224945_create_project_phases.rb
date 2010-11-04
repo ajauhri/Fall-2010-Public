@@ -4,8 +4,8 @@ class CreateProjectPhases < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.integer :sequence
-      t.decimal :total_estimated_effort
-
+      t.decimal :total_estimated_effort, :default => 0.0
+      t.decimal :actual_effort, :default => 0.0
       t.timestamps
     end
   end
