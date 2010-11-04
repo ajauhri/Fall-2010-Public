@@ -7,7 +7,7 @@ class AddTestDataForProjectPhases < ActiveRecord::Migration
     project_rails = Project.find_by_name("Project Rails")
     project_rails.create_phases
 
-  end 
+  end
 
   def self.down
     ProjectPhase.delete_all
