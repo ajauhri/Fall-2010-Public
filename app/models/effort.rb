@@ -13,7 +13,6 @@ class Effort < ActiveRecord::Base
   
   def update_all_effort
     if self.deliverable and self.deliverable.project_phase
-     
      self.deliverable.actual_effort += value
      self.deliverable.project_phase.actual_effort += value
      self.deliverable.project_phase.project.actual_effort += value

@@ -22,6 +22,10 @@
     <%= f.text_field :total_estimated_effort %>
   </p>
   <p>
+    <%= f.label :lifecycle_phase_id %><br />
+    <%=h @project_phase.lifecycle_phase.name  %>
+  </p>
+  <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
