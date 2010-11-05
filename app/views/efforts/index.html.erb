@@ -10,8 +10,16 @@
   <th id="HeaderRight"></th>
   <% for effort in @efforts %>
     <tr>
-      <% deliverable = Deliverable.find_by_id(effort.deliverable_id) %>
-      <td><%= deliverable.project_phase.project.name %></td>
+      <!-- % deliverable = Deliverable.find_by_id(effort.deliverable_id) %-->
+
+
+      <% puts effort %>
+      <% puts effort.deliverable %>
+      <% puts effort.deliverable.project_phase %>
+      <% puts effort.deliverable.project_phase.project %>
+
+        <%= deliverable = effort.deliverable %>
+      <td><!--%= deliverable.project_phase.project.name %--></td>
       <td><%= deliverable.project_phase.name %> </td>
       <td><%=  deliverable.name %></td>
       <td><%=  effort.value.round(1) %></td>
