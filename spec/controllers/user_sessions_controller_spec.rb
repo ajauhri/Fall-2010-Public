@@ -42,5 +42,11 @@ describe UserSessionsController do
     post 'destroy'
     response.should redirect_to login_path
   end
-
+  
+  it 'should check for a intruder and redirect to login_path' do
+    login_user
+    post :destroy, :id => 'intruder'
+    flash[:error].should == "You're not allowed in here!"
+    response.should redirect_to login_path
+  end
 end

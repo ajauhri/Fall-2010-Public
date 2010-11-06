@@ -23,4 +23,5 @@ describe Project do
     @project.lifecycle_id = @lifecycle.id
     @project.should be_valid
   end
+
 end

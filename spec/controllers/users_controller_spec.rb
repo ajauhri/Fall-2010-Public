@@ -88,6 +88,12 @@ describe UsersController do
         put :update, :id => "1"
         response.should redirect_to(root_url)
       end
+      
+      it "update_attributes returns false" do
+        controller.stub!(:current_user).and_return(mock_user(:update_attributes =>false))
+      put :update, :id => "1"
+      response.should render_template('edit')
+    end
     end
   end
 
