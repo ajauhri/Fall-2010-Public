@@ -77,4 +77,10 @@ describe ProjectsController do
     response.should redirect_to(projects_url)
     Project.exists?(project.id).should be_false
   end
+  
+  it "should use sort method for phases within a project" do
+    ProjectPhase.should_receive(:update_all).with(any_args()).twice.and_return(true)
+    put :sort, :phaseslist => {:id => 1, id => 2}
+  end
+  
 end

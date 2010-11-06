@@ -45,6 +45,15 @@ describe UsersController do
         response.should redirect_to(projects_url)
       end
     end
+    
+    describe "with not as admin" do
+      it "should redirect to logout as intruder" do
+      controller.stub!(:is_admin).and_return(false)
+      post :create, :user => {:user => 'params'}  
+      response.should redirect_to(logout_url(:id => "intruder"))
+      end
+      end
+          
   end
 
     describe "with invalid params" do
@@ -63,6 +72,7 @@ describe UsersController do
       end
     end
 
+    
   
 
   describe "PUT update" do
@@ -120,4 +130,17 @@ describe UsersController do
         response.should redirect_to(root_url)
       end
     end
+    
+    describe " public methods" do
+      it "should return whether user role is admin" do
+        controller.should_receive(:current_user).with(any_args()).and_return(mock_user)
+        @mock_user.should_receive(:role).once.and_return("Admin")
+        return_value = controller.is_admin
+        return_value.should == true
+      end
+      
+ 
+        end
+    
+    
 end
