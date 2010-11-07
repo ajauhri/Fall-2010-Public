@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">Sun Nov 07 01:11:32 -0800 2010</dd>
+			<dd class="modified-date">Sun Nov 07 12:41:21 -0800 2010</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -43,7 +43,28 @@
 		
 		<div class="description">
 			<h2>Description</h2>
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: deliverables
+</p>
+<pre>
+ id                        :integer         not null, primary key
+ name                      :string(255)
+ description               :text
+ deliverable_type          :string(255)
+ unit_of_measure           :string(255)
+ complexity                :string(255)
+ estimated_size            :decimal(, )
+ estimated_effort          :decimal(, )     default(0.0)
+ estimated_production_rate :decimal(, )
+ actual_size               :decimal(, )
+ actual_effort             :decimal(, )     default(0.0)
+ actual_production_rate    :decimal(, )
+ project_phase_id          :integer
+ created_at                :datetime
+ updated_at                :datetime
+</pre>
+<p>
 Model class for deliverables table. Associations => belongs_to
 :project_phase, has_many :efforts
 </p>

@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: typical_deliverables
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  description               :text
+#  deliverable_type_id       :integer
+#  complexity                :string(255)
+#  estimated_size            :decimal(, )
+#  estimated_effort          :decimal(, )
+#  estimated_production_rate :decimal(, )
+#  lifecycle_phase_id        :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#
 # Model class for typical_deliverable table, Associations => belongs_to :deliverable_type, :lifecycle_phase
 
 class TypicalDeliverable < ActiveRecord::Base
@@ -42,3 +58,5 @@ protected
   end
 
 end
+
+

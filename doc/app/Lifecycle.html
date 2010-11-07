@@ -176,7 +176,18 @@
 		<h1 class="class">Lifecycle</h1>
 
 		<div id="description">
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: lifecycles
+</p>
+<pre>
+ id          :integer         not null, primary key
+ name        :string(255)
+ description :text
+ created_at  :datetime
+ updated_at  :datetime
+</pre>
+<p>
 Model class for lifecycles table. Associations => has_many :projects,
 lifecycle_phases
 </p>

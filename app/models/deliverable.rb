@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: deliverables
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  description               :text
+#  deliverable_type          :string(255)
+#  unit_of_measure           :string(255)
+#  complexity                :string(255)
+#  estimated_size            :decimal(, )
+#  estimated_effort          :decimal(, )     default(0.0)
+#  estimated_production_rate :decimal(, )
+#  actual_size               :decimal(, )
+#  actual_effort             :decimal(, )     default(0.0)
+#  actual_production_rate    :decimal(, )
+#  project_phase_id          :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#
 # Model class for deliverables table. Associations => belongs_to :project_phase, has_many :efforts
 class Deliverable < ActiveRecord::Base
   belongs_to :project_phase

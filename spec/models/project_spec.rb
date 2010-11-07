@@ -36,3 +36,18 @@ describe Project do
   end
 
 end
+# == Schema Information
+#
+# Table name: projects
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  description            :text
+#  total_estimated_effort :decimal(, )     default(0.0)
+#  status                 :string(255)     default("Active")
+#  actual_effort          :decimal(, )     default(0.0)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  lifecycle_id           :integer
+#
+

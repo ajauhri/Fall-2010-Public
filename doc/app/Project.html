@@ -185,7 +185,22 @@
 		<h1 class="class">Project</h1>
 
 		<div id="description">
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: projects
+</p>
+<pre>
+ id                     :integer         not null, primary key
+ name                   :string(255)
+ description            :text
+ total_estimated_effort :decimal(, )     default(0.0)
+ status                 :string(255)     default(&quot;Active&quot;)
+ actual_effort          :decimal(, )     default(0.0)
+ created_at             :datetime
+ updated_at             :datetime
+ lifecycle_id           :integer
+</pre>
+<p>
 Model class for projects table. Associations => belongs_to :lifecycle,
 has_many :project_phases
 </p>
@@ -239,14 +254,14 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 					<div class="method-source-code"
 						id="create-phases-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/project.rb, line 19</span>
-19: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_phases</span>
-20:    <span class="ruby-ivar">@lifecycle_phases</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find_all_by_lifecycle_id</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lifecycle_id</span>)
-21:    <span class="ruby-ivar">@lifecycle_phases</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lp</span><span class="ruby-operator">|</span>
-22:      
-23:     <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">create_from_lifecycle_phase</span>(<span class="ruby-identifier">lp</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>)
-24:    <span class="ruby-keyword kw">end</span>
-25:  <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/project.rb, line 33</span>
+33: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_phases</span>
+34:    <span class="ruby-ivar">@lifecycle_phases</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find_all_by_lifecycle_id</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lifecycle_id</span>)
+35:    <span class="ruby-ivar">@lifecycle_phases</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lp</span><span class="ruby-operator">|</span>
+36:      
+37:     <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">create_from_lifecycle_phase</span>(<span class="ruby-identifier">lp</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>)
+38:    <span class="ruby-keyword kw">end</span>
+39:  <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

@@ -24,6 +24,7 @@ group :development do
   gem 'rspec', '1.3.1'
   gem 'rspec-rails'
   gem 'acts_as_list'
+  gem 'annotate'
  
 end
 

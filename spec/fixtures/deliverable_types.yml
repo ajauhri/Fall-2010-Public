@@ -7,3 +7,15 @@ one:
 two:
   name: MyString
   unit_of_measure: MyString
+
+# == Schema Information
+#
+# Table name: deliverable_types
+#
+#  id              :integer         not null, primary key
+#  name            :string(255)
+#  unit_of_measure :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+

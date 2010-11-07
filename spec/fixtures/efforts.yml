@@ -7,3 +7,17 @@ one:
 two:
   value: 1.5
   username: MyString
+
+# == Schema Information
+#
+# Table name: efforts
+#
+#  id             :integer         not null, primary key
+#  value          :decimal(, )     default(0.0)
+#  effort_date    :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deliverable_id :integer
+#  user_id        :integer
+#
+

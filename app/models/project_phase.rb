@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: project_phases
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  description            :text
+#  sequence               :integer
+#  total_estimated_effort :decimal(, )     default(0.0)
+#  actual_effort          :decimal(, )     default(0.0)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  project_id             :integer
+#  lifecycle_phase_id     :integer
+#
 # Model class for project_phases table, Associations => belongs_to :project, :lifecycle_phase, has_many :deliverables
 class ProjectPhase < ActiveRecord::Base
   after_create :create_deliverables
@@ -36,3 +51,6 @@ class ProjectPhase < ActiveRecord::Base
     end
   end
 end
+
+
+

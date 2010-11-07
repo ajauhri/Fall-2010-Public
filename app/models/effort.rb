@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: efforts
+#
+#  id             :integer         not null, primary key
+#  value          :decimal(, )     default(0.0)
+#  effort_date    :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deliverable_id :integer
+#  user_id        :integer
+#
 # Model class for efforts table. Associations: belongs_to :user, :deliverable
 class Effort < ActiveRecord::Base
   belongs_to :user
@@ -28,3 +40,4 @@ class Effort < ActiveRecord::Base
     end
   end
 end
+

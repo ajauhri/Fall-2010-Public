@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">Mon Oct 25 19:50:10 -0700 2010</dd>
+			<dd class="modified-date">Sun Nov 07 12:42:53 -0800 2010</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -43,7 +43,22 @@
 		
 		<div class="description">
 			<h2>Description</h2>
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: users
+</p>
+<pre>
+ id                :integer         not null, primary key
+ username          :string(255)
+ email             :string(255)
+ role              :string(255)
+ crypted_password  :string(255)
+ password_salt     :string(255)
+ persistence_token :string(255)
+ created_at        :datetime
+ updated_at        :datetime
+</pre>
+<p>
 Model class for users table. Associations => has_many :efforts
 </p>
 
