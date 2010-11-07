@@ -28,6 +28,7 @@ class ProjectPhase < ActiveRecord::Base
     end
   end
 
+# For creating typical deliverables in the project phase
   def create_deliverables
     @typical_deliverables = TypicalDeliverable.find_all_by_lifecycle_phase_id(self.lifecycle_phase_id)
     @typical_deliverables.each do |td|

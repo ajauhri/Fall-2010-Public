@@ -1,3 +1,5 @@
+# Model class for deliverable_types table. Associations => has_many :typical_deliverables
+
 class DeliverableType < ActiveRecord::Base
   has_many :typical_deliverables
 

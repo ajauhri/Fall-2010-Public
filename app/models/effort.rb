@@ -9,8 +9,8 @@ class Effort < ActiveRecord::Base
   after_save :update_all_effort
   
   private
-  # Checks for the validity of a deliverable to log effort
   
+  # Updates efforts in deliverable, project_phase, and project
   def update_all_effort
     if self.deliverable and self.deliverable.project_phase
      self.deliverable.actual_effort += value
@@ -20,7 +20,8 @@ class Effort < ActiveRecord::Base
     end
   end
     
-    
+  # Checks for the validity of a deliverable to log effort
+     
   def validify_effort
     if value < 0.0
       self.value = 0.0

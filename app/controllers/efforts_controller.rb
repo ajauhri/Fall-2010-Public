@@ -2,6 +2,8 @@
 class EffortsController < ApplicationController
   
   # Display most recently logged effort and autopopulate select field with most recent
+  #  Input params: None
+  #  Returns     : Returns a list of all efforts
   def index
     @projects     = Project.find(:all)
     @phases       = ProjectPhase.find(:all)
@@ -47,6 +49,9 @@ class EffortsController < ApplicationController
 =end
 
   # Updates an effort log if it exists, otherwise create new effort log
+  #  Input params: All/required params related to a Effort and Deliverable.id need to be passed
+  #  Returns     : A hash of the newly created Effort
+  
   def create
     d_id  = params[:effort][:deliverable_id]
     value = params[:effort][:value].to_f
@@ -79,6 +84,9 @@ class EffortsController < ApplicationController
 =end
   
   # Removes an effort log
+  #  Input params: Effort.id
+  #  Returns     : Redirects to the index page of all efforts
+  
   def destroy
     @effort = Effort.find(params[:id])
     @effort.destroy

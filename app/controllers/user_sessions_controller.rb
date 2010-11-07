@@ -3,12 +3,19 @@ class UserSessionsController < ApplicationController
 
   before_filter :require_user, :except => ['new', 'create']
 
+  #  Create a new user session
+   #  Input params: None
+   #  Returns     : Returns a hash of the user session
   def new
     if current_user
       redirect_to  root_url
     end
     @user_session = UserSession.new
   end
+
+  #  Creates a UserSession record. 
+   #  Input params: All/required params related to a UserSession need to be passed
+   #  Returns     : A hash of the newly created UserSession
 
   def create
     @user_session = UserSession.new(params[:user_session])
@@ -19,6 +26,11 @@ class UserSessionsController < ApplicationController
       render :action => 'new'
     end
   end
+  
+   #  Deletes a UserSession. 
+   #  Input params: UserSession
+   #  Returns     : Redirects to the login page
+  
 
   def destroy
     @user_session = UserSession.find

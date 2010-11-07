@@ -22,6 +22,16 @@
 <body class="module">
 
 	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -52,9 +62,9 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#M000044">#display_links</a></li>
+					<li><a href="#method-i-display_links">#display_links</a></li>
 					
-					<li><a href="#M000046">#get_link</a></li>
+					<li><a href="#method-i-get_link">#get_link</a></li>
 					
 				</ul>
 			</div>
@@ -96,7 +106,15 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./Complexity.html">Complexity</a></li>
+				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
+				
+					<li><a href="./DeliverableType.html">DeliverableType</a></li>
+				
+					<li><a href="./DeliverableTypesController.html">DeliverableTypesController</a></li>
+				
+					<li><a href="./DeliverableTypesHelper.html">DeliverableTypesHelper</a></li>
 				
 					<li><a href="./DeliverablesController.html">DeliverablesController</a></li>
 				
@@ -116,6 +134,10 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
+					<li><a href="./PetController.html">PetController</a></li>
+				
+					<li><a href="./PetHelper.html">PetHelper</a></li>
+				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -127,6 +149,12 @@
 					<li><a href="./ProjectsController.html">ProjectsController</a></li>
 				
 					<li><a href="./ProjectsHelper.html">ProjectsHelper</a></li>
+				
+					<li><a href="./TypicalDeliverable.html">TypicalDeliverable</a></li>
+				
+					<li><a href="./TypicalDeliverablesController.html">TypicalDeliverablesController</a></li>
+				
+					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
 				
@@ -172,7 +200,7 @@ application.
 
 		
 			<div id="display-links-method" class="method-detail ">
-				<a name="M000044"></a>
+				<a name="method-i-display_links"></a>
 
 				<div class="method-heading">
 				
@@ -208,11 +236,13 @@ Helper to display links in tabs format or text format
 				</div>
 
 				
+
+				
 			</div>
 
 		
 			<div id="get-link-method" class="method-detail ">
-				<a name="M000046"></a>
+				<a name="method-i-get_link"></a>
 
 				<div class="method-heading">
 				
@@ -238,12 +268,14 @@ Helper to create a link_to call
 17:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">controller</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">action</span>
 18:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;&lt;a class = 'sel'&gt;#{string}&lt;/a&gt;&quot;</span>
 19:     <span class="ruby-keyword kw">else</span>
-20:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">string</span>, <span class="ruby-identifier">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>
+20:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">string</span>, <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">controller</span>, <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>
 21:     <span class="ruby-keyword kw">end</span>
 22:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>

@@ -1,3 +1,5 @@
+# Model class for typical_deliverable table, Associations => belongs_to :deliverable_type, :lifecycle_phase
+
 class TypicalDeliverable < ActiveRecord::Base
  belongs_to :deliverable_type
  belongs_to :lifecycle_phase
@@ -13,6 +15,7 @@ class TypicalDeliverable < ActiveRecord::Base
 
   validates_inclusion_of :complexity, :in => Complexity.getValues
 
+# Returns the production rate
   def get_production_rate
     #if !estimated_size.nil? && !estimated_effort.nil? && estimated_size > 0 && estimated_effort > 0
       return estimated_effort / estimated_size
@@ -22,11 +25,15 @@ class TypicalDeliverable < ActiveRecord::Base
   end
 
 protected
+# Ensures estimate_size is not negative
+
   def estimated_size_should_be_positive
     if estimated_size.nil? || estimated_size <= 0
     errors.add(:estimated_size, 'should be positive')
     end
   end
+
+  # Ensures estimate_effort is not negative
 
   def estimated_effort_should_be_positive
         if estimated_effort.nil? || estimated_effort <= 0

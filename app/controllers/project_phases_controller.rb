@@ -1,6 +1,5 @@
-# Handles phase functionality
+# Handles project phase functionality
 class ProjectPhasesController < ApplicationController
- # Lists all ProjectPhases from the DB
 
 =begin
   def index
@@ -13,8 +12,10 @@ class ProjectPhasesController < ApplicationController
   end
 =end
 
-  # Lists details of a particular ProjectPhase. Params required: ProjectPhase.id
-
+   #  Provides a list with different fields of a particular project phase
+   #  Input params: ProjectPhase.id
+   #  Returns     : Returns a hash of all fields related to a ProjectPhase
+  
   def show
     @project_phase = ProjectPhase.find(params[:id])
 
@@ -25,8 +26,10 @@ class ProjectPhasesController < ApplicationController
   end
 
 
-  # Renders a new template with all fields required to create a ProjectPhase
 
+  #  Provides a list of all/required fields needed to create a ProjectPhase
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a project phase
   def new
     @project_phase = ProjectPhase.new
 
@@ -36,14 +39,19 @@ class ProjectPhasesController < ApplicationController
     end
   end
 
-   # Retrieves a ProjectPhase record. Params required: ProjectPhase.id
+  #  Provides a list of all/required fields of an existing ProjectPhase
+  #  Input params: ProjectPhase.id
+  #  Returns     : Returns a hash of fields and values of ProjectPhase
 
+  
   def edit
     @project_phase = ProjectPhase.find(params[:id])
   end
 
 
-  # Creates a ProjectPhase record. All params related to a ProjectPhase need to be passed
+  #  Creates a ProjectPhase record. 
+  #  Input params: All/required params related to a ProjectPhase need to be passed
+  #  Returns     : A hash of the newly created ProjectPhase and a confirmation
 
 
   def create
@@ -64,7 +72,9 @@ class ProjectPhasesController < ApplicationController
   end
 
 
-  # Update a ProjectPhase record. Params required: ProjectPhase.id
+  #  Updates a ProjectPhase record. 
+  #  Input params: ProjectPhase.id
+  #  Returns     : A hash of the newly created ProjectPhase and a confirmation 
 
 
   def update
@@ -82,8 +92,10 @@ class ProjectPhasesController < ApplicationController
   end
 
 
-  # Deletes a ProjectPhase record. Params required: ProjectPhase.id
-
+  #  Deletes a ProjectPhase record. 
+  #  Input params: ProjectPhase.id
+  #  Returns     : Redirects to the index page of all project phase
+  
   def destroy
     @project_phase = ProjectPhase.find(params[:id])
     @project_phase.destroy

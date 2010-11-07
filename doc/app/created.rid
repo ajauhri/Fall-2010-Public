@@ -1,1 +1,35 @@
-Sat, 09 Oct 2010 13:32:02 -0700
+Sun, 07 Nov 2010 01:17:31 -0800
+app/models/project_phase.rb	Sun, 07 Nov 2010 01:15:16 -0800
+app/models/lifecycle.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/helpers/deliverable_types_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/helpers/application_helper.rb	Thu, 28 Oct 2010 00:20:30 -0700
+app/controllers/lifecycle_phases_controller.rb	Sat, 06 Nov 2010 23:06:08 -0700
+app/helpers/user_sessions_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/helpers/pet_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/helpers/lifecycle_phases_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/controllers/user_sessions_controller.rb	Sat, 06 Nov 2010 23:46:44 -0700
+app/models/user.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/models/deliverable.rb	Sun, 07 Nov 2010 01:11:32 -0800
+app/helpers/efforts_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/controllers/deliverable_types_controller.rb	Sat, 06 Nov 2010 23:20:33 -0700
+app/helpers/users_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/controllers/typical_deliverables_controller.rb	Sat, 06 Nov 2010 23:25:49 -0700
+app/controllers/projects_controller.rb	Sat, 06 Nov 2010 23:16:42 -0700
+app/models/lifecycle_phase.rb	Sun, 07 Nov 2010 01:14:09 -0800
+app/models/deliverable_type.rb	Sun, 07 Nov 2010 01:12:29 -0800
+app/controllers/efforts_controller.rb	Sat, 06 Nov 2010 22:59:43 -0700
+app/controllers/application_controller.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/models/user_session.rb	Wed, 27 Oct 2010 19:34:09 -0700
+app/models/typical_deliverable.rb	Sun, 07 Nov 2010 01:16:49 -0800
+app/helpers/typical_deliverables_helper.rb	Thu, 28 Oct 2010 14:07:40 -0700
+app/controllers/users_controller.rb	Sat, 06 Nov 2010 23:38:07 -0700
+app/controllers/deliverables_controller.rb	Sat, 06 Nov 2010 22:56:52 -0700
+app/models/project.rb	Tue, 26 Oct 2010 19:37:20 -0700
+doc/README_FOR_APP	Mon, 25 Oct 2010 19:50:10 -0700
+app/models/effort.rb	Sun, 07 Nov 2010 01:13:46 -0800
+app/models/complexity.rb	Sun, 07 Nov 2010 01:53:12 -0700
+app/helpers/projects_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/helpers/project_phases_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/helpers/deliverables_helper.rb	Mon, 25 Oct 2010 19:50:10 -0700
+app/controllers/project_phases_controller.rb	Sat, 06 Nov 2010 23:13:13 -0700
+app/controllers/pet_controller.rb	Mon, 25 Oct 2010 19:50:10 -0700
