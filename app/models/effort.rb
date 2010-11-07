@@ -13,9 +13,11 @@ class Effort < ActiveRecord::Base
   # Checks for the validity of a deliverable to log effort
   
   def update_all_effort
-    self.deliverable.value += value
-    # self.project_phase.update(:value => value)
-    #     self.project.update(:value => value)
+    if self.deliverable
+      self.deliverable.value += value
+      self.deliverable.project_phase.value += value
+      self.deliverable.project_phase.project.value += value
+    end
   end
     
     
