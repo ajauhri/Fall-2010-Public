@@ -37,29 +37,46 @@ end
 Factory.define :effort_project, :class => Project do |p|
   p.name "Effort Project"
   p.lifecycle_id 10
+
 end
 
 Factory.define :effort_project_phase, :class => ProjectPhase do |p|
-  p.project_id {|l| l.association(:effort_project) }
+  p.project {|l| l.association(:effort_project) }
 end
 
 Factory.define :effort_deliverable, :class => Deliverable do |p|
-  p.name "Requirements Document"
-  p.deliverable_type "Requirements Document"
+  p.name "Document"
+  p.deliverable_type "Document"
   p.unit_of_measure "Pages"
-  p.complexity "HIGH"
-  p.actual_size 6
-  p.actual_effort 6
-  p.actual_production_rate 6
+  p.complexity "LOW"
   p.estimated_size 3
   p.estimated_effort 3
-  p.project_phase_id {|l| l.association(:effort_project_phase) }
+  p.project_phase {|l| l.association(:effort_project_phase) }
+end
+
+Factory.define :effort_deliverable2, :class => Deliverable do |p|
+  p.name "Document2"
+  p.deliverable_type "Document2"
+  p.unit_of_measure "Pages"
+  p.complexity "LOW"
+  p.estimated_size 3
+  p.estimated_effort 30
+  p.project_phase {|l| l.association(:effort_project_phase) }
 end
 
 Factory.define :testing_total_effort, :class => Effort do |p|
+  p.user_id 4
   p.value 10
-  p.deliverable_id {|l| l.association(:effort_deliverable) }
+  p.deliverable {|l| l.association(:effort_deliverable) }
 end
+
+Factory.define :testing_total_effort2, :class => Effort do |p|
+  p.user_id 47
+  p.value 15
+end
+
+
+  
 
 
   

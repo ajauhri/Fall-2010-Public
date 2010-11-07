@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe ProjectsController do
   setup :activate_authlogic
-  integrate_views
+  #integrate_views
+  
+  def mock_project(stubs ={})
+    @mock_project ||= mock_model(Project, stubs)
+  end
 
   before(:all) do
     Factory.create(:project)
@@ -21,11 +25,22 @@ describe ProjectsController do
 
 
   it "should redirect to index with a notice on successful save" do
-    Project.any_instance.stubs(:valid?).returns(true)
+    Project.stub!(:new).and_return(mock_project)
+    @mock_project.should_receive(:save).and_return(true)
     post :create
     flash[:notice].should_not be_nil
     response.should redirect_to(project_url(assigns[:project]))
   end
+  
+  
+  it "should redirect to new with a notice on unsuccessful save" do
+    Project.stub!(:new).and_return(mock_project)
+    @mock_project.should_receive(:save).and_return(false)
+    controller.stub!(:error_html).and_return(true)
+    post :create
+    flash[:error].should_not be_nil
+    response.should render_template('new')
+      end
 
   it "should redirect to index" do
     Project.any_instance.stubs(:valid?).returns(true)
@@ -62,4 +77,10 @@ describe ProjectsController do
     response.should redirect_to(projects_url)
     Project.exists?(project.id).should be_false
   end
+  
+  it "should use sort method for phases within a project" do
+    ProjectPhase.should_receive(:update_all).with(any_args()).twice.and_return(true)
+    put :sort, :phaseslist => {:id => 1, id => 2}
+  end
+  
 end

@@ -1,29 +1,42 @@
-<h1>Editing project_phases</h1>
+<h1>Editing project phase</h1>
 
 <% form_for(@project_phase) do |f| %>
   <%= f.error_messages %>
+  <div class="InputArea">
 
-
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description, :cols=> 80, :rows => 5  %>
-  </p>
-  <p>
-    <%= f.label :sequence %><br />
-    <%= f.text_field :sequence %>
-  </p>
-  <p>
-    <%= f.label :total_estimated_effort %><br />
-    <%= f.text_field :total_estimated_effort %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+    <table class="InputTable">
+      <tr>
+        <td>
+          <%= f.label :name %></td><td>
+          <%= f.text_field :name %>
+        </td></tr>
+      <tr><td>
+          <%= f.label :description %></td><td>
+          <%= f.text_area :description, :cols=> 40, :rows => 5  %>
+        </td></tr>
+      <tr><td>
+          <%= f.label :sequence %></td><td>
+          <%=h @project_phase.sequence %>
+        </td></tr>
+      <tr><td>
+          <%= f.label :total_estimated_effort %></td><td>
+          <%=h @project_phase.total_estimated_effort %>
+        </td></tr>
+      <tr><td>
+          <%= f.label :actual_effort %></td><td>
+          <%=h @project_phase.actual_effort %>
+        </td></tr>
+      <% if !@project_phase.lifecycle_phase.nil? %>
+        <tr><td>
+            <%= f.label :lifecycle_phase_id %></td><td>
+            <%=h @project_phase.lifecycle_phase.name  %>
+          </td></tr>
+      <% end %>
+      <tr><td>
+          <%= f.submit 'Update' %>
+        </td></tr>
+    </table>
+  </div>
 <% end %>
 
 <!--%= link_to 'Show', @project_phase %> | --!>

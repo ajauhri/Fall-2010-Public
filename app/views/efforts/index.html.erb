@@ -10,8 +10,16 @@
   <th id="HeaderRight"></th>
   <% for effort in @efforts %>
     <tr>
-      <% deliverable = Deliverable.find_by_id(effort.deliverable_id) %>
-      <td><%= deliverable.project_phase.project.name %></td>
+      <!-- % deliverable = Deliverable.find_by_id(effort.deliverable_id) %-->
+
+
+      <% puts effort %>
+      <% puts effort.deliverable %>
+      <% puts effort.deliverable.project_phase %>
+      <% puts effort.deliverable.project_phase.project %>
+
+        <%= deliverable = effort.deliverable %>
+      <td><!--%= deliverable.project_phase.project.name %--></td>
       <td><%= deliverable.project_phase.name %> </td>
       <td><%=  deliverable.name %></td>
       <td><%=  effort.value.round(1) %></td>
@@ -34,7 +42,9 @@
   <%= collection_select '', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
   <%= collection_select '', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>
   <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
-  <%= form.text_field :value, :style => "width: 30px;"%>
+
+  <%= form.text_field :value, :style => "width: 30px;"%>Hours
+  <%= form.text_field :effort_date, :class => 'datepicker' %>
   <%= form.submit 'Add Effort' %>
 <% end %>
 

@@ -1,6 +1,7 @@
-# Handles phase functionality
+# Handles project phase functionality
 class ProjectPhasesController < ApplicationController
- # Lists all ProjectPhases from the DB
+
+=begin
   def index
     @project_phases = ProjectPhase.all
 
@@ -9,46 +10,52 @@ class ProjectPhasesController < ApplicationController
       format.xml  { render :xml => @project_phases }
     end
   end
+=end
 
-
-  # Lists details of a particular ProjectPhase. Params required: ProjectPhase.id
-
+   #  Provides a list with different fields of a particular project phase
+   #  Input params: ProjectPhase.id
+   #  Returns     : Returns a hash of all fields related to a ProjectPhase
+  
   def show
     @project_phase = ProjectPhase.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @project_phase }
+      #format.xml  { render :xml => @project_phase }
     end
   end
 
 
-  # Renders a new template with all fields required to create a ProjectPhase
 
+  #  Provides a list of all/required fields needed to create a ProjectPhase
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a project phase
   def new
     @project_phase = ProjectPhase.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @project_phase }
+      #format.xml  { render :xml => @project_phase }
     end
   end
 
-   # Retrieves a ProjectPhase record. Params required: ProjectPhase.id
+  #  Provides a list of all/required fields of an existing ProjectPhase
+  #  Input params: ProjectPhase.id
+  #  Returns     : Returns a hash of fields and values of ProjectPhase
 
+  
   def edit
     @project_phase = ProjectPhase.find(params[:id])
   end
 
 
-  # Creates a ProjectPhase record. All params related to a ProjectPhase need to be passed
+  #  Creates a ProjectPhase record. 
+  #  Input params: All/required params related to a ProjectPhase need to be passed
+  #  Returns     : A hash of the newly created ProjectPhase and a confirmation
 
 
   def create
     @project_phase = ProjectPhase.new(params[:project_phase])
-    
-    # Probably there is a better way to do this, using associations, nested forms.
-    @project_phase.project_id=session[:current_project]
     
     respond_to do |format|
       if @project_phase.save
@@ -56,42 +63,46 @@ class ProjectPhasesController < ApplicationController
         format.html { render :partial => @project_phases }
         #format.html { redirect_to(@project_phase.project, :notice => 'Project phase was successfully created.') }
         format.js
-        format.xml  { render :xml => @project_phase, :status => :created, :location => @project_phase }
+        #format.xml  { render :xml => @project_phase, :status => :created, :location => @project_phase }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
       end
     end
   end
 
 
-  # Update a ProjectPhase record. Params required: ProjectPhase.id
+  #  Updates a ProjectPhase record. 
+  #  Input params: ProjectPhase.id
+  #  Returns     : A hash of the newly created ProjectPhase and a confirmation 
 
 
   def update
     @project_phase = ProjectPhase.find(params[:id])
 
     respond_to do |format|
-      if @project_phase.update_attributes(params[:project_phases])
-        format.html { redirect_to(@project_phase, :notice => 'Project phase was successfully updated.') }
-        format.xml  { head :ok }
+      if @project_phase.update_attributes(params[:project_phase])
+        format.html { redirect_to(@project_phase.project, :notice => 'Project phase was successfully updated.') }
+        #format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
       end
     end
   end
 
 
-  # Deletes a ProjectPhase record. Params required: ProjectPhase.id
-
+  #  Deletes a ProjectPhase record. 
+  #  Input params: ProjectPhase.id
+  #  Returns     : Redirects to the index page of all project phase
+  
   def destroy
     @project_phase = ProjectPhase.find(params[:id])
     @project_phase.destroy
 
     respond_to do |format|
       format.html { redirect_to(@project_phase.project) }
-      format.xml  { head :ok }
+      #format.xml  { head :ok }
     end
   end
 

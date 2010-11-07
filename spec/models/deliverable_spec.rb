@@ -86,23 +86,52 @@ describe Deliverable, "estimating based upon matching type and complexity" do
     estimates[:avg_rate].should >=4
   end
 
-  describe Deliverable do
+  describe "should update project, phase total_estimated_effort" do
 
-  before(:all) do
-    @effort_project = Factory.build(:effort_project)
-    @effort_project_phase = Factory.build(:effort_project_phase)
-    @effort_delvierable =  Factory.build(:effort_deliverable)
-  end
+  
+    before(:all) do
 
-  it "should update project estimated total effort" do
-    #@effort_project.total_estimated_effort.should == @effort_delvierable.value
-  end
+      @testing_deliverable = Factory.create(:effort_deliverable)
+      @phase_init = @testing_deliverable.project_phase.total_estimated_effort
+      @project_init = @testing_deliverable.project_phase.project.total_estimated_effort
+      @testing_deliverable2 = Factory.create(:effort_deliverable2, :project_phase => @testing_deliverable.project_phase)
+
+    end
+
+     it "should update project total estimated effort" do  
+      @project_init.should == @testing_deliverable.estimated_effort
+     @testing_deliverable.project_phase.project.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+    end
 
 
-  it "should update project phases estimated total effort" do
-    #@effort_project_phase.total_estimated_effort.should == @effort_delvierable.value
-  end
+          it "should update project phases total estimated effort" do
+           @phase_init.should == @testing_deliverable.estimated_effort
+           @testing_deliverable.project_phase.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+          end
 
-  end
+
+    end
 
 end
+
+# == Schema Information
+#
+# Table name: deliverables
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  description               :text
+#  deliverable_type          :string(255)
+#  unit_of_measure           :string(255)
+#  complexity                :string(255)
+#  estimated_size            :decimal(, )
+#  estimated_effort          :decimal(, )     default(0.0)
+#  estimated_production_rate :decimal(, )
+#  actual_size               :decimal(, )
+#  actual_effort             :decimal(, )     default(0.0)
+#  actual_production_rate    :decimal(, )
+#  project_phase_id          :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#
+

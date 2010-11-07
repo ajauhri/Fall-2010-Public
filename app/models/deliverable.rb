@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: deliverables
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  description               :text
+#  deliverable_type          :string(255)
+#  unit_of_measure           :string(255)
+#  complexity                :string(255)
+#  estimated_size            :decimal(, )
+#  estimated_effort          :decimal(, )     default(0.0)
+#  estimated_production_rate :decimal(, )
+#  actual_size               :decimal(, )
+#  actual_effort             :decimal(, )     default(0.0)
+#  actual_production_rate    :decimal(, )
+#  project_phase_id          :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#
 # Model class for deliverables table. Associations => belongs_to :project_phase, has_many :efforts
 class Deliverable < ActiveRecord::Base
   belongs_to :project_phase
@@ -13,6 +33,7 @@ class Deliverable < ActiveRecord::Base
 
   validates_inclusion_of :complexity, :in => Complexity.getValues
 
+  # To retrieve the estimated production rate for a deliverable
   def get_production_rate
     #if !estimated_size.nil? && !estimated_effort.nil? && estimated_size > 0 && estimated_effort > 0
       return estimated_effort / estimated_size
@@ -22,11 +43,13 @@ class Deliverable < ActiveRecord::Base
   end
 
 
+ # To create deliverables from the set of pre-defined typical deliverables
+ # Inputs parms : TypicalDeliverable.id, ProjectPhase.id
+ #Retruns       : Nil
   def self.create_from_typical_deliverable(typical_deliverable_id, project_phase_id)
     @typical_deliverable = TypicalDeliverable.find(typical_deliverable_id)
     deliverable_type = DeliverableType.find(@typical_deliverable.deliverable_type_id)
 
-    puts "create_from_typical_deliverable ----" + @typical_deliverable.name
     if @typical_deliverable
         Deliverable.create(
          :name => @typical_deliverable.name,
@@ -41,6 +64,10 @@ class Deliverable < ActiveRecord::Base
     end
   end
 
+
+  # To get estimates based on complexity, and deliverable
+  # Inputs parms : Deliverable.id, Complexity
+  # Retruns     : Hash of all estimates
   def self.get_estimates(deliverable_type, complexity)
     find_by = ["deliverable_type like ? and complexity like ?", deliverable_type, complexity]
     return get_statistics(find_by)
@@ -48,13 +75,18 @@ class Deliverable < ActiveRecord::Base
 
 protected
 
+# Updates efforts for ProjectPhase
 
   def update_all_estimated_effort
-   #self.project_phase.update(:total_estimated_effort => estimated_effort)
-    #     self.project.update(:value => value)
+   if self.project_phase and self.project_phase.project
+    self.project_phase.total_estimated_effort += estimated_effort
+    self.project_phase.project.total_estimated_effort += estimated_effort
+  end
   end
 
-
+# Calulates estimates
+# Input params : DeliverableType.name, Complexity
+# Returns      : Hash of the estimates
   def self.get_statistics(find_by)
     estimates = {}
   
@@ -72,11 +104,15 @@ protected
          
     end
 
+# Ensures estimate_size is not negative
+ 
   def estimated_size_should_be_positive
     if estimated_size.nil? || estimated_size <= 0
     errors.add(:estimated_size, 'should be positive')
     end
   end
+
+  # Ensures estimate_effort is not negative
 
   def estimated_effort_should_be_positive
         if estimated_effort.nil? || estimated_effort <= 0

@@ -59,3 +59,9 @@ function projectSelect(selectedProject, selectedPhase, selectedDeliverable) {
     $('effort_deliverable_id').options.length = 1;
     }
 }
+
+
+jQuery(function() {
+		jQuery( ".datepicker" ).datepicker();
+	});
+

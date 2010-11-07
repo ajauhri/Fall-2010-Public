@@ -1,7 +1,11 @@
 # Handles project functionality
 class ProjectsController < ApplicationController
-  # Lists all Projects from the DB
 
+  
+  #  Provides a list of all projects
+  #  Input params: None
+  #  Returns     : Returns a list of all projects
+  
   def index
     @projects = Project.all
 
@@ -11,7 +15,10 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # Lists details of a particular Project. Params required: Project.id
+  
+  #  Provides a list with different fields of a particular project
+  #  Input params: Project.id
+  #  Returns     : Returns a hash of all fields related to a Project
 
   def show
     @project = Project.find(params[:id])
@@ -22,11 +29,13 @@ class ProjectsController < ApplicationController
     @project_phases = ProjectPhase.find_all_by_project_id(params[:id], :order=>"sequence")
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @project }
     end
   end
 
-  # Renders a new template with all fields required to create a Project
+
+  #  Provides a list of all/required fields needed to create a Project
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a project
 
   def new
     @project = Project.new
@@ -36,14 +45,18 @@ class ProjectsController < ApplicationController
     end
   end
 
- # Retrieves a Project record. Params required: Project.id
+  #  Provides a list of all/required fields of an existing Project
+  #  Input params: Project.id
+  #  Returns     : Returns a hash of fields and values of Project
 
   def edit
     @project = Project.find(params[:id])
   end
 
-  # Creates a Project record. All params related to a Project need to be passed
-  
+  #  Creates a Project record. 
+  #  Input params: All/required params related to a Project need to be passed
+  #  Returns     : A hash of the newly created Project and a confirmation
+
   def create
     @project = Project.new(params[:project])
    
@@ -51,31 +64,33 @@ class ProjectsController < ApplicationController
       
       if @project.save
         format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
+        flash[:error] = error_html(@project.errors)
         format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # Update a Project record. Params required: Project.id
 
+  #  Updates a Project record. 
+  #  Input params: Project.id
+  #  Returns     : A hash of the newly created Project and a confirmation
   def update
     @project = Project.find(params[:id])
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
-        format.xml  { head :ok }
       else
+        flash[:error] = error_html(@project.errors)
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # Deletes a Project record. Params required: Project.id
+  #  Deletes a Project record. 
+   #  Input params: Project.id
+   #  Returns     : Redirects to the index page of all projects
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
@@ -86,7 +101,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # Updates sequence values of ProjectPhases. Params required: ProjectPhase.id, ProjectPhase.sequence
+  # Updates sequence values of ProjectPhases. 
+  # Input params: Params required: ProjectPhase.id, ProjectPhase.sequence
+  # Returns     : Provides a hash of the updated sequence of project phases
 
   def sort
     params[:phaseslist].each_with_index do |id, index|

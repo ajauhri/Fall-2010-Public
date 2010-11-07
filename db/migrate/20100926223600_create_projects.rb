@@ -3,8 +3,9 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :name
       t.text :description
-      t.decimal :total_estimated_effort
-      t.string :status
+      t.decimal :total_estimated_effort, :default => 0.0
+      t.string :status, :default => 'Active'
+      t.decimal :actual_effort, :default => 0.0
 
       t.timestamps
     end

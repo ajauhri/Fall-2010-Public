@@ -1,15 +1,16 @@
 <h1>Projects</h1>
 
-<% columns = [{:type => 'html', :class => "first"}, {:type => 'html'}, {:type => 'html'}, {:type => nil, :class => "last"}] %>
-<%= datatable(columns, {:sort_by => "[0, 'asc']", :persist_state => false}) %>
+<% columns = [{:type => 'html'}, {:type => 'html'}, {:type => 'html'},{:type => 'html'}, {:type => nil, :class => "last"}] %>
+<%= datatable(columns, {:sort_by => "[4,'asc'],[0, 'asc']", :per_page => 10}) %>
 
 <!-- table class="DisplayTable" -->
-<table class='datatable'>
+<table class='datatable' id="example">
   <thead>
   <tr>
     <th id="HeaderLeft">Name</th>
     <th>Description</th>
-    <th>Total Est. Effort</th>
+    <th>Est. Effort</th>
+    <th>Actual Effort</th>
     <th>Status</th>
     <th id="HeaderRight"></th>
   </tr>
@@ -20,8 +21,14 @@
     <td><%= link_to h(project.name), project %></td>
     <td><%=h project.description %></td>
     <td><%=h project.total_estimated_effort %></td>
+    <td><%=h project.actual_effort %> </td>
     <td><%=h project.status %></td>
-    <td><%= link_to image_tag('/images/delete_icon.gif'), project, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      
+    <%= link_to image_tag('/images/edit_icon.gif', :size => "15x15", :title => 'Edit '+project.name, :alt => 'Edit '+project.name), edit_project_path(project) %>
+    <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete '+project.name, :alt => 'Delete '+project.name), project, :confirm => 'Are you sure?', :method => :delete %>
+   
+      </td>
   </tr>
 <% end %>
 </tbody>
