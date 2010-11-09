@@ -22,6 +22,16 @@
 <body class="class">
 
 	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -59,7 +69,9 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#M000047">#validify_effort</a></li>
+					<li><a href="#method-i-update_all_effort">#update_all_effort</a></li>
+					
+					<li><a href="#method-i-validify_effort">#validify_effort</a></li>
 					
 				</ul>
 			</div>
@@ -101,7 +113,15 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./Complexity.html">Complexity</a></li>
+				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
+				
+					<li><a href="./DeliverableType.html">DeliverableType</a></li>
+				
+					<li><a href="./DeliverableTypesController.html">DeliverableTypesController</a></li>
+				
+					<li><a href="./DeliverableTypesHelper.html">DeliverableTypesHelper</a></li>
 				
 					<li><a href="./DeliverablesController.html">DeliverablesController</a></li>
 				
@@ -121,6 +141,10 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
+					<li><a href="./PetController.html">PetController</a></li>
+				
+					<li><a href="./PetHelper.html">PetHelper</a></li>
+				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -132,6 +156,12 @@
 					<li><a href="./ProjectsController.html">ProjectsController</a></li>
 				
 					<li><a href="./ProjectsHelper.html">ProjectsHelper</a></li>
+				
+					<li><a href="./TypicalDeliverable.html">TypicalDeliverable</a></li>
+				
+					<li><a href="./TypicalDeliverablesController.html">TypicalDeliverablesController</a></li>
+				
+					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
 				
@@ -157,7 +187,20 @@
 		<h1 class="class">Effort</h1>
 
 		<div id="description">
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: efforts
+</p>
+<pre>
+ id             :integer         not null, primary key
+ value          :decimal(, )     default(0.0)
+ effort_date    :datetime
+ created_at     :datetime
+ updated_at     :datetime
+ deliverable_id :integer
+ user_id        :integer
+</pre>
+<p>
 Model class for efforts table. Associations: belongs_to :user, :deliverable
 </p>
 
@@ -175,8 +218,49 @@ Model class for efforts table. Associations: belongs_to :user, :deliverable
 			<h3 class="section-header">Private Instance Methods</h3>
 
 		
+			<div id="update-all-effort-method" class="method-detail ">
+				<a name="method-i-update_all_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">update_all_effort</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Updates efforts in deliverable, project_phase, and project
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="update-all-effort-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/effort.rb, line 26</span>
+26:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_all_effort</span>
+27:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">deliverable</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">project_phase</span>
+28:      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span>
+29:      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span>
+30:      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span>
+31:      
+32:     <span class="ruby-keyword kw">end</span>
+33:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
 			<div id="validify-effort-method" class="method-detail ">
-				<a name="M000047"></a>
+				<a name="method-i-validify_effort"></a>
 
 				<div class="method-heading">
 				
@@ -197,18 +281,17 @@ Checks for the validity of a deliverable to log effort
 					<div class="method-source-code"
 						id="validify-effort-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/effort.rb, line 21</span>
-21:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validify_effort</span>
-22:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">deliverable_id</span>.<span class="ruby-identifier">blank?</span>
-23:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value str">''</span>, <span class="ruby-value str">&quot;Must select a deliverable to log effort&quot;</span>)
-24:     <span class="ruby-keyword kw">end</span>
-25:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-26:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> = <span class="ruby-value">0</span>
-27:     <span class="ruby-keyword kw">end</span>
-28:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/effort.rb, line 37</span>
+37:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validify_effort</span>
+38:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0.0</span>
+39:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">value</span> = <span class="ruby-value">0.0</span>
+40:     <span class="ruby-keyword kw">end</span>
+41:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>

@@ -1,6 +1,10 @@
+# Handles deliverable types
 class DeliverableTypesController < ApplicationController
-  # GET /deliverable_types
-  # GET /deliverable_types.xml
+  
+  
+  #  Provides a list of all deliverables types
+  #  Input params: None
+  #  Returns     : Returns a list of all deliverables types
   def index
     @deliverable_types = DeliverableType.all
 
@@ -10,8 +14,9 @@ class DeliverableTypesController < ApplicationController
     end
   end
 
-  # GET /deliverable_types/1
-  # GET /deliverable_types/1.xml
+  #  Provides a list with different fields of a particular deliverable type
+  #  Input params: DeliverableType.id
+  #  Returns     : Returns a hash of all fields related to a DelvierableType
   def show
     @deliverable_type = DeliverableType.find(params[:id])
 
@@ -21,8 +26,9 @@ class DeliverableTypesController < ApplicationController
     end
   end
 
-  # GET /deliverable_types/new
-  # GET /deliverable_types/new.xml
+  #  Provides a list of all/required fields needed to create a DeliverableType
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a deliverable type
   def new
     @deliverable_type = DeliverableType.new
 
@@ -32,13 +38,22 @@ class DeliverableTypesController < ApplicationController
     end
   end
 
-  # GET /deliverable_types/1/edit
+
+  #  Provides a list of all/required fields of an existing DeliverableType
+  #  Input params: DeliverableType.id
+  #  Returns     : Returns a hash of fields and edited values of DeliverableType
+
+
   def edit
     @deliverable_type = DeliverableType.find(params[:id])
   end
 
-  # POST /deliverable_types
-  # POST /deliverable_types.xml
+
+  #  Creates a DeliverableType record. 
+  #  Input params: All/required params related to a DeliverableType need to be passed
+  #  Returns     : A hash of the newly created DeliverableType and a confirmation
+
+
   def create
     @deliverable_type = DeliverableType.new(params[:deliverable_type])
 
@@ -53,8 +68,10 @@ class DeliverableTypesController < ApplicationController
     end
   end
 
-  # PUT /deliverable_types/1
-  # PUT /deliverable_types/1.xml
+  #  Updates a DeliverableType record. 
+  #  Input params: DeliverabeType.id
+  #  Returns     : A hash of the newly created DeliverableType and a confirmation 
+
   def update
     @deliverable_type = DeliverableType.find(params[:id])
 
@@ -69,8 +86,11 @@ class DeliverableTypesController < ApplicationController
     end
   end
 
-  # DELETE /deliverable_types/1
-  # DELETE /deliverable_types/1.xml
+
+  #  Deletes a DeliverableType record. 
+  #  Input params: DeliverabeType.id
+  #  Returns     : Redirects to the index page of all deliverables types
+  
   def destroy
     @deliverable_type = DeliverableType.find(params[:id])
     @deliverable_type.destroy

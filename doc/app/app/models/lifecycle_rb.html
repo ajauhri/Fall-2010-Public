@@ -24,7 +24,7 @@
 	<div id="metadata">
 		<dl>
 			<dt class="modified-date">Last Modified</dt>
-			<dd class="modified-date">Sat Oct 09 12:40:58 -0700 2010</dd>
+			<dd class="modified-date">Sun Nov 07 12:41:54 -0800 2010</dd>
 
 			
 			<dt class="requires">Requires</dt>
@@ -43,7 +43,18 @@
 		
 		<div class="description">
 			<h2>Description</h2>
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: lifecycles
+</p>
+<pre>
+ id          :integer         not null, primary key
+ name        :string(255)
+ description :text
+ created_at  :datetime
+ updated_at  :datetime
+</pre>
+<p>
 Model class for lifecycles table. Associations => has_many :projects,
 lifecycle_phases
 </p>

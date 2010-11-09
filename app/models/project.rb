@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  description            :text
+#  total_estimated_effort :decimal(, )     default(0.0)
+#  status                 :string(255)     default("Active")
+#  actual_effort          :decimal(, )     default(0.0)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  lifecycle_id           :integer
+#
 # Model class for projects table. Associations => belongs_to :lifecycle, has_many :project_phases
 class Project < ActiveRecord::Base
   after_create :create_phases
@@ -28,3 +42,4 @@ def create_phases
   #validates_inclusion_of :status, :in =>
   #  STATUS_TYPES.map{|disp, value| value}
 end
+

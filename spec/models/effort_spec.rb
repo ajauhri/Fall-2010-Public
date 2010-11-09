@@ -61,3 +61,17 @@ describe " for project, phase, deliverable shall be updated after effort creatio
         end
   end
 end
+
+# == Schema Information
+#
+# Table name: efforts
+#
+#  id             :integer         not null, primary key
+#  value          :decimal(, )     default(0.0)
+#  effort_date    :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#  deliverable_id :integer
+#  user_id        :integer
+#
+

@@ -22,6 +22,16 @@
 <body class="class">
 
 	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -59,9 +69,11 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#M000050">::create_from_lifecycle_phase</a></li>
+					<li><a href="#method-c-create_from_lifecycle_phase">::create_from_lifecycle_phase</a></li>
 					
-					<li><a href="#M000048">#scope_condition</a></li>
+					<li><a href="#method-i-create_deliverables">#create_deliverables</a></li>
+					
+					<li><a href="#method-i-scope_condition">#scope_condition</a></li>
 					
 				</ul>
 			</div>
@@ -103,7 +115,15 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./Complexity.html">Complexity</a></li>
+				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
+				
+					<li><a href="./DeliverableType.html">DeliverableType</a></li>
+				
+					<li><a href="./DeliverableTypesController.html">DeliverableTypesController</a></li>
+				
+					<li><a href="./DeliverableTypesHelper.html">DeliverableTypesHelper</a></li>
 				
 					<li><a href="./DeliverablesController.html">DeliverablesController</a></li>
 				
@@ -123,6 +143,10 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
+					<li><a href="./PetController.html">PetController</a></li>
+				
+					<li><a href="./PetHelper.html">PetHelper</a></li>
+				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -134,6 +158,12 @@
 					<li><a href="./ProjectsController.html">ProjectsController</a></li>
 				
 					<li><a href="./ProjectsHelper.html">ProjectsHelper</a></li>
+				
+					<li><a href="./TypicalDeliverable.html">TypicalDeliverable</a></li>
+				
+					<li><a href="./TypicalDeliverablesController.html">TypicalDeliverablesController</a></li>
+				
+					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
 				
@@ -159,7 +189,23 @@
 		<h1 class="class">ProjectPhase</h1>
 
 		<div id="description">
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: project_phases
+</p>
+<pre>
+ id                     :integer         not null, primary key
+ name                   :string(255)
+ description            :text
+ sequence               :integer
+ total_estimated_effort :decimal(, )     default(0.0)
+ actual_effort          :decimal(, )     default(0.0)
+ created_at             :datetime
+ updated_at             :datetime
+ project_id             :integer
+ lifecycle_phase_id     :integer
+</pre>
+<p>
 Model class for project_phases table, Associations => belongs_to :project,
 :lifecycle_phase, has_many :deliverables
 </p>
@@ -179,7 +225,7 @@ Model class for project_phases table, Associations => belongs_to :project,
 
 		
 			<div id="create-from-lifecycle-phase-method" class="method-detail ">
-				<a name="M000050"></a>
+				<a name="method-c-create_from_lifecycle_phase"></a>
 
 				<div class="method-heading">
 				
@@ -201,22 +247,24 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 					<div class="method-source-code"
 						id="create-from-lifecycle-phase-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 16</span>
-16:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_from_lifecycle_phase</span>(<span class="ruby-identifier">lifecycle_phase_id</span>, <span class="ruby-identifier">project</span>)
-17:     <span class="ruby-ivar">@lifecycle_phase</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">lifecycle_phase_id</span>)
-18: 
-19:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lifecycle_phase</span>
-20:         <span class="ruby-identifier">create</span>(
-21:          <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">name</span>,
-22:          <span class="ruby-identifier">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">description</span>,
-23:          <span class="ruby-identifier">:lifecycle_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>,
-24:          <span class="ruby-identifier">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">sequence</span>,
-25:          <span class="ruby-identifier">:project</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>)
-26:     <span class="ruby-keyword kw">end</span>
-27:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 33</span>
+33:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_from_lifecycle_phase</span>(<span class="ruby-identifier">lifecycle_phase_id</span>, <span class="ruby-identifier">project</span>)
+34:     <span class="ruby-ivar">@lifecycle_phase</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">lifecycle_phase_id</span>)
+35: 
+36:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lifecycle_phase</span>
+37:         <span class="ruby-identifier">create</span>(
+38:          <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">name</span>,
+39:          <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">description</span>,
+40:          <span class="ruby-value">:lifecycle_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>,
+41:          <span class="ruby-value">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">sequence</span>,
+42:          <span class="ruby-value">:project</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>)
+43:     <span class="ruby-keyword kw">end</span>
+44:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>
@@ -228,8 +276,47 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 			<h3 class="section-header">Public Instance Methods</h3>
 
 		
+			<div id="create-deliverables-method" class="method-detail ">
+				<a name="method-i-create_deliverables"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">create_deliverables</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+For creating typical deliverables in the project phase
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="create-deliverables-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_deliverables</span>
+48:     <span class="ruby-ivar">@typical_deliverables</span> = <span class="ruby-constant">TypicalDeliverable</span>.<span class="ruby-identifier">find_all_by_lifecycle_phase_id</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lifecycle_phase_id</span>)
+49:     <span class="ruby-ivar">@typical_deliverables</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">td</span><span class="ruby-operator">|</span>
+50:       <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">create_from_typical_deliverable</span>(<span class="ruby-identifier">td</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>)
+51:     <span class="ruby-keyword kw">end</span>
+52:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
 			<div id="scope-condition-method" class="method-detail ">
-				<a name="M000048"></a>
+				<a name="method-i-scope_condition"></a>
 
 				<div class="method-heading">
 				
@@ -250,13 +337,15 @@ For defining the scope for acts_as_list method
 					<div class="method-source-code"
 						id="scope-condition-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 11</span>
-11:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scope_condition</span>
-12:     <span class="ruby-node">&quot;#{connection.quote_column_name(&quot;project_id&quot;)} = #{quote_value(project_id)}&quot;</span> <span class="ruby-comment cmt">#+ :project</span>
-13:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 28</span>
+28:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scope_condition</span>
+29:     <span class="ruby-node">&quot;#{connection.quote_column_name(&quot;project_id&quot;)} = #{quote_value(project_id)}&quot;</span> <span class="ruby-comment cmt">#+ :project</span>
+30:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>

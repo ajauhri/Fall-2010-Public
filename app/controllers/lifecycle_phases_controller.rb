@@ -1,6 +1,9 @@
 # Handles lifecycle functionality
 class LifecyclePhasesController < ApplicationController
    # Lists all LifecyclePhases from the DB
+   # Input params: None
+   # Returns     : Returns a list of all lifecycle phases
+   
   def index
 
     @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(params[:id])
@@ -11,7 +14,10 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-    # Lists details of a particular LifecyclePhase. Params required: LifecyclePhases.id
+    #  Lists details of a particular LifecyclePhase.
+    #  Input params: LifecyclePhase.id
+    #  Returns     : Returns a hash of all fields related to a LifecyclePhase
+    
   def show
     @lifecycle_phase = LifecyclePhase.find(params[:id])
 
@@ -21,7 +27,9 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-  # Renders a new template with all fields required to create a LifecyclePhase
+  #  Provides a list of all/required fields needed to create a LifecyclePhase
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a lifecycle phase
   def new
     @lifecycle_phase = LifecyclePhase.new
 
@@ -31,13 +39,20 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
- # Retrieves a LifecyclePhase record. Params required: LifecyclePhase.id
+
+  #  Provides a list of all/required fields of an existing LifecyclePhase
+  #  Input params: LifecyclePhase.id
+  #  Returns     : Returns a hash of fields and values of LifecyclePhase
+
   def edit
     @lifecycle_phase = LifecyclePhase.find(params[:id])
   end
 
 
-  # Creates a LifecyclePhase record. All params related to a LifecyclePhase need to be passed
+  # Creates a LifecyclePhase record. 
+  #  Input params: All/required params related to a LifecyclePhase need to be passed
+  #  Returns     : A hash of the newly created LifecyclePhase and a confirmation
+
 
   def create
     @lifecycle_phase = LifecyclePhase.new(params[:lifecycle_phase])
@@ -53,7 +68,9 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-   # Update a LifecyclePhase record. Params required: LifecyclePhase.id
+  #  Updates a LifecyclePhase record. 
+  #  Input params: LifecylePhase.id
+  #  Returns     : A hash of the newly created LifecyclePhase and a confirmation 
 
   def update
     @lifecycle_phase = LifecyclePhase.find(params[:id])
@@ -69,8 +86,11 @@ class LifecyclePhasesController < ApplicationController
     end
   end
 
-    # Deletes a LifecyclePhase record. Params required: LifecyclePhase.id
 
+  #  Deletes a LifecyclePhase record. 
+  #  Input params: LifecyclePhase.id
+  #  Returns     : Redirects to the index page of all lifecycle phases
+  
   def destroy
     @lifecycle_phase = LifecyclePhase.find(params[:id])
     @lifecycle_phase.destroy

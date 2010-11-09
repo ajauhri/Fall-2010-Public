@@ -22,6 +22,16 @@
 <body class="class">
 
 	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -59,19 +69,17 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#M000034">#create</a></li>
+					<li><a href="#method-i-create">#create</a></li>
 					
-					<li><a href="#M000041">#destroy</a></li>
+					<li><a href="#method-i-destroy">#destroy</a></li>
 					
-					<li><a href="#M000033">#edit</a></li>
+					<li><a href="#method-i-edit">#edit</a></li>
 					
-					<li><a href="#M000028">#index</a></li>
+					<li><a href="#method-i-new">#new</a></li>
 					
-					<li><a href="#M000031">#new</a></li>
+					<li><a href="#method-i-show">#show</a></li>
 					
-					<li><a href="#M000029">#show</a></li>
-					
-					<li><a href="#M000039">#update</a></li>
+					<li><a href="#method-i-update">#update</a></li>
 					
 				</ul>
 			</div>
@@ -113,7 +121,15 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./Complexity.html">Complexity</a></li>
+				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
+				
+					<li><a href="./DeliverableType.html">DeliverableType</a></li>
+				
+					<li><a href="./DeliverableTypesController.html">DeliverableTypesController</a></li>
+				
+					<li><a href="./DeliverableTypesHelper.html">DeliverableTypesHelper</a></li>
 				
 					<li><a href="./DeliverablesController.html">DeliverablesController</a></li>
 				
@@ -133,6 +149,10 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
+					<li><a href="./PetController.html">PetController</a></li>
+				
+					<li><a href="./PetHelper.html">PetHelper</a></li>
+				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -144,6 +164,12 @@
 					<li><a href="./ProjectsController.html">ProjectsController</a></li>
 				
 					<li><a href="./ProjectsHelper.html">ProjectsHelper</a></li>
+				
+					<li><a href="./TypicalDeliverable.html">TypicalDeliverable</a></li>
+				
+					<li><a href="./TypicalDeliverablesController.html">TypicalDeliverablesController</a></li>
+				
+					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
 				
@@ -170,7 +196,7 @@
 
 		<div id="description">
 			<p>
-Handles phase functionality
+Handles project phase functionality
 </p>
 
 		</div>
@@ -188,7 +214,7 @@ Handles phase functionality
 
 		
 			<div id="create-method" class="method-detail ">
-				<a name="M000034"></a>
+				<a name="method-i-create"></a>
 
 				<div class="method-heading">
 				
@@ -201,8 +227,11 @@ Handles phase functionality
 				<div class="method-description">
 					
 					<p>
-Creates a <a href="ProjectPhase.html">ProjectPhase</a> record. All params
-related to a <a href="ProjectPhase.html">ProjectPhase</a> need to be passed
+Creates a <a href="ProjectPhase.html">ProjectPhase</a> record.  Input
+params: All/required params related to a <a
+href="ProjectPhase.html">ProjectPhase</a> need to be passed Returns     : A
+hash of the newly created <a href="ProjectPhase.html">ProjectPhase</a> and
+a confirmation
 </p>
 					
 
@@ -210,36 +239,35 @@ related to a <a href="ProjectPhase.html">ProjectPhase</a> need to be passed
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 47</span>
-47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-48:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:project_phase</span>])
-49:     
-50:     <span class="ruby-comment cmt"># Probably there is a better way to do this, using associations, nested forms.</span>
-51:     <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">project_id</span>=<span class="ruby-identifier">session</span>[<span class="ruby-identifier">:current_project</span>]
-52:     
-53:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-54:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">save</span>
-55:         <span class="ruby-ivar">@project_phases</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find_all_by_project_id</span>(<span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">project_id</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:sequence</span>)
-56:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phases</span> }
-57:         <span class="ruby-comment cmt">#format.html { redirect_to(@project_phase.project, :notice =&gt; 'Project phase was successfully created.') }</span>
-58:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
-59:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phase</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:created</span>, <span class="ruby-identifier">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phase</span> }
-60:       <span class="ruby-keyword kw">else</span>
-61:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-62:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unprocessable_entity</span> }
-63:       <span class="ruby-keyword kw">end</span>
-64:     <span class="ruby-keyword kw">end</span>
-65:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 57</span>
+57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+58:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:project_phase</span>])
+59:     
+60:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+61:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">save</span>
+62:         <span class="ruby-ivar">@project_phases</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find_all_by_project_id</span>(<span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">project_id</span>, <span class="ruby-value">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:sequence</span>)
+63:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phases</span> }
+64:         <span class="ruby-comment cmt">#format.html { redirect_to(@project_phase.project, :notice =&gt; 'Project phase was successfully created.') }</span>
+65:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+66:         <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @project_phase, :status =&gt; :created, :location =&gt; @project_phase }</span>
+67:       <span class="ruby-keyword kw">else</span>
+68:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+69:         <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @project_phase.errors, :status =&gt; :unprocessable_entity }</span>
+70:       <span class="ruby-keyword kw">end</span>
+71:     <span class="ruby-keyword kw">end</span>
+72:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>
 
 		
 			<div id="destroy-method" class="method-detail ">
-				<a name="M000041"></a>
+				<a name="method-i-destroy"></a>
 
 				<div class="method-heading">
 				
@@ -252,8 +280,9 @@ related to a <a href="ProjectPhase.html">ProjectPhase</a> need to be passed
 				<div class="method-description">
 					
 					<p>
-Deletes a <a href="ProjectPhase.html">ProjectPhase</a> record. Params
-required: ProjectPhase.id
+Deletes a <a href="ProjectPhase.html">ProjectPhase</a> record.  Input
+params: ProjectPhase.id Returns     : Redirects to the index page of all
+project phase
 </p>
 					
 
@@ -261,26 +290,28 @@ required: ProjectPhase.id
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 88</span>
-88:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-89:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
-90:     <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">destroy</span>
-91: 
-92:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-93:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">project</span>) }
-94:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-identifier">:ok</span> }
-95:     <span class="ruby-keyword kw">end</span>
-96:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 99</span>
+ 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+100:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+101:     <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">destroy</span>
+102: 
+103:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+104:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">project</span>) }
+105:       <span class="ruby-comment cmt">#format.xml  { head :ok }</span>
+106:     <span class="ruby-keyword kw">end</span>
+107:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>
 
 		
 			<div id="edit-method" class="method-detail ">
-				<a name="M000033"></a>
+				<a name="method-i-edit"></a>
 
 				<div class="method-heading">
 				
@@ -293,8 +324,10 @@ required: ProjectPhase.id
 				<div class="method-description">
 					
 					<p>
-Retrieves a <a href="ProjectPhase.html">ProjectPhase</a> record. Params
-required: ProjectPhase.id
+Provides a list of all/required fields of an existing <a
+href="ProjectPhase.html">ProjectPhase</a> Input params: ProjectPhase.id
+Returns     : Returns a hash of fields and values of <a
+href="ProjectPhase.html">ProjectPhase</a>
 </p>
 					
 
@@ -302,59 +335,22 @@ required: ProjectPhase.id
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 39</span>
-39:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-40:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
-41:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+48:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+49:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
 
 				
-			</div>
-
-		
-			<div id="index-method" class="method-detail ">
-				<a name="M000028"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">index</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					<p>
-Lists all ProjectPhases from the DB
-</p>
-					
-
-					
-					<div class="method-source-code"
-						id="index-source">
-<pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 4</span>
- 4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 5:     <span class="ruby-ivar">@project_phases</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">all</span>
- 6: 
- 7:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 8:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
- 9:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phases</span> }
-10:     <span class="ruby-keyword kw">end</span>
-11:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
 
 				
 			</div>
 
 		
 			<div id="new-method" class="method-detail ">
-				<a name="M000031"></a>
+				<a name="method-i-new"></a>
 
 				<div class="method-heading">
 				
@@ -367,8 +363,9 @@ Lists all ProjectPhases from the DB
 				<div class="method-description">
 					
 					<p>
-Renders a new template with all fields required to create a <a
-href="ProjectPhase.html">ProjectPhase</a>
+Provides a list of all/required fields needed to create a <a
+href="ProjectPhase.html">ProjectPhase</a> Input params: None Returns     :
+Returns a hash of different fields of a project phase
 </p>
 					
 
@@ -376,25 +373,27 @@ href="ProjectPhase.html">ProjectPhase</a>
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 28</span>
-28:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
-29:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">new</span>
-30: 
-31:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-32:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-33:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phase</span> }
-34:     <span class="ruby-keyword kw">end</span>
-35:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 33</span>
+33:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+34:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">new</span>
+35: 
+36:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+38:       <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @project_phase }</span>
+39:     <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>
 
 		
 			<div id="show-method" class="method-detail ">
-				<a name="M000029"></a>
+				<a name="method-i-show"></a>
 
 				<div class="method-heading">
 				
@@ -407,8 +406,9 @@ href="ProjectPhase.html">ProjectPhase</a>
 				<div class="method-description">
 					
 					<p>
-Lists details of a particular <a href="ProjectPhase.html">ProjectPhase</a>.
-Params required: ProjectPhase.id
+Provides a list with different fields of a particular project phase Input
+params: ProjectPhase.id Returns     : Returns a hash of all fields related
+to a <a href="ProjectPhase.html">ProjectPhase</a>
 </p>
 					
 
@@ -416,25 +416,27 @@ Params required: ProjectPhase.id
 					<div class="method-source-code"
 						id="show-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 16</span>
-16:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
-17:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
-18: 
-19:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-20:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
-21:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phase</span> }
-22:     <span class="ruby-keyword kw">end</span>
-23:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 19</span>
+19:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
+20:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+21: 
+22:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+23:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
+24:       <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @project_phase }</span>
+25:     <span class="ruby-keyword kw">end</span>
+26:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>
 
 		
 			<div id="update-method" class="method-detail ">
-				<a name="M000039"></a>
+				<a name="method-i-update"></a>
 
 				<div class="method-heading">
 				
@@ -447,8 +449,9 @@ Params required: ProjectPhase.id
 				<div class="method-description">
 					
 					<p>
-Update a <a href="ProjectPhase.html">ProjectPhase</a> record. Params
-required: ProjectPhase.id
+Updates a <a href="ProjectPhase.html">ProjectPhase</a> record.  Input
+params: ProjectPhase.id Returns     : A hash of the newly created <a
+href="ProjectPhase.html">ProjectPhase</a> and a confirmation 
 </p>
 					
 
@@ -456,23 +459,25 @@ required: ProjectPhase.id
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 71</span>
-71:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-72:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
-73: 
-74:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-75:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:project_phases</span>])
-76:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@project_phase</span>, <span class="ruby-identifier">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Project phase was successfully updated.'</span>) }
-77:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-identifier">:ok</span> }
-78:       <span class="ruby-keyword kw">else</span>
-79:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-80:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:unprocessable_entity</span> }
-81:       <span class="ruby-keyword kw">end</span>
-82:     <span class="ruby-keyword kw">end</span>
-83:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/project_phases_controller.rb, line 80</span>
+80:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+81:     <span class="ruby-ivar">@project_phase</span> = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+82: 
+83:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+84:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:project_phase</span>])
+85:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@project_phase</span>.<span class="ruby-identifier">project</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Project phase was successfully updated.'</span>) }
+86:         <span class="ruby-comment cmt">#format.xml  { head :ok }</span>
+87:       <span class="ruby-keyword kw">else</span>
+88:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+89:         <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @project_phase.errors, :status =&gt; :unprocessable_entity }</span>
+90:       <span class="ruby-keyword kw">end</span>
+91:     <span class="ruby-keyword kw">end</span>
+92:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>

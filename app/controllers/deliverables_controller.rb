@@ -1,19 +1,10 @@
+#Handles deliverables for a project phase
 class DeliverablesController < ApplicationController
-  # Lists all deliverables from the DB
 
-=begin
-  def index
-    @deliverables = Deliverable.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @deliverables }
-    end
-  end
-=end
-
-  #  Lists details of a particular deliverable. Params required: Deliverable.id
-
+  #  Provides a list with different fields of a particular deliverable
+  #  Input params: Deliverable.id
+  #  Returns     : Returns a hash of all fields related to a Delvierable
   def show
     
     @deliverable = Deliverable.find(params[:id])
@@ -24,8 +15,10 @@ class DeliverablesController < ApplicationController
     end
   end
 
-  # Renders a new template with all fields required to create a deliverable
 
+  #  Provides a list of all/required fields needed to create a Deliverable
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a deliverable
   def new
     @deliverable = Deliverable.new
     @deliverable.project_phase_id = params[:project_phase_id]
@@ -37,13 +30,20 @@ class DeliverablesController < ApplicationController
     end
   end
 
-# Retrieves a Deliverable record. Params required: Deliverable.id
+
+  #  Provides a list of all/required fields of an existing Deliverable
+  #  Input params: Deliverable.id
+  #  Returns     : Returns a hash of fields and values of Deliverable
+
 
   def edit
     @deliverable = Deliverable.find(params[:id])
   end
+  
+  #  Creates a DeliverableType record. 
+  #  Input params: All/required params related to a Deliverable need to be passed
+  #  Returns     : A hash of the newly created Deliverable and a confirmation
 
-  # Creates a Deliverable record. All params related to a deliverable need to be passed
 
   def create
     @deliverable = Deliverable.new(params[:deliverable])
@@ -61,7 +61,10 @@ class DeliverablesController < ApplicationController
   end
 
 
-# Update a Deliverable record. Params required: Deliverable.id
+  #  Updates a Deliverable record. 
+  #  Input params: Deliverabe.id
+  #  Returns     : A hash of the newly created Deliverable and a confirmation
+
 
   def update
     @deliverable = Deliverable.find(params[:id])
@@ -79,7 +82,9 @@ class DeliverablesController < ApplicationController
   end
 
 
-  # Deletes a Deliverable record. Params required: Deliverable.id
+  #  Deletes a Deliverablerecord. 
+  #  Input params: Deliverabe.id
+  #  Returns     : Redirects to the index page of all deliverables
 
   def destroy
     @deliverable = Deliverable.find(params[:id])
@@ -93,6 +98,9 @@ class DeliverablesController < ApplicationController
   end
 
   private
+#  Passes all know deliverables types and complexities to Deliverable model to get minimum, average, and maximum of effort, size and rate.
+#  Input params: DeliverableType, and Complexity
+#  Returns     : Hash of min, avg, and max of each: effort, size, and rate
 
    def dynamic_estimates
     estimates = []

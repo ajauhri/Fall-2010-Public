@@ -1,6 +1,9 @@
+# Handles Typical deliverables under a typical lifecycle
 class TypicalDeliverablesController < ApplicationController
-  # GET /typical_deliverables
-  # GET /typical_deliverables.xml
+  
+  #  Provides a list of all typical deliverables types
+  #  Input params: None
+  #  Returns     : Returns a list of all deliverables types
   def index
     @typical_deliverables = TypicalDeliverable.all
 
@@ -10,8 +13,9 @@ class TypicalDeliverablesController < ApplicationController
     end
   end
 
-  # GET /typical_deliverables/1
-  # GET /typical_deliverables/1.xml
+  #  Provides a list with different fields of a particular typical deliverables
+   #  Input params: TypicalDeliverable.id
+   #  Returns     : Returns a hash of all fields related to a TypicalDeliverable
   def show
     @typical_deliverable = TypicalDeliverable.find(params[:id])
 
@@ -21,8 +25,9 @@ class TypicalDeliverablesController < ApplicationController
     end
   end
 
-  # GET /typical_deliverables/new
-  # GET /typical_deliverables/new.xml
+  #  Provides a list of all/required fields needed to create a TypicalDeliverable
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a typical deliverable
   def new
     @typical_deliverable = TypicalDeliverable.new
 
@@ -32,14 +37,17 @@ class TypicalDeliverablesController < ApplicationController
     end
   end
 
-  # GET /typical_deliverables/1/edit
+  #  Provides a list of all/required fields of an existing TypicalDelivearble
+  #  Input params: TypicalDelivearble.id
+  #  Returns     : Returns a hash of fields and edited values of TypicalDelivearble
   def edit
     @typical_deliverable = TypicalDeliverable.find(params[:id])
   end
 
-  # POST /typical_deliverables
-  # POST /typical_deliverables.xml
-  def create
+  #  Creates a TypicalDeliverable record. 
+   #  Input params: All/required params related to a TypicalDeliverable need to be passed
+   #  Returns     : A hash of the newly created TypicalDeliverable and a confirmation
+    def create
     @typical_deliverable = TypicalDeliverable.new(params[:typical_deliverable])
 
     respond_to do |format|
@@ -53,8 +61,9 @@ class TypicalDeliverablesController < ApplicationController
     end
   end
 
-  # PUT /typical_deliverables/1
-  # PUT /typical_deliverables/1.xml
+  #  Updates a TypicalDeliverable record. 
+   #  Input params: TypicalDeliverable.id
+   #  Returns     : A hash of the newly created TypicalDeliverable and a confirmation 
   def update
     @typical_deliverable = TypicalDeliverable.find(params[:id])
 
@@ -69,8 +78,9 @@ class TypicalDeliverablesController < ApplicationController
     end
   end
 
-  # DELETE /typical_deliverables/1
-  # DELETE /typical_deliverables/1.xml
+  #  Deletes a TypicalDeliverable record. 
+  #  Input params: TypicalDeliverable.id
+  #  Returns     : Redirects to the index page of all typical deliverables
   def destroy
     @typical_deliverable = TypicalDeliverable.find(params[:id])
     @typical_deliverable.destroy

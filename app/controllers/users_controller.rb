@@ -4,12 +4,18 @@ class UsersController < ApplicationController
   before_filter :require_user, :except => ['new', 'create']
   before_filter :require_admin, :except => ['edit', 'update']
 
-  # Lists all Projects from the DB
+  #  Provides a list of all/required fields needed to create a User
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a user
+  
   def new
     @user = User.new
   end
 
-  # Creates a Project record. All params related to a Project need to be passed
+  #  Creates a User record. 
+  #  Input params: All/required params related to a User need to be passed
+  #  Returns     : A hash of the newly created User and a confirmation
+  
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -20,13 +26,17 @@ class UsersController < ApplicationController
     end
   end
 
-  # Retrieves a Project record. Params required: Project.id
-  def edit
+
+  #  Provides a list of all/required fields of an existing User(only the user logged in can edit)
+  #  Input params: User.id
+  #  Returns     : Returns a hash of fields and edited values of User 
+   def edit
     @user = current_user
   end
-
-
-  # Update a Project record. Params required: Project.id
+  
+  #  Updates a DeliverableType record. 
+  #  Input params: DeliverabeType.id
+  #  Returns     : A hash of the newly created DeliverableType and a confirmation
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
@@ -53,13 +63,14 @@ class UsersController < ApplicationController
     end
   end
 =end
+
   # Redirects if the current_user is not Admin
   def require_admin
      if !is_admin
        redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder'
      end
   end
-  
+  # Checks wheter the current user is admin or not
   def is_admin
     return current_user.role == User::ADMIN
   end

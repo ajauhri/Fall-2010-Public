@@ -22,6 +22,16 @@
 <body class="class">
 
 	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
 		<div id="file-metadata">
 			<div id="file-list-section" class="section">
 				<h3 class="section-header">In Files</h3>
@@ -59,7 +69,7 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#M000049">#create_phases</a></li>
+					<li><a href="#method-i-create_phases">#create_phases</a></li>
 					
 				</ul>
 			</div>
@@ -101,7 +111,15 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./Complexity.html">Complexity</a></li>
+				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
+				
+					<li><a href="./DeliverableType.html">DeliverableType</a></li>
+				
+					<li><a href="./DeliverableTypesController.html">DeliverableTypesController</a></li>
+				
+					<li><a href="./DeliverableTypesHelper.html">DeliverableTypesHelper</a></li>
 				
 					<li><a href="./DeliverablesController.html">DeliverablesController</a></li>
 				
@@ -121,6 +139,10 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
+					<li><a href="./PetController.html">PetController</a></li>
+				
+					<li><a href="./PetHelper.html">PetHelper</a></li>
+				
 					<li><a href="./Project.html">Project</a></li>
 				
 					<li><a href="./ProjectPhase.html">ProjectPhase</a></li>
@@ -132,6 +154,12 @@
 					<li><a href="./ProjectsController.html">ProjectsController</a></li>
 				
 					<li><a href="./ProjectsHelper.html">ProjectsHelper</a></li>
+				
+					<li><a href="./TypicalDeliverable.html">TypicalDeliverable</a></li>
+				
+					<li><a href="./TypicalDeliverablesController.html">TypicalDeliverablesController</a></li>
+				
+					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
 				
@@ -157,7 +185,22 @@
 		<h1 class="class">Project</h1>
 
 		<div id="description">
-			<p>
+			<h2>Schema Information</h2>
+<p>
+Table name: projects
+</p>
+<pre>
+ id                     :integer         not null, primary key
+ name                   :string(255)
+ description            :text
+ total_estimated_effort :decimal(, )     default(0.0)
+ status                 :string(255)     default(&quot;Active&quot;)
+ actual_effort          :decimal(, )     default(0.0)
+ created_at             :datetime
+ updated_at             :datetime
+ lifecycle_id           :integer
+</pre>
+<p>
 Model class for projects table. Associations => belongs_to :lifecycle,
 has_many :project_phases
 </p>
@@ -172,7 +215,7 @@ has_many :project_phases
 			
 				<dt><a name="STATUS_TYPES">STATUS_TYPES</a></dt>
 				
-				<dd class="description missing-docs">(Not documented)</dd>
+				<dd class="description"></dd>
 				
 			
 			</dl>
@@ -189,7 +232,7 @@ has_many :project_phases
 
 		
 			<div id="create-phases-method" class="method-detail ">
-				<a name="M000049"></a>
+				<a name="method-i-create_phases"></a>
 
 				<div class="method-heading">
 				
@@ -211,17 +254,19 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 					<div class="method-source-code"
 						id="create-phases-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/project.rb, line 19</span>
-19: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_phases</span>
-20:    <span class="ruby-ivar">@lifecycle_phases</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find_all_by_lifecycle_id</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lifecycle_id</span>)
-21:    <span class="ruby-ivar">@lifecycle_phases</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lp</span><span class="ruby-operator">|</span>
-22:      
-23:     <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">create_from_lifecycle_phase</span>(<span class="ruby-identifier">lp</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>)
-24:    <span class="ruby-keyword kw">end</span>
-25:  <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/project.rb, line 33</span>
+33: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_phases</span>
+34:    <span class="ruby-ivar">@lifecycle_phases</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find_all_by_lifecycle_id</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lifecycle_id</span>)
+35:    <span class="ruby-ivar">@lifecycle_phases</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">lp</span><span class="ruby-operator">|</span>
+36:      
+37:     <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">create_from_lifecycle_phase</span>(<span class="ruby-identifier">lp</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>)
+38:    <span class="ruby-keyword kw">end</span>
+39:  <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
+
+				
 
 				
 			</div>
