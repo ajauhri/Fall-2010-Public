@@ -453,11 +453,16 @@ border-right-width: 1px;*/
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#5FBDCE', endColorstr='#428490');
 }
 
-.InputTable {
+.InputTable, #DeliverableBottomTable {
     width: 100%;
     text-align: left;
     padding: 0;
     color: #FFFFFF;
+}
+
+#DeliverableBottomTable td, #DeliverableBottomTable tr{
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -531,4 +536,8 @@ li .handle {
 
 #effort_deliverable_id{
     width: 150px;
+}
+
+.numberField{
+    width: 40px;
 }

@@ -2,74 +2,81 @@
 <div class="InputArea">
   Project: <%=h @deliverable.project_phase.project.name %><br />
 Phase: <%=h @deliverable.project_phase.name %>
+<br/>*Denotes Required Field
 <% form_for(@deliverable) do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field :project_phase_id, {:value => @deliverable.project_phase_id} %>
 
   <table class="InputTable">
     <tr><td>
-        <%= f.label :name %></td><td>
+        <%= f.label :name %>*</td><td>
         <%= f.text_field :name %>
       </td></tr>
     <tr><td>
-        <%= f.label :type %></td><td>
-        <%= f.collection_select :deliverable_type, DeliverableType.find(:all), :name, :name, :prompt => 'Deliverable Type'  %>
+        <%= f.label :type %>*</td><td>
+        <%= f.collection_select :deliverable_type, DeliverableType.find(:all) << DeliverableType.new(:name => 'Ad-Hoc'), :name, :name, :prompt => 'Deliverable Type'  %>
       </td></tr>
     <tr><td>
-        <%= f.label :unit_of_measure %></td><td>
-        <%= f.text_field :unit_of_measure %>
-      </td></tr>
-    <tr><td>
-        <%= f.label :complexity %></td><td>
+        <%= f.label :complexity %>*</td><td>
         <%= f.select :complexity, Complexity.getValues, :prompt => 'Complexity' %>
       </td></tr>
     <tr><td>
         <%= f.label :description %></td><td>
         <%= f.text_area :description, :cols => 60, :rows => 8  %>
       </td></tr>
+  </table>
+<table id="DeliverableBottomTable">
+    <tr class="stats_table">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="stats_table">Min</td>
+      <td class="stats_table">Avg</td>
+      <td class="stats_table">Max</td>
+    </tr>
     <tr><td>
-        <%= f.label :estimated_size %></td><td>
-        <%= f.text_field :estimated_size %>
-      </td></tr>
-    <tr><td>
-        <%= f.label :estimated_effort %></td><td>
-        <%= f.text_field :estimated_effort %>
+        <%= f.label "Effort" %>*</td><td>
+        <%= f.text_field :estimated_effort, :value => '', 
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+      </td>
+      <td></td>
+      <td class="stats_table" id="min_effort"></td>
+      <td class="stats_table" id="avg_effort"></td>
+      <td class="stats_table" id="max_effort"></td>
+    </tr>
+     <tr><td>
+        <%= f.label "Size" %>*</td><td>
+        <%= f.text_field :estimated_size, 
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+       <td><%= f.text_field :unit_of_measure, :style => 'width: 100px;'%>*</td>
+      <td class="stats_table" id="min_size"></td>
+      <td class="stats_table" id="avg_size"></td>
+      <td class="stats_table" id="max_size"></td>
+      </td>
+    </tr>
+     <tr><td>
+        <%= f.label "Production Rate" %>*</td><td>
+        <%= f.text_field :estimated_production_rate, 
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+       <td></td>
+      <td class="stats_table" id="min_rate"></td>
+      <td class="stats_table" id="avg_rate"></td>
+      <td class="stats_table" id="max_rate"></td>
       </td></tr>
   </table>
   <p>
     <%= f.submit 'Create' %>
   </p>
 
-  <table id="stats_table">
-    <th></th>
-    <th>Minimum</th>
-    <th>Maximum</th>
-    <th>Average</th>
-    <tr>
-      <td>Effort</td>
-      <td id="min_effort"></td>
-      <td id="max_effort"></td>
-      <td id="avg_effort"></td>
-    </tr>
-    <tr>
-      <td>Size</td>
-      <td id="min_size"></td>
-      <td id="max_size"></td>
-      <td id="avg_size"></td>
-    </tr>
-    <tr>
-      <td>Rate</td>
-      <td id="min_rate"></td>
-      <td id="max_rate"></td>
-      <td id="avg_rate"></td>
-    </tr>
-  </table>
-
 <% end %>
 
 <%= link_to 'Back', @deliverable.project_phase.project %>
 </div>
 <script type="text/javascript">
+
+<% for deliverable_type in DeliverableType.find(:all) %>
+    deliverableTypes.push(new Array('<%= deliverable_type.unit_of_measure %>', '<%=h deliverable_type.name %>'));
+<% end %>
 
 <% for estimate in @estimates %>
     estimates.push(new Array('<%=h estimate[:type] %>', '<%=h estimate[:complexity] %>',

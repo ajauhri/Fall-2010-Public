@@ -25,22 +25,13 @@ class Deliverable < ActiveRecord::Base
   after_save :update_all_estimated_effort
 
   validates_presence_of :name, :deliverable_type, :unit_of_measure,
-    :complexity, :estimated_size, :estimated_effort
+    :complexity, :estimated_size, :estimated_effort, :estimated_production_rate
 
   validates_numericality_of :estimated_size, :estimated_effort
 
   validate :estimated_size_should_be_positive, :estimated_effort_should_be_positive
 
   validates_inclusion_of :complexity, :in => Complexity.getValues
-
-  # To retrieve the estimated production rate for a deliverable
-  def get_production_rate
-    #if !estimated_size.nil? && !estimated_effort.nil? && estimated_size > 0 && estimated_effort > 0
-    return estimated_effort / estimated_size
-    #else
-    #  return 0
-    #end
-  end
 
 
   # To create deliverables from the set of pre-defined typical deliverables
