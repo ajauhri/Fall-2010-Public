@@ -25,7 +25,7 @@ class Deliverable < ActiveRecord::Base
   after_save :update_all_estimated_effort
 
   validates_presence_of :name, :deliverable_type, :unit_of_measure,
-      :complexity, :estimated_size, :estimated_effort
+    :complexity, :estimated_size, :estimated_effort
 
   validates_numericality_of :estimated_size, :estimated_effort
 
@@ -36,31 +36,31 @@ class Deliverable < ActiveRecord::Base
   # To retrieve the estimated production rate for a deliverable
   def get_production_rate
     #if !estimated_size.nil? && !estimated_effort.nil? && estimated_size > 0 && estimated_effort > 0
-      return estimated_effort / estimated_size
+    return estimated_effort / estimated_size
     #else
     #  return 0
     #end
   end
 
 
- # To create deliverables from the set of pre-defined typical deliverables
- # Inputs parms : TypicalDeliverable.id, ProjectPhase.id
- #Retruns       : Nil
+  # To create deliverables from the set of pre-defined typical deliverables
+  # Inputs parms : TypicalDeliverable.id, ProjectPhase.id
+  #Retruns       : Nil
   def self.create_from_typical_deliverable(typical_deliverable_id, project_phase_id)
     @typical_deliverable = TypicalDeliverable.find(typical_deliverable_id)
     deliverable_type = DeliverableType.find(@typical_deliverable.deliverable_type_id)
 
     if @typical_deliverable
-        Deliverable.create(
-         :name => @typical_deliverable.name,
-         :description => @typical_deliverable.description,
-         :deliverable_type => deliverable_type.name,
-         :unit_of_measure => deliverable_type.unit_of_measure,
-         :complexity => @typical_deliverable.complexity,
-         :estimated_size => @typical_deliverable.estimated_size,
-         :estimated_effort => @typical_deliverable.estimated_effort,
-         :estimated_production_rate => @typical_deliverable.estimated_production_rate,
-         :project_phase_id => project_phase_id)
+      Deliverable.create(
+        :name => @typical_deliverable.name,
+        :description => @typical_deliverable.description,
+        :deliverable_type => deliverable_type.name,
+        :unit_of_measure => deliverable_type.unit_of_measure,
+        :complexity => @typical_deliverable.complexity,
+        :estimated_size => @typical_deliverable.estimated_size,
+        :estimated_effort => @typical_deliverable.estimated_effort,
+        :estimated_production_rate => @typical_deliverable.estimated_production_rate,
+        :project_phase_id => project_phase_id)
     end
   end
 
@@ -73,50 +73,55 @@ class Deliverable < ActiveRecord::Base
     return get_statistics(find_by)
   end
 
-protected
+  protected
 
-# Updates efforts for ProjectPhase
+  # Updates efforts for ProjectPhase
 
   def update_all_estimated_effort
-   if self.project_phase and self.project_phase.project
-    self.project_phase.total_estimated_effort += estimated_effort
-    self.project_phase.project.total_estimated_effort += estimated_effort
-  end
+
+    if self.estimated_effort_changed? and self.project_phase and self.project_phase.project
+        self.project_phase.total_estimated_effort += estimated_effort
+        self.project_phase.project.total_estimated_effort += estimated_effort
+
+        self.project_phase.save!
+        self.project_phase.project.save!
+      end
+    
   end
 
-# Calulates estimates
-# Input params : DeliverableType.name, Complexity
-# Returns      : Hash of the estimates
+  # Calulates estimates
+  # Input params : DeliverableType.name, Complexity
+  # Returns      : Hash of the estimates
   def self.get_statistics(find_by)
     estimates = {}
   
-            estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by
-            estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by
-            estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by
-            estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by
-            estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by
-            estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by
-            estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by
-            estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by
-            estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by
+    estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by
+    estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by
+    estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by
+    estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by
+    estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by
+    estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by
+    estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by
+    estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by
+    estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by
 
-        return estimates
+    return estimates
          
-    end
+  end
 
-# Ensures estimate_size is not negative
+  # Ensures estimate_size is not negative
  
   def estimated_size_should_be_positive
     if estimated_size.nil? || estimated_size <= 0
-    errors.add(:estimated_size, 'should be positive')
+      errors.add(:estimated_size, 'should be positive')
     end
   end
 
   # Ensures estimate_effort is not negative
 
   def estimated_effort_should_be_positive
-        if estimated_effort.nil? || estimated_effort <= 0
-    errors.add(:estimated_effort, 'should be positive')
+    if estimated_effort.nil? || estimated_effort <= 0
+      errors.add(:estimated_effort, 'should be positive')
     end
   end
 

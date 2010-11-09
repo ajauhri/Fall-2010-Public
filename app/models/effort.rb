@@ -24,10 +24,14 @@ class Effort < ActiveRecord::Base
   
   # Updates efforts in deliverable, project_phase, and project
   def update_all_effort
-    if self.deliverable and self.deliverable.project_phase
+    if self.value_changed? and self.deliverable and self.deliverable.project_phase
      self.deliverable.actual_effort += value
      self.deliverable.project_phase.actual_effort += value
      self.deliverable.project_phase.project.actual_effort += value
+
+     self.deliverable.save!
+     self.deliverable.project_phase.save!
+     self.deliverable.project_phase.project.save!
      
     end
   end

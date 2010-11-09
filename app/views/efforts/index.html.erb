@@ -2,7 +2,7 @@
 
 <% columns = [{:type => 'html'}, {:type => 'html'}, {:type => 'html'},{:type => 'html'}, {:type => 'html'}] %>
 <%= datatable(columns, {:sort_by => "[4,'desc']", :per_page => 10}) %>
-
+<div>
 <table class='datatable' id="example">
   <thead>
   <th id="HeaderLeft">Project</th>
@@ -35,8 +35,9 @@
   <% end %>
 </tbody>
 </table>
-
-
+</div>
+<div class="cleaner"></div>
+<div>
 <% form_for @effort, :html => {:class => "InputArea", :style => "width:70%;"} do |form| %>
   <% form.error_messages %>
   <%= collection_select '', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
@@ -47,6 +48,7 @@
   <%= form.text_field :effort_date, :class => 'datepicker' %>
   <%= form.submit 'Add Effort' %>
 <% end %>
+</div>
 
 
 <script type="text/javascript">
