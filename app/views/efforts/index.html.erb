@@ -1,32 +1,31 @@
-
 <h2>Recently Logged Effort</h2>
-<table class="DisplayTable">
+
+<% columns = [{:type => 'html'}, {:type => 'html'}, {:type => 'html'},{:type => 'html'}, {:type => 'html'}] %>
+<%= datatable(columns, {:sort_by => "[4,'desc']", :per_page => 10}) %>
+<div>
+<table class='datatable' id="example">
+  <thead>
   <th id="HeaderLeft">Project</th>
   <th>Phase</th>
   <th>Deliverable</th>
   <th>Effort (Hours)</th>
   <th>Last Updated</th>
-  <th></th>
   <th id="HeaderRight"></th>
+</thead>
+<tbody>
   <% for effort in @efforts %>
     <tr>
       <!-- % deliverable = Deliverable.find_by_id(effort.deliverable_id) %-->
-
-
-      <% puts effort %>
-      <% puts effort.deliverable %>
-      <% puts effort.deliverable.project_phase %>
-      <% puts effort.deliverable.project_phase.project %>
-
-        <%= deliverable = effort.deliverable %>
-      <td><!--%= deliverable.project_phase.project.name %--></td>
-      <td><%= deliverable.project_phase.name %> </td>
-      <td><%=  deliverable.name %></td>
+      <td><%= effort.deliverable.project_phase.project.name %></td>
+      <td><%= effort.deliverable.project_phase.name %> </td>
+      <td><%=  effort.deliverable.name %></td>
       <td><%=  effort.value.round(1) %></td>
       <td><%=  effort.updated_at.to_s(:long) %></td>
-      <td><%= link_to_function 'Log', "projectSelect(#{deliverable.project_phase.id},
-          #{deliverable.project_phase.project.id}, #{deliverable.id})" %></td>
-      <td><%= link_to 'X', effort, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to_function 'Log', "projectSelect(#{effort.deliverable.project_phase.id},
+          #{effort.deliverable.project_phase.project.id}, #{effort.deliverable.id})" %>
+        <%=  link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete effort for '+effort.deliverable.name, :alt => 'Delete effort for '+effort.deliverable.name),
+          effort, :confirm => 'Are you sure to delete effort for '+effort.deliverable.name+'?', :method => :delete %>
+      </td>
     </tr>
   <% end %>
   <% if @efforts.length == 0 %>
@@ -34,9 +33,11 @@
       <td colspan="7">You have not logged effort to any deliverables</td>
     </tr>
   <% end %>
+</tbody>
 </table>
-
-
+</div>
+<div class="cleaner"></div>
+<div>
 <% form_for @effort, :html => {:class => "InputArea", :style => "width:70%;"} do |form| %>
   <% form.error_messages %>
   <%= collection_select '', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
@@ -47,6 +48,7 @@
   <%= form.text_field :effort_date, :class => 'datepicker' %>
   <%= form.submit 'Add Effort' %>
 <% end %>
+</div>
 
 
 <script type="text/javascript">
