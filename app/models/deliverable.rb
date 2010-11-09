@@ -115,6 +115,24 @@ class Deliverable < ActiveRecord::Base
       errors.add(:estimated_effort, 'should be positive')
     end
   end
+  
+  # Decrements Deliverable.actual_effort and calls ProjectPhase model to decrement actual_effort
+  # Input params : Effort.value
+  
+  def decrement_actual_effort effort_value
+    self.actual_effort -= effort_value
+    if self.save! && self.project_phase
+      self.project_phase.decrement_actual_effort effort_value
+    end
+  end
+  
+  def increment_actual_effort effort_value
+    self.actual_effort += effort_value
+    if self.save! && self.project_phase
+      self.project_phase.increment_actual_effort effort_value
+    end
+  end
+  
 
 
 end

@@ -34,33 +34,73 @@ describe " for project, phase, deliverable shall be updated after effort creatio
 
   before(:all) do
 
-    @testing_total_effort = Factory.create(:testing_total_effort)
-    @deliverable_effort_init = @testing_total_effort.deliverable.actual_effort
-  @project_phase_effort_init = @testing_total_effort.deliverable.project_phase.actual_effort
-  @project_effort_init = @testing_total_effort.deliverable.project_phase.project.actual_effort
-    @testing_total_effort2 = Factory.create(:testing_total_effort2, :deliverable => @testing_total_effort.deliverable)
+    @effort1 = Factory.create(:effort1)
+    @init_actual_effort_for_deliverable = Deliverable.find(@effort1.deliverable).actual_effort
+  @init_actual_effort_for_project_phase = ProjectPhase.find(@effort1.deliverable.project_phase).actual_effort
+  @init_actual_effort_for_project = Project.find(@effort1.deliverable.project_phase.project).actual_effort
+    @effort2 = Factory.create(:effort2, :deliverable => @effort1.deliverable)
 
   end
 
    it "should update project total effort" do
-     @project_effort_init == @testing_total_effort.value
-    @testing_total_effort.deliverable.project_phase.project.actual_effort.should == @deliverable_effort_init + @testing_total_effort2.value
+     @init_actual_effort_for_project.should == @effort1.value
+    Project.find(@effort1.deliverable.project_phase.project).actual_effort.should == @init_actual_effort_for_project + @effort2.value
   end
 
 
-        it "should update project phases total effort" do
-           @project_phase_effort_init == @testing_total_effort.value
-           @testing_total_effort.deliverable.project_phase.actual_effort.should == @deliverable_effort_init + @testing_total_effort2.value
-        end
+   it "should update project phases total effort" do
+     @init_actual_effort_for_project_phase == @effort1.value
+     ProjectPhase.find(@effort1.deliverable.project_phase).actual_effort.should == @init_actual_effort_for_project_phase + @effort2.value
+   end
 
 
-        it "should update deliverable effort" do
-             @deliverable_effort_init.should == @testing_total_effort.value
-            @testing_total_effort.deliverable.actual_effort.should == @deliverable_effort_init + @testing_total_effort2.value
+   it "should update deliverable effort" do
+      @init_actual_effort_for_deliverable.should == @effort1.value
+      Deliverable.find(@effort1.deliverable).actual_effort.should == @init_actual_effort_for_deliverable + @effort2.value
+    end
+  end
 
-        end
+
+describe " for project, phase, deliverable shall be updated after deletion" do
+
+  before(:each) do
+    @effort1 = Factory.create(:effort1)
+  end
+
+   it "should update deliverable actual_effort" do
+       @init_actual_effort_for_deliverable = Deliverable.find(@effort1.deliverable).actual_effort
+
+         @init_actual_effort_for_deliverable.should == @effort1.value
+         @deliverable = Deliverable.find(@effort1.deliverable)
+         @effort_value = @effort1.value
+         Effort.destroy(@effort1)
+         Deliverable.find(@deliverable).actual_effort.should == @init_actual_effort_for_deliverable - @effort_value
+
+    end
+
+
+  it "should update project phase actual effort" do
+       @init_actual_effort_for_project_phase = ProjectPhase.find(@effort1.deliverable.project_phase).actual_effort
+       @init_actual_effort_for_project_phase.should == @effort1.value
+       @project_phase = ProjectPhase.find(@effort1.deliverable.project_phase)
+       @effort_value = @effort1.value
+       Effort.destroy(@effort1)
+       ProjectPhase.find(@project_phase).actual_effort.should == @init_actual_effort_for_project_phase - @effort_value
+   end
+
+  it "should update project actual effort" do
+      @init_actual_effort_for_project = Project.find(@effort1.deliverable.project_phase.project).actual_effort
+      @init_actual_effort_for_project.should == @effort1.value
+      @project = Project.find(@effort1.deliverable.project_phase.project)
+      @effort_value = @effort1.value
+      Effort.destroy(@effort1)
+      Project.find(@project).actual_effort.should == @init_actual_effort_for_project - @effort_value
+  end
+
+
   end
 end
+
 
 # == Schema Information
 #

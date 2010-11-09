@@ -64,13 +64,13 @@ Factory.define :effort_deliverable2, :class => Deliverable do |p|
   p.project_phase {|l| l.association(:effort_project_phase) }
 end
 
-Factory.define :testing_total_effort, :class => Effort do |p|
+Factory.define :effort1, :class => Effort do |p|
   p.user_id 4
   p.value 10
   p.deliverable {|l| l.association(:effort_deliverable) }
 end
 
-Factory.define :testing_total_effort2, :class => Effort do |p|
+Factory.define :effort2, :class => Effort do |p|
   p.user_id 47
   p.value 15
 end
