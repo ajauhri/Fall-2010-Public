@@ -50,6 +50,24 @@ class ProjectPhase < ActiveRecord::Base
       Deliverable.create_from_typical_deliverable(td.id, self.id)
     end
   end
+  
+  # Decrements ProjectPhase.actual_effort and calls Project model to decrement actual_effort
+  # Input params : Effort.value
+  def decrement_actual_effort effort_value
+    self.actual_effort -= effort_value
+    
+    if self.save! && self.project
+      self.project.decrement_actual_effort effort_value
+    end
+  end
+  
+  def increment_actual_effort effort_value
+    self.actual_effort += effort_value
+    if self.save! && self.project
+      self.project.increment_actual_effort effort_value
+    end
+  end
+  
 end
 
 

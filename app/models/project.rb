@@ -37,6 +37,19 @@ def create_phases
     ProjectPhase.create_from_lifecycle_phase(lp.id, self)
    end
  end
+ 
+ # Decrements Project.actual_effort 
+ # Input params : Effort.value
+ 
+ def decrement_actual_effort effort_value
+   self.actual_effort -= effort_value
+   self.save!
+ end
+
+def increment_actual_effort effort_value
+  self.actual_effort +=effort_value
+  self.save!
+end
 
 
   #validates_inclusion_of :status, :in =>
