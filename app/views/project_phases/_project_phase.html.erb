@@ -1,17 +1,26 @@
-<%content_tag_for :tr, project_phase do %>
-  <td>
-    <span class="_handle">[drag]</span>
-    <b>Phase</b>
-    <%= link_to h(project_phase.name), edit_project_phase_path(project_phase) %>
-    <%= link_to 'Remove', project_phase, :confirm => 'Are you sure?', :method => :delete %>
-    <%= link_to 'Add deliverables', new_deliverable_path(:project_phase_id => project_phase.id) %>
-    <% for deliverable in project_phase.deliverables.all %>
-      <p><%= link_to h(deliverable.name), edit_deliverable_path(deliverable) %> <%= link_to 'Destroy', deliverable, :method => :delete %></p>
-    <% end %>
-  </td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-<% end %>
+<tbody class="phaseSelection">
+<tr style="cursor: move" class="_handle project_phase <%= cycle('odd', 'evenPhase') %>" id="project_phase_<%= project_phase.id %>">
+    <td>
+      <b>[DRAG]</b>
+      <%= link_to h(project_phase.name), edit_project_phase_path(project_phase) %>
+      <%= link_to 'Remove', project_phase, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+    <td><%= project_phase.total_estimated_effort %></td>
+    <td><%= project_phase.actual_effort %></td>
+  </tr>
+  <% for deliverable in project_phase.deliverables.all %>
+    <tr class="deliverableRow">
+        <td><%= link_to h(deliverable.name), edit_deliverable_path(deliverable) %> <%= link_to 'Destroy', deliverable, :method => :delete %></td>
 
+      <td><%= deliverable.estimated_effort %> </td>
+      <td><%= deliverable.actual_effort %> </td>
+    </tr>
+  <% end %>
+  <tr class="deliverableRow">
+      <td>
+         <%= link_to 'Add New Deliverable', new_deliverable_path(:project_phase_id => project_phase.id) %>
+      </td>
+      <td></td>
+        <td></td>
+  </tr>
+</tbody>
