@@ -50,7 +50,7 @@ class DeliverablesController < ApplicationController
 
     respond_to do |format|
       if @deliverable.save
-        format.html { redirect_to(@deliverable, :notice => 'Deliverables was successfully created.') }
+        format.html { redirect_to(@deliverable.project_phase.project, :notice => 'Deliverables was successfully created.') }
         #format.xml  { render :xml => @deliverable, :status => :created, :location => @deliverables }
       else
         @estimates =  dynamic_estimates

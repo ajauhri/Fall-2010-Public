@@ -1,4 +1,19 @@
-<h2>Recently Logged Effort</h2>
+<h1>Recently Logged Effort</h1>
+
+<div>
+<% form_for @effort, :html => {:class => "InputArea", :style => "width:70%;"} do |form| %>
+  <% form.error_messages %>
+  <%= collection_select '', :project_id, @projects, :id, :name,
+    :prompt => 'Select Project' %>
+  <%= collection_select '', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>
+  <%= form.collection_select :deliverable_id, @deliverables, :id, :name,
+    :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
+
+  <%= form.text_field :value, :style => "width: 30px;"%>Hours
+  <%= form.text_field :effort_date, :class => 'datepicker', :style => "width: 80px" %>
+  <%= form.submit 'Add Effort' %>
+<% end %>
+</div>
 
 <% columns = [{:type => 'html'}, {:type => 'html'}, {:type => 'html'},{:type => 'html'}, {:type => 'html'}] %>
 <%= datatable(columns, {:sort_by => "[4,'desc']", :per_page => 10}) %>
@@ -37,18 +52,7 @@
 </table>
 </div>
 <div class="cleaner"></div>
-<div>
-<% form_for @effort, :html => {:class => "InputArea", :style => "width:70%;"} do |form| %>
-  <% form.error_messages %>
-  <%= collection_select '', :project_id, @projects, :id, :name, :prompt => 'Select Project' %>
-  <%= collection_select '', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>
-  <%= form.collection_select :deliverable_id, @deliverables, :id, :name, :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
 
-  <%= form.text_field :value, :style => "width: 30px;"%>Hours
-  <%= form.text_field :effort_date, :class => 'datepicker' %>
-  <%= form.submit 'Add Effort' %>
-<% end %>
-</div>
 
 
 <script type="text/javascript">

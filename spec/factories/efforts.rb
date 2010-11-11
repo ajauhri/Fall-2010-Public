@@ -47,7 +47,7 @@ end
 
 
 Factory.define :effort1, :class => Effort do |p|
-  p.user_id 4
+  p.user_id 5
   p.value 10
   p.deliverable {|l| l.association(:effort_deliverable) }
 end
