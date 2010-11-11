@@ -79,6 +79,8 @@ describe ProjectPhasesController do
         #@project_phases = ProjectPhase.find_all_by_project_id(@project_phase.project_id, :order => :sequence)
         response.should render_template("project_phases/_")
       end
+      
+      
     end
 
     describe "with invalid params" do
@@ -118,6 +120,13 @@ describe ProjectPhasesController do
         stub_project
         put :update, :id => "1"
         response.should redirect_to(project_url(mock_project))
+      end
+      
+      it "should redirect to show template if params commit is present" do
+        ProjectPhase.stub(:find).with(any_args()).and_return(mock_project_phase)
+        @mock_project_phase.should_receive(:project).and_return(mock_project)
+        put :update, :commit => "Cancel"
+        response.should redirect_to(project_url(@mock_project))
       end
     end
 

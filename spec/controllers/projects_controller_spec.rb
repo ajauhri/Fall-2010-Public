@@ -58,20 +58,26 @@ describe ProjectsController do
     response.should render_template(:edit)
   end
 
-  it "update action should render edit template when model is invalid" do
+  it "should update action should render edit template when model is invalid" do
     Project.any_instance.stubs(:valid?).returns(false)
     put :update, :id => Project.first
     response.should render_template(:edit)
   end
+  
+  it "should redirect to show template if params commit is present" do
+    put :update, :commit => "Cancel"
+    response.should redirect_to(project_url(:show))
+  end
+  
 
-  it "update action should redirect when model is valid" do
+  it "should update action should redirect when model is valid" do
     Project.any_instance.stubs(:valid?).returns(true)
     put :update, :id => Project.first
     flash[:notice].should_not be_nil
     response.should redirect_to(:id => Project.first)
   end
 
-  it "destroy action should destroy model and redirect to index action" do
+  it "should destroy action should destroy model and redirect to index action" do
     project = Project.first
     delete :destroy, :id => project
     response.should redirect_to(projects_url)
