@@ -35,14 +35,14 @@
     </tr>
   <% end %>
   <tr onClick="window.location.href='<%= new_deliverable_path(:project_phase_id => project_phase.id) %>'"
-      style="cursor: pointer" class="deliverableRow">
-    <td>
+      style="cursor: pointer;" class="deliverableRow">
+    <td style="border-radius: 0px;">
       <%=  image_tag('/images/plus_icon.png', :title => 'Add New Deliverable', :alt => 'Add New Deliverable')  %>
       <%= " New Deliverable" %>
     </td>
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="border-radius: 0px;"></td>
   </tr>
 </tbody>
