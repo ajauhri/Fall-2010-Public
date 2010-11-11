@@ -449,7 +449,7 @@ border-right-width: 1px;*/
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     background: #f78d1d;
     background: -webkit-gradient(linear, left top, left bottom, from(#5FBDCE), to(#428490));
-    background: -moz-linear-gradient(top,  #5FBDCE,  #428490);
+    background: -moz-linear-gradient(top,  #E0E0E0,  #EEEEEE);
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#5FBDCE', endColorstr='#428490');
 }
 
@@ -457,7 +457,7 @@ border-right-width: 1px;*/
     width: 100%;
     text-align: left;
     padding: 0;
-    color: #FFFFFF;
+    color: black;
 }
 
 #DeliverableBottomTable td, #DeliverableBottomTable tr{
@@ -488,7 +488,7 @@ border-right-width: 1px;*/
 }
 
 .DisplayTable th, td{
-    padding: 1em;
+    padding: 0em;
 }
 
 .DisplayTable #BottomRow td{

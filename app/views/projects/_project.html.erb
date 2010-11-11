@@ -1,55 +1,58 @@
 <% form_for(@project) do |f| %>
 
-<div class="InputArea">
+  <div class="InputArea">
 
-   <table class="InputTable">
-     <tr>
-    <td>
-    <%= f.label "Project Name:" %>
-    </td><td>
-    <%= f.text_field :name %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-    <%= f.label "Description:" %>
+    <table class="InputTable">
+      <tr>
+        <td>
+          <%= f.label "Project Name:" %>
         </td><td>
-    <%= f.text_area :description %>
-      </td>
-  </tr>
-       <tr>
-    <td>
-    <%= f.label "Status:" %>
-    </td><td>
-  <%= f.select(:status, Project::STATUS_TYPES) %>
-    </td>
-  </tr>
+          <%= f.text_field :name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label "Description:" %>
+        </td><td>
+          <%= f.text_area :description, :rows => 5 %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label "Status:" %>
+        </td><td>
+          <%= f.select(:status, Project::STATUS_TYPES) %>
+        </td>
+      </tr>
 
-         <tr>
-    <td>
-    <%= f.label "Lifecycle:" %>
-    </td><td>
- <%= f.collection_select(:lifecycle_id, Lifecycle.find(:all), :id, :name, :prompt => "Select a lifecycle") %>
-    </td>
-  </tr>
+      <tr>
+        <td>
+          <%= f.label "Lifecycle:" %>
+        </td><td>
+          <%= f.collection_select(:lifecycle_id, Lifecycle.find(:all), :id, :name, :prompt => "Select a lifecycle") %>
+        </td>
+      </tr>
+      <tr><td></td>
+      </tr>
+      <tr><td></td></tr>
 
 
 
 
-  <tr><td>
-    </td><td>
-        <% if  action_name == 'new' %>
-    <%= f.submit 'Create' %>
-    <% elsif action_name == 'edit' %>
-    <%= f.submit 'Update' %>
-    <% else %>
-    <%= f.submit 'Submit' %>
-    <% end %>
-      <%= link_to 'Back', @project %>
-    </td></tr>
-</table>
+      <tr><td>
+        </td><td>
+          <% if  action_name == 'new' %>
+            <%= f.submit 'Create' %>
+          <% elsif action_name == 'edit' %>
+            <%= f.submit 'Update' %>
+          <% else %>
+            <%= f.submit 'Submit' %>
+          <% end %>
+          <%= link_to 'Back', @project %>
+        </td></tr>
+    </table>
 
-</div>
+  </div>
 
 <% end %>
 
