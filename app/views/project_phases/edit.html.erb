@@ -1,4 +1,6 @@
-<h1>Editing project phase</h1>
+<div class="pageTitle">
+ <h1><%= @project_phase.project.name %> > <%= @project_phase.name %> > Edit</h1>
+</div>
 
 <% form_for(@project_phase) do |f| %>
   <%= f.error_messages %>
@@ -10,7 +12,7 @@
           <%= f.label :name %></td><td>
           <%= f.text_field :name %>
         </td></tr>
-      <tr><td>
+      <tr><td style="vertical-align: top">
           <%= f.label :description %></td><td>
           <%= f.text_area :description, :cols=> 40, :rows => 5  %>
         </td></tr>
@@ -32,12 +34,10 @@
             <%=h @project_phase.lifecycle_phase.name  %>
           </td></tr>
       <% end %>
-      <tr><td>
+      <tr><td></td><td>
           <%= f.submit 'Update' %>
+          <%= f.submit 'Cancel' %>
         </td></tr>
     </table>
   </div>
 <% end %>
-
-<!--%= link_to 'Show', @project_phase %> | --!>
-<%= link_to 'Back', @project_phase.project %>

@@ -102,8 +102,8 @@ img {
 }
 
 #notice{
-    border: 1px solid #feb875;
-    background: #fce6d2;
+    border: 1px solid #FFB84D;
+    background: #FFD494;
 }
 
 #notice, #error{
@@ -140,7 +140,6 @@ img {
 #header {
     width: 100%;
     min-width: 1024px;
-    height: 120px;
     /*background: #45B7D8;*/
     background: url('/images/header.png');
     color: #015666;
@@ -462,9 +461,9 @@ border-right-width: 1px;*/
     -moz-box-shadow: 0 2px 4px rgba(0,0,0,.2);
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     background: #f78d1d;
-    background: -webkit-gradient(linear, left top, left bottom, from(#5FBDCE), to(#428490));
-    background: -moz-linear-gradient(top,  #E0E0E0,  #EEEEEE);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#5FBDCE', endColorstr='#428490');
+    background: -webkit-gradient(linear, left top, left bottom, from(#D6D6D6), to(#EEEEEE));
+    background: -moz-linear-gradient(top,  #D6D6D6,  #EEEEEE);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#D6D6D6', endColorstr='#EEEEEE');
 }
 
 .InputTable, #DeliverableBottomTable {
@@ -583,4 +582,13 @@ li .handle {
 
 #cancelPhaseIcon {
     display: none;
+}
+
+.logEffortDropBox{
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.stats_table{
+    text-align:center;
 }

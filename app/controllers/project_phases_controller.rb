@@ -77,7 +77,13 @@ class ProjectPhasesController < ApplicationController
 
 
   def update
+
     @project_phase = ProjectPhase.find(params[:id])
+
+
+    if params[:commit] == 'Cancel'
+      redirect_to :controller => 'projects', :action => 'show', :id => @project_phase.project.id
+    else
 
     respond_to do |format|
       if @project_phase.update_attributes(params[:project_phase])
@@ -88,6 +94,7 @@ class ProjectPhasesController < ApplicationController
         #format.xml  { render :xml => @project_phase.errors, :status => :unprocessable_entity }
       end
     end
+  end
   end
 
 

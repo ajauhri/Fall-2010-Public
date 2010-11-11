@@ -11,6 +11,7 @@
     <th>Est. Effort</th>
     <th>Actual Effort</th>
     <th>Status</th>
+    <th></th>
     <th id="HeaderRight"></th>
   </tr>
   </thead>
@@ -23,10 +24,11 @@
     <td><%=h project.actual_effort %> </td>
     <td><%=h project.status %></td>
     <td>
-      
+
     <%= link_to image_tag('/images/edit_icon.gif', :size => "15x15", :title => 'Edit '+project.name, :alt => 'Edit '+project.name), edit_project_path(project) %>
-    <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete '+project.name, :alt => 'Delete '+project.name), project, :confirm => 'Are you sure?', :method => :delete %>
-   
+    </td><td>
+  <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete '+project.name, :alt => 'Delete '+project.name), project, :confirm => 'Are you sure?', :method => :delete %>
+
       </td>
   </tr>
 <% end %>

@@ -23,8 +23,7 @@ class Project < ActiveRecord::Base
 
   STATUS_TYPES = [
     ["Active"], #"active"],
-    ["Archived"], #"archived"],
-    ["Deleted"]#, "deleted"]
+    ["Archived"] #"archived"],
   ]
 
 # For automatically inserting (at the time of creation of a new project) all pre-defined phases from LifecyclePhase

@@ -1,16 +1,16 @@
 <h1>Recently Logged Effort</h1>
 
 <div>
-<% form_for @effort, :html => {:class => "InputArea", :style => "width:70%;"} do |form| %>
+<% form_for @effort, :html => {:class => "InputArea", :style => "width:80%;"} do |form| %>
   <% form.error_messages %>
   <%= collection_select '', :project_id, @projects, :id, :name,
-    :prompt => 'Select Project' %>
-  <%= collection_select '', :phase_id, @phases, :id, :name, :prompt => 'Select Phase' %>
+    {:prompt => 'Select Project'}, {:class => "logEffortDropBox"} %>
+  <%= collection_select '', :phase_id, @phases, :id, :name, 
+    {:prompt => 'Select Phase'}, {:class => "logEffortDropBox"} %>
   <%= form.collection_select :deliverable_id, @deliverables, :id, :name,
-    :prompt => 'Select Deliverable', :selected => @selected_deliverable %>
-
-  <%= form.text_field :value, :style => "width: 30px;"%>Hours
-  <%= form.text_field :effort_date, :class => 'datepicker', :style => "width: 80px" %>
+    {:prompt => 'Select Deliverable'},{:class => "logEffortDropBox"} %>
+  <%= form.text_field :effort_date, :class => 'datepicker', :style => "width: 80px", :value => Time.now.strftime("%m/%d/%Y") %>
+  <%= form.text_field :value, :style => "width: 30px;"%><%= " Hours " %>
   <%= form.submit 'Add Effort' %>
 <% end %>
 </div>
@@ -29,15 +29,19 @@
 </thead>
 <tbody>
   <% for effort in @efforts %>
-    <tr>
+    <tr style="cursor:pointer"
+      onClick="projectSelect(<%=
+          "#{effort.deliverable.project_phase.project.id},
+          #{effort.deliverable.project_phase.id},
+          #{effort.deliverable.id})" %>"
+        class="effortRow">
       <!-- % deliverable = Deliverable.find_by_id(effort.deliverable_id) %-->
       <td><%= effort.deliverable.project_phase.project.name %></td>
       <td><%= effort.deliverable.project_phase.name %> </td>
       <td><%=  effort.deliverable.name %></td>
       <td><%=  effort.value.round(1) %></td>
       <td><%=  effort.updated_at.to_s(:long) %></td>
-      <td><%= link_to_function 'Log', "projectSelect(#{effort.deliverable.project_phase.id},
-          #{effort.deliverable.project_phase.project.id}, #{effort.deliverable.id})" %>
+      <td>
         <%=  link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete effort for '+effort.deliverable.name, :alt => 'Delete effort for '+effort.deliverable.name),
           effort, :confirm => 'Are you sure to delete effort for '+effort.deliverable.name+'?', :method => :delete %>
       </td>
@@ -56,17 +60,19 @@
 
 
 <script type="text/javascript">
+   jQuery(".effortRow").hover(function () {
+      startColor = jQuery(this).css('background-color');
+      jQuery(this).css('background-color', "#E6FF99");
+  }, function () {
+    jQuery(this).css('background-color', startColor);
+  });
+
 <% for phase in @phases %>
     phases.push(new Array(<%= phase.project_id %>, '<%=h phase.name %>', <%= phase.id %>));
 <%end%>
 <% for deliverable in @deliverables %>
     deliverables.push(new Array(<%= deliverable.project_phase_id %>, '<%=h deliverable.name %>', <%= deliverable.id %>));
 <%end%>
-
-  document.observe('dom:loaded', function() {
     projectSelect();
     phaseSelect();
-    $('_project_id').observe('change', projectSelect);
-    $('_phase_id').observe('change', phaseSelect);
-  });
 </script>

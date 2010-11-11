@@ -1,0 +1,98 @@
+<%= f.hidden_field :project_phase_id, {:value => @deliverable.project_phase_id} %>
+  <table class="InputTable">
+    <tr><td>
+        <%= f.label :name %>*</td><td>
+        <%= f.text_field :name %>
+      </td></tr>
+    <tr><td>
+        <%= f.label :type %>*</td><td>
+        <% type_collection = DeliverableType.find(:all) %>
+        <% type_collection << DeliverableType.new(:name => 'Ad-Hoc') if action_name == 'new' %>
+        <%= f.collection_select :deliverable_type, type_collection, :name, :name, :prompt => 'Deliverable Type'  %>
+      </td></tr>
+    <tr><td>
+        <%= f.label :complexity %>*</td><td>
+        <%= f.select :complexity, Complexity.getValues, :prompt => 'Complexity' %>
+      </td></tr>
+    <tr><td style="vertical-align:top;">
+        <%= f.label :description %></td><td>
+        <%= f.text_area :description, :cols => 40, :rows => 5  %>
+      </td></tr>
+  </table>
+<table id="DeliverableBottomTable">
+  <th style="width:25%"></th>
+  <th style="width: 10%"></th>
+  <th style="width: 35%"></th>
+  <th style="width: 10%"></th>
+  <th style="width: 10%"></th>
+  <th style="width: 10%"></th>
+  <tr>
+     <td colspan="3" style="text-align:left">Estimate Deliverable Effort</td>
+      <td class="stats_table" colspan="3">Historical Data</td>
+  </tr>
+    <tr class="stats_table">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Min</td>
+      <td>Avg</td>
+      <td>Max</td>
+    </tr>
+    <tr><td>
+        <%= f.label "Effort" %>*</td><td>
+        <% effort_value = @deliverable.estimated_effort == 0.0 ?  '' : @deliverable.estimated_effort  %>
+        <%= f.text_field :estimated_effort, :value => effort_value,
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+      </td>
+      <td></td>
+      <td class="stats_table" id="min_effort"></td>
+      <td class="stats_table" id="avg_effort"></td>
+      <td class="stats_table" id="max_effort"></td>
+    </tr>
+     <tr><td>
+        <%= f.label "Size" %>*</td><td>
+        <%= f.text_field :estimated_size,
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+       <td><span id="unitOfMeasure" style="display:none"></span><%= f.text_field :unit_of_measure, :style => 'width: 150px;'%></td>
+      <td class="stats_table" id="min_size"></td>
+      <td class="stats_table" id="avg_size"></td>
+      <td class="stats_table" id="max_size"></td>
+      </td>
+    </tr>
+     <tr><td>
+        <%= f.label "Production Rate" %>*</td><td>
+        <%= f.text_field :estimated_production_rate,
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+       <td></td>
+      <td class="stats_table" id="min_rate"></td>
+      <td class="stats_table" id="avg_rate"></td>
+      <td class="stats_table" id="max_rate"></td>
+      </td></tr>
+  </table>
+
+
+<script type="text/javascript">
+
+<% for deliverable_type in DeliverableType.find(:all) %>
+    deliverableTypes.push(new Array('<%= deliverable_type.unit_of_measure %>', '<%=h deliverable_type.name %>'));
+<% end %>
+
+<% for estimate in @estimates %>
+    estimates.push(new Array('<%=h estimate[:type] %>', '<%=h estimate[:complexity] %>',
+  <%= estimate[:statistics][:min_effort] || 0 %>,
+  <%= estimate[:statistics][:max_effort] || 0 %>,
+  <%= estimate[:statistics][:avg_effort] || 0 %>,
+  <%= estimate[:statistics][:min_size] || 0 %>,
+  <%= estimate[:statistics][:max_size] || 0 %>,
+  <%= estimate[:statistics][:avg_size] || 0 %>,
+  <%= estimate[:statistics][:min_rate] || 0 %>,
+  <%= estimate[:statistics][:max_rate] || 0 %>,
+  <%= estimate[:statistics][:avg_rate] || 0 %>));
+<% end %>
+
+  document.observe('dom:loaded', function() {
+    pairSelected();
+    $('deliverable_deliverable_type').observe('change', pairSelected);
+    $('deliverable_complexity').observe('change', pairSelected);
+  });
+</script>
