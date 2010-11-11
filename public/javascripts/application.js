@@ -126,6 +126,14 @@ function projectSelect(selectedProject, selectedPhase, selectedDeliverable) {
 
 
 jQuery(function() {
-		jQuery( ".datepicker" ).datepicker();
-	});
+    jQuery( ".datepicker" ).keydown(function(){
+        return false;
+    });
+    jQuery( ".datepicker" ).datepicker({
+        minDate: 0
+    });
+});
 
+jQuery(document).ready(function(){
+    jQuery( ".datepicker ").datepicker( "option", "showAnim", 'fadeIn' );
+});
