@@ -44,25 +44,7 @@ Factory.define :effort_project_phase, :class => ProjectPhase do |p|
   p.project {|l| l.association(:effort_project) }
 end
 
-Factory.define :effort_deliverable, :class => Deliverable do |p|
-  p.name "Document"
-  p.deliverable_type "Document"
-  p.unit_of_measure "Pages"
-  p.complexity "LOW"
-  p.estimated_size 3
-  p.estimated_effort 3
-  p.project_phase {|l| l.association(:effort_project_phase) }
-end
 
-Factory.define :effort_deliverable2, :class => Deliverable do |p|
-  p.name "Document2"
-  p.deliverable_type "Document2"
-  p.unit_of_measure "Pages"
-  p.complexity "LOW"
-  p.estimated_size 3
-  p.estimated_effort 30
-  p.project_phase {|l| l.association(:effort_project_phase) }
-end
 
 Factory.define :effort1, :class => Effort do |p|
   p.user_id 4

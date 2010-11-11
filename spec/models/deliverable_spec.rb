@@ -8,7 +8,8 @@ describe Deliverable do
       :unit_of_measure => "pages",
       :complexity => "LOW",#Complexity::VALUES,
       :estimated_size => 10,
-      :estimated_effort => 20
+      :estimated_effort => 20,
+      :estimated_production_rate => 3
     }
   end
 
@@ -20,11 +21,6 @@ describe Deliverable do
     deliverable = Deliverable.create!(@valid_attributes)
     deliverable.complexity = "blah"
     deliverable.should be_invalid
-  end
-
-  it "should calculate the production rate from size and effort" do
-    deliverable = Deliverable.create!(@valid_attributes)
-    deliverable.get_production_rate.should == 2
   end
 
   it "should fail if effort not > 0" do
@@ -51,7 +47,7 @@ describe Deliverable , "from a typical deliverable and a phase" do
   it "should create a deliverablie for a project phase from a typical deliverable" do
      
     typical_deliverable = TypicalDeliverable.create!(:name => 'Concept Document1', :deliverable_type_id => @deliverable_type.id,
-      :estimated_size => 10, :estimated_effort => 20,
+      :estimated_size => 10, :estimated_effort => 20, :estimated_production_rate => 3,
       :complexity => 'LOW')
     project_phase_id = 1
 

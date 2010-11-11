@@ -56,7 +56,6 @@ class ProjectPhasesController < ApplicationController
 
   def create
     @project_phase = ProjectPhase.new(params[:project_phase])
-    
     respond_to do |format|
       if @project_phase.save
         @project_phases = ProjectPhase.find_all_by_project_id(@project_phase.project_id, :order => :sequence)

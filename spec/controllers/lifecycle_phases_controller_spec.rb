@@ -48,7 +48,8 @@ setup :activate_authlogic
       assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
     end
   end
-  
+
+=begin
   describe "GET edit" do
     # it "assigns the requested lifecycle_phase as @lifecycle_phase" do
     #              LifecyclePhase.stub!(:find).with(any_args()).and_return(mock_lifecycle_phase)
@@ -57,6 +58,7 @@ setup :activate_authlogic
     #              #LifecyclePhase.unstub!(:find)
     #            end
     end
+=end
 
   describe "POST create" do
    

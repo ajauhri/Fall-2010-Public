@@ -1,70 +1,42 @@
-<table class="DisplayTable" >
-  <tr><td>
-      <b>Name:</b>
-      <%=h @project.name %>
-    </td>
-    <td width="120px" style="text-align: right">
-      <%= link_to image_tag('/images/edit_icon.gif', :size => "15x15", :title => 'Edit '+@project.name, :alt => 'Edit '+@project.name), edit_project_path(@project) %>
+<div class="pageTitle">
+<h1><%=h @project.name %> (<%=h @project.status %>)
+    <%= link_to image_tag('/images/edit_icon.gif', :size => "15x15", :title => 'Edit '+@project.name, :alt => 'Edit '+@project.name), edit_project_path(@project) %>
       <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete '+@project.name, :alt => 'Delete '+@project.name), @project, :confirm => 'Are you sure?', :method => :delete %>
       <%= link_to image_tag('/images/back.gif', :size => "15x15", :title => 'Back', :alt => 'Back'), projects_path %>
-    </td>
-  </tr>
+ </h1>
+ <p><%=h @project.description %></p>
+</div>
 
-  <tr><td colspan="2">
-      <b>Description:</b>
-      <%=h @project.description %>
-    </td>
-  </tr>
-  <tr><td colspan="2">
-      <b>Total estimated effort:</b>
-      <%=h @project.total_estimated_effort %>
-    </td>
-  </tr>
-  <tr><td colspan="2">
-      <b>Actual effort:</b>
-      <%=h @project.actual_effort %>
-    </td>
-  </tr>
-  <tr><td colspan="2">
-      <b>Status:</b>
-      <%=h @project.status %>
-    </td>
-  </tr>
-</table>
 <script type="text/javascript" >
-  function rshow(elemId1, elemId2)
+  function rshow()
   {
-    
-    var control1 = document.getElementById(elemId1);
-    //alert(control1.id);
-    control1.style.display = 'block';
-
-    var control2 = document.getElementById(elemId2);
-    //alert(control2.id);
-    control2.style.display = 'none';
-   
+    jQuery('#newPhase').toggle();
+    jQuery('#project_phase_name').val('');
+    jQuery('#project_phase_description').val('');
+    textField = jQuery('#addNewPhaseText');
+    textField.html() == 'Add New Phase' ? textField.html('Cancel Add') : textField.html('Add New Phase') ;
   }
-
 </script>
-<div id="PhaseControls">
-  Create phase:
-  <input id="checked_1" type="radio" name="check_opt" checked="checked"
-         onclick="rshow('lifecycle_phase', 'custom_phase')">Lifecycle Phase</input>
-  <input id="checked_2" type="radio" name="check_opt"
-         onclick="rshow('custom_phase', 'lifecycle_phase')">Custom Phase</input>
-  <br />
-  <div id="lifecycle_phase" >
-    <br/>
-    <br/>
-    Define the information required for this type of phase<br/>
-    <br/>
-    <br/>
-  </div>
-  <div id="custom_phase" style="display: none" >
-    <% form_remote_for(:project_phase, @project_phase, :url => {:controller => :project_phases, :action => :create},
-  :html => { :id => "phases_form"}) do |f| %>
-  <%# form_remote_for :project_phase, :url => :url => {:controller => :project_phases, :action => :create} do |f| %>
 
+<table class="datatable" id="example" style="width: 100%">
+  <thead>
+    <tr>
+  <th id="HeaderLeft" style="width: 80%">Phase / Deliverables</th>
+  <th>Estimated Effort</th>
+  <th id="HeaderRight">Actual Effort</th>
+    </tr>
+  </thead>
+  <%= render :partial => @project_phases %>
+  <tbody id="projectTableBottom">
+  <tr class=<%= @project_phases.size % 2 == 0 ? "odd": "evenPhase" %>>
+    <td><b><%= link_to 'Add New Phase', '#', :onclick => 'rshow();return false;', :id => 'addNewPhaseText' %></b></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="newPhase" style="display:none">
+    <td>
+       <% form_remote_for(:project_phase, @project_phase, :url => {:controller => :project_phases, :action => :create},
+  :html => { :id => "phases_form"}) do |f| %>
   <table class="quickTable" id="quickProject">
     <tr>
       <td>Name:</td><td><%= f.text_field :name %></td>
@@ -72,31 +44,33 @@
     <tr>
       <td>Description:</td><td><%= f.text_field :description %></td>
     </tr>
-  </table>
-<%= hidden_field 'project_phase', 'project_id', :value => @project.id %>
-  <%= f.submit "Create" %>
+    <tr>
+      <td></td>
+      <td>
+        <%= hidden_field 'project_phase', 'project_id', :value => @project.id %>
+  <%= f.submit "Create" %><%= button_to 'Cancel', '#',  :onclick => 'rshow();return false;' %>
 <% end %>
-  </div>
-</div>
+      </td>
+    </tr>
+  </table>
 
-
-<table class="DisplayTable" style="width: 100%">
-  <th id="HeaderLeft" style="width: 80%">Phase / Deliverables</th>
-  <th>Estimated Effort</th>
-  <th>Actual Effort</th>
-  <th>Estimated Prod. Rate</th>
-  <th>Actual Prod. Rate</th>
-  <th></th>
-  <th id="HeaderRight"</th>
-  <tbody id="phaseslist">
-    <%= render :partial => @project_phases %>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr class="tableFooter" style="text-align:left;">
+    <td><b><span class="whiteText">Totals:</span></b></td>
+    <td><span class="whiteText"><%=h @project.total_estimated_effort %></span></td>
+    <td><span class="whiteText"><%=h @project.actual_effort %></span></td>
+  </tr>
   </tbody>
 </table>
-
+  
 <span id="sortable_list_control">
-<%= sortable_element("phaseslist", 
+<%= sortable_element("example",
   :url => sort_projects_path,
-  :tag => "tr") %>
+  :handle => 'handle',
+  :tag => "tbody", :only => 'phaseSelection') %>
 </span>
 
 

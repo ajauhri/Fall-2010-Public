@@ -541,3 +541,30 @@ li .handle {
 .numberField{
     width: 40px;
 }
+
+.deliverableRow{
+    background: #F5FAFF;
+}
+
+.evenPhase{
+    background: #E3E1E9;
+}
+.deliverableRow:hover, .evenPhase:hover{
+    background: #E6FF99;
+}
+
+.pageTitle{
+    width: 50%;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.tableFooter td, .tableFooter:link, .tableFooter:visited{
+    background: #015666;
+    color: white;
+    text-align: left;
+}
+
+.whiteText{
+    color: white;
+}
