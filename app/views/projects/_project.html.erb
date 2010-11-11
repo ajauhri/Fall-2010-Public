@@ -17,6 +17,8 @@
           <%= f.text_area :description, :rows => 5 %>
         </td>
       </tr>
+      
+      <% if action_name == 'edit' %>
       <tr>
         <td>
           <%= f.label "Status:" %>
@@ -24,6 +26,7 @@
           <%= f.select(:status, Project::STATUS_TYPES) %>
         </td>
       </tr>
+      <% end %>
 
       <tr>
         <td>

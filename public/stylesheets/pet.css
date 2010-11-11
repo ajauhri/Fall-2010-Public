@@ -5,6 +5,14 @@ body {
     font: 11px/1.5 verdana, sans-serif;
 }
 
+textarea, input, select
+{
+
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+
+
+
 img {
     border: none;
 }
