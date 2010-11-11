@@ -85,16 +85,13 @@ end
 
     describe "with valid params" do
       it "assigns a newly created deliverable as @deliverable" do
-        Deliverable.stub(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => true))
+        Deliverable.stub!(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => true))
+        @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+        @mock_project_phase.should_receive(:project).and_return(mock_project)
         post :create, :deliverable => {:these => 'params'}
         assigns[:deliverable].should equal(mock_deliverable)
       end
 
-      it "redirects to the created deliverables" do
-        Deliverable.stub(:new).and_return(mock_deliverable(:save => true))
-        post :create, :deliverable => {}
-        response.should redirect_to(deliverable_url(mock_deliverable))
-      end
     end
 
     describe "with invalid params" do

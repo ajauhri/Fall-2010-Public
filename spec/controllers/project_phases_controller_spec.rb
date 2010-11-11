@@ -83,11 +83,11 @@ describe ProjectPhasesController do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved project_phase as @project_phase" do
-        ProjectPhase.stub(:new).with({'these' => 'params'}).and_return(mock_project_phase(:save => false))
-        post :create, :project_phase => {:these => 'params'}
-        assigns[:project_phase].should equal(mock_project_phase)
-      end
-
+                 ProjectPhase.stub(:new).with({'these' => 'params'}).and_return(mock_project_phase(:save => false))
+                 post :create, :project_phase => {:these => 'params'}
+                 assigns[:project_phase].should equal(mock_project_phase)
+               end
+         
       it "re-renders the 'new' template" do
         ProjectPhase.stub(:new).and_return(mock_project_phase(:save => false))
         post :create, :project_phase => {}
