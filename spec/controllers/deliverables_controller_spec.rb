@@ -87,7 +87,10 @@ end
       it "assigns a newly created deliverable as @deliverable" do
         Deliverable.stub!(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => true))
         @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+        @mock_deliverable.should_receive(:name).once.and_return(mock_project_phase(:name => "name"))
+        
         @mock_project_phase.should_receive(:project).and_return(mock_project)
+        
         post :create, :deliverable => {:these => 'params'}
         assigns[:deliverable].should equal(mock_deliverable)
       end
@@ -97,14 +100,18 @@ end
     describe "with invalid params" do
       it "assigns a newly created but unsaved deliverable as @deliverable" do
         Deliverable.stub(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => false))
+         @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+          controller.stub!(:error_html).and_return(true)
         post :create, :deliverable => {:these => 'params'}
         assigns[:deliverable].should equal(mock_deliverable)
       end
 
       it "re-renders the 'new' template" do
         Deliverable.stub(:new).and_return(mock_deliverable(:save => false))
+         @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+          controller.stub!(:error_html).and_return(true)
         post :create, :deliverable => {}
-        response.should render_template('new')
+        response.should redirect_to(deliverables_url+"/new?project_phase_id="+@mock_project_phase.id.to_s)
       end
     end
   end
@@ -115,6 +122,8 @@ end
     describe "with valid params" do
       it "updates the requested deliverable" do
         Deliverable.should_receive(:find).with("37").and_return(mock_deliverable)
+          @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+          controller.stub!(:error_html).and_return(true)
         mock_deliverable.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :deliverable => {:these => 'params'}
       end
@@ -122,6 +131,8 @@ end
       it "assigns the requested deliverables as @deliverable" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => true))
         @mock_deliverable.should_receive(:project_phase).once.and_return(mock_project_phase(:project => "true"))
+        @mock_deliverable.should_receive(:name).once.and_return(mock_project_phase(:name => "name"))
+        
         put :update, :id => "1"
         assigns[:deliverable].should equal(mock_deliverable)
       end
@@ -129,6 +140,7 @@ end
       it "redirects to the deliverables" do
         Deliverable.stub!(:find).with(any_args()).and_return(mock_deliverable(:project_phase => mock_project_phase(:project => mock_project)))
         @mock_deliverable.should_receive(:update_attributes).once.with({'these' => 'params'}).and_return(true)
+        @mock_deliverable.should_receive(:name).once.and_return(mock_project_phase(:name => "name"))
         
         put :update, :id => "1", :deliverable => {:these => 'params'}
         response.should redirect_to(project_url(@mock_project))
@@ -137,21 +149,29 @@ end
 
     describe "with invalid params" do
       it "updates the requested deliverables" do
-        Deliverable.should_receive(:find).with("37").and_return(mock_deliverable)
-        mock_deliverable.should_receive(:update_attributes).with({'these' => 'params'})
+        Deliverable.should_receive(:find).with(any_args()).and_return(mock_deliverable)
+        @mock_deliverable.should_receive(:update_attributes).and_return(false)
+        @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+        controller.stub!(:error_html).and_return(true)
+        
         put :update, :id => "37", :deliverable => {:these => 'params'}
       end
 
       it "assigns the deliverables as @deliverables" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => false))
+        @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+        controller.stub!(:error_html).and_return(true)
         put :update, :id => "1"
         assigns[:deliverable].should equal(mock_deliverable)
       end
 
       it "re-renders the 'edit' template" do
         Deliverable.stub(:find).and_return(mock_deliverable(:update_attributes => false))
-        put :update, :id => "1"
-        response.should render_template('edit')
+        @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+         controller.stub!(:error_html).and_return(true)
+        put :update
+        response.should redirect_to(deliverables_url+"/edit?project_phase_id="+@mock_project_phase.id.to_s)
+
       end
     end
 
