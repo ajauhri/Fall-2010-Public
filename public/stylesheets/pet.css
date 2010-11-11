@@ -140,7 +140,6 @@ img {
 #header {
     width: 100%;
     min-width: 1024px;
-    height: 120px;
     /*background: #45B7D8;*/
     background: url('/images/header.png');
     color: #015666;
