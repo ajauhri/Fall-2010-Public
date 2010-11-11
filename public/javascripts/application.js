@@ -12,34 +12,34 @@ function calculateProductionRate(changed){
     size        = jQuery("#deliverable_estimated_size");
     effort      = jQuery("#deliverable_estimated_effort");
     rate        = jQuery("#deliverable_estimated_production_rate");
-    sizeVal     = parseFloat(jQuery("#deliverable_estimated_size").attr('value'));
-    effortVal   = parseFloat(jQuery("#deliverable_estimated_effort").attr('value'));
-    rateVal     = parseFloat(jQuery("#deliverable_estimated_production_rate").attr('value'));
+    sizeVal     = parseFloat(jQuery("#deliverable_estimated_size").val());
+    effortVal   = parseFloat(jQuery("#deliverable_estimated_effort").val());
+    rateVal     = parseFloat(jQuery("#deliverable_estimated_production_rate").val());
 
     if (changed.value != ''){
         if (changed.id == "deliverable_estimated_size"){
             if (!isNaN(effortVal) && effortVal != 0){
-                rate.attr('value', round(effortVal / sizeVal));
+                rate.val( round(effortVal / sizeVal));
             } else if (!isNaN(rateVal) && rateVal != 0){
-                effort.attr('value', round(rateVal * sizeVal))
+                effort.val( round(rateVal * sizeVal))
             } else {
                 // do not calculate, because we need at least two values
             }
         }
         if (changed.id == "deliverable_estimated_effort"){
             if (!isNaN(sizeVal) && sizeVal != 0){
-                rate.attr('value', round(effortVal / sizeVal));
+                rate.val( round(effortVal / sizeVal));
             } else if (!isNaN(rateVal) && rateVal != 0){
-                size.attr('value', round(effortVal / rateVal));
+                size.val( round(effortVal / rateVal));
             } else {
                 // do not calculate, because we need at least two values
             }
         }
         if (changed.id == "deliverable_estimated_production_rate"){
             if ((isNaN(sizeVal) || sizeVal == 0) && (!isNaN(effortVal) && effortVal != 0)){
-                size.attr('value', round(effortVal / rateVal));
+                size.val( round(effortVal / rateVal));
             } else if (!isNaN(sizeVal) && sizeVal != 0){
-                effort.attr('value', round(rateVal * sizeVal));
+                effort.val( round(rateVal * sizeVal));
             } else {
                 // do not calculate, because we need at least two values
             }
@@ -53,16 +53,21 @@ function round(number){
 
 function changeUOM() {
   type = $('deliverable_deliverable_type').getValue();
-  if (type == 'Ad-Hoc'){
-      jQuery('#deliverable_unit_of_measure').attr('value', '');
-      jQuery('#deliverable_unit_of_measure').removeAttr('disabled');
-      jQuery('.stats_table').hide();
+  if (type == 'Ad-Hoc' || type == ''){
+      if (type == 'Ad-Hoc') {
+        jQuery('#deliverable_unit_of_measure').val( 'Unit of Measure');
+        jQuery('#deliverable_unit_of_measure').show();
+      }
+      jQuery('.stats_table').css('visibility', 'hidden');
+      jQuery('#unitOfMeasure').hide();
       return true;
   }
   for (i = 0; i < deliverableTypes.length; i++){
       if (deliverableTypes[i][1] == type){
-          jQuery('#deliverable_unit_of_measure').attr('value', deliverableTypes[i][0]);
-          jQuery('#deliverable_unit_of_measure').attr('disabled', true)
+          jQuery('#deliverable_unit_of_measure').val( deliverableTypes[i][0]);
+          jQuery('#deliverable_unit_of_measure').hide();
+          jQuery('#unitOfMeasure').html(deliverableTypes[i][0]);
+          jQuery('#unitOfMeasure').show();
           break;
       }
   }
@@ -85,17 +90,17 @@ function pairSelected() {
         jQuery('#min_rate').html(round(estimates[i][8]));
         jQuery('#max_rate').html(round(estimates[i][9]));
         jQuery('#avg_rate').html(round(estimates[i][10]));
-        jQuery('.stats_table').show();
+        jQuery('.stats_table').css('visibility', 'visible');
         break;
      }
    }
  } else {
-    jQuery('.stats_table').hide();
+    jQuery('.stats_table').css('visibility', 'hidden');
  }
 }
 
 function phaseSelect(selectedPhase, selectedDeliverable) {
-    phase_id = $('_phase_id').getValue() || selectedPhase;
+    phase_id = selectedPhase || jQuery('#_phase_id').val();
     dOptions = $('effort_deliverable_id').options
     dOptions.length = 1;
     deliverables.each(function(deliverable) {
@@ -103,13 +108,13 @@ function phaseSelect(selectedPhase, selectedDeliverable) {
             dOptions[dOptions.length] = new Option(deliverable[1], deliverable[2])
         }
     });
-    if (selectedPhase) jQuery('#_phase_id').attr('value', selectedPhase);
-    if (selectedDeliverable) jQuery('#effort_deliverable_id').attr('value', selectedDeliverable);
+    if (selectedPhase) jQuery('#_phase_id').val(selectedPhase);
+    if (selectedDeliverable) jQuery('#effort_deliverable_id').val( selectedDeliverable);
 }
 
 function projectSelect(selectedProject, selectedPhase, selectedDeliverable) {
-    project_id = $('_project_id').getValue() || selectedProject;
-    pOptions = $('_phase_id').options
+   project_id = selectedProject || jQuery('#_project_id').val();
+   pOptions = $('_phase_id').options
     pOptions.length = 1;
     phases.each(function(phase) {
         if (phase[0] == project_id) {
@@ -117,7 +122,7 @@ function projectSelect(selectedProject, selectedPhase, selectedDeliverable) {
         }
     });
     if (selectedProject && selectedPhase && selectedDeliverable){
-       jQuery('#_project_id').attr('value', selectedProject);
+       jQuery('#_project_id').val( selectedProject);
         phaseSelect(selectedPhase, selectedDeliverable);
     } else {
     $('effort_deliverable_id').options.length = 1;
@@ -135,5 +140,11 @@ jQuery(function() {
 });
 
 jQuery(document).ready(function(){
+    jQuery('#_project_id').change(function(){
+        projectSelect()});
+    jQuery('#_phase_id').change(function(){
+        phaseSelect()});
+    jQuery('#deliverable_unit_of_measure').hide();
+    jQuery('.stats_table').css('visibility', 'hidden');
     jQuery( ".datepicker ").datepicker( "option", "showAnim", 'fadeIn' );
 });

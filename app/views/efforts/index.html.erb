@@ -6,7 +6,7 @@
   <%= collection_select '', :project_id, @projects, :id, :name,
     {:prompt => 'Select Project'}, {:class => "logEffortDropBox"} %>
   <%= collection_select '', :phase_id, @phases, :id, :name, 
-    {:prompt => 'Select Phase'},{:class => "logEffortDropBox"} %>
+    {:prompt => 'Select Phase'}, {:class => "logEffortDropBox"} %>
   <%= form.collection_select :deliverable_id, @deliverables, :id, :name,
     {:prompt => 'Select Deliverable'},{:class => "logEffortDropBox"} %>
   <%= form.text_field :effort_date, :class => 'datepicker', :style => "width: 80px", :value => Time.now.strftime("%m/%d/%Y") %>
@@ -73,11 +73,6 @@
 <% for deliverable in @deliverables %>
     deliverables.push(new Array(<%= deliverable.project_phase_id %>, '<%=h deliverable.name %>', <%= deliverable.id %>));
 <%end%>
-
-  document.observe('dom:loaded', function() {
     projectSelect();
     phaseSelect();
-    $('_project_id').observe('change', projectSelect);
-    $('_phase_id').observe('change', phaseSelect);
-  });
 </script>

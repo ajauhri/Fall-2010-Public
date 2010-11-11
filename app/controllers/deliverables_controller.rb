@@ -38,6 +38,8 @@ class DeliverablesController < ApplicationController
 
   def edit
     @deliverable = Deliverable.find(params[:id])
+    @estimates = dynamic_estimates
+   
   end
   
   #  Creates a DeliverableType record. 
@@ -48,14 +50,18 @@ class DeliverablesController < ApplicationController
   def create
     @deliverable = Deliverable.new(params[:deliverable])
 
-    respond_to do |format|
+    if params[:commit] == 'Cancel'
+      redirect_to :controller => 'projects', :action => 'show',
+        :id => @deliverable.project_phase.project.id
+    else
+
       if @deliverable.save
-        format.html { redirect_to(@deliverable.project_phase.project, :notice => 'Deliverables was successfully created.') }
-        #format.xml  { render :xml => @deliverable, :status => :created, :location => @deliverables }
+        respond_to do |format|
+          format.html { redirect_to(@deliverable.project_phase.project, :notice => "#{@deliverable.name} created successfully") }
+        end
       else
-        @estimates =  dynamic_estimates
-        format.html { render :action => "new" }
-        #format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
+        flash[:error] = error_html(@deliverable.errors)
+        redirect_to :action => 'new', :project_phase_id => @deliverable.project_phase.id
       end
     end
   end
@@ -69,13 +75,22 @@ class DeliverablesController < ApplicationController
   def update
     @deliverable = Deliverable.find(params[:id])
 
-    respond_to do |format|
+
+    if params[:commit] == 'Cancel'
+      redirect_to :controller => 'projects', :action => 'show',
+        :id => @deliverable.project_phase.project.id
+    else
+
       if @deliverable.update_attributes(params[:deliverable])
-        format.html { redirect_to project_url(@deliverable.project_phase.project) }
-        #format.html { redirect_to(@deliverable, :notice => 'Deliverable was successfully updated.') }
-        #format.xml  { head :ok }
+        respond_to do |format|
+          format.html { redirect_to project_url(@deliverable.project_phase.project), :notice => "#{@deliverable.name} successfully updated" }
+          #format.html { redirect_to(@deliverable,  }
+          #format.xml  { head :ok }
+        end
       else
-        format.html { render :action => "edit" }
+        flash[:error] = error_html(@deliverable.errors)
+        redirect_to :action => 'edit', :project_phase_id => @deliverable.project_phase.id
+
         #format.xml  { render :xml => @deliverable.errors, :status => :unprocessable_entity }
       end
     end
@@ -98,11 +113,11 @@ class DeliverablesController < ApplicationController
   end
 
   private
-#  Passes all know deliverables types and complexities to Deliverable model to get minimum, average, and maximum of effort, size and rate.
-#  Input params: DeliverableType, and Complexity
-#  Returns     : Hash of min, avg, and max of each: effort, size, and rate
+  #  Passes all know deliverables types and complexities to Deliverable model to get minimum, average, and maximum of effort, size and rate.
+  #  Input params: DeliverableType, and Complexity
+  #  Returns     : Hash of min, avg, and max of each: effort, size, and rate
 
-   def dynamic_estimates
+  def dynamic_estimates
     estimates = []
     deliverable_types = DeliverableType.find(:all)
     for deliverable_type in deliverable_types

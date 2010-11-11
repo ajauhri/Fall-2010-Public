@@ -102,8 +102,8 @@ img {
 }
 
 #notice{
-    border: 1px solid #feb875;
-    background: #fce6d2;
+    border: 1px solid #FFB84D;
+    background: #FFD494;
 }
 
 #notice, #error{
@@ -588,4 +588,8 @@ li .handle {
 .logEffortDropBox{
     min-width: 150px;
     max-width: 150px;
+}
+
+.stats_table{
+    text-align:center;
 }
