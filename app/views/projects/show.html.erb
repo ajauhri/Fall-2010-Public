@@ -1,10 +1,10 @@
 <div class="pageTitle">
-<h1>Project > <%=h @project.name %> (<%=h @project.status %>)
+<h1><%=h @project.name %> (<%=h @project.status %>)
     <%= link_to image_tag('/images/edit_icon.gif', :size => "15x15", :title => 'Edit '+@project.name, :alt => 'Edit '+@project.name), edit_project_path(@project) %>
       <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15", :title => 'Delete '+@project.name, :alt => 'Delete '+@project.name), @project, :confirm => 'Are you sure?', :method => :delete %>
       <%= link_to image_tag('/images/back.gif', :size => "15x15", :title => 'Back', :alt => 'Back'), projects_path %>
  </h1>
- <p><b>Description: </b><%=h @project.description %></p>
+ <p><%=h @project.description %></p>
 </div>
 
 <script type="text/javascript" >
