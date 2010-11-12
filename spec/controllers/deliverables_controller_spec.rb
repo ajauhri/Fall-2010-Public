@@ -94,6 +94,15 @@ end
         post :create, :deliverable => {:these => 'params'}
         assigns[:deliverable].should equal(mock_deliverable)
       end
+      
+      it "redirects to projects show page" do
+        Deliverable.stub!(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => true))
+         @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+         @mock_project_phase.should_receive(:project).and_return(mock_project)
+        
+        post :create, :deliverable => {:these => 'params'}, :commit => 'Cancel'
+        response.should redirect_to(project_url(@mock_project))
+      end
 
     end
 
@@ -143,6 +152,15 @@ end
         @mock_deliverable.should_receive(:name).once.and_return(mock_project_phase(:name => "name"))
         
         put :update, :id => "1", :deliverable => {:these => 'params'}
+        response.should redirect_to(project_url(@mock_project))
+      end
+      
+      it "redirects to projects show page" do
+        Deliverable.stub!(:find).with(any_args()).and_return(mock_deliverable)
+         @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
+         @mock_project_phase.should_receive(:project).and_return(mock_project)
+        
+        put :update, :id => "1", :commit => 'Cancel'
         response.should redirect_to(project_url(@mock_project))
       end
     end
