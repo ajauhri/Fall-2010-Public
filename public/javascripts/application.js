@@ -135,7 +135,7 @@ jQuery(function() {
         return false;
     });
     jQuery( ".datepicker" ).datepicker({
-        minDate: 0
+        maxDate: 0
     });
 });
 

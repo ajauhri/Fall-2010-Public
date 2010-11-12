@@ -25,10 +25,10 @@
       </td>
       <td><%= deliverable.estimated_effort %> </td>
       <td><%= deliverable.actual_effort %> </td>
-      <td> <%= link_to image_tag('/images/edit_icon.gif', :size => "15x15", :title => 'Edit '+deliverable.name,
+      <td> <%= link_to image_tag('/images/deliverable_edit.gif', :title => 'Edit '+deliverable.name,
           :alt => 'Edit '+deliverable.name, :style => 'margin-left: 5px;'), edit_deliverable_path(deliverable)  %>
       </td><td>
-        <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15",
+        <%= link_to image_tag('/images/deliverable_remove.gif',
           :title => 'Delete '+deliverable.name, :alt => 'Delete '+deliverable.name),
           deliverable, :confirm => 'Are you sure?', :method => :delete %>
       </td>
