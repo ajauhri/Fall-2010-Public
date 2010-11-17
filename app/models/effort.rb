@@ -16,8 +16,6 @@ class Effort < ActiveRecord::Base
   belongs_to :deliverable # :autosave => true
   validates_presence_of :value, :deliverable_id
   validates_numericality_of :value
-  validates_uniqueness_of :user_id, :scope => :deliverable_id
-  validate :validify_effort
   after_save :increment_actual_effort
   before_destroy :decrement_actual_effort
 
@@ -39,11 +37,4 @@ class Effort < ActiveRecord::Base
   end
 
 
-  # Checks for the validity of a deliverable to log effort
-
-  def validify_effort
-    if value < 0.0
-      self.value = 0.0
-    end
-  end
 end

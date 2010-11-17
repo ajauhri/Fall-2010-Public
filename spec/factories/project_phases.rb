@@ -6,6 +6,16 @@ Factory.define :xp_iteration0, :class => ProjectPhase do |p|
 end
 
 
+Factory.define :archived_project_phase, :class => ProjectPhase do |p|
+  p.name "Archived"
+
+  # This uses association and :lifecycle factory
+  p.project {|l| l.association(:archived_project) }
+end
+
+
+
+
 Factory.define :project_phase, :class => Project do |p|
   p.name "Project_phase"
   p.lifecycle_id 9

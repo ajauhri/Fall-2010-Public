@@ -60,7 +60,8 @@ class Deliverable < ActiveRecord::Base
   # Inputs parms : Deliverable.id, Complexity
   # Retruns     : Hash of all estimates
   def self.get_estimates(deliverable_type, complexity)
-    find_by = ["deliverable_type like ? and complexity like ?", deliverable_type, complexity]
+    find_by = {:complexity => complexity, :deliverable_type => deliverable_type,
+                :project_phases => {:projects => {:status => "Archived"}}}
     return get_statistics(find_by)
   end
 
@@ -85,16 +86,15 @@ class Deliverable < ActiveRecord::Base
   # Returns      : Hash of the estimates
   def self.get_statistics(find_by)
     estimates = {}
-  
-    estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by
-    estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by
-    estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by
-    estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by
-    estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by
-    estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by
-    estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by
-    estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by
-    estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by
+    estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
+    estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
 
     return estimates
          

@@ -8,7 +8,7 @@ Factory.define :xp_deliverable1, :class => Deliverable do |p|
   p.estimated_production_rate 2
 
   # This uses association and :lifecycle factory
-  p.project_phase_id {|l| l.association(:xp_iteration0) }
+  p.project_phase {|l| l.association(:xp_iteration0) }
 end
 
 Factory.define :low_complex_minutes1, :class => Deliverable do |p|
@@ -22,6 +22,7 @@ Factory.define :low_complex_minutes1, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 3
   p.estimated_production_rate 2
+  p.project_phase {|l| l.association(:archived_project_phase) }
 end
 
 Factory.define :low_complex_minutes2, :class => Deliverable do |p|
@@ -35,6 +36,7 @@ Factory.define :low_complex_minutes2, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 3
   p.estimated_production_rate 2
+  p.project_phase {|l| l.association(:archived_project_phase) }
 end
 
 Factory.define :low_complex_minutes3, :class => Deliverable do |p|
@@ -48,6 +50,7 @@ Factory.define :low_complex_minutes3, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 3
   p.estimated_production_rate 2
+  p.project_phase {|l| l.association(:archived_project_phase) }
 end
 
 
@@ -62,6 +65,7 @@ Factory.define :high_complex_requirements1, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 3
   p.estimated_production_rate 2
+  p.project_phase {|l| l.association(:archived_project_phase) }
 end
 
 Factory.define :high_complex_requirements2, :class => Deliverable do |p|
@@ -75,6 +79,7 @@ Factory.define :high_complex_requirements2, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 3
   p.estimated_production_rate 2
+  p.project_phase {|l| l.association(:archived_project_phase) }
 end
 
 Factory.define :high_complex_requirements3, :class => Deliverable do |p|
@@ -88,6 +93,7 @@ Factory.define :high_complex_requirements3, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 3
   p.estimated_production_rate 2
+  p.project_phase {|l| l.association(:archived_project_phase) }
 end
 
 Factory.define :effort_deliverable, :class => Deliverable do |p|

@@ -19,6 +19,7 @@ describe UsersController do
   describe "GET edit" do
     it "assigns the requested user as @user" do
       controller.stub!(:current_user).and_return(mock_user)
+      controller.stub!(:restrict_developer).and_return(true)
       puts current_user.id.to_s + "----------------"
       get :edit, :id => "36"
       assigns[:user].should equal(mock_user)
@@ -80,6 +81,7 @@ describe UsersController do
     describe "with valid params" do
       it "updates the requested user" do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        controller.stub!(:restrict_developer).and_return(true)
         #User.should_receive(:find).with("37").and_return(mock_user)
         mock_user.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :user => {:these => 'params'}
@@ -87,6 +89,7 @@ describe UsersController do
 
       it "assigns the requested user as @user" do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        controller.stub!(:restrict_developer).and_return(true)
         put :update, :id => "1"
         flash[:notice].should have_text("Profile successfully updated.")
         response.should redirect_to(root_url)
@@ -95,12 +98,14 @@ describe UsersController do
 
       it "redirects to the user" do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        controller.stub!(:restrict_developer).and_return(true)
         put :update, :id => "1"
         response.should redirect_to(root_url)
       end
       
       it "update_attributes returns false" do
-        controller.stub!(:current_user).and_return(mock_user(:update_attributes =>false))
+      controller.stub!(:current_user).and_return(mock_user(:update_attributes =>false))
+      controller.stub!(:restrict_developer).and_return(true)
       put :update, :id => "1"
       response.should render_template('edit')
     end
@@ -110,16 +115,21 @@ describe UsersController do
     describe "with invalid params" do
       before :each do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
+        controller.stub!(:restrict_developer).and_return(true)
       end
       
       it "updates the requested user" do
         #User.should_receive(:find).with("37").and_return(mock_user)
+
+        controller.stub!(:restrict_developer).and_return(true)
         mock_user.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :user => {:these => 'params'}
       end
 
       it "assigns the user as @user" do
        # User.stub(:find).and_return(mock_user(:update_attributes => false))
+
+       controller.stub!(:restrict_developer).and_return(true)
         put :update, :id => "1"
         assigns[:user].should equal(mock_user)
       end

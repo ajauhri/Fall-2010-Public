@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @active = @project.status == 'Active'
     #@project.project_phases.build
     session[:current_project] = @project.id
     puts "This is the call " + @project.id.to_s

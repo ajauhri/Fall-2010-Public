@@ -46,6 +46,9 @@ class ProjectPhasesController < ApplicationController
   
   def edit
     @project_phase = ProjectPhase.find(params[:id])
+    if !is_active(@project_phase)
+      redirect_to :controllers => 'projects'
+    end
   end
 
 
@@ -56,8 +59,13 @@ class ProjectPhasesController < ApplicationController
 
   def create
     @project_phase = ProjectPhase.new(params[:project_phase])
+    @active = true
+      if !is_active(@project_phase)
+        redirect_to :controllers => 'projects'
+      end
     respond_to do |format|
       if @project_phase.save
+        @project = @project_phase.project
         @project_phases = ProjectPhase.find_all_by_project_id(@project_phase.project_id, :order => :sequence)
         format.html { render :partial => @project_phases }
         #format.html { redirect_to(@project_phase.project, :notice => 'Project phase was successfully created.') }
@@ -77,14 +85,13 @@ class ProjectPhasesController < ApplicationController
 
 
   def update
-
- @project_phase = ProjectPhase.find(params[:id])   
-
-
+    @project_phase = ProjectPhase.find(params[:id])
+    if !is_active(@project_phase)
+      redirect_to :controllers => 'projects'
+    end
     if params[:commit] == 'Cancel'
       redirect_to :controller => 'projects', :action => 'show', :id => @project_phase.project.id
     else
-
 
     respond_to do |format|
       if @project_phase.update_attributes(params[:project_phase])
@@ -110,6 +117,14 @@ class ProjectPhasesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(@project_phase.project) }
       #format.xml  { head :ok }
+    end
+  end
+  
+  private
+
+  def is_active(project_phase)
+    if project_phase.project
+      return project_phase.project.status == 'Active'
     end
   end
 

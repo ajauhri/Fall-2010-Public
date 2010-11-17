@@ -6,6 +6,15 @@ Factory.define :project do |p|
 end
 
 
+Factory.define :archived_project, :class => Project do |p|
+  p.name "Archived"
+  p.status "Archived"
+  # This uses association and :lifecycle factory
+  p.lifecycle_id {|l| l.association(:lifecycle) }
+end
+
+
+
 Factory.define :inti_project, :class => Project do |p|
   p.name "Project XWY"
   

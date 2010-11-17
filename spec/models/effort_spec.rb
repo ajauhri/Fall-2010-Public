@@ -14,7 +14,7 @@ describe Effort do
   end
 
    it "should create a valid effort log" do
-    Factory.build(:valid_effort).should be_valid
+    Factory.create(:valid_effort).should be_valid
   end
 
    it "should create an invalid effort log because of a string value" do
@@ -25,16 +25,11 @@ describe Effort do
     Factory.build(:invalid_deliverable).should be_invalid
   end
 
-  it "should set a negative effort value to zero" do
-   effort = Factory.create(:negative_effort_value)
-   effort.value.should == 0
-  end
-
 describe " for project, phase, deliverable shall be updated after effort creation" do
 
   before(:all) do
 
-    @effort1 = Factory.create(:effort1)
+    @effort1 = Factory.build(:effort1)
     @init_actual_effort_for_deliverable = Deliverable.find(@effort1.deliverable).actual_effort
   @init_actual_effort_for_project_phase = ProjectPhase.find(@effort1.deliverable.project_phase).actual_effort
   @init_actual_effort_for_project = Project.find(@effort1.deliverable.project_phase.project).actual_effort
@@ -64,7 +59,7 @@ describe " for project, phase, deliverable shall be updated after effort creatio
 describe " for project, phase, deliverable shall be updated after deletion" do
 
   before(:each) do
-    @effort1 = Factory.create(:effort1)
+    @effort1 = Factory.build(:effort1)
   end
 
    it "should update deliverable actual_effort" do

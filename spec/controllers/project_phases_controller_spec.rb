@@ -53,6 +53,7 @@ describe ProjectPhasesController do
   describe "GET edit" do
     it "assigns the requested project_phase as @project_phase" do
       ProjectPhase.stub(:find).with("37").and_return(mock_project_phase)
+      controller.stub!(:is_active).and_return(true)
       get :edit, :id => "37"
       assigns[:project_phase].should equal(mock_project_phase)
     end
@@ -63,6 +64,7 @@ describe ProjectPhasesController do
     describe "with valid params" do
       it "assigns a newly created project_phase as @project_phase" do
         ProjectPhase.stub(:new).with({'these' => 'params'}).and_return(mock_project_phase(:save => true))
+        controller.stub!(:is_active).and_return(true)
         stub_project
         mock_project_phase.stub(:project_id).and_return(mock_project.id)
         post :create, :project_phase => {:these => 'params'}
@@ -71,6 +73,7 @@ describe ProjectPhasesController do
 
       it "redirects to the project" do
         ProjectPhase.stub(:new).and_return(mock_project_phase(:save => true))
+        controller.stub!(:is_active).and_return(true)
         stub_project
         mock_project_phase.stub(:project_id).and_return(mock_project.id)
         post :create, :project_phase => {}
@@ -86,12 +89,14 @@ describe ProjectPhasesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved project_phase as @project_phase" do
                  ProjectPhase.stub(:new).with({'these' => 'params'}).and_return(mock_project_phase(:save => false))
+                 controller.stub!(:is_active).and_return(true)
                  post :create, :project_phase => {:these => 'params'}
                  assigns[:project_phase].should equal(mock_project_phase)
                end
          
       it "re-renders the 'new' template" do
         ProjectPhase.stub(:new).and_return(mock_project_phase(:save => false))
+        controller.stub!(:is_active).and_return(true)
         post :create, :project_phase => {}
         response.should render_template('new')
       end
@@ -104,12 +109,14 @@ describe ProjectPhasesController do
     describe "with valid params" do
       it "updates the requested project_phase" do
         ProjectPhase.should_receive(:find).with("37").and_return(mock_project_phase)
+        controller.stub!(:is_active).and_return(true)
         mock_project_phase.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :project_phase => {:these => 'params'}
       end
 
       it "assigns the requested project_phase as @project_phase" do
         ProjectPhase.stub(:find).and_return(mock_project_phase(:update_attributes => true))
+        controller.stub!(:is_active).and_return(true)
         stub_project
         put :update, :id => "1"
         assigns[:project_phase].should equal(mock_project_phase)
@@ -117,6 +124,7 @@ describe ProjectPhasesController do
 
       it "redirects to the project" do
         ProjectPhase.stub(:find).and_return(mock_project_phase(:update_attributes => true))
+        controller.stub!(:is_active).and_return(true)
         stub_project
         put :update, :id => "1"
         response.should redirect_to(project_url(mock_project))
@@ -124,6 +132,7 @@ describe ProjectPhasesController do
       
       it "should redirect to show template if params commit is present" do
         ProjectPhase.stub(:find).with(any_args()).and_return(mock_project_phase)
+        controller.stub!(:is_active).and_return(true)
         @mock_project_phase.should_receive(:project).and_return(mock_project)
         put :update, :commit => "Cancel"
         response.should redirect_to(project_url(@mock_project))
@@ -133,18 +142,21 @@ describe ProjectPhasesController do
     describe "with invalid params" do
       it "updates the requested project_phase" do
         ProjectPhase.should_receive(:find).with("37").and_return(mock_project_phase)
+        controller.stub!(:is_active).and_return(true)
         mock_project_phase.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :project_phase => {:these => 'params'}
       end
 
       it "assigns the project_phase as @project_phase" do
         ProjectPhase.stub(:find).and_return(mock_project_phase(:update_attributes => false))
+        controller.stub!(:is_active).and_return(true)
         put :update, :id => "1"
         assigns[:project_phase].should equal(mock_project_phase)
       end
 
       it "re-renders the 'edit' template" do
         ProjectPhase.stub(:find).and_return(mock_project_phase(:update_attributes => false))
+        controller.stub!(:is_active).and_return(true)
         put :update, :id => "1"
         response.should render_template('edit')
       end

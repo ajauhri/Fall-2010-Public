@@ -76,6 +76,7 @@ end
   describe "GET edit" do
     it "assigns the requested deliverable as @deliverable" do
       Deliverable.stub(:find).with("37").and_return(mock_deliverable)
+      controller.stub!(:is_active).and_return(true)
       get :edit, :id => "37"
       assigns[:deliverable].should equal(mock_deliverable)
     end
@@ -86,17 +87,17 @@ end
     describe "with valid params" do
       it "assigns a newly created deliverable as @deliverable" do
         Deliverable.stub!(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => true))
+        controller.stub!(:is_active).and_return(true)
         @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
         @mock_deliverable.should_receive(:name).once.and_return(mock_project_phase(:name => "name"))
-        
         @mock_project_phase.should_receive(:project).and_return(mock_project)
-        
         post :create, :deliverable => {:these => 'params'}
         assigns[:deliverable].should equal(mock_deliverable)
       end
       
       it "redirects to projects show page" do
         Deliverable.stub!(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => true))
+        controller.stub!(:is_active).and_return(true)
          @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
          @mock_project_phase.should_receive(:project).and_return(mock_project)
         
@@ -109,14 +110,16 @@ end
     describe "with invalid params" do
       it "assigns a newly created but unsaved deliverable as @deliverable" do
         Deliverable.stub(:new).with({'these' => 'params'}).and_return(mock_deliverable(:save => false))
+        controller.stub!(:is_active).and_return(true)
          @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
-          controller.stub!(:error_html).and_return(true)
+        controller.stub!(:error_html).and_return(true)
         post :create, :deliverable => {:these => 'params'}
         assigns[:deliverable].should equal(mock_deliverable)
       end
 
       it "re-renders the 'new' template" do
         Deliverable.stub(:new).and_return(mock_deliverable(:save => false))
+        controller.stub!(:is_active).and_return(true)
          @mock_deliverable.should_receive(:project_phase).and_return(mock_project_phase)
           controller.stub!(:error_html).and_return(true)
         post :create, :deliverable => {}

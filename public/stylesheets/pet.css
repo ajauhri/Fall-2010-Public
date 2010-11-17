@@ -624,3 +624,23 @@ li .handle {
 .stats_table{
     text-align:center;
 }
+
+
+#example_length, #example_filter{
+    margin-bottom: 10px;
+}
+
+#example_length {
+    float:right;
+    width: 150px;
+}
+
+#example_filter {
+    width: 300px;
+}
+
+#example_check {
+    text-align: left;
+    float: left;
+    width: 200px;
+}

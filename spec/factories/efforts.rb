@@ -1,8 +1,8 @@
 
 Factory.define :valid_effort , :class => Effort do |e|
   e.sequence(:user_id) {|n| n}
-  e.sequence(:deliverable_id) {|n| n}
   e.value 5.0
+  e.deliverable_id {|l| l.association(:effort_deliverable) }
 end
 
 Factory.define :invalid_value , :class => Effort do |e|

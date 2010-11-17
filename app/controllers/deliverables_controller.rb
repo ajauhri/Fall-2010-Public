@@ -38,6 +38,9 @@ class DeliverablesController < ApplicationController
 
   def edit
     @deliverable = Deliverable.find(params[:id])
+    if !is_active(@deliverable)
+      redirect_to :controllers => 'projects'
+    end
     @estimates = dynamic_estimates
    
   end
@@ -49,7 +52,9 @@ class DeliverablesController < ApplicationController
 
   def create
     @deliverable = Deliverable.new(params[:deliverable])
-
+    if !is_active(@deliverable)
+      redirect_to :controllers => 'projects'
+    end
     if params[:commit] == 'Cancel'
       redirect_to :controller => 'projects', :action => 'show',
         :id => @deliverable.project_phase.project.id
@@ -118,6 +123,7 @@ class DeliverablesController < ApplicationController
   #  Returns     : Hash of min, avg, and max of each: effort, size, and rate
 
   def dynamic_estimates
+
     estimates = []
     deliverable_types = DeliverableType.find(:all)
     for deliverable_type in deliverable_types
@@ -127,5 +133,12 @@ class DeliverablesController < ApplicationController
       end
     end
     return estimates
+  end
+
+
+  def is_active(deliverable)
+    if deliverable.project_phase and deliverable.project_phase.project
+      return deliverable.project_phase.project.status == 'Active'
+    end
   end
 end

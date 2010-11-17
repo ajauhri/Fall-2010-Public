@@ -35,7 +35,8 @@ describe EffortsController do
 
     describe "with invalid params" do
       it "should unsuccessfully create an effort" do
-        post :create, :effort => {:deliverable_id => nil, :value => 5.0}
+        post :create, :effort => {:deliverable_id => nil}
+      controller.stub!(:is_active).and_return(true)
         flash[:error].should_not be_nil
         response.should redirect_to :action => 'index'
       end

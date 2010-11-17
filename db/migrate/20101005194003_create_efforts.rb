@@ -4,7 +4,6 @@ class CreateEfforts < ActiveRecord::Migration
       t.decimal :value, :default => 0.0
       t.string :username
       t.datetime :effort_date
-      
 
       t.timestamps
     end

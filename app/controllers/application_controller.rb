@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  before_filter :set_cache_buster, :require_user
+  before_filter :set_cache_buster, :require_user, :restrict_developer
 
 # Doesn't allow browsers to cache web pages
 
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   layout 'application'
 
-  helper_method :current_user, :error_html
+  helper_method :current_user, :error_html, :is_developer, :is_manager
 
   private
 
@@ -43,6 +43,23 @@ class ApplicationController < ActionController::Base
     unless current_user
         redirect_to login_url
     end
+  end
+  
+  # Only allows access to effort logs for non-manager and admin types
+  def restrict_developer
+    return if controller_name == 'user_sessions' and action_name == 'destroy'
+    if current_user and is_developer 
+      redirect_to :controller => 'efforts'
+    end
+  end
+
+  # Checks wheter the current user is a developer or not
+  def is_developer
+    return current_user.role == User::DEVELOPER
+  end
+
+  def is_manager
+    return current_user.role == User::MANAGER
   end
 
   # Records execution errors, formats them for display

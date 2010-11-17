@@ -1,39 +1,53 @@
 <tbody class="_handle phaseSelection">
   <tr class="project_phase <%= cycle('odd', 'evenPhase') %>"
       id="project_phase_<%= project_phase.id %>">
-    <td style="cursor: pointer" onClick="window.location.href='<%= edit_project_phase_path(project_phase) %>'">
+    <td style="border-radius: 0px;"
+      <% if @active %>
+      style="cursor: pointer" onClick="window.location.href='<%= edit_project_phase_path(project_phase) %>'"
+      <%end%>>
       <span style="cursor: move"><b>[DRAG]</b></span>
       <b><%= project_phase.name %></b>
     </td>
     <td><%= project_phase.total_estimated_effort %></td>
-    <td><%= project_phase.actual_effort %></td>
+    <td style="border-radius: 0px;"><%= project_phase.actual_effort %></td>
+    <%  if @active %>
     <td>
       <%=  link_to image_tag('/images/edit_icon.gif', :size => "15x15",
         :title => 'Edit '+project_phase.name, :alt => 'Edit '+project_phase.name,
         :style => 'margin-left: 5px;'), edit_project_phase_path(project_phase)  %>
-    </td><td onClick="return false;">
+    </td>
+    <td onClick="return false;">
       <%= link_to image_tag('/images/delete_icon.gif', :size => "15x15",
         :title => 'Delete '+project_phase.name, :alt => 'Delete '+project_phase.name),
         project_phase, :confirm => 'Are you sure?', :method => :delete %>
     </td>
+    <% end %>
   </tr>
   <% for deliverable in project_phase.deliverables.all %>
     <tr class="deliverableRow">
-      <td style="cursor: pointer"
-        onClick="window.location.href='<%= edit_deliverable_path(deliverable) %>'">
+      <td style="border-radius: 0px;"
+        <% if @active %>
+        style="cursor: pointer"
+        onClick="window.location.href='<%= edit_deliverable_path(deliverable) %>'"
+        <%end%>>
         <%= deliverable.name %>
       </td>
       <td><%= deliverable.estimated_effort %> </td>
-      <td><%= deliverable.actual_effort %> </td>
+      <td style="border-radius: 0px;"><%= deliverable.actual_effort %> </td>
+
+      <%  if @active %>
       <td> <%= link_to image_tag('/images/deliverable_edit.gif', :title => 'Edit '+deliverable.name,
           :alt => 'Edit '+deliverable.name, :style => 'margin-left: 5px;'), edit_deliverable_path(deliverable)  %>
-      </td><td>
+      </td>
+      <td>
         <%= link_to image_tag('/images/deliverable_remove.gif',
           :title => 'Delete '+deliverable.name, :alt => 'Delete '+deliverable.name),
           deliverable, :confirm => 'Are you sure?', :method => :delete %>
       </td>
+      <% end %>
     </tr>
   <% end %>
+  <% if @active %>
   <tr onClick="window.location.href='<%= new_deliverable_path(:project_phase_id => project_phase.id) %>'"
       style="cursor: pointer;" class="deliverableRow">
     <td style="border-radius: 0px;">
@@ -41,8 +55,8 @@
       <%= " New Deliverable" %>
     </td>
     <td></td>
-    <td></td>
-    <td></td>
+    <%= "<td></td><td></td>" if @active %>
     <td style="border-radius: 0px;"></td>
   </tr>
+  <% end %>
 </tbody>

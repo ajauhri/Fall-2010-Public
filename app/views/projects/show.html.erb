@@ -23,13 +23,14 @@
     <tr>
   <th id="HeaderLeft" style="width: 80%">Phases<br/>> Deliverables</th>
   <th>Est. Effort</th>
-  <th>Actual Effort</th>
-  <th></th>
-  <th id="HeaderRight"></th>
+  <th <%= 'id="HeaderRight"' if !@active %>>Actual Effort</th>
+  <%= "<th></th><th id='HeaderRight'></th>" if @active %>
     </tr>
   </thead>
   <%= render :partial => @project_phases %>
   <tbody id="projectTableBottom">
+
+  <% if @active %>
   <tr class=<%= @project_phases.size % 2 == 0 ? "odd": "evenPhase" %>
       style="cursor:pointer" onClick="rshow();return false;">
     <td>
@@ -38,11 +39,10 @@
      <b><%= "New Phase" %></b></td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
+    <%= "<td></td><td></td>" if @active %>
   </tr>
   <tr id="newPhase" style="display:none">
-    <td colspan="3">
+    <td colspan="5">
       <div style="margin: 0 auto;">
        <% form_remote_for(:project_phase, @project_phase, :url => {:controller => :project_phases, :action => :create},
   :html => { :id => "phases_form"}) do |f| %>
@@ -52,14 +52,15 @@
      <%= f.submit "Create", :style => "float:left;" %>
      <%= button_to 'Cancel', '#',  :onclick => 'rshow();return false;', :style => "float:left;" %>
       </div>
-<% end %></td>
+  <% end %>
+    </td>
   </tr>
+  <% end %>
   <tr class="tableFooter">
     <td style="text-align:right"><b><span class="whiteText">Totals:</span></b></td>
     <td><span class="whiteText"><b><%=h @project.total_estimated_effort %></b></span></td>
     <td><span class="whiteText"><b><%=h @project.actual_effort %></b></span></td>
-    <td></td>
-    <td></td>
+    <%= "<td></td><td></td>" if @active %>
   </tr>
   </tbody>
 </table>
