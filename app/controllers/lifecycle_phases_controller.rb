@@ -6,7 +6,7 @@ class LifecyclePhasesController < ApplicationController
    
   def index
 
-    @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(params[:id])
+    @lifecycle_phases = LifecyclePhase.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -11,6 +11,9 @@ module ApplicationHelper
       html += tag + get_link("<span></span>Create New Project", 'projects', 'new') + end_tag + spacer
     end
     html += tag + get_link("<span></span>Log Effort", 'efforts', 'index') + end_tag
+    if is_admin
+      html += tag + get_link("<span></span>Catalogs",'catalogs','index') + end_tag + spacer
+    end
     return html
   end
 

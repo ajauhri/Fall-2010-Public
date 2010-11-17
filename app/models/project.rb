@@ -26,29 +26,39 @@ class Project < ActiveRecord::Base
     ["Archived"] #"archived"],
   ]
 
-# For automatically inserting (at the time of creation of a new project) all pre-defined phases from LifecyclePhase
+  # For automatically inserting (at the time of creation of a new project) all pre-defined phases from LifecyclePhase
 
 
-def create_phases
-   @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(self.lifecycle_id)
-   @lifecycle_phases.each do |lp|
+  def create_phases
+    @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(self.lifecycle_id)
+    @lifecycle_phases.each do |lp|
      
-    ProjectPhase.create_from_lifecycle_phase(lp.id, self)
-   end
- end
+      ProjectPhase.create_from_lifecycle_phase(lp.id, self)
+    end
+  end
  
- # Decrements Project.actual_effort 
- # Input params : Effort.value
+  # Decrements Project.actual_effort
+  # Input params : Effort.value
  
- def decrement_actual_effort effort_value
-   self.actual_effort -= effort_value
-   self.save!
- end
+  def decrement_actual_effort effort_value
+    self.actual_effort -= effort_value
+    self.save!
+  end
 
-def increment_actual_effort effort_value
-  self.actual_effort +=effort_value
-  self.save!
-end
+  def increment_actual_effort effort_value
+    self.actual_effort +=effort_value
+    self.save!
+  end
+
+  def increment_total_estimated_effort estimated_effort
+    self.total_estimated_effort += estimated_effort
+    self.save!
+  end
+
+  def decrement_total_estimated_effort estimated_effort
+    self.total_estimated_effort -= estimated_effort
+    self.save!
+  end
 
 
   #validates_inclusion_of :status, :in =>

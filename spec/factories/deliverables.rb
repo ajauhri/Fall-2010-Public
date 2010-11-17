@@ -115,5 +115,4 @@ Factory.define :effort_deliverable2, :class => Deliverable do |p|
   p.estimated_size 3
   p.estimated_effort 30
   p.estimated_production_rate 2
-  p.project_phase {|l| l.association(:effort_project_phase) }
 end
