@@ -21,7 +21,7 @@ group :development do
 #  gem linecache, '0.43'
   gem 'rcov'
   gem 'rdoc'
-  gem 'rspec', '1.3.0'
+  gem 'rspec', '1.3.1'
   gem 'rspec-rails'
   gem 'acts_as_list'
   gem 'annotate'
@@ -37,7 +37,7 @@ group :test do
   gem 'ruby-debug-ide' #'0.4.6'
   gem 'rcov'
   gem 'rdoc'
-  gem 'rspec', '1.3.0'
+  gem 'rspec', '1.3.1'
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'mocha'
@@ -47,6 +47,7 @@ group :test do
   gem 'autotest-growl', '0.2.0'
   gem 'autotest-fsevent', '0.1.1'
   gem 'rcov_notifier'
+  gem 'capybara'
  end
 
 

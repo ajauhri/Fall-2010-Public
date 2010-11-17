@@ -34,21 +34,21 @@ describe Deliverable do
     deliverable.estimated_size = -1
     deliverable.should be_invalid
   end
-  
+
 end
 
 describe Deliverable , "from a typical deliverable and a phase" do
   before :all do
     DeliverableType.delete_all
     @deliverable_type = DeliverableType.create!(:name => 'Requirements Document1',
-      :unit_of_measure => 'pages')
+    :unit_of_measure => 'pages')
   end
 
   it "should create a deliverablie for a project phase from a typical deliverable" do
-     
+
     typical_deliverable = TypicalDeliverable.create!(:name => 'Concept Document1', :deliverable_type_id => @deliverable_type.id,
-      :estimated_size => 10, :estimated_effort => 20, :estimated_production_rate => 3,
-      :complexity => 'LOW')
+    :estimated_size => 10, :estimated_effort => 20, :estimated_production_rate => 3,
+    :complexity => 'LOW')
     project_phase_id = 1
 
     deliverable = Deliverable.create_from_typical_deliverable(typical_deliverable.id, project_phase_id)
@@ -84,7 +84,7 @@ describe Deliverable, "estimating based upon matching type and complexity" do
 
   describe "should update project, phase total_estimated_effort" do
 
-  
+
     before(:all) do
 
       @testing_deliverable = Factory.create(:effort_deliverable)
@@ -94,19 +94,19 @@ describe Deliverable, "estimating based upon matching type and complexity" do
 
     end
 
-     it "should update project total estimated effort" do  
+    it "should update project total estimated effort" do  
       @project_init.should == @testing_deliverable.estimated_effort
-     @testing_deliverable.project_phase.project.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+      @testing_deliverable.project_phase.project.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
     end
 
 
-          it "should update project phases total estimated effort" do
-           @phase_init.should == @testing_deliverable.estimated_effort
-           @testing_deliverable.project_phase.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
-          end
-
-
+    it "should update project phases total estimated effort" do
+      @phase_init.should == @testing_deliverable.estimated_effort
+      @testing_deliverable.project_phase.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
     end
+
+
+  end
 
 end
 

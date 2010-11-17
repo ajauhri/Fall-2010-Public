@@ -127,6 +127,7 @@ class Deliverable < ActiveRecord::Base
   end
   
   def increment_actual_effort effort_value
+    
     self.actual_effort += effort_value
     if self.save! && self.project_phase
       self.project_phase.increment_actual_effort effort_value
