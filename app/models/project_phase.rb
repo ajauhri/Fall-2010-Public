@@ -34,16 +34,16 @@ class ProjectPhase < ActiveRecord::Base
     @lifecycle_phase = LifecyclePhase.find(lifecycle_phase_id)
 
     if @lifecycle_phase
-        create(
-         :name => @lifecycle_phase.name,
-         :description => @lifecycle_phase.description,
-         :lifecycle_phase => @lifecycle_phase,
-         :sequence => @lifecycle_phase.sequence,
-         :project => project)
+      create(
+        :name => @lifecycle_phase.name,
+        :description => @lifecycle_phase.description,
+        :lifecycle_phase => @lifecycle_phase,
+        :sequence => @lifecycle_phase.sequence,
+        :project => project)
     end
   end
 
-# For creating typical deliverables in the project phase
+  # For creating typical deliverables in the project phase
   def create_deliverables
     @typical_deliverables = TypicalDeliverable.find_all_by_lifecycle_phase_id(self.lifecycle_phase_id)
     @typical_deliverables.each do |td|
@@ -65,6 +65,21 @@ class ProjectPhase < ActiveRecord::Base
     self.actual_effort += effort_value
     if self.save! && self.project
       self.project.increment_actual_effort effort_value
+    end
+  end
+
+  def increment_total_estimated_effort estimated_effort
+
+    self.total_estimated_effort += estimated_effort
+    if self.save! && self.project
+      self.project.increment_total_estimated_effort estimated_effort
+    end
+  end
+
+  def decrement_total_estimated_effort estimated_effort
+    self.total_estimated_effort -= estimated_effort
+    if self.save! && self.project
+      self.project.decrement_total_estimated_effort estimated_effort
     end
   end
   

@@ -19,9 +19,15 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def only_admin
+    if !is_admin
+      redirect_to projects_path
+    end
+  end
+
   layout 'application'
 
-  helper_method :current_user, :error_html, :is_developer, :is_manager
+  helper_method :current_user, :error_html, :is_developer, :is_manager, :is_admin
 
   private
 
@@ -62,6 +68,12 @@ class ApplicationController < ActionController::Base
 
   def is_manager
     return current_user.role == User::MANAGER
+  end
+
+
+
+      def is_admin
+        return current_user.role == User::ADMIN
   end
 
   # Records execution errors, formats them for display

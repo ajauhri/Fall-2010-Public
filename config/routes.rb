@@ -10,6 +10,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :lifecycle_phases
 
+  map.resources :lifecycles
+
   #map.connect ':controller/:action.:format'
   map.resources :users
   map.login     'login', :controller => 'user_sessions', :action => 'new'

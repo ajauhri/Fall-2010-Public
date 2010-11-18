@@ -22,7 +22,8 @@
 class Deliverable < ActiveRecord::Base
   belongs_to :project_phase
   has_many :efforts, :dependent => :destroy
-  after_save :update_all_estimated_effort
+  after_save :increment_estimated_effort
+  before_destroy :decrement_estimated_effort
 
   validates_presence_of :name, :deliverable_type, :unit_of_measure,
     :complexity, :estimated_size, :estimated_effort, :estimated_production_rate
@@ -67,19 +68,7 @@ class Deliverable < ActiveRecord::Base
 
   protected
 
-  # Updates efforts for ProjectPhase
 
-  def update_all_estimated_effort
-
-    if self.estimated_effort_changed? and self.project_phase and self.project_phase.project
-        self.project_phase.total_estimated_effort += estimated_effort
-        self.project_phase.project.total_estimated_effort += estimated_effort
-
-        self.project_phase.save!
-        self.project_phase.project.save!
-      end
-    
-  end
 
   # Calulates estimates
   # Input params : DeliverableType.name, Complexity
@@ -133,7 +122,24 @@ class Deliverable < ActiveRecord::Base
       self.project_phase.increment_actual_effort effort_value
     end
   end
-  
+
+    # Updates efforts for ProjectPhase
+
+  def increment_estimated_effort
+
+    if self.estimated_effort_changed? and self.project_phase
+        self.project_phase.increment_total_estimated_effort self.estimated_effort
+    end
+
+  end
+
+  # Calls Deliverable model to decrement actual_effort
+  def decrement_estimated_effort
+    if self.project_phase
+      self.project_phase.decrement_total_estimated_effort self.estimated_effort
+    end
+
+  end
 
 
 end
