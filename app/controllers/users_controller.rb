@@ -1,8 +1,9 @@
 # Handles user functionality
 class UsersController < ApplicationController
 
-  before_filter :require_user, :except => ['new', 'create']
-  before_filter :require_admin, :except => ['edit', 'update']
+  before_filter :require_user, :except => ['new', 'create'] 
+  before_filter :require_admin, :except => ['edit', 'update'] 
+  before_filter :load_user_using_perishable_token, :only => ['edit_password', 'update_password']
 
   #  Provides a list of all/required fields needed to create a User
   #  Input params: None
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
   #  Provides a list of all/required fields of an existing User(only the user logged in can edit)
   #  Input params: User.id
   #  Returns     : Returns a hash of fields and edited values of User 
-   def edit
+  def edit
     @user = current_user
   end
   
@@ -46,6 +47,7 @@ class UsersController < ApplicationController
       render :action => 'edit'
     end
   end
+
 
 =begin
   # DELETE /users/1
@@ -66,13 +68,14 @@ class UsersController < ApplicationController
 
   # Redirects if the current_user is not Admin
   def require_admin
-     if !is_admin
-       redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder'
-     end
+    if !is_admin
+      redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder'
+    end
   end
   # Checks wheter the current user is admin or not
   def is_admin
     return current_user.role == User::ADMIN
   end
-  
+
+
 end

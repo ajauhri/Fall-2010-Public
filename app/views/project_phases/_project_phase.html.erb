@@ -1,12 +1,15 @@
-<tbody class="_handle phaseSelection">
+<tbody id="phase_<%= project_phase.id %>" class="phaseSelection">
   <tr class="project_phase <%= cycle('odd', 'evenPhase') %>"
       id="project_phase_<%= project_phase.id %>">
-    <td style="border-radius: 0px;"
-      <% if @active %>
-      style="cursor: pointer" onClick="window.location.href='<%= edit_project_phase_path(project_phase) %>'"
-      <%end%>>
-      <span style="cursor: move"><b>[DRAG]</b></span>
+    <td style="border-radius: 0px;">
+       <% if @active %>
+      <div style="width: 20px;float:left">
+         <%= image_tag "/images/draggable.png", :style => 'margin-top:2px;cursor:move'%>
+      </div>
+      <%end%>
+      <div style="margin-top:2px;height:100%;width:100%;<%= 'cursor: pointer;" onClick="window.location.href=\'' + edit_project_phase_path(project_phase) + "'" %>">
       <b><%= project_phase.name %></b>
+      </div>
     </td>
     <td><%= project_phase.total_estimated_effort %></td>
     <td style="border-radius: 0px;"><%= project_phase.actual_effort %></td>

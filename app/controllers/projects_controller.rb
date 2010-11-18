@@ -118,7 +118,7 @@ class ProjectsController < ApplicationController
   # Returns     : Provides a hash of the updated sequence of project phases
 
   def sort
-    params[:phaseslist].each_with_index do |id, index|
+    params[:phase].each_with_index do |id, index|
       ProjectPhase.update_all(['sequence=?',index+1],['id=?',id])
     end
     render :nothing => true

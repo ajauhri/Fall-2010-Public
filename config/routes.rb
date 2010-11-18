@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :deliverable_types
   map.resources :typical_deliverables
-
+  map.resources :passwords
   map.resources :efforts
 
   map.resources :deliverables
@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.resources :projects, :collection => {:sort => :post}
 
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

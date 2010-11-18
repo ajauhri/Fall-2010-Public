@@ -20,5 +20,11 @@ class User < ActiveRecord::Base
   DEVELOPER = 'Developer'
   MANAGER = 'Manager'
   ROLES = ['Developer','Manager', 'Admin']
+
+  def deliver_password_reset_instructions!
+    reset_perishable_token!
+    UserMailer.deliver_password_reset_instructions(self)
+  end
+
 end
 

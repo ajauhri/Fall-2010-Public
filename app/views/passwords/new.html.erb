@@ -1,0 +1,15 @@
+<% form_for User.new, :url => {:action => 'send_password'} do |form| %>
+<div style="width: 300px" id="Login">
+  <div class="LoginLabel">
+    Please enter your email address to receive 
+    instructions on resettings your password:
+  </div>
+  <div class="LoginTextfield">
+    <%= form.text_field :email %>
+  </div>
+  <div style="padding:10px">
+  <%= form.submit "Request Reset", :style => 'padding: 2px' %>
+  <%= form.submit "Back", :style => 'padding: 2px'  %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,25 @@
+<% form_for @user, :url => {:action =>'update'} do |form| %>
+<div id="Login">
+  <div style="font-size: larger;font-weight:bold">
+    Please enter a new password
+  </div>
+  <div class="LoginLabel">
+    <%= form.label :password, "Password:" %>
+  </div>
+  <div class="LoginTextfield">
+    <%= form.password_field :password %>
+  </div>
+    <div class="LoginLabel">
+    <%= form.label :password_confirmation, "Password Confirmation:" %>
+  </div>
+  <div class="LoginTextfield">
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <div style="padding: 10px;">
+  <%= form.submit "Reset Password", :style => "padding: 2px;" %>
+  <%= form.submit "Back", :style => "padding: 2px;" %>
+  </div>
+</div>
+<% end %>
+
+

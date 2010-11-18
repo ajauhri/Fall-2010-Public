@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101102202442) do
+ActiveRecord::Schema.define(:version => 20101117211650) do
 
   create_table "deliverable_types", :force => true do |t|
     t.string   "name"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20101102202442) do
     t.string   "persistence_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "perishable_token",  :default => "", :null => false
   end
 
 end

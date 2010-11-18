@@ -1,6 +1,14 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 
+Factory.define :email_user, :class => User do |u|
+  u.username 'Emailme'
+  u.password  'test'
+  u.password_confirmation  'test'
+  u.email  "testme@testthis.com"
+  u.role 'Developer'
+end
+
 Factory.define :valid_user , :class => User do |u|
   u.sequence(:username) {|n| "user#{n}"}
   u.password "test"

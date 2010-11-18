@@ -1,7 +1,7 @@
 # Handles a user session
 class UserSessionsController < ApplicationController
 
-  before_filter :require_user, :except => ['new', 'create']
+   before_filter :require_user, :except => ['new', 'create']
 
   #  Create a new user session
    #  Input params: None

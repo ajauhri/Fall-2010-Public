@@ -60,15 +60,13 @@ end
 
 def create
   @effort = Effort.new(params[:effort])
-  if !is_active(@effort)
-    redirect_to :controllers => 'projects'
-  else
+  if is_active(@effort)
     @effort.user = current_user
     if not @effort.save
       flash[:error] = error_html(@effort.errors)
     end
-    redirect_to :action => 'index'
   end
+  redirect_to :action => 'index'
 end
 
 =begin

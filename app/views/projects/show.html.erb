@@ -64,13 +64,14 @@
   </tr>
   </tbody>
 </table>
-  
-<span id="sortable_list_control">
-<%= sortable_element("example",
-  :url => sort_projects_path,
-  :handle => 'handle',
-  :tag => "tbody", :only => 'phaseSelection') %>
-</span>
 
-
-
+<script>
+    jQuery( "#example" ).sortable({
+      items: ".phaseSelection",
+      update: function(){
+        phases = jQuery(this).sortable('serialize');
+        phases += "&authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
+        jQuery.post('sort', phases);
+      }
+    });
+ </script>
