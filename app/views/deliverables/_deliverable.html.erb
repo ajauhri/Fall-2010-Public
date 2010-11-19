@@ -6,9 +6,15 @@
       </td></tr>
     <tr><td>
         <%= f.label :type %>*</td><td>
+        <% if (action_name == 'edit' and @deliverable.deliverable_type == 'Ad-Hoc') or
+              @deliverable.project_phase.lifecycle_phase.nil? %>
+        <% type_collection = ['Ad-Hoc'] %>
+        <%= select('', '', ['Ad-Hoc']) %>
+        <% else %>
         <% type_collection = DeliverableType.find(:all) %>
         <% type_collection << DeliverableType.new(:name => 'Ad-Hoc') if action_name == 'new' %>
         <%= f.collection_select :deliverable_type, type_collection, :name, :name, :prompt => 'Deliverable Type'  %>
+        <% end %>
       </td></tr>
     <tr><td>
         <%= f.label :complexity %>*</td><td>

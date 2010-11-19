@@ -604,9 +604,14 @@ li .handle {
 }
 
 .pageTitle{
+    min-height: 30px;
+    padding-left: 50px;
     width: 80%;
     text-align: left;
+    background: url('/images/arrow.png');
+    background-repeat: no-repeat;
 }
+
 
 .tableFooter td, .tableFooter:link, .tableFooter:visited{
     background: #015666;
@@ -647,4 +652,20 @@ li .handle {
     text-align: left;
     float: left;
     width: 200px;
+}
+
+#catalogList {
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+    list-style: none;
+}
+
+#catalogList a:link, a:visited{
+    color: #428490;
+    text-decoration: none;
+}
+
+#catalogList a:hover{
+    color: #5FBDCE;
 }
