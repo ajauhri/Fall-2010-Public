@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe UserMailer do
-
-  before(:all) do
+  
+  before(:each) do
     @user = Factory.create(:email_user)
   end
-
+  
   before(:each) do
     ActionMailer::Base.delivery_method = :test
     ActionMailer::Base.perform_deliveries = :true

@@ -17,6 +17,8 @@ require 'capybara/dsl'
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
+Capybara.default_wait_time = 5
+ 
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
@@ -26,7 +28,7 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
   config.include(Capybara, :type => :integration) 
-  Capybara.default_wait_time = 5
+  
   # config.mock_with :mocha
 
   # == Fixtures

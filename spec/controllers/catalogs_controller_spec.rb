@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe CatalogsController do
+  before(:each) do
+     login_user
+   end
+
+   after(:each) do
+     logout_user
+   end
+  
 
   #Delete these examples and add some real ones
   it "should use CatalogsController" do

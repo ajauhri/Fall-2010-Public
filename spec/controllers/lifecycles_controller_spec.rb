@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe LifecyclesController do
+  
+  before(:each) do
+     login_user
+   end
+
+   after(:each) do
+     logout_user
+   end
 
   def mock_lifecycle(stubs={})
     @mock_lifecycle ||= mock_model(Lifecycle, stubs)

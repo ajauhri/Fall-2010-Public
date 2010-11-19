@@ -15,12 +15,12 @@ describe "Deliverables" do
   end
  
   it "should log in" do
-      # Capybara.current_driver = :selenium
-      #    Capybara.reset_sessions!
-      #    #Factory.create(:valid_user)
-      #    visit root_path
-      #    fill_in "Username", :with => "testuser@test.com"
-      #    fill_in "Password", :with => "testpassword"
-      #    click_button "Login"
-       end
+      Capybara.current_driver = :selenium
+              Capybara.reset_sessions!
+              #Factory.create(:valid_user)
+              visit root_path
+              #fill_in "Username", :with => "testuser@test.com"
+              #fill_in "Password", :with => "testpassword"
+              #click_button "Login"
+            end
   end
