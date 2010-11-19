@@ -595,7 +595,11 @@ li .handle {
     background: #E3E1E9;
 }
 
-.deliverableRow:hover, .evenPhase:hover{
+.oddPhase{
+    background: #E2E4FF;
+}
+
+.deliverableRow:hover, .oddPhase:hover, .evenPhase:hover{
     background: #E6FF99;
 }
 

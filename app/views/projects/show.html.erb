@@ -31,7 +31,7 @@
   <tbody id="projectTableBottom">
 
   <% if @active %>
-  <tr class=<%= @project_phases.size % 2 == 0 ? "odd": "evenPhase" %>
+  <tr class=<%= @project_phases.size % 2 == 0 ? "odd oddPhase": "evenPhase" %>
       style="cursor:pointer" onClick="rshow();return false;">
     <td>
      <%= image_tag('/images/plus_icon.gif', :title => 'Add New Phase', :alt => 'Add New Phase', :id => 'newPhaseIcon')  %>
@@ -66,6 +66,8 @@
 </table>
 
 <script>
+
+  <% if @active %>
     jQuery( "#example" ).sortable({
       items: ".phaseSelection",
       update: function(){
@@ -74,4 +76,5 @@
         jQuery.post('sort', phases);
       }
     });
+    <% end %>
  </script>
