@@ -12,7 +12,7 @@ module ApplicationHelper
     end
     html += tag + get_link("<span></span>Log Effort", 'efforts', 'index') + end_tag
     if is_admin
-      html += tag + get_link("<span></span>Catalogs",'catalogs','index') + end_tag + spacer
+      html += spacer + tag + get_link("<span></span>Catalogs",'catalogs','index') + end_tag
     end
     return html
   end

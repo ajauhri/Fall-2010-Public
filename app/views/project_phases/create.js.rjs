@@ -1,10 +1,1 @@
-page.insert_html(:before, :projectTableBottom , :partial => "project_phase", :object => @project_phase)
-page.replace_html('sortable_list_control', sortable_element('projectTableBottom',
-    :url => sort_projects_path,
-    :handle => 'handle',
-    :tag => 'tbody',
-  :only => 'phaseSelection'))
-page << 'rshow();'
-#page[:tracker_form].reset
-#page.replace_html :notice, flash[:notice]
-#flash.discard
+page.insert_html :before, 'projectTableBottom' , :partial => "project_phase", :object => @project_phase

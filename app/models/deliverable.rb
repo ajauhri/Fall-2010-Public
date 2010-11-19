@@ -24,6 +24,7 @@ class Deliverable < ActiveRecord::Base
   has_many :efforts, :dependent => :destroy
   after_save :increment_estimated_effort
   before_destroy :decrement_estimated_effort
+  before_create :assign_actual_size
 
   validates_presence_of :name, :deliverable_type, :unit_of_measure,
     :complexity, :estimated_size, :estimated_effort, :estimated_production_rate
@@ -110,6 +111,7 @@ class Deliverable < ActiveRecord::Base
   
   def decrement_actual_effort effort_value
     self.actual_effort -= effort_value
+    self.actual_production_rate = ((self.actual_effort / self.actual_size)*100).round / 100
     if self.save! && self.project_phase
       self.project_phase.decrement_actual_effort effort_value
     end
@@ -118,6 +120,7 @@ class Deliverable < ActiveRecord::Base
   def increment_actual_effort effort_value
     
     self.actual_effort += effort_value
+    self.actual_production_rate = ((self.actual_effort / self.actual_size)*100).round / 100
     if self.save! && self.project_phase
       self.project_phase.increment_actual_effort effort_value
     end
@@ -141,5 +144,8 @@ class Deliverable < ActiveRecord::Base
 
   end
 
+  def assign_actual_size
+    self.actual_size = self.estimated_size
+  end
 
 end

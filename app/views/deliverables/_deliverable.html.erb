@@ -6,9 +6,15 @@
       </td></tr>
     <tr><td>
         <%= f.label :type %>*</td><td>
+        <% if (action_name == 'edit' and @deliverable.deliverable_type == 'Ad-Hoc') or
+              @deliverable.project_phase.lifecycle_phase.nil? %>
+        <% type_collection = ['Ad-Hoc'] %>
+        <%= select('', '', ['Ad-Hoc']) %>
+        <% else %>
         <% type_collection = DeliverableType.find(:all) %>
         <% type_collection << DeliverableType.new(:name => 'Ad-Hoc') if action_name == 'new' %>
         <%= f.collection_select :deliverable_type, type_collection, :name, :name, :prompt => 'Deliverable Type'  %>
+        <% end %>
       </td></tr>
     <tr><td>
         <%= f.label :complexity %>*</td><td>
@@ -27,7 +33,7 @@
   <th style="width: 10%"></th>
   <th style="width: 10%"></th>
   <tr>
-     <td colspan="3" style="text-align:left">Estimate Deliverable Effort</td>
+     <td colspan="3" style="text-align:left">Estimate Deliverable Data</td>
       <td class="stats_table" colspan="3">Historical Data</td>
   </tr>
     <tr class="stats_table">
@@ -68,10 +74,37 @@
       <td class="stats_table" id="avg_rate"></td>
       <td class="stats_table" id="max_rate"></td>
       </td></tr>
+
+    <%  if action_name == 'edit'%>
+     <tr style="height:60px;vertical-align: middle;">
+     <td colspan="6" style="text-align:left">Actual Data</td>
+     </tr>
+     <tr><td>Effort</td><td>
+        <%= f.text_field :actual_effort,  :class => 'numberField'  %>
+      </td><td>Hours</td><td></td><td></td><td></td>
+    </tr>
+     <tr><td>Size</td><td>
+        <%= f.text_field :actual_size, :class => 'numberField',
+          :onKeyUp => "recalculateActualProductionRate(this)" %></td>
+       <td><%= @deliverable.unit_of_measure %></td>
+      <td></td><td></td><td></td><td></td></tr>
+     <tr style="padding-bottom:10px"><td>Production Rate</td><td>
+         <%= f.text_field :actual_production_rate, :class => 'numberField'  %>
+       <td></td><td></td><td></td><td></td></td></tr>
+     <% end %>
+
+
   </table>
 
 
 <script type="text/javascript">
+
+  jQuery(document).ready(function(){
+    jQuery('#deliverable_actual_effort').attr('disabled', 'disabled');
+    jQuery('#deliverable_actual_production_rate').keydown(function(){
+      return false;
+    });
+  })
 
 <% for deliverable_type in DeliverableType.find(:all) %>
     deliverableTypes.push(new Array('<%= deliverable_type.unit_of_measure %>', '<%=h deliverable_type.name %>'));

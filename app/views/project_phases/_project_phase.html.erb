@@ -1,5 +1,5 @@
 <tbody id="phase_<%= project_phase.id %>" class="phaseSelection">
-  <tr class="project_phase <%= cycle('odd', 'evenPhase') %>"
+  <tr class="project_phase <%= cycle('oddPhase', 'evenPhase') %>"
       id="project_phase_<%= project_phase.id %>">
     <td style="border-radius: 0px;">
        <% if @active %>
@@ -28,10 +28,11 @@
   </tr>
   <% for deliverable in project_phase.deliverables.all %>
     <tr class="deliverableRow">
-      <td style="border-radius: 0px;"
+      <td style="border-radius: 0px;
         <% if @active %>
-        style="cursor: pointer"
+        <%= 'cursor: pointer;"' %>
         onClick="window.location.href='<%= edit_deliverable_path(deliverable) %>'"
+        <% else %>"
         <%end%>>
         <%= deliverable.name %>
       </td>

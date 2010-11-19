@@ -595,14 +595,23 @@ li .handle {
     background: #E3E1E9;
 }
 
-.deliverableRow:hover, .evenPhase:hover{
+.oddPhase{
+    background: #E2E4FF;
+}
+
+.deliverableRow:hover, .oddPhase:hover, .evenPhase:hover{
     background: #E6FF99;
 }
 
 .pageTitle{
+    min-height: 30px;
+    padding-left: 50px;
     width: 80%;
     text-align: left;
+    background: url('/images/arrow.png');
+    background-repeat: no-repeat;
 }
+
 
 .tableFooter td, .tableFooter:link, .tableFooter:visited{
     background: #015666;
@@ -643,4 +652,36 @@ li .handle {
     text-align: left;
     float: left;
     width: 200px;
+}
+
+#catalogList {
+    padding: 10px;
+    text-align: left;
+    list-style: none;
+}
+
+#catalogList li {
+    font-size: 16px;
+}
+
+
+#catalogList a:link, a:visited{
+    color: #428490;
+    text-decoration: none;
+}
+
+#catalogList a:hover{
+    color: #5FBDCE;
+}
+
+.CatalogTable {
+    margin: 10px;
+}
+
+.CatalogTable td{
+    padding: 1px 8px 1px 2px;
+}
+
+.CatalogTable th{
+     padding: 1px 8px 1px 5px;
 }

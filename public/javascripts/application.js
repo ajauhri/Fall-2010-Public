@@ -7,6 +7,27 @@ var deliverables = new Array();
 var deliverableTypes = new Array();
 
 
+function recalculateActualProductionRate(changed){
+    if (isNaN(parseFloat(changed.value)) || parseFloat(changed.value) == 0) return false;
+    size        = jQuery("#deliverable_actual_size");
+    effort      = jQuery("#deliverable_actual_effort");
+    rate        = jQuery("#deliverable_actual_production_rate");
+    sizeVal     = parseFloat(jQuery("#deliverable_actual_size").val());
+    effortVal   = parseFloat(jQuery("#deliverable_actual_effort").val());
+    rateVal     = parseFloat(jQuery("#deliverable_actual_production_rate").val());
+
+    if (changed.value != '' && changed.id == "deliverable_actual_size"){
+        if (!isNaN(effortVal) && effortVal != 0){
+            rate.val( round(effortVal / sizeVal));
+        } else if (!isNaN(rateVal) && rateVal != 0){
+            effort.val( round(rateVal * sizeVal))
+        } else {
+    // do not calculate, because we need at least two values
+    }
+    }
+}
+
+
 function calculateProductionRate(changed){
     if (isNaN(parseFloat(changed.value)) || parseFloat(changed.value) == 0) return false;
     size        = jQuery("#deliverable_estimated_size");

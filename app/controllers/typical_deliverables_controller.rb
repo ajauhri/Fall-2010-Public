@@ -1,17 +1,5 @@
 # Handles Typical deliverables under a typical lifecycle
 class TypicalDeliverablesController < ApplicationController
-  
-  #  Provides a list of all typical deliverables types
-  #  Input params: None
-  #  Returns     : Returns a list of all deliverables types
-  def index
-    @typical_deliverables = TypicalDeliverable.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      #format.xml  { render :xml => @typical_deliverables }
-    end
-  end
 
   #  Provides a list with different fields of a particular typical deliverables
    #  Input params: TypicalDeliverable.id
