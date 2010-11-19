@@ -6,13 +6,6 @@ describe LifecyclesController do
     @mock_lifecycle ||= mock_model(Lifecycle, stubs)
   end
 
-  describe "GET index" do
-    it "assigns all lifecycles as @lifecycles" do
-      Lifecycle.stub(:find).with(:all).and_return([mock_lifecycle])
-      get :index
-      assigns[:lifecycles].should == [mock_lifecycle]
-    end
-  end
 
   describe "GET show" do
     it "assigns the requested lifecycle as @lifecycle" do

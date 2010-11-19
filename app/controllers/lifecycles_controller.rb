@@ -1,15 +1,4 @@
 class LifecyclesController < ApplicationController
-  # GET /lifecycles
-  # GET /lifecycles.xml
-  def index
-    @lifecycles = Lifecycle.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @lifecycles }
-    end
-  end
-
   # GET /lifecycles/1
   # GET /lifecycles/1.xml
   def show

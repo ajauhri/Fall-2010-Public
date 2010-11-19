@@ -14,14 +14,6 @@ describe TypicalDeliverablesController do
     logout_user
   end
 
-  describe "GET index" do
-    it "assigns all typical_deliverables as @typical_deliverables" do
-      TypicalDeliverable.stub(:find).with(:all).and_return([mock_typical_deliverable])
-      get :index
-      assigns[:typical_deliverables].should == [mock_typical_deliverable]
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested typical_deliverable as @typical_deliverable" do
       TypicalDeliverable.stub(:find).with("37").and_return(mock_typical_deliverable)

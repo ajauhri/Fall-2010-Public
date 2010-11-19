@@ -1,0 +1,25 @@
+<table class="CatalogTable DisplayTable">
+  <tr>
+    <th id="HeaderLeft">Name</th>
+    <th>Description</th>
+    <th>Sequence</th>
+    <th id="HeaderRight"></th>
+  </tr>
+ 
+
+
+<% @lifecycle_phases.each do |lifecycle_phase| %>
+  <tr>
+    <td><%=link_to h(lifecycle_phase.name), edit_lifecycle_phase_path(lifecycle_phase)  %></td>
+    <td><%=h lifecycle_phase.description %></td>
+    <td><%=h lifecycle_phase.sequence %></td>
+    <td><%= link_to 'X', lifecycle_phase, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td colspan="4">
+      <%= link_to image_tag("/images/plus_icon.png") + ' New Lifecycle Phase', new_lifecycle_phase_path %>
+    </td>
+  </tr>
+</table>
+

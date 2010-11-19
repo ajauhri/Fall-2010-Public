@@ -14,24 +14,6 @@ describe LifecyclePhasesController do
     login_user
   end
 
-  it "display all phases based on the lifecycle" do
-    #    lifecyclephase = Factory.create(:lifecycle_phase)
-    #    lifecyclephase.lifecycle.name.should_not be_nil
-    get :index, :id => Lifecycle.first
-    response.should render_template(:index)
-    #LifecyclePhase.find(:all,:conditions => ["lifecycle_id = ?", Lifecycle.first]).size.should > 0
-    #LifecyclePhase.where(["lifecycle_id = ?", Lifecycle.first]).size.should == 9
-  end
-
-
-
-  describe "GET index" do
-    it "assigns all lifecycle_phases as @lifecycle_phases" do
-      LifecyclePhase.stub!(:find).with(any_args()).and_return(mock_lifecycle_phase)
-      get :index
-      assigns[:lifecycle_phases].should == mock_lifecycle_phase
-    end
-  end
 
   describe "GET show" do
     it "assigns the requested lifecycle_phase as @lifecycle_phase" do

@@ -14,14 +14,6 @@ describe DeliverableTypesController do
     logout_user
   end
 
-  describe "GET index" do
-    it "assigns all deliverable_types as @deliverable_types" do
-      DeliverableType.stub(:find).with(:all).and_return([mock_deliverable_type])
-      get :index
-      assigns[:deliverable_types].should == [mock_deliverable_type]
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested deliverable_type as @deliverable_type" do
       DeliverableType.stub(:find).with("37").and_return(mock_deliverable_type)

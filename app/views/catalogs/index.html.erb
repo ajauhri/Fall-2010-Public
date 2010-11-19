@@ -1,14 +1,51 @@
 <div class="pageTitle"><h1>Catalogs</h1></div>
 <ul id="catalogList">
-  <li><%= image_tag("/images/expandCatalog.png", :id => 'deliverableCatalog') %>
-      <%= link_to "Deliverable Types", deliverable_types_url %></li>
-  <li><%=  image_tag("/images/expandCatalog.png", :id => 'lifecycleCatalog') %>
-  <%= link_to "Lifecycles", lifecycles_url %></li>
-  <li><%=  image_tag("/images/expandCatalog.png", :id => 'phaseCatalog') %>
-<%= link_to "Lifecycle Phases", lifecycle_phases_url %></li>
-  <li><%= image_tag("/images/expandCatalog.png", :id => 'typicalDeliverableCatalog')%>
-<%= link_to "Typical Deliverables", typical_deliverables_url %></li>
-  <li><%=  image_tag("/images/expandCatalog.png", :id => 'userCatalog') %>
-<%= link_to "Users", users_url %></li>
+  <li><%= link_to image_tag("/images/expandCatalog.gif"), '#', :id => 'deliverableTypesExpand', :onclick => 'toggleCollapse("deliverableTypes")'%>
+      <%= link_to image_tag("/images/collapseCatalog.gif"), '#', :id => 'deliverableTypesCollapse',
+        :style => 'display:none', :onclick => 'toggleCollapse("deliverableTypes")'%>
+      <%= link_to "Deliverable Types", '#', :onclick => "toggleCollapse('deliverableTypes')" %></li>
+  <div style="display:none"  id="deliverableTypes">
+    <%= render :partial => 'deliverable_types/index' %>
+  </div>
+  <li>
+   <%= link_to image_tag("/images/expandCatalog.gif"), '#', :id => 'lifecyclesExpand', :onclick => 'toggleCollapse("lifecycles")'%>
+   <%= link_to image_tag("/images/collapseCatalog.gif"), '#', :id => 'lifecyclesCollapse',
+     :style => 'display:none', :onclick => 'toggleCollapse("lifecycles")'%>
+  <%= link_to "Lifecycles", '#',  :onclick => 'toggleCollapse("lifecycles")' %></li>
+  <div style="display:none" id="lifecycles">
+        <%= render :partial => 'lifecycles/index' %>
+  </div>
+  <li>
+    <%= link_to image_tag("/images/expandCatalog.gif"), '#', :id => 'lifecyclePhasesExpand', :onclick => 'toggleCollapse("lifecyclePhases")'%>
+   <%= link_to image_tag("/images/collapseCatalog.gif"), '#', :id => 'lifecyclePhasesCollapse',
+     :style => 'display:none', :onclick => 'toggleCollapse("lifecyclePhases")'%>
+<%= link_to "Lifecycle Phases", '#', :onclick => 'toggleCollapse("lifecyclePhases")' %></li>
+  <div style="display:none" id="lifecyclePhases">
+        <%= render :partial => 'lifecycle_phases/index' %>
+  </div>
+  <li>
+   <%= link_to image_tag("/images/expandCatalog.gif"), '#', :id => 'typicalDeliverablesExpand', :onclick => 'toggleCollapse("typicalDeliverables")' %>
+   <%= link_to image_tag("/images/collapseCatalog.gif"), '#', :id => 'typicalDeliverablesCollapse', :style => 'display:none',
+     :style => 'display:none', :onclick => 'toggleCollapse("typicalDeliverables")' %>
+ <%= link_to "Typical Deliverables", '#', :onclick => 'toggleCollapse("typicalDeliverables")'  %></li>
+  <div style="display:none" id="typicalDeliverables">
+        <%= render :partial => 'typical_deliverables/index' %>
+  </div>
+  
+  <li>
+    <%= link_to image_tag("/images/expandCatalog.gif"), '#', :id => 'usersExpand', :onclick => 'toggleCollapse("users")' %>
+   <%= link_to image_tag("/images/collapseCatalog.gif"), '#', :id => 'usersCollapse', :style => 'display:none',
+     :style => 'display:none', :onclick => 'toggleCollapse("users")' %>
+ <%= link_to "Users", "#",  :onclick => 'toggleCollapse("users")' %></li>
+  <div style="display:none" id="users">
+        <!--#render :partial => 'users/index'-->
+  </div>
 </ul>
 
+<script>
+  function toggleCollapse(elem){
+    jQuery('#'+elem+'Expand').toggle();
+    jQuery('#'+elem+'Collapse').toggle();
+    jQuery('#'+elem).slideToggle();
+  }
+</script>

@@ -1,18 +1,5 @@
 # Handles lifecycle functionality
 class LifecyclePhasesController < ApplicationController
-   # Lists all LifecyclePhases from the DB
-   # Input params: None
-   # Returns     : Returns a list of all lifecycle phases
-   
-  def index
-
-    @lifecycle_phases = LifecyclePhase.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @lifecycle_phases }
-    end
-  end
 
     #  Lists details of a particular LifecyclePhase.
     #  Input params: LifecyclePhase.id

@@ -1,18 +1,6 @@
 # Handles deliverable types
 class DeliverableTypesController < ApplicationController
   
-  
-  #  Provides a list of all deliverables types
-  #  Input params: None
-  #  Returns     : Returns a list of all deliverables types
-  def index
-    @deliverable_types = DeliverableType.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @deliverable_types }
-    end
-  end
 
   #  Provides a list with different fields of a particular deliverable type
   #  Input params: DeliverableType.id
