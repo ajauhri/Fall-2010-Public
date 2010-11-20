@@ -31,3 +31,10 @@ end
 Factory.define :lifecycle_for_project, :class => Lifecycle do |l|
   l.name "Lifecycle for project"
 end
+
+
+Factory.define :effort_project, :class => Project do |p|
+  p.name "Effort Project"
+  p.lifecycle_id 10
+
+end

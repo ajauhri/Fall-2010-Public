@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_filter :require_user, :except => ['new', 'create'] 
   before_filter :require_admin, :except => ['edit', 'update'] 
   before_filter :load_user_using_perishable_token, :only => ['edit_password', 'update_password']
+  
 
   #  Provides a list of all/required fields needed to create a User
   #  Input params: None

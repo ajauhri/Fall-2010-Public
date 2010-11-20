@@ -34,8 +34,5 @@ class Effort < ActiveRecord::Base
     if self.deliverable
       self.deliverable.decrement_actual_effort self.value
     end
-
   end
-
-
 end

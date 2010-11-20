@@ -27,7 +27,7 @@ class Deliverable < ActiveRecord::Base
   before_create :assign_actual_size
 
   validates_presence_of :name, :deliverable_type, :unit_of_measure,
-    :complexity, :estimated_size, :estimated_effort, :estimated_production_rate
+  :complexity, :estimated_size, :estimated_effort, :estimated_production_rate
 
   validates_numericality_of :estimated_size, :estimated_effort
 
@@ -45,15 +45,15 @@ class Deliverable < ActiveRecord::Base
 
     if @typical_deliverable
       Deliverable.create(
-        :name => @typical_deliverable.name,
-        :description => @typical_deliverable.description,
-        :deliverable_type => deliverable_type.name,
-        :unit_of_measure => deliverable_type.unit_of_measure,
-        :complexity => @typical_deliverable.complexity,
-        :estimated_size => @typical_deliverable.estimated_size,
-        :estimated_effort => @typical_deliverable.estimated_effort,
-        :estimated_production_rate => @typical_deliverable.estimated_production_rate,
-        :project_phase_id => project_phase_id)
+      :name => @typical_deliverable.name,
+      :description => @typical_deliverable.description,
+      :deliverable_type => deliverable_type.name,
+      :unit_of_measure => deliverable_type.unit_of_measure,
+      :complexity => @typical_deliverable.complexity,
+      :estimated_size => @typical_deliverable.estimated_size,
+      :estimated_effort => @typical_deliverable.estimated_effort,
+      :estimated_production_rate => @typical_deliverable.estimated_production_rate,
+      :project_phase_id => project_phase_id)
     end
   end
 
@@ -63,89 +63,93 @@ class Deliverable < ActiveRecord::Base
   # Retruns     : Hash of all estimates
   def self.get_estimates(deliverable_type, complexity)
     find_by = {:complexity => complexity, :deliverable_type => deliverable_type,
-                :project_phases => {:projects => {:status => "Archived"}}}
-    return get_statistics(find_by)
-  end
-
-  protected
-
-
-
-  # Calulates estimates
-  # Input params : DeliverableType.name, Complexity
-  # Returns      : Hash of the estimates
-  def self.get_statistics(find_by)
-    estimates = {}
-    estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
-    estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
-
-    return estimates
-         
-  end
-
-  # Ensures estimate_size is not negative
- 
-  def estimated_size_should_be_positive
-    if estimated_size.nil? || estimated_size <= 0
-      errors.add(:estimated_size, 'should be positive')
+      :project_phases => {:projects => {:status => "Archived"}}}
+      return get_statistics(find_by)
     end
-  end
 
-  # Ensures estimate_effort is not negative
+    protected
 
-  def estimated_effort_should_be_positive
-    if estimated_effort.nil? || estimated_effort <= 0
-      errors.add(:estimated_effort, 'should be positive')
+
+
+    # Calulates estimates
+    # Input params : DeliverableType.name, Complexity
+    # Returns      : Hash of the estimates
+    def self.get_statistics(find_by)
+      estimates = {}
+      estimates[:avg_effort] = Deliverable.average :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:max_effort] = Deliverable.maximum :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:min_effort] = Deliverable.minimum :actual_effort, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:avg_size] = Deliverable.average :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:max_size] = Deliverable.maximum :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:min_size] = Deliverable.minimum :actual_size, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:avg_rate] = Deliverable.average :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:max_rate] = Deliverable.maximum :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
+      estimates[:min_rate] = Deliverable.minimum :actual_production_rate, :conditions => find_by, :joins => [:project_phase => :project]
+
+      return estimates
+
     end
-  end
-  
-  # Decrements Deliverable.actual_effort and calls ProjectPhase model to decrement actual_effort
-  # Input params : Effort.value
-  
-  def decrement_actual_effort effort_value
-    self.actual_effort -= effort_value
-    self.actual_production_rate = ((self.actual_effort / self.actual_size)*100).round / 100
-    if self.save! && self.project_phase
-      self.project_phase.decrement_actual_effort effort_value
+
+    # Ensures estimate_size is not negative
+
+    def estimated_size_should_be_positive
+      if estimated_size.nil? || estimated_size <= 0
+        errors.add(:estimated_size, 'should be positive')
+      end
     end
-  end
-  
-  def increment_actual_effort effort_value
+
+    # Ensures estimate_effort is not negative
+
+    def estimated_effort_should_be_positive
+      if estimated_effort.nil? || estimated_effort <= 0
+        errors.add(:estimated_effort, 'should be positive')
+      end
+    end
+
+    # Decrements Deliverable.actual_effort and calls ProjectPhase model to decrement actual_effort
+    # Input params : Effort.value
+
+    def decrement_actual_effort effort_value
+      self.actual_effort -= effort_value
+      self.actual_production_rate = ((self.actual_effort / self.actual_size)*100).round / 100
+      if self.save! && self.project_phase
+        self.project_phase.decrement_actual_effort effort_value
+      end
+    end
     
-    self.actual_effort += effort_value
-    self.actual_production_rate = ((self.actual_effort / self.actual_size)*100).round / 100
-    if self.save! && self.project_phase
-      self.project_phase.increment_actual_effort effort_value
+    
+    # Increments Deliverable.actual_effort and calls ProjectPhase model to increment actual_effort
+    # Input params : Effort.value
+
+    def increment_actual_effort effort_value
+
+      self.actual_effort += effort_value
+      self.actual_production_rate = ((self.actual_effort / self.actual_size)*100).round / 100
+      if self.save! && self.project_phase
+        self.project_phase.increment_actual_effort effort_value
+      end
     end
-  end
 
     # Updates efforts for ProjectPhase
 
-  def increment_estimated_effort
+    def increment_estimated_effort
 
-    if self.estimated_effort_changed? and self.project_phase
+      if self.estimated_effort_changed? and self.project_phase
         self.project_phase.increment_total_estimated_effort self.estimated_effort
+      end
+
+    end
+
+    # Calls Deliverable model to decrement actual_effort
+    def decrement_estimated_effort
+      if self.project_phase
+        self.project_phase.decrement_total_estimated_effort self.estimated_effort
+      end
+
+    end
+
+    def assign_actual_size
+      self.actual_size = self.estimated_size
     end
 
   end
-
-  # Calls Deliverable model to decrement actual_effort
-  def decrement_estimated_effort
-    if self.project_phase
-      self.project_phase.decrement_total_estimated_effort self.estimated_effort
-    end
-
-  end
-
-  def assign_actual_size
-    self.actual_size = self.estimated_size
-  end
-
-end

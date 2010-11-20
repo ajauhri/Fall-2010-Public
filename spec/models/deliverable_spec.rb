@@ -19,7 +19,7 @@ describe Deliverable do
 
   it "should fail with a complexity that does not exist in the complexity array" do
     deliverable = Deliverable.create!(@valid_attributes)
-    deliverable.complexity = "blah"
+    deliverable.complexity = "xxx"
     deliverable.should be_invalid
   end
 
@@ -34,7 +34,6 @@ describe Deliverable do
     deliverable.estimated_size = -1
     deliverable.should be_invalid
   end
-
 end
 
 describe Deliverable , "from a typical deliverable and a phase" do
@@ -50,15 +49,13 @@ describe Deliverable , "from a typical deliverable and a phase" do
     :estimated_size => 10, :estimated_effort => 20, :estimated_production_rate => 3,
     :complexity => 'LOW')
     project_phase_id = 1
-
     deliverable = Deliverable.create_from_typical_deliverable(typical_deliverable.id, project_phase_id)
     deliverable.should be_valid
   end
-
 end
 
 
-describe Deliverable, "estimating based upon matching type and complexity" do
+describe Deliverable, "should estimate based upon matching type and complexity" do
 
   before(:all) do
     Factory.create(:low_complex_minutes1)
@@ -69,11 +66,11 @@ describe Deliverable, "estimating based upon matching type and complexity" do
     Factory.create(:high_complex_requirements3)
   end
 
-  it "should return accurate estimates for highly complex req. doc" do
+  it "should return accurate estimates for highly complex requirements doc" do
     estimates = Deliverable.get_estimates('Requirements Document', 'HIGH')
-    estimates[:max_size].should >=6
+    estimates[:max_size].should == 3
     estimates[:min_size].should >=2
-    estimates[:avg_size].should >=4 
+    estimates[:avg_size].should <=4 
     estimates[:max_effort].should equal(6)
     estimates[:min_effort].should equal(2)
     estimates[:avg_effort].should >=4
@@ -82,86 +79,72 @@ describe Deliverable, "estimating based upon matching type and complexity" do
     estimates[:avg_rate].should >=4
   end
 
-#  describe "should update project, phase total_estimated_effort" do
-#
-#
-#    before(:all) do
-#
-#      @testing_deliverable = Factory.create(:effort_deliverable)
-#      @phase_init = @testing_deliverable.project_phase.total_estimated_effort
-#      @project_init = @testing_deliverable.project_phase.project.total_estimated_effort
-#      @testing_deliverable2 = Factory.create(:effort_deliverable2, :project_phase => @testing_deliverable.project_phase)
-#
-#    end
-#
-#    it "should update project total estimated effort" do
-#      @project_init.should == @testing_deliverable.estimated_effort
-#      @testing_deliverable.project_phase.project.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
-#    end
-#
-#
-#    it "should update project phases total estimated effort" do
-#      @phase_init.should == @testing_deliverable.estimated_effort
-#      @testing_deliverable.project_phase.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
-#    end
-#
-#
-#  end
+  describe "should update project, phase total_estimated_effort" do
+
+    before(:all) do
+      @testing_deliverable = Factory.create(:effort_deliverable)
+      @phase_init = @testing_deliverable.project_phase.total_estimated_effort
+      @project_init = @testing_deliverable.project_phase.project.total_estimated_effort
+      @testing_deliverable2 = Factory.create(:effort_deliverable2, :project_phase => @testing_deliverable.project_phase)
+    end
+
+    it "should update project total estimated effort" do
+      @project_init.should == @testing_deliverable.estimated_effort
+      @testing_deliverable.project_phase.project.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+    end
 
 
-
-describe "should increment project and project phase estimated effort values after deliverable creation" do
-
-  before(:all) do
-
-    @deliverable1 = Factory.create(:effort_deliverable)  
-    @init_estimated_effort_for_project_phase = ProjectPhase.find(@deliverable1.project_phase).total_estimated_effort
-    @init_estimated_effort_for_project = Project.find(@deliverable1.project_phase.project).total_estimated_effort
-    @deliverable2 = Factory.create(:effort_deliverable2, :project_phase => @deliverable1.project_phase)
-
-  end
-
-   it "should update project total effort" do
-     @init_estimated_effort_for_project.should == @deliverable1.estimated_effort
-    Project.find(@deliverable1.project_phase.project).total_estimated_effort.should == @init_estimated_effort_for_project + @deliverable2.estimated_effort
+    it "should update project phases total estimated effort" do
+      @phase_init.should == @testing_deliverable.estimated_effort
+      @testing_deliverable.project_phase.total_estimated_effort.should == @phase_init + @testing_deliverable2.estimated_effort
+    end
   end
 
 
-   it "should update project phases total effort" do
-     @init_estimated_effort_for_project_phase == @deliverable1.estimated_effort
-     ProjectPhase.find(@deliverable1.project_phase).total_estimated_effort.should == @init_estimated_effort_for_project_phase + @deliverable2.estimated_effort
-   end
-end
 
-describe "should decrement project and project phase estimated effort values after deliverable deletion" do
+  describe "should increment project and project phase estimated effort values after deliverable creation" do
 
-  before(:each) do
-    @deliverable1 = Factory.create(:effort_deliverable)
+    before(:all) do
+      @deliverable1 = Factory.create(:effort_deliverable)  
+      @init_estimated_effort_for_project_phase = ProjectPhase.find(@deliverable1.project_phase).total_estimated_effort
+      @init_estimated_effort_for_project = Project.find(@deliverable1.project_phase.project).total_estimated_effort
+      @deliverable2 = Factory.create(:effort_deliverable2, :project_phase => @deliverable1.project_phase)
+    end
+
+    it "should update project total effort" do
+      @init_estimated_effort_for_project.should == @deliverable1.estimated_effort
+      Project.find(@deliverable1.project_phase.project).total_estimated_effort.should == @init_estimated_effort_for_project + @deliverable2.estimated_effort
+    end
+
+    it "should update project phases total effort" do
+      @init_estimated_effort_for_project_phase == @deliverable1.estimated_effort
+      ProjectPhase.find(@deliverable1.project_phase).total_estimated_effort.should == @init_estimated_effort_for_project_phase + @deliverable2.estimated_effort
+    end
   end
 
-  it "should decrement project total estimated effort" do
-       @init_estimated_effort_for_project = Project.find(@deliverable1.project_phase.project).total_estimated_effort
-       @init_estimated_effort_for_project.should == @deliverable1.estimated_effort
+  describe "should decrement project and project phase estimated effort values after deliverable deletion" do
 
-       @project = Project.find(@deliverable1.project_phase.project)
-       @estimated_effort = @deliverable1.estimated_effort
-       Deliverable.destroy(@deliverable1)
-       Project.find(@project).total_estimated_effort.should == @init_estimated_effort_for_project - @estimated_effort
-   end
+    before(:each) do
+      @deliverable1 = Factory.create(:effort_deliverable)
+    end
 
-  it "should decrement project phase total estimated effort" do
-       @init_estimated_effort_for_project_phase = ProjectPhase.find(@deliverable1.project_phase).total_estimated_effort
-       @init_estimated_effort_for_project_phase.should == @deliverable1.estimated_effort
+    it "should decrement project total estimated effort" do
+      @init_estimated_effort_for_project = Project.find(@deliverable1.project_phase.project).total_estimated_effort
+      @init_estimated_effort_for_project.should == @deliverable1.estimated_effort
+      @project = Project.find(@deliverable1.project_phase.project)
+      @estimated_effort = @deliverable1.estimated_effort
+      Deliverable.destroy(@deliverable1)
+      Project.find(@project).total_estimated_effort.should == @init_estimated_effort_for_project - @estimated_effort
+    end
 
-       @project_phase = ProjectPhase.find(@deliverable1.project_phase)
-       @estimated_effort = @deliverable1.estimated_effort
-       Deliverable.destroy(@deliverable1)
-       ProjectPhase.find(@project_phase).total_estimated_effort.should == @init_estimated_effort_for_project_phase - @estimated_effort
-   end
-
-   
-
-
+    it "should decrement project phase total estimated effort" do
+      @init_estimated_effort_for_project_phase = ProjectPhase.find(@deliverable1.project_phase).total_estimated_effort
+      @init_estimated_effort_for_project_phase.should == @deliverable1.estimated_effort
+      @project_phase = ProjectPhase.find(@deliverable1.project_phase)
+      @estimated_effort = @deliverable1.estimated_effort
+      Deliverable.destroy(@deliverable1)
+      ProjectPhase.find(@project_phase).total_estimated_effort.should == @init_estimated_effort_for_project_phase - @estimated_effort
+    end
   end
 end
 

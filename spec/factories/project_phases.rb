@@ -59,3 +59,9 @@ Factory.define :lifecycle_project_phase, :class => LifecyclePhase do |p|
     p.name "Lifecycle_phase"
    
 end
+
+
+
+Factory.define :effort_project_phase, :class => ProjectPhase do |p|
+  p.project {|l| l.association(:effort_project) }
+end

@@ -80,6 +80,17 @@ end
       get :edit, :id => "37"
       assigns[:deliverable].should equal(mock_deliverable)
     end
+    
+    it "redirects to projects controller if project not active" do
+      Deliverable.stub(:find).with(any_args()).and_return(mock_deliverable)
+      mock_deliverable.should_receive(:project_phase).exactly(3).times.and_return(mock_project_phase)
+      mock_project_phase.should_receive(:project).twice.and_return(mock_project)
+      mock_project.should_receive(:status).and_return(false)
+      
+      #controller.stub!(:is_active).and_return(false)
+      get :edit
+      response.should redirect_to(deliverables_url+"/edit?controllers=projects")
+    end
   end
 
   describe "POST create" do

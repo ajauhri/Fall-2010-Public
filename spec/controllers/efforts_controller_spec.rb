@@ -13,13 +13,16 @@ describe EffortsController do
   end
   
   before(:each) do
-    logout_user
     login_user
   end
 
+  after(:each) do
+    logout_user
+  end
+  
   describe "GET index" do
     it "should render the index template" do
-            # 
+            
             # get :index
             # response.should render_template 'index'
     end
@@ -31,7 +34,8 @@ describe EffortsController do
         Effort.stub!(:new).with(any_args()).and_return(mock_effort)
         controller.should_receive(:is_active).and_return(false)
         post :create, :effort => {:these => "params"}
-        response.should redirect_to(efforts_url(:controllers => :projects))
+        #response.should redirect_to(efforts_url(:controllers => :projects))
+        response.should redirect_to(efforts_url)
       end
 
       it "should successfully update effort if project is active" do

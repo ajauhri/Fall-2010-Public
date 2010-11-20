@@ -119,6 +119,7 @@ class ProjectsController < ApplicationController
 
   def sort
     params[:phase].each_with_index do |id, index|
+      #puts id.to_s + "----"
       ProjectPhase.update_all(['sequence=?',index+1],['id=?',id])
     end
     render :nothing => true

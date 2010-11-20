@@ -57,6 +57,16 @@ describe ProjectPhasesController do
       get :edit, :id => "37"
       assigns[:project_phase].should equal(mock_project_phase)
     end
+    
+    it "redirects to project controller if project is not active" do
+      ProjectPhase.stub(:find).with(any_args()).and_return(mock_project_phase)
+      mock_project_phase.should_receive(:project).twice.and_return(mock_project)
+      mock_project.should_receive(:status).and_return(false)
+      #controller.stub!(:is_active).and_return(false)
+      get :edit
+      assigns[:project_phase].should equal(mock_project_phase)
+      response.should redirect_to(project_phases_url+"/edit?controllers=projects")
+    end
   end
 
   describe "POST create" do

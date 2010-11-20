@@ -2,21 +2,16 @@ require 'spec_helper'
 
 describe ProjectsController do
   setup :activate_authlogic
-  #integrate_views
-  
+
   def mock_project(stubs ={})
     @mock_project ||= mock_model(Project, stubs)
-  end
-
-  before(:all) do
-    Factory.create(:project)
   end
 
   before(:each) do
     logout_user
     login_user
   end
-  
+
   it "should create a new project" do
     get :new
     response.should render_template(:new)
@@ -31,8 +26,8 @@ describe ProjectsController do
     flash[:notice].should_not be_nil
     response.should redirect_to(project_url(assigns[:project]))
   end
-  
-  
+
+
   it "should redirect to new with a notice on unsuccessful save" do
     Project.stub!(:new).and_return(mock_project)
     @mock_project.should_receive(:save).and_return(false)
@@ -40,7 +35,14 @@ describe ProjectsController do
     post :create
     flash[:error].should_not be_nil
     response.should render_template('new')
-      end
+  end
+  
+  
+  
+  it "should redirect to action index if :commit == Cancel" do
+    post :create, :commit => 'Cancel'
+    response.should redirect_to(projects_url)
+  end
 
   it "should redirect to index" do
     Project.any_instance.stubs(:valid?).returns(true)
@@ -63,12 +65,12 @@ describe ProjectsController do
     put :update, :id => Project.first
     response.should render_template(:edit)
   end
-  
+
   it "should redirect to show template if params commit is present" do
     put :update, :commit => "Cancel"
     response.should redirect_to(project_url(:show))
   end
-  
+
 
   it "should update action should redirect when model is valid" do
     Project.any_instance.stubs(:valid?).returns(true)
@@ -83,10 +85,9 @@ describe ProjectsController do
     response.should redirect_to(projects_url)
     Project.exists?(project.id).should be_false
   end
-  
+
   it "should use sort method for phases within a project" do
     ProjectPhase.should_receive(:update_all).with(any_args()).twice.and_return(true)
-    put :sort, :phaseslist => {:id => 1, id => 2}
+    put :sort, :phase => {:id => 1, :index => 2}
   end
-  
 end

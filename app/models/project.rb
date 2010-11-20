@@ -32,8 +32,7 @@ class Project < ActiveRecord::Base
   def create_phases
     @lifecycle_phases = LifecyclePhase.find_all_by_lifecycle_id(self.lifecycle_id)
     @lifecycle_phases.each do |lp|
-     
-      ProjectPhase.create_from_lifecycle_phase(lp.id, self)
+     ProjectPhase.create_from_lifecycle_phase(lp.id, self)
     end
   end
  

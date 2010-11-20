@@ -9,11 +9,13 @@ describe LifecyclePhasesController do
     @mock_lifecycle_phase ||= mock_model(LifecyclePhase, stubs)
   end
 
-  before :each do
-    logout_user
+  before(:each) do
     login_user
   end
 
+  after(:each) do
+    logout_user
+  end
 
   describe "GET show" do
     it "assigns the requested lifecycle_phase as @lifecycle_phase" do
@@ -32,15 +34,23 @@ describe LifecyclePhasesController do
   end
 
 
+  describe "GET edit" do
+    it "assigns the requested lifecycle phase as @lifecycle_phase" do
+      LifecyclePhase.stub(:find).with("37").and_return(mock_lifecycle_phase)
+      get :edit, :id => "37"
+      assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
+    end
+  end
+
   describe "POST create" do
 
     describe "with valid params" do
       it "assigns a newly created lifecycle_phase as @lifecycle_phase" do
-        LifecyclePhase.stub!(:new).with({'these' => 'params'}).and_return(mock_lifecycle_phase(:save => true))
-        post :create, :lifecycle_phase => {:these => 'params'}
-        assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
-      end
-
+                LifecyclePhase.stub!(:new).with({'these' => 'params'}).and_return(mock_lifecycle_phase(:save => true))
+                post :create, :lifecycle_phase => {:these => 'params'}
+                assigns[:lifecycle_phase].should equal(mock_lifecycle_phase)
+              end
+        
       it "redirects to the created lifecycle_phase" do
         LifecyclePhase.stub!(:new).and_return(mock_lifecycle_phase(:save => true))
         post :create, :lifecycle_phase => {}
