@@ -38,7 +38,7 @@
      :style => 'display:none', :onclick => 'toggleCollapse("users")' %>
  <%= link_to "Users", "#",  :onclick => 'toggleCollapse("users")' %></li>
   <div style="display:none" id="users">
-        <!--#render :partial => 'users/index'-->
+        <%= render :partial => 'users/index' %>
   </div>
 </ul>
 
