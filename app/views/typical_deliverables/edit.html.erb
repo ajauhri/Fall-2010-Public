@@ -1,5 +1,6 @@
-<h1>Editing typical_deliverable</h1>
+<div class="pageTitle"><h1><%= @typical_deliverable.name %> >  Edit</h1></div>
 
+<div class="InputArea">
 <% form_for(@typical_deliverable) do |f| %>
   <%= f.error_messages %>
 
@@ -8,5 +9,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @typical_deliverable %> |
-<%= link_to 'Back', typical_deliverables_path %>
+<%= link_to 'Back', :controller => 'catalogs' %>
+</div>

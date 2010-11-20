@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   #  Input params: None
   #  Returns     : Returns a hash of different fields of a user
   
+
   def new
     @user = User.new
   end

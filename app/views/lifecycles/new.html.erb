@@ -1,5 +1,6 @@
-<h1>New lifecycle</h1>
+<div class="pageTitle"><h1>New Lifecycle</h1></div>
 
+<div class="InputArea">
 <% form_for(@lifecycle) do |f| %>
   <%= f.error_messages %>
 
@@ -7,13 +8,16 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
+  <br/>
   <p>
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </p>
+  <br/>
   <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', lifecycles_path %>
+<%= link_to 'Back', :controller => 'catalogs' %>
+</div>

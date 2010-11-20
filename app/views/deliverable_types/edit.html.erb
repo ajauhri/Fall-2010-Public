@@ -1,5 +1,6 @@
-<h1>Editing deliverable_type</h1>
+<div class="pageTitle"><h1><%= @deliverable_type.name %> > Edit</h1></div>
 
+<div class="InputArea">
 <% form_for(@deliverable_type) do |f| %>
   <%= f.error_messages %>
 
@@ -7,14 +8,16 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
+  <br/>
   <p>
     <%= f.label :unit_of_measure %><br />
     <%= f.text_field :unit_of_measure %>
   </p>
+  <br/>
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @deliverable_type %> |
-<%= link_to 'Back', deliverable_types_path %>
+<%= link_to 'Back', :controller => 'catalogs' %>
+</div>

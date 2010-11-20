@@ -6,9 +6,7 @@
       </td></tr>
     <tr><td>
         <%= f.label :type %>*</td><td>
-        <% if (action_name == 'edit' and @deliverable.deliverable_type == 'Ad-Hoc') or
-              @deliverable.project_phase.lifecycle_phase.nil? %>
-        <% type_collection = ['Ad-Hoc'] %>
+        <% if action_name == 'edit' and @deliverable.project_phase.lifecycle_phase.nil? %>
         <%= select('', '', ['Ad-Hoc']) %>
         <% else %>
         <% type_collection = DeliverableType.find(:all) %>
