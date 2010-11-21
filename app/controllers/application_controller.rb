@@ -55,7 +55,10 @@ class ApplicationController < ActionController::Base
   
   # Only allows access to effort logs for manager and admin types
   def restrict_developer
-    return if controller_name == 'user_sessions' and action_name == 'destroy'
+    if (controller_name == 'user_sessions' and action_name == 'destroy') or
+       (controller_name == 'users' and (action_name == 'edit' || action_name == 'update'))
+     return
+    end
     if current_user and is_developer 
       redirect_to :controller => 'efforts'
     end
