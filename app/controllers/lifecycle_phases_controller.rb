@@ -1,18 +1,6 @@
 # Handles lifecycle functionality
 class LifecyclePhasesController < ApplicationController
 
-    #  Lists details of a particular LifecyclePhase.
-    #  Input params: LifecyclePhase.id
-    #  Returns     : Returns a hash of all fields related to a LifecyclePhase
-    
-  def show
-    @lifecycle_phase = LifecyclePhase.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @lifecycle_phase }
-    end
-  end
 
   #  Provides a list of all/required fields needed to create a LifecyclePhase
   #  Input params: None
@@ -46,11 +34,13 @@ class LifecyclePhasesController < ApplicationController
 
     respond_to do |format|
       if @lifecycle_phase.save
-        format.html { redirect_to(@lifecycle_phase, :notice => 'LifecyclePhase was successfully created.') }
-        format.xml  { render :xml => @lifecycle_phase, :status => :created, :location => @lifecycle_phase }
+        flash[:notice] = 'Lifecycle Phase was successfully created.'
+        format.html { redirect_to(:controller => 'catalogs') }
+       # format.xml  { render :xml => @lifecycle_phase, :status => :created, :location => @lifecycle_phase }
       else
+        flash[:error] = error_html(@lifecycle_phase.errors)
         format.html { render :action => "new" }
-        format.xml  { render :xml => @lifecycle_phase.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @lifecycle_phase.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,11 +54,13 @@ class LifecyclePhasesController < ApplicationController
 
     respond_to do |format|
       if @lifecycle_phase.update_attributes(params[:lifecycle_phase])
-        format.html { redirect_to(@lifecycle_phase, :notice => 'LifecyclePhase was successfully updated.') }
-        format.xml  { head :ok }
+        flash[:notice] = 'Lifecycle Phase was successfully updated.'
+        format.html { redirect_to(:controller => 'catalogs') }
+       # format.xml  { head :ok }
       else
+         flash[:error] = error_html(@lifecycle_phase.errors)
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @lifecycle_phase.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @lifecycle_phase.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -83,7 +75,7 @@ class LifecyclePhasesController < ApplicationController
     @lifecycle_phase.destroy
 
     respond_to do |format|
-      format.html { redirect_to(lifecycle_phases_url) }
+      format.html { redirect_to(:controller => 'catalogs') }
       format.xml  { head :ok }
     end
   end

@@ -1,14 +1,4 @@
 class LifecyclesController < ApplicationController
-  # GET /lifecycles/1
-  # GET /lifecycles/1.xml
-  def show
-    @lifecycle = Lifecycle.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @lifecycle }
-    end
-  end
 
   # GET /lifecycles/new
   # GET /lifecycles/new.xml
@@ -33,11 +23,13 @@ class LifecyclesController < ApplicationController
 
     respond_to do |format|
       if @lifecycle.save
-        format.html { redirect_to(@lifecycle, :notice => 'Lifecycle was successfully created.') }
-        format.xml  { render :xml => @lifecycle, :status => :created, :location => @lifecycle }
+        flash[:notice] = 'Lifecycle was successfully created.'
+        format.html { redirect_to(:controller => 'catalogs') }
+       # format.xml  { render :xml => @lifecycle, :status => :created, :location => @lifecycle }
       else
+        flash[:error] = error_html(@lifecycle.errors)
         format.html { render :action => "new" }
-        format.xml  { render :xml => @lifecycle.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @lifecycle.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -49,11 +41,13 @@ class LifecyclesController < ApplicationController
 
     respond_to do |format|
       if @lifecycle.update_attributes(params[:lifecycle])
-        format.html { redirect_to(@lifecycle, :notice => 'Lifecycle was successfully updated.') }
-        format.xml  { head :ok }
+        flash[:notice] = 'Lifecycle was successfully updated.'
+        format.html { redirect_to(:controller => 'catalogs') }
+        #format.xml  { head :ok }
       else
+        flash[:error] = error_html(@lifecycle.errors)
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @lifecycle.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @lifecycle.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -65,7 +59,7 @@ class LifecyclesController < ApplicationController
     @lifecycle.destroy
 
     respond_to do |format|
-      format.html { redirect_to(lifecycles_url) }
+      format.html { redirect_to(:controller => 'catalogs') }
       format.xml  { head :ok }
     end
   end

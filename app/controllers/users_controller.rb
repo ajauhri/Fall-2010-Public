@@ -23,9 +23,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Registration Successful!"
-      redirect_to :controller => 'projects', :action => 'index'
+      redirect_to :controller => 'catalogs'
     else
-      render :action => "new"
+      flash[:error] = error_html(@user.errors)
+      redirect_to :action => "new"
     end
   end
 
@@ -34,19 +35,32 @@ class UsersController < ApplicationController
   #  Input params: User.id
   #  Returns     : Returns a hash of fields and edited values of User 
   def edit
-    @user = current_user
+    if is_admin && params[:id] != 'current'
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
   
   #  Updates a DeliverableType record. 
   #  Input params: DeliverabeType.id
   #  Returns     : A hash of the newly created DeliverableType and a confirmation
   def update
-    @user = current_user
+    if is_admin && params[:id] != 'current'
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
     if @user.update_attributes(params[:user])
       flash[:notice] = "Profile successfully updated."
-      redirect_to root_url
+      if is_admin and @user.id != current_user.id
+        redirect_to :controller => 'catalogs'
+      else
+        redirect_to root_url
+      end
     else
-      render :action => 'edit'
+      flash[:error] = error_html(@user.errors)
+      redirect_to :action => 'edit'
     end
   end
 

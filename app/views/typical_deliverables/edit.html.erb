@@ -2,7 +2,85 @@
 
 <div class="InputArea">
 <% form_for(@typical_deliverable) do |f| %>
-  <%= f.error_messages %>
+
+  <table class="InputTable">
+    <tr><td>
+        <%= f.label :name %>*</td><td>
+        <%= f.text_field :name %>
+      </td></tr>
+    <tr><td>Deliverable Type</td><td>
+        <%= f.collection_select :deliverable_type_id, DeliverableType.find(:all), :id, :name, :prompt => 'Deliverable Type'  %>
+      </td></tr>
+       <tr><td>Lifecycle Phase</td><td>
+           <% lifecycle_phases =  LifecyclePhase.find(:all) %>
+           <% for lifecycle_phase in lifecycle_phases %>
+           <% lifecycle_phase.name = lifecycle_phase.lifecycle.name + ' > ' + lifecycle_phase.name %>
+           <% end %>
+        <%= f.collection_select :lifecycle_phase_id, lifecycle_phases, :id, :name, :prompt => 'Lifecycle Phase' %>
+      </td></tr>
+    <tr><td>
+        <%= f.label :complexity %>*</td><td>
+        <%= f.select :complexity, Complexity.getValues, :prompt => 'Complexity' %>
+      </td></tr>
+    <tr><td style="vertical-align:top;">
+        <%= f.label :description %></td><td>
+        <%= f.text_area :description, :cols => 40, :rows => 5  %>
+      </td></tr>
+  </table>
+<table id="DeliverableBottomTable">
+  <th style="width:25%"></th>
+  <th style="width: 10%"></th>
+  <th style="width: 35%"></th>
+  <th style="width: 10%"></th>
+  <th style="width: 10%"></th>
+  <th style="width: 10%"></th>
+  <tr>
+     <td colspan="3" style="text-align:left">Estimated Deliverable Data</td>
+      <td></td>
+  </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr><td>
+        <%= f.label "Effort" %>*</td><td>
+        <% effort_value = @typical_deliverable.estimated_effort == 0.0 ?  '' : @typical_deliverable.estimated_effort  %>
+        <%= f.text_field :estimated_effort, :value => effort_value, :id => 'deliverable_estimated_effort',
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+      </td>
+      <td>Hours</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+     <tr><td>
+        <%= f.label "Size" %>*</td><td>
+        <%= f.text_field :estimated_size, :id => 'deliverable_estimated_size',
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      </td>
+    </tr>
+     <tr><td>
+        <%= f.label "Production Rate" %>*</td><td>
+        <%= f.text_field :estimated_production_rate, :id => 'deliverable_estimated_production_rate',
+          :onKeyUp => "calculateProductionRate(this)", :class => 'numberField'  %>
+       <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      </td></tr>
+
+
+
+  </table>
+
 
   <p>
     <%= f.submit 'Update' %>
@@ -11,3 +89,8 @@
 
 <%= link_to 'Back', :controller => 'catalogs' %>
 </div>
+
+
+<script>
+  
+</script>

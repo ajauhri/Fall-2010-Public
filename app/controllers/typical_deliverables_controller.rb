@@ -1,18 +1,6 @@
 # Handles Typical deliverables under a typical lifecycle
 class TypicalDeliverablesController < ApplicationController
 
-  #  Provides a list with different fields of a particular typical deliverables
-   #  Input params: TypicalDeliverable.id
-   #  Returns     : Returns a hash of all fields related to a TypicalDeliverable
-  def show
-    @typical_deliverable = TypicalDeliverable.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      #format.xml  { render :xml => @typical_deliverable }
-    end
-  end
-
   #  Provides a list of all/required fields needed to create a TypicalDeliverable
   #  Input params: None
   #  Returns     : Returns a hash of different fields of a typical deliverable
@@ -40,9 +28,11 @@ class TypicalDeliverablesController < ApplicationController
 
     respond_to do |format|
       if @typical_deliverable.save
-        format.html { redirect_to(@typical_deliverable, :notice => 'TypicalDeliverable was successfully created.') }
+        flash[:notice] = 'Typical Deliverable was successfully created.'
+        format.html { redirect_to(:controller => 'catalogs')}
         #format.xml  { render :xml => @typical_deliverable, :status => :created, :location => @typical_deliverable }
       else
+        flash[:error] = error_html(@typical_deliverable.errors)
         format.html { render :action => "new" }
         #format.xml  { render :xml => @typical_deliverable.errors, :status => :unprocessable_entity }
       end
@@ -57,9 +47,11 @@ class TypicalDeliverablesController < ApplicationController
 
     respond_to do |format|
       if @typical_deliverable.update_attributes(params[:typical_deliverable])
-        format.html { redirect_to(@typical_deliverable, :notice => 'TypicalDeliverable was successfully updated.') }
+        flash[:notice] = 'Typical Deliverable was successfully updated.'
+        format.html { redirect_to(:controller => 'catalogs') }
         #format.xml  { head :ok }
       else
+        flash[:error] = error_html(@typical_deliverable.errors)
         format.html { render :action => "edit" }
         #format.xml  { render :xml => @typical_deliverable.errors, :status => :unprocessable_entity }
       end
@@ -74,7 +66,7 @@ class TypicalDeliverablesController < ApplicationController
     @typical_deliverable.destroy
 
     respond_to do |format|
-      format.html { redirect_to(typical_deliverables_url) }
+      format.html { redirect_to(:controller => 'catalogs') }
       #format.xml  { head :ok }
     end
   end
