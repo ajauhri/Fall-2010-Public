@@ -1,19 +1,6 @@
 # Handles deliverable types
 class DeliverableTypesController < ApplicationController
   
-
-  #  Provides a list with different fields of a particular deliverable type
-  #  Input params: DeliverableType.id
-  #  Returns     : Returns a hash of all fields related to a DelvierableType
-  def show
-    @deliverable_type = DeliverableType.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @deliverable_type }
-    end
-  end
-
   #  Provides a list of all/required fields needed to create a DeliverableType
   #  Input params: None
   #  Returns     : Returns a hash of different fields of a deliverable type
@@ -47,11 +34,13 @@ class DeliverableTypesController < ApplicationController
 
     respond_to do |format|
       if @deliverable_type.save
-        format.html { redirect_to(@deliverable_type, :notice => 'DeliverableType was successfully created.') }
-        format.xml  { render :xml => @deliverable_type, :status => :created, :location => @deliverable_type }
+        flash[:notice] = 'Deliverable Type was successfully created.'
+        format.html { redirect_to(:controller => 'catalogs')}
+        #format.xml  { render :xml => @deliverable_type, :status => :created, :location => @deliverable_type }
       else
+        flash[:error] = error_html(@deliverable_type.errors)
         format.html { render :action => "new" }
-        format.xml  { render :xml => @deliverable_type.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @deliverable_type.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -65,11 +54,13 @@ class DeliverableTypesController < ApplicationController
 
     respond_to do |format|
       if @deliverable_type.update_attributes(params[:deliverable_type])
-        format.html { redirect_to(@deliverable_type, :notice => 'DeliverableType was successfully updated.') }
-        format.xml  { head :ok }
+        flash[:notice] = 'Deliverable Type was successfully updated.'
+        format.html { redirect_to(:controller => 'catalogs') }
+       # format.xml  { head :ok }
       else
+        flash[:error] = error_html(@deliverable_type.errors)
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @deliverable_type.errors, :status => :unprocessable_entity }
+      #  format.xml  { render :xml => @deliverable_type.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -84,7 +75,7 @@ class DeliverableTypesController < ApplicationController
     @deliverable_type.destroy
 
     respond_to do |format|
-      format.html { redirect_to(deliverable_types_url) }
+      format.html { redirect_to(:controller => 'catalogs') }
       format.xml  { head :ok }
     end
   end

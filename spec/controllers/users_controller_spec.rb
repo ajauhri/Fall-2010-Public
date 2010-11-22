@@ -20,6 +20,7 @@ describe UsersController do
     it "assigns the requested user as @user" do
       controller.stub!(:current_user).and_return(mock_user)
       controller.stub!(:restrict_developer).and_return(true)
+      controller.stub!(:is_admin).and_return(false)
       puts current_user.id.to_s + "----------------"
       get :edit, :id => "36"
       assigns[:user].should equal(mock_user)
@@ -40,10 +41,9 @@ describe UsersController do
 
       it "redirects to the created user" do
         controller.stub!(:is_admin).and_return(true)
-        
         User.stub(:new).and_return(mock_user(:save => true))
         post :create, :user => {}
-        response.should redirect_to(projects_url)
+        response.should redirect_to(:controller => 'catalogs')
       end
     end
     
@@ -61,15 +61,17 @@ describe UsersController do
       it "assigns a newly created but unsaved user as @user" do
         controller.stub!(:is_admin).and_return(true)
         User.stub(:new).with({'these' => 'params'}).and_return(mock_user(:save => false))
+        controller.stub!(:error_html).and_return(true)
         post :create, :user => {:these => 'params'}
-       response.should render_template('new')
+       response.should redirect_to(:action => 'new')
       end
 
       it "re-renders the 'new' template" do
         controller.stub!(:is_admin).and_return(true)
         User.stub(:new).and_return(mock_user(:save => false))
+        controller.stub!(:error_html).and_return(true)
         post :create, :user => {}
-        response.should render_template('new')
+        response.should redirect_to(:action => 'new')
       end
     end
 
@@ -82,6 +84,7 @@ describe UsersController do
       it "updates the requested user" do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
         controller.stub!(:restrict_developer).and_return(true)
+        controller.stub!(:is_admin).and_return(false)
         #User.should_receive(:find).with("37").and_return(mock_user)
         mock_user.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :user => {:these => 'params'}
@@ -90,6 +93,7 @@ describe UsersController do
       it "assigns the requested user as @user" do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
         controller.stub!(:restrict_developer).and_return(true)
+        controller.stub!(:is_admin).and_return(false)
         put :update, :id => "1"
         flash[:notice].should have_text("Profile successfully updated.")
         response.should redirect_to(root_url)
@@ -99,15 +103,18 @@ describe UsersController do
       it "redirects to the user" do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
         controller.stub!(:restrict_developer).and_return(true)
+        controller.stub!(:is_admin).and_return(false)
         put :update, :id => "1"
         response.should redirect_to(root_url)
       end
       
       it "update_attributes returns false" do
       controller.stub!(:current_user).and_return(mock_user(:update_attributes =>false))
+        controller.stub!(:error_html).and_return(true)
       controller.stub!(:restrict_developer).and_return(true)
+      controller.stub!(:is_admin).and_return(false)
       put :update, :id => "1"
-      response.should render_template('edit')
+      response.should redirect_to(:controller => 'users', :action => 'edit', :id => '1')
     end
     end
   end
@@ -116,12 +123,13 @@ describe UsersController do
       before :each do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
         controller.stub!(:restrict_developer).and_return(true)
+        controller.stub!(:is_admin).and_return(false)
       end
       
       it "updates the requested user" do
         #User.should_receive(:find).with("37").and_return(mock_user)
-
         controller.stub!(:restrict_developer).and_return(true)
+        controller.stub!(:is_admin).and_return(false)
         mock_user.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :user => {:these => 'params'}
       end
@@ -130,12 +138,14 @@ describe UsersController do
        # User.stub(:find).and_return(mock_user(:update_attributes => false))
 
        controller.stub!(:restrict_developer).and_return(true)
+        controller.stub!(:is_admin).and_return(false)
         put :update, :id => "1"
         assigns[:user].should equal(mock_user)
       end
 
       it "re-renders the 'edit' template" do
        # User.stub(:find).and_return(mock_user(:update_attributes => false))
+        controller.stub!(:is_admin).and_return(false)
         put :update, :id => "1"
         response.should redirect_to(root_url)
       end

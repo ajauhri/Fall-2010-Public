@@ -14,9 +14,9 @@
   <tr>
     <td><%= link_to h(typical_deliverable.name), edit_typical_deliverable_path(typical_deliverable) %></td>
     <td><%=  typical_deliverable.complexity %></td>
-    <td><%=  typical_deliverable.estimated_size %></td>
-    <td><%=  typical_deliverable.estimated_effort %></td>
-    <td><%=  typical_deliverable.get_production_rate %> </td>
+    <td><%=  (typical_deliverable.estimated_size * 100).round / 100 %></td>
+    <td><%=  (typical_deliverable.estimated_effort * 100).round / 100 %></td>
+    <td><%=  (typical_deliverable.get_production_rate * 100).round / 100 %> </td>
     <td><%= typical_deliverable.deliverable_type.name %></td>
     <td><%= typical_deliverable.lifecycle_phase.name %></td>
     <td><%= link_to 'x', typical_deliverable, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -16,6 +16,8 @@ class LifecyclePhase < ActiveRecord::Base
   has_many :project_phases
   has_many :typical_deliverables
 
+  validates_presence_of :name 
+
 end
 
 
