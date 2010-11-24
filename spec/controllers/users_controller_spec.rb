@@ -13,15 +13,31 @@ describe UsersController do
       get :new
       assigns[:user].should equal(mock_user)
       end
+      
+    it "does not allow a developer to create a new user and redirect to efforts url" do
+        controller.stub!(:current_user).and_return(mock_user(:role => "Developer"))
+        #controller.stub!(:is_admin).and_return(true)
+        User.stub(:new).and_return(mock_user)
+        get :new
+      response.should redirect_to(efforts_url)
+    end
+    
   end
 
 
   describe "GET edit" do
-    it "assigns the requested user as @user" do
+    it "assigns the requested user as @user for non-admin and current for admin" do
       controller.stub!(:current_user).and_return(mock_user)
       controller.stub!(:restrict_developer).and_return(true)
       controller.stub!(:is_admin).and_return(false)
-      puts current_user.id.to_s + "----------------"
+      get :edit, :id => "36"
+      assigns[:user].should equal(mock_user)
+    end
+    
+    it "assigns the requested user as @user for admin and not current" do
+      controller.stub!(:current_user).and_return(mock_user(:role => "Admin"))
+      #controller.stub!(:is_admin).and_return(true)
+      User.should_receive(:find).with('36').and_return(mock_user)
       get :edit, :id => "36"
       assigns[:user].should equal(mock_user)
     end
@@ -85,7 +101,6 @@ describe UsersController do
         controller.stub!(:current_user).and_return(mock_user(:update_attributes =>true))
         controller.stub!(:restrict_developer).and_return(true)
         controller.stub!(:is_admin).and_return(false)
-        #User.should_receive(:find).with("37").and_return(mock_user)
         mock_user.should_receive(:update_attributes).with({'these' => 'params'})
         put :update, :id => "37", :user => {:these => 'params'}
       end
@@ -97,7 +112,6 @@ describe UsersController do
         put :update, :id => "1"
         flash[:notice].should have_text("Profile successfully updated.")
         response.should redirect_to(root_url)
-        #assigns[:flash].should equal("Successfully updated profile.")
       end
 
       it "redirects to the user" do
@@ -116,6 +130,16 @@ describe UsersController do
       put :update, :id => "1"
       response.should redirect_to(:controller => 'users', :action => 'edit', :id => '1')
     end
+        it "assigns the requested user as @user" do
+          controller.stub!(:current_user).and_return(mock_user(:id => '2'))
+          controller.stub!(:restrict_developer).and_return(true)
+          controller.stub!(:is_admin).and_return(true)
+          User.stub!(:find).with(any_args()).and_return(mock_model(User,{:id => 1, :update_attributes => true}))
+          put :update, :id => "1"
+          flash[:notice].should have_text("Profile successfully updated.")
+          response.should redirect_to(:controller => 'catalogs')
+        end
+    
     end
   end
 
