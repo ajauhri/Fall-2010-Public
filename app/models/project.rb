@@ -43,17 +43,28 @@ class Project < ActiveRecord::Base
     self.actual_effort -= effort_value
     self.save!
   end
+  
+  # Increments Project.actual_effort
+  # Input params : Effort.value
 
   def increment_actual_effort effort_value
     self.actual_effort +=effort_value
     self.save!
   end
+  
+  # Increments Project.total_estimated_effort
+  # Input params : Deliverable.estimated_effort
+  
 
   def increment_total_estimated_effort estimated_effort
     self.total_estimated_effort += estimated_effort
     self.save!
   end
-
+  
+  
+  # Decrements Project.total_estimated_effort
+  # Input params : Deliverable.estimated_effort
+  
   def decrement_total_estimated_effort estimated_effort
     self.total_estimated_effort -= estimated_effort
     self.save!

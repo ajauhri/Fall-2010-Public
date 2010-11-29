@@ -102,6 +102,9 @@ end
 
 private
 
+#  Checks whether the Project associated with Effort is active or not
+#  Input params: Effort
+
 def is_active(effort)
   if effort.deliverable and effort.deliverable.project_phase and effort.deliverable.project_phase.project
     return effort.deliverable.project_phase.project.status == 'Active'

@@ -75,11 +75,7 @@
 					
 					<li><a href="#method-i-edit">#edit</a></li>
 					
-					<li><a href="#method-i-index">#index</a></li>
-					
 					<li><a href="#method-i-new">#new</a></li>
-					
-					<li><a href="#method-i-show">#show</a></li>
 					
 					<li><a href="#method-i-update">#update</a></li>
 					
@@ -123,6 +119,10 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./CatalogsController.html">CatalogsController</a></li>
+				
+					<li><a href="./CatalogsHelper.html">CatalogsHelper</a></li>
+				
 					<li><a href="./Complexity.html">Complexity</a></li>
 				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
@@ -151,9 +151,13 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
+					<li><a href="./LifecyclesController.html">LifecyclesController</a></li>
 				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
+					<li><a href="./LifecyclesHelper.html">LifecyclesHelper</a></li>
+				
+					<li><a href="./PasswordsController.html">PasswordsController</a></li>
+				
+					<li><a href="./PasswordsHelper.html">PasswordsHelper</a></li>
 				
 					<li><a href="./Project.html">Project</a></li>
 				
@@ -174,6 +178,8 @@
 					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserMailer.html">UserMailer</a></li>
 				
 					<li><a href="./UserSession.html">UserSession</a></li>
 				
@@ -241,20 +247,22 @@ href="DeliverableType.html">DeliverableType</a> and a confirmation
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 57</span>
-57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-58:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:deliverable_type</span>])
-59: 
-60:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-61:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">save</span>
-62:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@deliverable_type</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'DeliverableType was successfully created.'</span>) }
-63:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span> }
-64:       <span class="ruby-keyword kw">else</span>
-65:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-66:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-67:       <span class="ruby-keyword kw">end</span>
-68:     <span class="ruby-keyword kw">end</span>
-69:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 32</span>
+32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+33:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:deliverable_type</span>])
+34: 
+35:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+36:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">save</span>
+37:         <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-value str">'Deliverable Type was successfully created.'</span>
+38:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'catalogs'</span>)}
+39:         <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @deliverable_type, :status =&gt; :created, :location =&gt; @deliverable_type }</span>
+40:       <span class="ruby-keyword kw">else</span>
+41:         <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-identifier">error_html</span>(<span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">errors</span>)
+42:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+43:         <span class="ruby-comment cmt">#format.xml  { render :xml =&gt; @deliverable_type.errors, :status =&gt; :unprocessable_entity }</span>
+44:       <span class="ruby-keyword kw">end</span>
+45:     <span class="ruby-keyword kw">end</span>
+46:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -289,16 +297,16 @@ deliverables types
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 94</span>
- 94:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
- 95:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
- 96:     <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">destroy</span>
- 97: 
- 98:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
- 99:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">deliverable_types_url</span>) }
-100:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-101:     <span class="ruby-keyword kw">end</span>
-102:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 73</span>
+73:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+74:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+75:     <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">destroy</span>
+76: 
+77:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+78:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'catalogs'</span>) }
+79:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
+80:     <span class="ruby-keyword kw">end</span>
+81:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -334,52 +342,10 @@ of <a href="DeliverableType.html">DeliverableType</a>
 					<div class="method-source-code"
 						id="edit-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 47</span>
-47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
-48:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-49:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-			<div id="index-method" class="method-detail ">
-				<a name="method-i-index"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">index</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					<p>
-Provides a list of all deliverables types Input params: None Returns     :
-Returns a list of all deliverables types
-</p>
-					
-
-					
-					<div class="method-source-code"
-						id="index-source">
-<pre>
-    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 8</span>
- 8:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 9:     <span class="ruby-ivar">@deliverable_types</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">all</span>
-10: 
-11:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-12:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># index.html.erb</span>
-13:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_types</span> }
-14:     <span class="ruby-keyword kw">end</span>
-15:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
+23:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+24:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -414,58 +380,15 @@ href="DeliverableType.html">DeliverableType</a> Input params: None Returns
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 32</span>
-32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
-33:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">new</span>
-34: 
-35:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-36:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
-37:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span> }
-38:     <span class="ruby-keyword kw">end</span>
-39:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-			<div id="show-method" class="method-detail ">
-				<a name="method-i-show"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">show</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					<p>
-Provides a list with different fields of a particular deliverable type
-Input params: DeliverableType.id Returns     : Returns a hash of all fields
-related to a DelvierableType
-</p>
-					
-
-					
-					<div class="method-source-code"
-						id="show-source">
-<pre>
-    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 20</span>
-20:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
-21:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-22: 
-23:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-24:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># show.html.erb</span>
-25:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span> }
-26:     <span class="ruby-keyword kw">end</span>
-27:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 7</span>
+ 7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
+ 8:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">new</span>
+ 9: 
+10:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+11:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment cmt"># new.html.erb</span>
+12:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span> }
+13:     <span class="ruby-keyword kw">end</span>
+14:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -500,20 +423,22 @@ href="DeliverableType.html">DeliverableType</a> and a confirmation
 					<div class="method-source-code"
 						id="update-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 75</span>
-75:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
-76:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-77: 
-78:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-79:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:deliverable_type</span>])
-80:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@deliverable_type</span>, <span class="ruby-value">:notice</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'DeliverableType was successfully updated.'</span>) }
-81:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-82:       <span class="ruby-keyword kw">else</span>
-83:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
-84:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-value">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span> }
-85:       <span class="ruby-keyword kw">end</span>
-86:     <span class="ruby-keyword kw">end</span>
-87:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/deliverable_types_controller.rb, line 52</span>
+52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>
+53:     <span class="ruby-ivar">@deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+54: 
+55:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+56:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:deliverable_type</span>])
+57:         <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-value str">'Deliverable Type was successfully updated.'</span>
+58:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'catalogs'</span>) }
+59:        <span class="ruby-comment cmt"># format.xml  { head :ok }</span>
+60:       <span class="ruby-keyword kw">else</span>
+61:         <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-identifier">error_html</span>(<span class="ruby-ivar">@deliverable_type</span>.<span class="ruby-identifier">errors</span>)
+62:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;edit&quot;</span> }
+63:       <span class="ruby-comment cmt">#  format.xml  { render :xml =&gt; @deliverable_type.errors, :status =&gt; :unprocessable_entity }</span>
+64:       <span class="ruby-keyword kw">end</span>
+65:     <span class="ruby-keyword kw">end</span>
+66:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

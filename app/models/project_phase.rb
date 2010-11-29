@@ -61,12 +61,19 @@ class ProjectPhase < ActiveRecord::Base
     end
   end
   
+  # Increments ProjectPhase.actual_effort and calls Project model to decrement actual_effort
+  # Input params : Effort.value
+  
   def increment_actual_effort effort_value
     self.actual_effort += effort_value
     if self.save! && self.project
       self.project.increment_actual_effort effort_value
     end
   end
+  
+  
+  # Increments ProjectPhase.total_estimated_effort
+  # Input params : Deliverable.estimated_effort
 
   def increment_total_estimated_effort estimated_effort
 
@@ -75,6 +82,11 @@ class ProjectPhase < ActiveRecord::Base
       self.project.increment_total_estimated_effort estimated_effort
     end
   end
+  
+  
+  # Decrements ProjectPhase.total_estimated_effort
+  # Input params : Deliverable.estimated_effort
+  
 
   def decrement_total_estimated_effort estimated_effort
     self.total_estimated_effort -= estimated_effort

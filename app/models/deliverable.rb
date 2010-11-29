@@ -147,7 +147,9 @@ class Deliverable < ActiveRecord::Base
       end
 
     end
-
+    
+    # Assigns estimated_size to actual_size
+    
     def assign_actual_size
       self.actual_size = self.estimated_size
     end

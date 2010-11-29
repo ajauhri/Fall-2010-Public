@@ -69,11 +69,14 @@ class ApplicationController < ActionController::Base
     return current_user.role == User::DEVELOPER
   end
 
+  # Checks wheter the current user is a manager or not
+
   def is_manager
     return current_user.role == User::MANAGER
   end
 
 
+  # Checks wheter the current user is a admin or not
 
       def is_admin
         return current_user.role == User::ADMIN

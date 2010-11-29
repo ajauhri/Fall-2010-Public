@@ -1,7 +1,8 @@
 class LifecyclesController < ApplicationController
 
-  # GET /lifecycles/new
-  # GET /lifecycles/new.xml
+  #  Provides a list of all/required fields needed to create a Lifecycle
+  #  Input params: None
+  #  Returns     : Returns a hash of different fields of a lifecycle
   def new
     @lifecycle = Lifecycle.new
 
@@ -11,13 +12,18 @@ class LifecyclesController < ApplicationController
     end
   end
 
-  # GET /lifecycles/1/edit
+  #  Provides a list of all/required fields of an existing Lifecycle
+  #  Input params: Lifecycle.id
+  #  Returns     : Returns a hash of fields and values of Lifecycle
+  
   def edit
     @lifecycle = Lifecycle.find(params[:id])
   end
 
-  # POST /lifecycles
-  # POST /lifecycles.xml
+  # Creates a Lifecycle record. 
+  #  Input params: All/required params related to a Lifecycle need to be passed
+  #  Returns     : A hash of the newly created Lifecycle and a confirmation
+
   def create
     @lifecycle = Lifecycle.new(params[:lifecycle])
 
@@ -34,8 +40,10 @@ class LifecyclesController < ApplicationController
     end
   end
 
-  # PUT /lifecycles/1
-  # PUT /lifecycles/1.xml
+  #  Updates a Lifecycle record. 
+  #  Input params: Lifecyle.id
+  #  Returns     : A hash of the newly created Lifecycle and a confirmation 
+
   def update
     @lifecycle = Lifecycle.find(params[:id])
 
@@ -52,8 +60,11 @@ class LifecyclesController < ApplicationController
     end
   end
 
-  # DELETE /lifecycles/1
-  # DELETE /lifecycles/1.xml
+
+  #  Deletes a Lifecycle record. 
+  #  Input params: Lifecycle.id
+  #  Returns     : Redirects to the index page of all lifecycle 
+
   def destroy
     @lifecycle = Lifecycle.find(params[:id])
     @lifecycle.destroy

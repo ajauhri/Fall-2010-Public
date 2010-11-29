@@ -73,6 +73,14 @@
 					
 					<li><a href="#method-i-create_deliverables">#create_deliverables</a></li>
 					
+					<li><a href="#method-i-decrement_actual_effort">#decrement_actual_effort</a></li>
+					
+					<li><a href="#method-i-decrement_total_estimated_effort">#decrement_total_estimated_effort</a></li>
+					
+					<li><a href="#method-i-increment_actual_effort">#increment_actual_effort</a></li>
+					
+					<li><a href="#method-i-increment_total_estimated_effort">#increment_total_estimated_effort</a></li>
+					
 					<li><a href="#method-i-scope_condition">#scope_condition</a></li>
 					
 				</ul>
@@ -115,6 +123,10 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./CatalogsController.html">CatalogsController</a></li>
+				
+					<li><a href="./CatalogsHelper.html">CatalogsHelper</a></li>
+				
 					<li><a href="./Complexity.html">Complexity</a></li>
 				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
@@ -143,9 +155,13 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
+					<li><a href="./LifecyclesController.html">LifecyclesController</a></li>
 				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
+					<li><a href="./LifecyclesHelper.html">LifecyclesHelper</a></li>
+				
+					<li><a href="./PasswordsController.html">PasswordsController</a></li>
+				
+					<li><a href="./PasswordsHelper.html">PasswordsHelper</a></li>
 				
 					<li><a href="./Project.html">Project</a></li>
 				
@@ -166,6 +182,8 @@
 					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserMailer.html">UserMailer</a></li>
 				
 					<li><a href="./UserSession.html">UserSession</a></li>
 				
@@ -252,12 +270,12 @@ pre-defined phases from <a href="LifecyclePhase.html">LifecyclePhase</a>
 34:     <span class="ruby-ivar">@lifecycle_phase</span> = <span class="ruby-constant">LifecyclePhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">lifecycle_phase_id</span>)
 35: 
 36:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lifecycle_phase</span>
-37:         <span class="ruby-identifier">create</span>(
-38:          <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">name</span>,
-39:          <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">description</span>,
-40:          <span class="ruby-value">:lifecycle_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>,
-41:          <span class="ruby-value">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">sequence</span>,
-42:          <span class="ruby-value">:project</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>)
+37:       <span class="ruby-identifier">create</span>(
+38:         <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">name</span>,
+39:         <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">description</span>,
+40:         <span class="ruby-value">:lifecycle_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>,
+41:         <span class="ruby-value">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lifecycle_phase</span>.<span class="ruby-identifier">sequence</span>,
+42:         <span class="ruby-value">:project</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project</span>)
 43:     <span class="ruby-keyword kw">end</span>
 44:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -305,6 +323,170 @@ For creating typical deliverables in the project phase
 50:       <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">create_from_typical_deliverable</span>(<span class="ruby-identifier">td</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>)
 51:     <span class="ruby-keyword kw">end</span>
 52:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="decrement-actual-effort-method" class="method-detail ">
+				<a name="method-i-decrement_actual_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">decrement_actual_effort</span><span
+						class="method-args">(effort_value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Decrements ProjectPhase.actual_effort and calls <a
+href="Project.html">Project</a> model to decrement actual_effort Input
+params : Effort.value
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="decrement-actual-effort-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 56</span>
+56:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+57:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">effort_value</span>
+58:     
+59:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save!</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>
+60:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">decrement_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+61:     <span class="ruby-keyword kw">end</span>
+62:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="decrement-total-estimated-effort-method" class="method-detail ">
+				<a name="method-i-decrement_total_estimated_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">decrement_total_estimated_effort</span><span
+						class="method-args">(estimated_effort)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Decrements ProjectPhase.total_estimated_effort Input params :
+Deliverable.estimated_effort
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="decrement-total-estimated-effort-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 91</span>
+91:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement_total_estimated_effort</span> <span class="ruby-identifier">estimated_effort</span>
+92:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">total_estimated_effort</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">estimated_effort</span>
+93:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save!</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>
+94:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">decrement_total_estimated_effort</span> <span class="ruby-identifier">estimated_effort</span>
+95:     <span class="ruby-keyword kw">end</span>
+96:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="increment-actual-effort-method" class="method-detail ">
+				<a name="method-i-increment_actual_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">increment_actual_effort</span><span
+						class="method-args">(effort_value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Increments ProjectPhase.actual_effort and calls <a
+href="Project.html">Project</a> model to decrement actual_effort Input
+params : Effort.value
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="increment-actual-effort-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 67</span>
+67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+68:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">effort_value</span>
+69:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save!</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>
+70:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">increment_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+71:     <span class="ruby-keyword kw">end</span>
+72:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="increment-total-estimated-effort-method" class="method-detail ">
+				<a name="method-i-increment_total_estimated_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">increment_total_estimated_effort</span><span
+						class="method-args">(estimated_effort)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Increments ProjectPhase.total_estimated_effort Input params :
+Deliverable.estimated_effort
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="increment-total-estimated-effort-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/project_phase.rb, line 78</span>
+78:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment_total_estimated_effort</span> <span class="ruby-identifier">estimated_effort</span>
+79: 
+80:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">total_estimated_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">estimated_effort</span>
+81:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save!</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>
+82:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">increment_total_estimated_effort</span> <span class="ruby-identifier">estimated_effort</span>
+83:     <span class="ruby-keyword kw">end</span>
+84:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

@@ -75,13 +75,19 @@
 					
 					<li><a href="#method-c-get_statistics">::get_statistics</a></li>
 					
+					<li><a href="#method-i-assign_actual_size">#assign_actual_size</a></li>
+					
+					<li><a href="#method-i-decrement_actual_effort">#decrement_actual_effort</a></li>
+					
+					<li><a href="#method-i-decrement_estimated_effort">#decrement_estimated_effort</a></li>
+					
 					<li><a href="#method-i-estimated_effort_should_be_positive">#estimated_effort_should_be_positive</a></li>
 					
 					<li><a href="#method-i-estimated_size_should_be_positive">#estimated_size_should_be_positive</a></li>
 					
-					<li><a href="#method-i-get_production_rate">#get_production_rate</a></li>
+					<li><a href="#method-i-increment_actual_effort">#increment_actual_effort</a></li>
 					
-					<li><a href="#method-i-update_all_estimated_effort">#update_all_estimated_effort</a></li>
+					<li><a href="#method-i-increment_estimated_effort">#increment_estimated_effort</a></li>
 					
 				</ul>
 			</div>
@@ -123,6 +129,10 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./CatalogsController.html">CatalogsController</a></li>
+				
+					<li><a href="./CatalogsHelper.html">CatalogsHelper</a></li>
+				
 					<li><a href="./Complexity.html">Complexity</a></li>
 				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
@@ -151,9 +161,13 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
+					<li><a href="./LifecyclesController.html">LifecyclesController</a></li>
 				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
+					<li><a href="./LifecyclesHelper.html">LifecyclesHelper</a></li>
+				
+					<li><a href="./PasswordsController.html">PasswordsController</a></li>
+				
+					<li><a href="./PasswordsHelper.html">PasswordsHelper</a></li>
 				
 					<li><a href="./Project.html">Project</a></li>
 				
@@ -174,6 +188,8 @@
 					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserMailer.html">UserMailer</a></li>
 				
 					<li><a href="./UserSession.html">UserSession</a></li>
 				
@@ -263,24 +279,24 @@ Retruns       : Nil
 					<div class="method-source-code"
 						id="create-from-typical-deliverable-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 49</span>
-49:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_from_typical_deliverable</span>(<span class="ruby-identifier">typical_deliverable_id</span>, <span class="ruby-identifier">project_phase_id</span>)
-50:     <span class="ruby-ivar">@typical_deliverable</span> = <span class="ruby-constant">TypicalDeliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">typical_deliverable_id</span>)
-51:     <span class="ruby-identifier">deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">deliverable_type_id</span>)
-52: 
-53:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@typical_deliverable</span>
-54:         <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">create</span>(
-55:          <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">name</span>,
-56:          <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">description</span>,
-57:          <span class="ruby-value">:deliverable_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">deliverable_type</span>.<span class="ruby-identifier">name</span>,
-58:          <span class="ruby-value">:unit_of_measure</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">deliverable_type</span>.<span class="ruby-identifier">unit_of_measure</span>,
-59:          <span class="ruby-value">:complexity</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">complexity</span>,
-60:          <span class="ruby-value">:estimated_size</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">estimated_size</span>,
-61:          <span class="ruby-value">:estimated_effort</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">estimated_effort</span>,
-62:          <span class="ruby-value">:estimated_production_rate</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">estimated_production_rate</span>,
-63:          <span class="ruby-value">:project_phase_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project_phase_id</span>)
-64:     <span class="ruby-keyword kw">end</span>
-65:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 42</span>
+42:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_from_typical_deliverable</span>(<span class="ruby-identifier">typical_deliverable_id</span>, <span class="ruby-identifier">project_phase_id</span>)
+43:     <span class="ruby-ivar">@typical_deliverable</span> = <span class="ruby-constant">TypicalDeliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">typical_deliverable_id</span>)
+44:     <span class="ruby-identifier">deliverable_type</span> = <span class="ruby-constant">DeliverableType</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">deliverable_type_id</span>)
+45: 
+46:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@typical_deliverable</span>
+47:       <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">create</span>(
+48:       <span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">name</span>,
+49:       <span class="ruby-value">:description</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">description</span>,
+50:       <span class="ruby-value">:deliverable_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">deliverable_type</span>.<span class="ruby-identifier">name</span>,
+51:       <span class="ruby-value">:unit_of_measure</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">deliverable_type</span>.<span class="ruby-identifier">unit_of_measure</span>,
+52:       <span class="ruby-value">:complexity</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">complexity</span>,
+53:       <span class="ruby-value">:estimated_size</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">estimated_size</span>,
+54:       <span class="ruby-value">:estimated_effort</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">estimated_effort</span>,
+55:       <span class="ruby-value">:estimated_production_rate</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@typical_deliverable</span>.<span class="ruby-identifier">estimated_production_rate</span>,
+56:       <span class="ruby-value">:project_phase_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">project_phase_id</span>)
+57:     <span class="ruby-keyword kw">end</span>
+58:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -315,11 +331,12 @@ of all estimates
 					<div class="method-source-code"
 						id="get-estimates-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 71</span>
-71:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_estimates</span>(<span class="ruby-identifier">deliverable_type</span>, <span class="ruby-identifier">complexity</span>)
-72:     <span class="ruby-identifier">find_by</span> = [<span class="ruby-value str">&quot;deliverable_type like ? and complexity like ?&quot;</span>, <span class="ruby-identifier">deliverable_type</span>, <span class="ruby-identifier">complexity</span>]
-73:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">get_statistics</span>(<span class="ruby-identifier">find_by</span>)
-74:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 64</span>
+64:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_estimates</span>(<span class="ruby-identifier">deliverable_type</span>, <span class="ruby-identifier">complexity</span>)
+65:     <span class="ruby-identifier">find_by</span> = {<span class="ruby-value">:complexity</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">complexity</span>, <span class="ruby-value">:deliverable_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">deliverable_type</span>,
+66:       <span class="ruby-value">:project_phases</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:projects</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Archived&quot;</span>}}}
+67:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">get_statistics</span>(<span class="ruby-identifier">find_by</span>)
+68:     <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -359,69 +376,22 @@ href="Complexity.html">Complexity</a> Returns      : Hash of the estimates
 					<div class="method-source-code"
 						id="get-statistics-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 90</span>
- 90:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_statistics</span>(<span class="ruby-identifier">find_by</span>)
- 91:     <span class="ruby-identifier">estimates</span> = {}
- 92:   
- 93:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:avg_effort</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">average</span> <span class="ruby-value">:actual_effort</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
- 94:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:max_effort</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">maximum</span> <span class="ruby-value">:actual_effort</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
- 95:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:min_effort</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">minimum</span> <span class="ruby-value">:actual_effort</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
- 96:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:avg_size</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">average</span> <span class="ruby-value">:actual_size</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
- 97:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:max_size</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">maximum</span> <span class="ruby-value">:actual_size</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
- 98:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:min_size</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">minimum</span> <span class="ruby-value">:actual_size</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
- 99:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:avg_rate</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">average</span> <span class="ruby-value">:actual_production_rate</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
-100:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:max_rate</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">maximum</span> <span class="ruby-value">:actual_production_rate</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
-101:             <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:min_rate</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">minimum</span> <span class="ruby-value">:actual_production_rate</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>
-102: 
-103:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">estimates</span>
-104:          
-105:     <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-		</div>
-	
-		<div id="public-instance-method-details" class="method-section section">
-			<h3 class="section-header">Public Instance Methods</h3>
-
-		
-			<div id="get-production-rate-method" class="method-detail ">
-				<a name="method-i-get_production_rate"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">get_production_rate</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					<p>
-To retrieve the estimated production rate for a deliverable
-</p>
-					
-
-					
-					<div class="method-source-code"
-						id="get-production-rate-source">
-<pre>
-    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 37</span>
-37:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_production_rate</span>
-38:     <span class="ruby-comment cmt">#if !estimated_size.nil? &amp;&amp; !estimated_effort.nil? &amp;&amp; estimated_size &gt; 0 &amp;&amp; estimated_effort &gt; 0</span>
-39:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">estimated_effort</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">estimated_size</span>
-40:     <span class="ruby-comment cmt">#else</span>
-41:     <span class="ruby-comment cmt">#  return 0</span>
-42:     <span class="ruby-comment cmt">#end</span>
-43:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 77</span>
+77:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_statistics</span>(<span class="ruby-identifier">find_by</span>)
+78:       <span class="ruby-identifier">estimates</span> = {}
+79:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:avg_effort</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">average</span> <span class="ruby-value">:actual_effort</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+80:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:max_effort</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">maximum</span> <span class="ruby-value">:actual_effort</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+81:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:min_effort</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">minimum</span> <span class="ruby-value">:actual_effort</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+82:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:avg_size</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">average</span> <span class="ruby-value">:actual_size</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+83:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:max_size</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">maximum</span> <span class="ruby-value">:actual_size</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+84:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:min_size</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">minimum</span> <span class="ruby-value">:actual_size</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+85:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:avg_rate</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">average</span> <span class="ruby-value">:actual_production_rate</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+86:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:max_rate</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">maximum</span> <span class="ruby-value">:actual_production_rate</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+87:       <span class="ruby-identifier">estimates</span>[<span class="ruby-value">:min_rate</span>] = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">minimum</span> <span class="ruby-value">:actual_production_rate</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">find_by</span>, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>]
+88: 
+89:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">estimates</span>
+90: 
+91:     <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -436,6 +406,124 @@ To retrieve the estimated production rate for a deliverable
 	
 		<div id="protected-instance-method-details" class="method-section section">
 			<h3 class="section-header">Protected Instance Methods</h3>
+
+		
+			<div id="assign-actual-size-method" class="method-detail ">
+				<a name="method-i-assign_actual_size"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">assign_actual_size</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Assigns estimated_size to actual_size
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="assign-actual-size-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 153</span>
+153:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assign_actual_size</span>
+154:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_size</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">estimated_size</span>
+155:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="decrement-actual-effort-method" class="method-detail ">
+				<a name="method-i-decrement_actual_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">decrement_actual_effort</span><span
+						class="method-args">(effort_value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Decrements Deliverable.actual_effort and calls <a
+href="ProjectPhase.html">ProjectPhase</a> model to decrement actual_effort
+Input params : Effort.value
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="decrement-actual-effort-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 112</span>
+112:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+113:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">effort_value</span>
+114:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_production_rate</span> = ((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">/</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_size</span>)*<span class="ruby-value">100</span>).<span class="ruby-identifier">round</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>
+115:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save!</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>
+116:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">decrement_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+117:       <span class="ruby-keyword kw">end</span>
+118:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="decrement-estimated-effort-method" class="method-detail ">
+				<a name="method-i-decrement_estimated_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">decrement_estimated_effort</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Calls <a href="Deliverable.html">Deliverable</a> model to decrement
+actual_effort
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="decrement-estimated-effort-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 144</span>
+144:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement_estimated_effort</span>
+145:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>
+146:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">decrement_total_estimated_effort</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">estimated_effort</span>
+147:       <span class="ruby-keyword kw">end</span>
+148: 
+149:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
 
 		
 			<div id="estimated-effort-should-be-positive-method" class="method-detail ">
@@ -460,12 +548,12 @@ Ensures estimate_effort is not negative
 					<div class="method-source-code"
 						id="estimated-effort-should-be-positive-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 117</span>
-117:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">estimated_effort_should_be_positive</span>
-118:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">estimated_effort</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">estimated_effort</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
-119:     <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:estimated_effort</span>, <span class="ruby-value str">'should be positive'</span>)
-120:     <span class="ruby-keyword kw">end</span>
-121:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 103</span>
+103:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">estimated_effort_should_be_positive</span>
+104:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">estimated_effort</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">estimated_effort</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+105:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:estimated_effort</span>, <span class="ruby-value str">'should be positive'</span>)
+106:       <span class="ruby-keyword kw">end</span>
+107:     <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -498,12 +586,12 @@ Ensures estimate_size is not negative
 					<div class="method-source-code"
 						id="estimated-size-should-be-positive-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 109</span>
-109:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">estimated_size_should_be_positive</span>
-110:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">estimated_size</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">estimated_size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
-111:     <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:estimated_size</span>, <span class="ruby-value str">'should be positive'</span>)
-112:     <span class="ruby-keyword kw">end</span>
-113:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 95</span>
+95:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">estimated_size_should_be_positive</span>
+96:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">estimated_size</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">estimated_size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+97:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(<span class="ruby-value">:estimated_size</span>, <span class="ruby-value str">'should be positive'</span>)
+98:       <span class="ruby-keyword kw">end</span>
+99:     <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -514,12 +602,55 @@ Ensures estimate_size is not negative
 			</div>
 
 		
-			<div id="update-all-estimated-effort-method" class="method-detail ">
-				<a name="method-i-update_all_estimated_effort"></a>
+			<div id="increment-actual-effort-method" class="method-detail ">
+				<a name="method-i-increment_actual_effort"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">update_all_estimated_effort</span><span
+					<span class="method-name">increment_actual_effort</span><span
+						class="method-args">(effort_value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Increments Deliverable.actual_effort and calls <a
+href="ProjectPhase.html">ProjectPhase</a> model to increment actual_effort
+Input params : Effort.value
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="increment-actual-effort-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 124</span>
+124:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+125: 
+126:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">effort_value</span>
+127:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_production_rate</span> = ((<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_effort</span> <span class="ruby-operator">/</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">actual_size</span>)*<span class="ruby-value">100</span>).<span class="ruby-identifier">round</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>
+128:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">save!</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>
+129:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">increment_actual_effort</span> <span class="ruby-identifier">effort_value</span>
+130:       <span class="ruby-keyword kw">end</span>
+131:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="increment-estimated-effort-method" class="method-detail ">
+				<a name="method-i-increment_estimated_effort"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">increment_estimated_effort</span><span
 						class="method-args">()</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
@@ -534,15 +665,16 @@ Updates efforts for <a href="ProjectPhase.html">ProjectPhase</a>
 
 					
 					<div class="method-source-code"
-						id="update-all-estimated-effort-source">
+						id="increment-estimated-effort-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 80</span>
-80:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_all_estimated_effort</span>
-81:    <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">project</span>
-82:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">total_estimated_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">estimated_effort</span>
-83:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">total_estimated_effort</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">estimated_effort</span>
-84:   <span class="ruby-keyword kw">end</span>
-85:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/models/deliverable.rb, line 135</span>
+135:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment_estimated_effort</span>
+136: 
+137:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">estimated_effort_changed?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>
+138:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">increment_total_estimated_effort</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">estimated_effort</span>
+139:       <span class="ruby-keyword kw">end</span>
+140: 
+141:     <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

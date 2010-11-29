@@ -1,4 +1,7 @@
 class UserMailer < ActionMailer::Base
+  
+  # Forms the various parameters of the email sent to reset password
+  # Input params: User
 
   def password_reset_instructions(user)
     subject    'Instructions to reset PET password'

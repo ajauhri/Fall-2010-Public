@@ -75,6 +75,8 @@
 					
 					<li><a href="#method-i-index">#index</a></li>
 					
+					<li><a href="#method-i-is_active">#is_active</a></li>
+					
 				</ul>
 			</div>
 			
@@ -115,6 +117,10 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./CatalogsController.html">CatalogsController</a></li>
+				
+					<li><a href="./CatalogsHelper.html">CatalogsHelper</a></li>
+				
 					<li><a href="./Complexity.html">Complexity</a></li>
 				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
@@ -143,9 +149,13 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
+					<li><a href="./LifecyclesController.html">LifecyclesController</a></li>
 				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
+					<li><a href="./LifecyclesHelper.html">LifecyclesHelper</a></li>
+				
+					<li><a href="./PasswordsController.html">PasswordsController</a></li>
+				
+					<li><a href="./PasswordsHelper.html">PasswordsHelper</a></li>
 				
 					<li><a href="./Project.html">Project</a></li>
 				
@@ -166,6 +176,8 @@
 					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserMailer.html">UserMailer</a></li>
 				
 					<li><a href="./UserSession.html">UserSession</a></li>
 				
@@ -232,19 +244,17 @@ Updates an effort log if it exists, otherwise create new effort log
 					<div class="method-source-code"
 						id="create-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 55</span>
-55:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-56:     <span class="ruby-identifier">d_id</span>  = <span class="ruby-identifier">params</span>[<span class="ruby-value">:effort</span>][<span class="ruby-value">:deliverable_id</span>]
-57:     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:effort</span>][<span class="ruby-value">:value</span>].<span class="ruby-identifier">to_f</span>
-58: 
-59:     <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">find_by_deliverable_id_and_user_id</span>(<span class="ruby-identifier">d_id</span>, <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>)
-60:     <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:deliverable_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">d_id</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">nil?</span>
-61:     <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span>
-62:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">save</span>
-63:       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-identifier">error_html</span>(<span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">errors</span>)
-64:     <span class="ruby-keyword kw">end</span>
-65:     <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>
-66:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 61</span>
+61: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+62:   <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:effort</span>])
+63:   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">is_active</span>(<span class="ruby-ivar">@effort</span>)
+64:     <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+65:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">save</span>
+66:       <span class="ruby-identifier">flash</span>[<span class="ruby-value">:error</span>] = <span class="ruby-identifier">error_html</span>(<span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">errors</span>)
+67:     <span class="ruby-keyword kw">end</span>
+68:   <span class="ruby-keyword kw">end</span>
+69:   <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'index'</span>
+70: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -280,15 +290,15 @@ Removes an effort log
 					<div class="method-source-code"
 						id="destroy-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 90</span>
-90:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-91:     <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-92:     <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">destroy</span>
-93: 
-94:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-95:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">efforts_url</span>) }
-96:     <span class="ruby-keyword kw">end</span>
-97:   <span class="ruby-keyword kw">end</span></pre>
+     <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 94</span>
+ 94: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+ 95:   <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+ 96:   <span class="ruby-ivar">@effort</span>.<span class="ruby-identifier">destroy</span>
+ 97: 
+ 98:   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 99:     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">efforts_url</span>) }
+100:   <span class="ruby-keyword kw">end</span>
+101: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -325,20 +335,70 @@ recent
 					<div class="method-source-code"
 						id="index-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 7</span>
- 7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
- 8:     <span class="ruby-ivar">@projects</span>     = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
- 9:     <span class="ruby-ivar">@phases</span>       = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
-10:     <span class="ruby-ivar">@deliverables</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
-11:     
-12:     <span class="ruby-ivar">@efforts</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">'user_id = ?'</span>, <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>])
-13:     <span class="ruby-ivar">@efforts</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">updated_at</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">updated_at</span> }
-14:     <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">new</span>
-15: 
-16:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-17:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+    <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 9</span>
+ 9:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+10:     <span class="ruby-ivar">@projects</span>     = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;status = 'Active'&quot;</span>)
+11:     <span class="ruby-ivar">@phases</span>       = <span class="ruby-constant">ProjectPhase</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:projects</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Active&quot;</span>}}, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project</span>])
+12:     <span class="ruby-ivar">@deliverables</span> = <span class="ruby-constant">Deliverable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:project_phases</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:projects</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;Active&quot;</span>}}}, <span class="ruby-value">:joins</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">:project_phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:project</span>])
+13: 
+14:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">is_developer</span>
+15:       <span class="ruby-ivar">@efforts</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">'user_id = ?'</span>, <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>])
+16:     <span class="ruby-keyword kw">else</span>
+17:       <span class="ruby-ivar">@efforts</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>)
 18:     <span class="ruby-keyword kw">end</span>
-19:   <span class="ruby-keyword kw">end</span></pre>
+19:     <span class="ruby-ivar">@efforts</span>.<span class="ruby-identifier">sort!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">effort_date</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">effort_date</span> }
+20:     <span class="ruby-ivar">@effort</span> = <span class="ruby-constant">Effort</span>.<span class="ruby-identifier">new</span>
+21: 
+22:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+23:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+24:     <span class="ruby-keyword kw">end</span>
+25:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="is-active-method" class="method-detail ">
+				<a name="method-i-is_active"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">is_active</span><span
+						class="method-args">(effort)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Checks whether the <a href="Project.html">Project</a> associated with <a
+href="Effort.html">Effort</a> is active or not Input params: <a
+href="Effort.html">Effort</a>
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="is-active-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/efforts_controller.rb, line 108</span>
+108: <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">is_active</span>(<span class="ruby-identifier">effort</span>)
+109:   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">effort</span>.<span class="ruby-identifier">deliverable</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">effort</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">project_phase</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">effort</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">project</span>
+110:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">effort</span>.<span class="ruby-identifier">deliverable</span>.<span class="ruby-identifier">project_phase</span>.<span class="ruby-identifier">project</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'Active'</span>
+111:   <span class="ruby-keyword kw">end</span>
+112: <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

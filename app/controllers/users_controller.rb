@@ -88,6 +88,7 @@ class UsersController < ApplicationController
       redirect_to :controller => 'user_sessions', :action => 'destroy', :id => 'intruder'
     end
   end
+  
   # Checks wheter the current user is admin or not
   def is_admin
     return current_user.role == User::ADMIN

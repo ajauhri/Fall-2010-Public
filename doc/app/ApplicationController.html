@@ -75,7 +75,17 @@
 					
 					<li><a href="#method-i-error_html">#error_html</a></li>
 					
+					<li><a href="#method-i-is_admin">#is_admin</a></li>
+					
+					<li><a href="#method-i-is_developer">#is_developer</a></li>
+					
+					<li><a href="#method-i-is_manager">#is_manager</a></li>
+					
+					<li><a href="#method-i-only_admin">#only_admin</a></li>
+					
 					<li><a href="#method-i-require_user">#require_user</a></li>
+					
+					<li><a href="#method-i-restrict_developer">#restrict_developer</a></li>
 					
 					<li><a href="#method-i-set_cache_buster">#set_cache_buster</a></li>
 					
@@ -119,6 +129,10 @@
 				
 					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
 				
+					<li><a href="./CatalogsController.html">CatalogsController</a></li>
+				
+					<li><a href="./CatalogsHelper.html">CatalogsHelper</a></li>
+				
 					<li><a href="./Complexity.html">Complexity</a></li>
 				
 					<li><a href="./Deliverable.html">Deliverable</a></li>
@@ -147,9 +161,13 @@
 				
 					<li><a href="./LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 				
-					<li><a href="./PetController.html">PetController</a></li>
+					<li><a href="./LifecyclesController.html">LifecyclesController</a></li>
 				
-					<li><a href="./PetHelper.html">PetHelper</a></li>
+					<li><a href="./LifecyclesHelper.html">LifecyclesHelper</a></li>
+				
+					<li><a href="./PasswordsController.html">PasswordsController</a></li>
+				
+					<li><a href="./PasswordsHelper.html">PasswordsHelper</a></li>
 				
 					<li><a href="./Project.html">Project</a></li>
 				
@@ -170,6 +188,8 @@
 					<li><a href="./TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 				
 					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserMailer.html">UserMailer</a></li>
 				
 					<li><a href="./UserSession.html">UserSession</a></li>
 				
@@ -211,6 +231,42 @@ controllers.
 		
 		<div id="public-instance-method-details" class="method-section section">
 			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="only-admin-method" class="method-detail ">
+				<a name="method-i-only_admin"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">only_admin</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="only-admin-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">only_admin</span>
+23:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">is_admin</span>
+24:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">projects_path</span>
+25:     <span class="ruby-keyword kw">end</span>
+26:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
 
 		
 			<div id="set-cache-buster-method" class="method-detail ">
@@ -283,10 +339,10 @@ session
 					<div class="method-source-code"
 						id="current-user-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 37</span>
-37:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_user</span>
-38:     <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">current_user_session</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_user_session</span>.<span class="ruby-identifier">record</span>
-39:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 43</span>
+43:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_user</span>
+44:     <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">current_user_session</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_user_session</span>.<span class="ruby-identifier">record</span>
+45:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -319,11 +375,11 @@ Used to authenticate a user session
 					<div class="method-source-code"
 						id="current-user-session-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 30</span>
-30:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_user_session</span>
-31:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@curent_user_session</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@curent_user_session</span>)
-32:     <span class="ruby-ivar">@current_user_session</span> = <span class="ruby-constant">UserSession</span>.<span class="ruby-identifier">find</span>
-33:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 36</span>
+36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_user_session</span>
+37:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@curent_user_session</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@curent_user_session</span>)
+38:     <span class="ruby-ivar">@current_user_session</span> = <span class="ruby-constant">UserSession</span>.<span class="ruby-identifier">find</span>
+39:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -356,14 +412,122 @@ Records execution errors, formats them for display
 					<div class="method-source-code"
 						id="error-html-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 50</span>
-50:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">error_html</span>(<span class="ruby-identifier">errors</span>)
-51:     <span class="ruby-identifier">html</span> = <span class="ruby-value str">&quot;&lt;b&gt;&lt;u&gt;Error!&lt;/u&gt;&lt;/b&gt;&lt;br/&gt;&quot;</span>
-52:     <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">error</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">errors</span>
-53:       <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{error[0].capitalize.humanize} #{error[1]}&lt;br/&gt;&quot;</span>
-54:     <span class="ruby-keyword kw">end</span>
-55:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">html</span>
-56:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 87</span>
+87:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">error_html</span>(<span class="ruby-identifier">errors</span>)
+88:     <span class="ruby-identifier">html</span> = <span class="ruby-value str">&quot;&lt;b&gt;&lt;u&gt;Error!&lt;/u&gt;&lt;/b&gt;&lt;br/&gt;&quot;</span>
+89:     <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">error</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">errors</span>
+90:       <span class="ruby-identifier">html</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;#{error[0].capitalize.humanize} #{error[1]}&lt;br/&gt;&quot;</span>
+91:     <span class="ruby-keyword kw">end</span>
+92:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">html</span>
+93:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="is-admin-method" class="method-detail ">
+				<a name="method-i-is_admin"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">is_admin</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Checks wheter the current user is a admin or not
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="is-admin-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 81</span>
+81:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">is_admin</span>
+82:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">role</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">ADMIN</span>
+83:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="is-developer-method" class="method-detail ">
+				<a name="method-i-is_developer"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">is_developer</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Checks wheter the current user is a developer or not
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="is-developer-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 68</span>
+68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">is_developer</span>
+69:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">role</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">DEVELOPER</span>
+70:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="is-manager-method" class="method-detail ">
+				<a name="method-i-is_manager"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">is_manager</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Checks wheter the current user is a manager or not
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="is-manager-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 74</span>
+74:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">is_manager</span>
+75:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">role</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">MANAGER</span>
+76:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -396,12 +560,54 @@ Checks for user sessions against methods which require user authentication
 					<div class="method-source-code"
 						id="require-user-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 42</span>
-42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_user</span>
-43:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">current_user</span>
-44:         <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">login_url</span>
-45:     <span class="ruby-keyword kw">end</span>
-46:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 48</span>
+48:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_user</span>
+49:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">current_user</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'passwords'</span>
+50:         <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">login_url</span>
+51:     <span class="ruby-keyword kw">end</span>
+52:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="restrict-developer-method" class="method-detail ">
+				<a name="method-i-restrict_developer"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">restrict_developer</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Only allows access to effort logs for manager and admin types
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="restrict-developer-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/application_controller.rb, line 57</span>
+57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restrict_developer</span>
+58:     <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'user_sessions'</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'destroy'</span>) <span class="ruby-keyword kw">or</span>
+59:        (<span class="ruby-identifier">controller_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'users'</span> <span class="ruby-keyword kw">and</span> (<span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'edit'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">action_name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'update'</span>))
+60:      <span class="ruby-keyword kw">return</span>
+61:     <span class="ruby-keyword kw">end</span>
+62:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_user</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">is_developer</span> 
+63:       <span class="ruby-identifier">redirect_to</span> <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'efforts'</span>
+64:     <span class="ruby-keyword kw">end</span>
+65:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

@@ -20,20 +20,6 @@
 
 	
 	<h1>Rails Application Documentation</h1>
-	 <p>This is the API documentation for PET 1.3.</p>
-	    <p>Process Enactment Tool 1.3 is an online web-application tool tailor-made for assessing projects in software organizations.
-	        <ul>
-	            <h3>Technologies Used</h3>
-	            <b>Development:</b>
-	        <li> Ruby 1.8.7</li>
-	            <li> Rails 2.3.8</li>
-	            <li> JQuery</li>
-	            <li> CSS3</li>
-	            <li> HTML.</li>
-	            <b>Database:</b>
-	            <li> Sqlite 3.6.12</li>
-	        </ul></p>
-	<img src="images/Rails Coasters PET DB Diagram.png">
 
 	
 	<p>This is the API documentation for 'Rails Application Documentation'.</p>
@@ -55,6 +41,10 @@
 		<li class="class"><a href="ApplicationController.html">ApplicationController</a></li>
 		
 		<li class="module"><a href="ApplicationHelper.html">ApplicationHelper</a></li>
+		
+		<li class="class"><a href="CatalogsController.html">CatalogsController</a></li>
+		
+		<li class="module"><a href="CatalogsHelper.html">CatalogsHelper</a></li>
 		
 		<li class="class"><a href="Complexity.html">Complexity</a></li>
 		
@@ -84,9 +74,13 @@
 		
 		<li class="module"><a href="LifecyclePhasesHelper.html">LifecyclePhasesHelper</a></li>
 		
-		<li class="class"><a href="PetController.html">PetController</a></li>
+		<li class="class"><a href="LifecyclesController.html">LifecyclesController</a></li>
 		
-		<li class="module"><a href="PetHelper.html">PetHelper</a></li>
+		<li class="module"><a href="LifecyclesHelper.html">LifecyclesHelper</a></li>
+		
+		<li class="class"><a href="PasswordsController.html">PasswordsController</a></li>
+		
+		<li class="module"><a href="PasswordsHelper.html">PasswordsHelper</a></li>
 		
 		<li class="class"><a href="Project.html">Project</a></li>
 		
@@ -107,6 +101,8 @@
 		<li class="module"><a href="TypicalDeliverablesHelper.html">TypicalDeliverablesHelper</a></li>
 		
 		<li class="class"><a href="User.html">User</a></li>
+		
+		<li class="class"><a href="UserMailer.html">UserMailer</a></li>
 		
 		<li class="class"><a href="UserSession.html">UserSession</a></li>
 		
@@ -133,23 +129,27 @@
 		
 			<li><a href="Deliverable.html#method-c-get_statistics">::get_statistics &mdash; Deliverable</a></li>
 		
-			<li><a href="ProjectsController.html#method-i-create">#create &mdash; ProjectsController</a></li>
-		
-			<li><a href="ProjectPhasesController.html#method-i-create">#create &mdash; ProjectPhasesController</a></li>
-		
-			<li><a href="UsersController.html#method-i-create">#create &mdash; UsersController</a></li>
-		
-			<li><a href="LifecyclePhasesController.html#method-i-create">#create &mdash; LifecyclePhasesController</a></li>
-		
-			<li><a href="EffortsController.html#method-i-create">#create &mdash; EffortsController</a></li>
+			<li><a href="Deliverable.html#method-i-assign_actual_size">#assign_actual_size &mdash; Deliverable</a></li>
 		
 			<li><a href="UserSessionsController.html#method-i-create">#create &mdash; UserSessionsController</a></li>
 		
+			<li><a href="EffortsController.html#method-i-create">#create &mdash; EffortsController</a></li>
+		
+			<li><a href="UsersController.html#method-i-create">#create &mdash; UsersController</a></li>
+		
+			<li><a href="ProjectsController.html#method-i-create">#create &mdash; ProjectsController</a></li>
+		
+			<li><a href="LifecyclePhasesController.html#method-i-create">#create &mdash; LifecyclePhasesController</a></li>
+		
 			<li><a href="TypicalDeliverablesController.html#method-i-create">#create &mdash; TypicalDeliverablesController</a></li>
+		
+			<li><a href="DeliverableTypesController.html#method-i-create">#create &mdash; DeliverableTypesController</a></li>
+		
+			<li><a href="ProjectPhasesController.html#method-i-create">#create &mdash; ProjectPhasesController</a></li>
 		
 			<li><a href="DeliverablesController.html#method-i-create">#create &mdash; DeliverablesController</a></li>
 		
-			<li><a href="DeliverableTypesController.html#method-i-create">#create &mdash; DeliverableTypesController</a></li>
+			<li><a href="LifecyclesController.html#method-i-create">#create &mdash; LifecyclesController</a></li>
 		
 			<li><a href="ProjectPhase.html#method-i-create_deliverables">#create_deliverables &mdash; ProjectPhase</a></li>
 		
@@ -159,39 +159,61 @@
 		
 			<li><a href="ApplicationController.html#method-i-current_user_session">#current_user_session &mdash; ApplicationController</a></li>
 		
+			<li><a href="Deliverable.html#method-i-decrement_actual_effort">#decrement_actual_effort &mdash; Deliverable</a></li>
+		
+			<li><a href="Project.html#method-i-decrement_actual_effort">#decrement_actual_effort &mdash; Project</a></li>
+		
+			<li><a href="ProjectPhase.html#method-i-decrement_actual_effort">#decrement_actual_effort &mdash; ProjectPhase</a></li>
+		
+			<li><a href="Effort.html#method-i-decrement_actual_effort">#decrement_actual_effort &mdash; Effort</a></li>
+		
+			<li><a href="Deliverable.html#method-i-decrement_estimated_effort">#decrement_estimated_effort &mdash; Deliverable</a></li>
+		
+			<li><a href="Project.html#method-i-decrement_total_estimated_effort">#decrement_total_estimated_effort &mdash; Project</a></li>
+		
+			<li><a href="ProjectPhase.html#method-i-decrement_total_estimated_effort">#decrement_total_estimated_effort &mdash; ProjectPhase</a></li>
+		
+			<li><a href="User.html#method-i-deliver_password_reset_instructions%21">#deliver_password_reset_instructions! &mdash; User</a></li>
+		
 			<li><a href="DeliverablesController.html#method-i-destroy">#destroy &mdash; DeliverablesController</a></li>
 		
-			<li><a href="ProjectsController.html#method-i-destroy">#destroy &mdash; ProjectsController</a></li>
+			<li><a href="UserSessionsController.html#method-i-destroy">#destroy &mdash; UserSessionsController</a></li>
 		
 			<li><a href="TypicalDeliverablesController.html#method-i-destroy">#destroy &mdash; TypicalDeliverablesController</a></li>
+		
+			<li><a href="ProjectPhasesController.html#method-i-destroy">#destroy &mdash; ProjectPhasesController</a></li>
 		
 			<li><a href="DeliverableTypesController.html#method-i-destroy">#destroy &mdash; DeliverableTypesController</a></li>
 		
 			<li><a href="EffortsController.html#method-i-destroy">#destroy &mdash; EffortsController</a></li>
 		
+			<li><a href="LifecyclesController.html#method-i-destroy">#destroy &mdash; LifecyclesController</a></li>
+		
 			<li><a href="LifecyclePhasesController.html#method-i-destroy">#destroy &mdash; LifecyclePhasesController</a></li>
 		
-			<li><a href="ProjectPhasesController.html#method-i-destroy">#destroy &mdash; ProjectPhasesController</a></li>
-		
-			<li><a href="UserSessionsController.html#method-i-destroy">#destroy &mdash; UserSessionsController</a></li>
+			<li><a href="ProjectsController.html#method-i-destroy">#destroy &mdash; ProjectsController</a></li>
 		
 			<li><a href="ApplicationHelper.html#method-i-display_links">#display_links &mdash; ApplicationHelper</a></li>
 		
 			<li><a href="DeliverablesController.html#method-i-dynamic_estimates">#dynamic_estimates &mdash; DeliverablesController</a></li>
 		
-			<li><a href="ProjectPhasesController.html#method-i-edit">#edit &mdash; ProjectPhasesController</a></li>
-		
-			<li><a href="LifecyclePhasesController.html#method-i-edit">#edit &mdash; LifecyclePhasesController</a></li>
-		
-			<li><a href="UsersController.html#method-i-edit">#edit &mdash; UsersController</a></li>
+			<li><a href="PasswordsController.html#method-i-edit">#edit &mdash; PasswordsController</a></li>
 		
 			<li><a href="DeliverablesController.html#method-i-edit">#edit &mdash; DeliverablesController</a></li>
 		
-			<li><a href="DeliverableTypesController.html#method-i-edit">#edit &mdash; DeliverableTypesController</a></li>
-		
 			<li><a href="ProjectsController.html#method-i-edit">#edit &mdash; ProjectsController</a></li>
 		
+			<li><a href="UsersController.html#method-i-edit">#edit &mdash; UsersController</a></li>
+		
+			<li><a href="LifecyclesController.html#method-i-edit">#edit &mdash; LifecyclesController</a></li>
+		
 			<li><a href="TypicalDeliverablesController.html#method-i-edit">#edit &mdash; TypicalDeliverablesController</a></li>
+		
+			<li><a href="DeliverableTypesController.html#method-i-edit">#edit &mdash; DeliverableTypesController</a></li>
+		
+			<li><a href="LifecyclePhasesController.html#method-i-edit">#edit &mdash; LifecyclePhasesController</a></li>
+		
+			<li><a href="ProjectPhasesController.html#method-i-edit">#edit &mdash; ProjectPhasesController</a></li>
 		
 			<li><a href="ApplicationController.html#method-i-error_html">#error_html &mdash; ApplicationController</a></li>
 		
@@ -199,87 +221,111 @@
 		
 			<li><a href="TypicalDeliverable.html#method-i-estimated_effort_should_be_positive">#estimated_effort_should_be_positive &mdash; TypicalDeliverable</a></li>
 		
-			<li><a href="TypicalDeliverable.html#method-i-estimated_size_should_be_positive">#estimated_size_should_be_positive &mdash; TypicalDeliverable</a></li>
-		
 			<li><a href="Deliverable.html#method-i-estimated_size_should_be_positive">#estimated_size_should_be_positive &mdash; Deliverable</a></li>
+		
+			<li><a href="TypicalDeliverable.html#method-i-estimated_size_should_be_positive">#estimated_size_should_be_positive &mdash; TypicalDeliverable</a></li>
 		
 			<li><a href="ApplicationHelper.html#method-i-get_link">#get_link &mdash; ApplicationHelper</a></li>
 		
 			<li><a href="TypicalDeliverable.html#method-i-get_production_rate">#get_production_rate &mdash; TypicalDeliverable</a></li>
 		
-			<li><a href="Deliverable.html#method-i-get_production_rate">#get_production_rate &mdash; Deliverable</a></li>
+			<li><a href="ProjectPhase.html#method-i-increment_actual_effort">#increment_actual_effort &mdash; ProjectPhase</a></li>
 		
-			<li><a href="PetController.html#method-i-index">#index &mdash; PetController</a></li>
+			<li><a href="Project.html#method-i-increment_actual_effort">#increment_actual_effort &mdash; Project</a></li>
 		
-			<li><a href="TypicalDeliverablesController.html#method-i-index">#index &mdash; TypicalDeliverablesController</a></li>
+			<li><a href="Effort.html#method-i-increment_actual_effort">#increment_actual_effort &mdash; Effort</a></li>
 		
-			<li><a href="LifecyclePhasesController.html#method-i-index">#index &mdash; LifecyclePhasesController</a></li>
+			<li><a href="Deliverable.html#method-i-increment_actual_effort">#increment_actual_effort &mdash; Deliverable</a></li>
 		
-			<li><a href="DeliverableTypesController.html#method-i-index">#index &mdash; DeliverableTypesController</a></li>
+			<li><a href="Deliverable.html#method-i-increment_estimated_effort">#increment_estimated_effort &mdash; Deliverable</a></li>
+		
+			<li><a href="ProjectPhase.html#method-i-increment_total_estimated_effort">#increment_total_estimated_effort &mdash; ProjectPhase</a></li>
+		
+			<li><a href="Project.html#method-i-increment_total_estimated_effort">#increment_total_estimated_effort &mdash; Project</a></li>
 		
 			<li><a href="EffortsController.html#method-i-index">#index &mdash; EffortsController</a></li>
 		
 			<li><a href="ProjectsController.html#method-i-index">#index &mdash; ProjectsController</a></li>
 		
+			<li><a href="CatalogsController.html#method-i-index">#index &mdash; CatalogsController</a></li>
+		
+			<li><a href="ProjectPhasesController.html#method-i-is_active">#is_active &mdash; ProjectPhasesController</a></li>
+		
+			<li><a href="DeliverablesController.html#method-i-is_active">#is_active &mdash; DeliverablesController</a></li>
+		
+			<li><a href="EffortsController.html#method-i-is_active">#is_active &mdash; EffortsController</a></li>
+		
+			<li><a href="ApplicationController.html#method-i-is_admin">#is_admin &mdash; ApplicationController</a></li>
+		
 			<li><a href="UsersController.html#method-i-is_admin">#is_admin &mdash; UsersController</a></li>
+		
+			<li><a href="ApplicationController.html#method-i-is_developer">#is_developer &mdash; ApplicationController</a></li>
+		
+			<li><a href="ApplicationController.html#method-i-is_manager">#is_manager &mdash; ApplicationController</a></li>
+		
+			<li><a href="PasswordsController.html#method-i-load_user_using_perishable_token">#load_user_using_perishable_token &mdash; PasswordsController</a></li>
+		
+			<li><a href="DeliverableTypesController.html#method-i-new">#new &mdash; DeliverableTypesController</a></li>
+		
+			<li><a href="PasswordsController.html#method-i-new">#new &mdash; PasswordsController</a></li>
 		
 			<li><a href="TypicalDeliverablesController.html#method-i-new">#new &mdash; TypicalDeliverablesController</a></li>
 		
 			<li><a href="LifecyclePhasesController.html#method-i-new">#new &mdash; LifecyclePhasesController</a></li>
 		
-			<li><a href="ProjectsController.html#method-i-new">#new &mdash; ProjectsController</a></li>
-		
-			<li><a href="DeliverableTypesController.html#method-i-new">#new &mdash; DeliverableTypesController</a></li>
-		
 			<li><a href="DeliverablesController.html#method-i-new">#new &mdash; DeliverablesController</a></li>
-		
-			<li><a href="UsersController.html#method-i-new">#new &mdash; UsersController</a></li>
 		
 			<li><a href="ProjectPhasesController.html#method-i-new">#new &mdash; ProjectPhasesController</a></li>
 		
 			<li><a href="UserSessionsController.html#method-i-new">#new &mdash; UserSessionsController</a></li>
 		
+			<li><a href="LifecyclesController.html#method-i-new">#new &mdash; LifecyclesController</a></li>
+		
+			<li><a href="UsersController.html#method-i-new">#new &mdash; UsersController</a></li>
+		
+			<li><a href="ProjectsController.html#method-i-new">#new &mdash; ProjectsController</a></li>
+		
+			<li><a href="ApplicationController.html#method-i-only_admin">#only_admin &mdash; ApplicationController</a></li>
+		
+			<li><a href="UserMailer.html#method-i-password_reset_instructions">#password_reset_instructions &mdash; UserMailer</a></li>
+		
 			<li><a href="UsersController.html#method-i-require_admin">#require_admin &mdash; UsersController</a></li>
 		
 			<li><a href="ApplicationController.html#method-i-require_user">#require_user &mdash; ApplicationController</a></li>
 		
+			<li><a href="ApplicationController.html#method-i-restrict_developer">#restrict_developer &mdash; ApplicationController</a></li>
+		
 			<li><a href="ProjectPhase.html#method-i-scope_condition">#scope_condition &mdash; ProjectPhase</a></li>
+		
+			<li><a href="PasswordsController.html#method-i-send_password">#send_password &mdash; PasswordsController</a></li>
 		
 			<li><a href="ApplicationController.html#method-i-set_cache_buster">#set_cache_buster &mdash; ApplicationController</a></li>
 		
-			<li><a href="LifecyclePhasesController.html#method-i-show">#show &mdash; LifecyclePhasesController</a></li>
-		
-			<li><a href="DeliverableTypesController.html#method-i-show">#show &mdash; DeliverableTypesController</a></li>
-		
-			<li><a href="ProjectsController.html#method-i-show">#show &mdash; ProjectsController</a></li>
-		
 			<li><a href="DeliverablesController.html#method-i-show">#show &mdash; DeliverablesController</a></li>
-		
-			<li><a href="TypicalDeliverablesController.html#method-i-show">#show &mdash; TypicalDeliverablesController</a></li>
 		
 			<li><a href="ProjectPhasesController.html#method-i-show">#show &mdash; ProjectPhasesController</a></li>
 		
+			<li><a href="ProjectsController.html#method-i-show">#show &mdash; ProjectsController</a></li>
+		
 			<li><a href="ProjectsController.html#method-i-sort">#sort &mdash; ProjectsController</a></li>
-		
-			<li><a href="UsersController.html#method-i-update">#update &mdash; UsersController</a></li>
-		
-			<li><a href="DeliverableTypesController.html#method-i-update">#update &mdash; DeliverableTypesController</a></li>
 		
 			<li><a href="DeliverablesController.html#method-i-update">#update &mdash; DeliverablesController</a></li>
 		
+			<li><a href="TypicalDeliverablesController.html#method-i-update">#update &mdash; TypicalDeliverablesController</a></li>
+		
 			<li><a href="ProjectsController.html#method-i-update">#update &mdash; ProjectsController</a></li>
 		
-			<li><a href="ProjectPhasesController.html#method-i-update">#update &mdash; ProjectPhasesController</a></li>
+			<li><a href="DeliverableTypesController.html#method-i-update">#update &mdash; DeliverableTypesController</a></li>
+		
+			<li><a href="PasswordsController.html#method-i-update">#update &mdash; PasswordsController</a></li>
 		
 			<li><a href="LifecyclePhasesController.html#method-i-update">#update &mdash; LifecyclePhasesController</a></li>
 		
-			<li><a href="TypicalDeliverablesController.html#method-i-update">#update &mdash; TypicalDeliverablesController</a></li>
+			<li><a href="ProjectPhasesController.html#method-i-update">#update &mdash; ProjectPhasesController</a></li>
 		
-			<li><a href="Effort.html#method-i-update_all_effort">#update_all_effort &mdash; Effort</a></li>
+			<li><a href="UsersController.html#method-i-update">#update &mdash; UsersController</a></li>
 		
-			<li><a href="Deliverable.html#method-i-update_all_estimated_effort">#update_all_estimated_effort &mdash; Deliverable</a></li>
-		
-			<li><a href="Effort.html#method-i-validify_effort">#validify_effort &mdash; Effort</a></li>
+			<li><a href="LifecyclesController.html#method-i-update">#update &mdash; LifecyclesController</a></li>
 		
 	</ul>
 

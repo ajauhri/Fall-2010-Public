@@ -121,6 +121,11 @@ class ProjectPhasesController < ApplicationController
   end
   
   private
+  
+  
+  #  Checks whether the Project associated with ProjectPhase is active or not
+  #  Input params: ProjectPhase
+
 
   def is_active(project_phase)
     if project_phase.project

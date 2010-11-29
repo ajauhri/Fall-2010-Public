@@ -135,7 +135,9 @@ class DeliverablesController < ApplicationController
     return estimates
   end
 
-
+  #  Checks whether the Project associated with Deliver is active or not
+  #  Input params: Deliverable
+  
   def is_active(deliverable)
     if deliverable.project_phase and deliverable.project_phase.project
       return deliverable.project_phase.project.status == 'Active'
